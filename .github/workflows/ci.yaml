@@ -1,0 +1,40 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to Vercel
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Get previous version
+        id: prev
+        run: |
+          PREV_VERSION=$(git show HEAD~1:package.json | jq -r .version)
+          echo "prev_version=$PREV_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Get current version
+        id: curr
+        run: |
+          CURR_VERSION=$(jq -r .version package.json)
+          echo "curr_version=$CURR_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Deploy to Vercel if version changed
+        if: steps.curr.outputs.curr_version != steps.prev.outputs.prev_version
+        run: |
+          npm install -g vercel
+          vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
