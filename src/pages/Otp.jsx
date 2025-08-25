@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import Button from "../components/common/button";
+import Button from "../components/common/Button";
 const toast = ({ title, description }) => {
   alert(`${title}\n${description}`);
 };
