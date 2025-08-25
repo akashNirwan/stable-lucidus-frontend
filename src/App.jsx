@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 const App = () => {
   const navigate = useNavigate();
-
   useEffect(() => {
     navigate("/auth/login");
   }, [navigate]);
