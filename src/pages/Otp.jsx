@@ -34,7 +34,6 @@ export default function Otp() {
       localStorage.setItem(RESEND_KEY, newExpiry.toString());
       setCanResend(false);
     }
-
     setTimer(remaining);
   }, []);
 
