@@ -21,7 +21,6 @@ export default function Otp() {
   useEffect(() => {
     const expiry = localStorage.getItem(RESEND_KEY);
     let remaining = RESEND_DURATION;
-
     if (expiry) {
       remaining = Math.floor((Number(expiry) - Date.now()) / 1000);
       if (remaining <= 0) {
