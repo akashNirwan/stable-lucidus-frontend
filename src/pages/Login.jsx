@@ -1,28 +1,53 @@
 import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { motion } from "framer-motion";
 import TextInput from "../components/common/TextInput";
 import Button from "../components/common/Button";
 import { useNavigate } from "react-router-dom";
-
+import { loginUser } from "../redux/actions/auth-action";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useDispatch, useSelector } from "react-redux";
+import { loginSchema,signupSchema } from "../validation/auth-validaion";
+import { getDeviceInfo } from "../utils/deviceInfo";
+import toast from "react-hot-toast";
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
+  const dispatch = useDispatch()
+   const {loginLoading, loginerror  } = useSelector((state) => state.auth);
   const navigate = useNavigate();
+
+
   const {
-    register,
+    
+    control,
     handleSubmit,
     reset,
     formState: { errors, isValid },
-  } = useForm({ mode: "onChange" });
+  } = useForm({ mode: "onChange",
+      resolver: yupResolver(isLogin ? loginSchema : signupSchema),
+   });
 
-  const onSubmit = (data) => {
-    alert(
-      isLogin
-        ? `OTP Sent Successfully to ${data.email}`
-        : `Account Created for ${data.username || data.email}`
-    );
+ 
+
+  const onSubmit = async (data) => {
+    console.log("hiii");
+    const { deviceId, deviceName } = getDeviceInfo();
+    console.log(deviceId, deviceName, "deviceid");
+    
+  try {
+    const res = await dispatch(loginUser({
+       email: data.email ,
+       deviceId : deviceId,
+       deviceName : deviceName,
+      })).unwrap();
+
+    toast.success(`OTP sent to ${data.email}`);
     navigate("/auth/otp");
-  };
+  } catch (err) {
+    console.error("Login failed:", err);
+    toast.error(err || "Failed to login");
+  }
+};
 
   useEffect(() => {
     reset();
@@ -67,46 +92,52 @@ export default function Login() {
       <div className="w-full space-y-4 my-6">
         {!isLogin ? (
           <>
-            <TextInput
-              type="text"
-              placeholder="Enter Your User Name"
-              register={register("username", {
-                required: "Username is required",
-              })}
-              error={errors.username}
-            />
-
-            <TextInput
-              type="email"
-              placeholder="Enter Your School Email"
-              register={register("email", {
-                required: "Email is required",
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: "Enter a valid email",
-                },
-              })}
-              error={errors.email}
-            />
-          </>
-        ) : (
+            <Controller
+        name="username"
+        control={control}
+        render={({ field }) => (
           <TextInput
+            {...field}
+            type="text"
+            placeholder="Enter Your User Name"
+            error={errors.username}
+          />
+        )}
+      />
+
+            <Controller
+        name="email"
+        control={control}
+        render={({ field }) => (
+          <TextInput
+            {...field}
             type="email"
             placeholder="Enter Your School Email"
-            register={register("email", {
-              required: "Email is required",
-              pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: "Enter a valid email",
-              },
-            })}
             error={errors.email}
           />
         )}
+      />
+          </>
+        ) : (
+          <Controller
+      name="email"
+      control={control}
+      render={({ field }) => (
+        <TextInput
+          {...field}
+          type="email"
+          placeholder="Enter Your School Email"
+          error={errors.email}
+        />
+      )}
+    />
+  )}
       </div>
 
       {/* Submit Button */}
-      <Button type="submit" isActive={isValid}>
+      
+      
+      <Button type="submit" disabled={loginLoading || !isValid}>
         {isLogin ? "Send OTP" : "Create Account"}
       </Button>
     </motion.form>
