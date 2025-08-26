@@ -1,6 +1,6 @@
 
 import { UAParser } from "ua-parser-js";
-
+//commit
 export function getDeviceInfo() {
   
   let deviceId = localStorage.getItem("deviceId");
