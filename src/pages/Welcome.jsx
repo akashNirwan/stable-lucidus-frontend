@@ -157,7 +157,7 @@ export default function Welcome() {
         <AnimatePresence>
           {animationStep >= 6 && (
             <MotionLink
-              to="/grade"
+              to="/questions"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: "spring", stiffness: 80 }}

@@ -4,6 +4,9 @@ import Login from "../pages/Login";
 import AuthLayout from "./authWrapper";
 import Otp from "../pages/Otp";
 import Welcome from "../pages/Welcome";
+import QuestionWrapper from "./questionWrapper";
+
+import Question from "../pages/Question";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -17,22 +20,21 @@ const router = createBrowserRouter([
     path: "/auth",
     element: <AuthLayout />,
     children: [
-      {
-        path: "login",
-        element: <Login />,
-      },
-      {
-        path: "otp",
-        element: <Otp />,
-      },
+      { path: "login", element: <Login /> },
+      { path: "otp", element: <Otp /> },
     ],
   },
   {
     path: "/welcome",
     element: <Welcome />,
   },
+  {
+    path: "/questions",
+    element: <QuestionWrapper />,
+    children: [{ index: true, element: <Question /> }],
+  },
 ]);
 
-export const RouterConfigration = () => {
+export const RouterConfiguration = () => {
   return <RouterProvider router={router} />;
 };
