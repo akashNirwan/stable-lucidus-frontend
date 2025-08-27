@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Outlet } from "react-router-dom";
-export default function QuestonWrapper() {
+export default function OnBoardWrapper() {
   const [step, setStep] = useState(1);
   const totalSteps = 7;
   return (
