@@ -16,3 +16,11 @@ export const signupSchema = yup.object().shape({
     .email("Enter a valid email")
     .required("Email is required"),
 });
+
+export const otpSchema = yup.object().shape({
+  otp: yup
+    .string()
+    .required("OTP is required")
+    .length(6, "OTP must be exactly 6 digits")
+    .matches(/^\d+$/, "OTP must contain only numbers"),
+});
