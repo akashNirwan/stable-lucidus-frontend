@@ -4,8 +4,8 @@ import Login from "../pages/Login";
 import AuthLayout from "./authWrapper";
 import Otp from "../pages/Otp";
 import Welcome from "../pages/Welcome";
-import QuestionWrapper from "./questionWrapper";
-
+import OnBoardWrapper from "./onboardWrapper";
+import QuestionFinalLoad from "../pages/QuestionFinalLoad";
 import Question from "../pages/Question";
 const router = createBrowserRouter([
   {
@@ -30,8 +30,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/questions",
-    element: <QuestionWrapper />,
+    element: <OnBoardWrapper />,
     children: [{ index: true, element: <Question /> }],
+  },
+  {
+    path: "/question-load",
+    element: <QuestionFinalLoad />,
   },
 ]);
 
