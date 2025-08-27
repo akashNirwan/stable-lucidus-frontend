@@ -4,48 +4,86 @@ import { motion } from "framer-motion";
 import TextInput from "../components/common/TextInput";
 import Button from "../components/common/Button";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../redux/actions/auth-action";
+import { loginUser,signupUser } from "../redux/actions/auth-action";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch, useSelector } from "react-redux";
-import { loginSchema,signupSchema } from "../validation/auth-validaion";
+import { loginSchema, signupSchema } from "../validation/auth-validaion";
 import { getDeviceInfo } from "../utils/deviceInfo";
 import toast from "react-hot-toast";
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
-  const dispatch = useDispatch()
-   const {loginLoading, loginerror  } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const { loginLoading, loginerror } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
 
-  const {
+    const recaptcha_token = import.meta.env.VITE_reCAPTCHA_KEY;
+
+    console.log(recaptcha_token,"recaptcha_token");
     
+  const {
     control,
     handleSubmit,
     reset,
     formState: { errors, isValid },
-  } = useForm({ mode: "onChange",
-      resolver: yupResolver(isLogin ? loginSchema : signupSchema),
-   });
+  } = useForm({
+    mode: "onChange",
+    resolver: yupResolver(isLogin ? loginSchema : signupSchema),
+  });
+
+
+   const executeRecaptcha = async () => {
+  return new Promise((resolve, reject) => {
+    if (window.grecaptcha) {
+      window.grecaptcha.ready(() => {
+        window.grecaptcha
+          .execute(recaptcha_token, { action: "submit" })
+          .then(token => resolve(token))
+          .catch(err => reject(err));
+      });
+    } else {
+      reject("reCAPTCHA not ready");
+    }
+  });
+};
+
+
 
  
 
   const onSubmit = async (data) => {
-    console.log("hiii");
-    const { deviceId, deviceName } = getDeviceInfo();
-    console.log(deviceId, deviceName, "deviceid");
-    
   try {
-    const res = await dispatch(loginUser({
-       email: data.email ,
-       deviceId : deviceId,
-       deviceName : deviceName,
-      })).unwrap();
+    if (isLogin) {
+      
+      const { deviceId, deviceName } = getDeviceInfo();
+      const token = await executeRecaptcha();
 
-    toast.success(`OTP sent to ${data.email}`);
-    navigate("/auth/otp");
+      await dispatch(
+        loginUser({
+          email: data.email,
+          deviceId,
+          deviceName,
+          recaptchaToken: token,
+        })
+      ).unwrap();
+
+      toast.success(`OTP sent to ${data.email}`);
+      navigate("/auth/otp");
+    } else {
+       
+      await dispatch(
+        signupUser({
+          email: data.email,
+          name: data.username,
+        })
+      ).unwrap();
+
+        localStorage.setItem("email", data.email );
+         navigate("/auth/otp");
+    }
   } catch (err) {
-    console.error("Login failed:", err);
-    toast.error(err || "Failed to login");
+    console.error("Auth failed:", err);
+    toast.error(err || "Something went wrong");
   }
 };
 
@@ -53,6 +91,14 @@ export default function Login() {
     reset();
   }, [isLogin, reset]);
 
+   useEffect(() => {
+  if (!window.grecaptcha) {
+    const script = document.createElement("script");
+    script.src = `https://www.google.com/recaptcha/api.js?render=${recaptcha_token}`;
+    script.async = true;
+    document.body.appendChild(script);
+  }
+}, [recaptcha_token]);
   return (
     <motion.form
       onSubmit={handleSubmit(onSubmit)}
@@ -93,50 +139,49 @@ export default function Login() {
         {!isLogin ? (
           <>
             <Controller
-        name="username"
-        control={control}
-        render={({ field }) => (
-          <TextInput
-            {...field}
-            type="text"
-            placeholder="Enter Your User Name"
-            error={errors.username}
-          />
-        )}
-      />
+              name="username"
+              control={control}
+              render={({ field }) => (
+                <TextInput
+                  {...field}
+                  type="text"
+                  placeholder="Enter Your User Name"
+                  error={errors.username}
+                />
+              )}
+            />
 
             <Controller
-        name="email"
-        control={control}
-        render={({ field }) => (
-          <TextInput
-            {...field}
-            type="email"
-            placeholder="Enter Your School Email"
-            error={errors.email}
-          />
-        )}
-      />
+              name="email"
+              control={control}
+              render={({ field }) => (
+                <TextInput
+                  {...field}
+                  type="email"
+                  placeholder="Enter Your School Email"
+                  error={errors.email}
+                />
+              )}
+            />
           </>
         ) : (
           <Controller
-      name="email"
-      control={control}
-      render={({ field }) => (
-        <TextInput
-          {...field}
-          type="email"
-          placeholder="Enter Your School Email"
-          error={errors.email}
-        />
-      )}
-    />
-  )}
+            name="email"
+            control={control}
+            render={({ field }) => (
+              <TextInput
+                {...field}
+                type="email"
+                placeholder="Enter Your School Email"
+                error={errors.email}
+              />
+            )}
+          />
+        )}
       </div>
 
       {/* Submit Button */}
-      
-      
+
       <Button type="submit" disabled={loginLoading || !isValid}>
         {isLogin ? "Send OTP" : "Create Account"}
       </Button>
