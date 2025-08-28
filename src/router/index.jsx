@@ -7,6 +7,8 @@ import Welcome from "../pages/Welcome";
 import OnBoardWrapper from "./onboardWrapper";
 import QuestionFinalLoad from "../pages/QuestionFinalLoad";
 import Question from "../pages/Question";
+import DashBoardLayout from "./dashboardWrapper";
+import DashBoard from "../pages/DashBoard";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,6 +38,11 @@ const router = createBrowserRouter([
   {
     path: "/question-load",
     element: <QuestionFinalLoad />,
+  },
+  {
+    path: "/dashboard",
+    element: <DashBoardLayout />,
+    children: [{ index: true, element: <DashBoard /> }],
   },
 ]);
 
