@@ -30,7 +30,7 @@ export default function Otp() {
     otpRequestId 
   } = useSelector((state) => state.auth);
 
-  console.log(user, "user");
+  console.log(user, "user login account user details ");
   console.log(otpRequestId, "otp request id");
   
    const useremail = localStorage.getItem("email");
@@ -124,7 +124,8 @@ console.log(useremail ," useremail");
       otp: parseInt(data.otp),
       id: user?.id, 
     };
-
+     console.log(payload , "payload in 1231313");
+     
     try {
       const result = await dispatch(verifyOtp(payload)).unwrap();
       
@@ -133,11 +134,13 @@ console.log(useremail ," useremail");
         console.log(userData, "otp user data");
         
          toast.success(`OTP Verified Welcome ${userData.name} ` )
+         localStorage.removeItem("email");
          navigate("/welcome")
       }
     } catch (error) {
       
-      toast.error(error.message)
+      console.log();
+      
       setOtp(Array(6).fill(""));
       reset();
       inputRefs.current[0]?.focus();
@@ -147,13 +150,15 @@ console.log(useremail ," useremail");
   const handleResend = async () => {
     if (!canResend || resendOtpLoading) return;
 
-     const payload = {
-       email : useremail
+    
+    
+    const payload = {
+       email :  user?.email || useremail,
      }
     
     try {
       await dispatch(resendOtp(payload)).unwrap();
-      navigate("/welcome")
+      
       const expiryTime = Date.now() + RESEND_DURATION * 1000;
       localStorage.setItem(RESEND_KEY, expiryTime.toString());
 
@@ -169,6 +174,7 @@ console.log(useremail ," useremail");
 
   const handleBack = () => {
     localStorage.removeItem(RESEND_KEY);
+    localStorage.removeItem("email");
     setTimer(0);
     setCanResend(true);
     navigate("/auth/login");
