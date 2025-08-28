@@ -1,11 +1,15 @@
 import React from "react";
 import { useOutletContext } from "react-router-dom";
-import CareerFeed from "./CareerFeed";
+import DashBoardMenuThree from "./Dashboard-MenuThree";
+import DashBoardMenuTwo from "./Dashboard-MenuTwo";
+import DashBoardMenuOne from "./Dashboard-MenuOne";
 const DashBoard = () => {
   const { menu, setMenu } = useOutletContext();
 
   const stepComponents = {
-    1: <School />,
+    1: <DashBoardMenuOne />,
+    2: <DashBoardMenuTwo />,
+    3: <DashBoardMenuThree />,
   };
   return (
     <div>

@@ -2,7 +2,7 @@ import React from "react";
 
 const Header = () => {
   return (
-    <div className="h-[60px]  flex justify-between items-center text-white px-4">
+    <div className="flex justify-between items-center text-white p-4">
       <div>
         <img
           src="/assets/logo.svg"
