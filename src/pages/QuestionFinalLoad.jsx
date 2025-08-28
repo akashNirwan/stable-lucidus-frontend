@@ -6,12 +6,10 @@ import LoadingBar from "../components/loadingComp";
 const QuestionFinalLoad = () => {
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Background */}
       <div className="fixed inset-0 bg-[url('/assets/welcome/welcome-bg.svg')] bg-no-repeat bg-center bg-cover" />
 
       <div className="w-full max-w-[375px] flex mx-auto">
         <div className="fixed inset-0">
-          {/* Twinkling dots */}
           {[...Array(40)].map((_, i) => (
             <motion.div
               key={i}
@@ -32,7 +30,6 @@ const QuestionFinalLoad = () => {
             />
           ))}
 
-          {/* Floating stars (✦) */}
           {[...Array(20)].map((_, i) => (
             <motion.div
               key={`plus-${i}`}
@@ -56,9 +53,7 @@ const QuestionFinalLoad = () => {
           ))}
         </div>
 
-        {/* Content */}
         <div className="relative flex flex-col items-center justify-center min-h-screen px-6 text-center">
-          {/* Animated text */}
           <motion.h2
             className="font-bold text-3xl text-[#4ED0AA]"
             initial={{ opacity: 0, y: -20 }}
@@ -80,7 +75,6 @@ const QuestionFinalLoad = () => {
             recommendations get.
           </motion.p>
 
-          {/* Floating astronaut */}
           <motion.div
             animate={{ y: [0, -15, 0] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -88,7 +82,6 @@ const QuestionFinalLoad = () => {
             <InteractiveAstronautLoad />
           </motion.div>
 
-          {/* Animated LoadingBar */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
