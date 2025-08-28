@@ -70,12 +70,12 @@ const authSlice = createSlice({
         state.verifyOtpData = action.payload;
            console.log(action.payload, "vhgfgfgfgfgfgfgfhfh");
            
-        const token = action.payload?.data?.token;
-                console.log(token, "token in th log");
+        // const token = action.payload?.data?.token;
+        //         console.log(token, "token in th log");
                 
-        if (token) {
-          localStorage.setItem("token", token);
-        }
+        // if (token) {
+        //   localStorage.setItem("token", token);
+        // }
       })
       .addCase(verifyOtp.rejected, (state, action) => {
         state.verifyOtpLoading = false;

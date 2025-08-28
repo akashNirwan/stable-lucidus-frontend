@@ -132,9 +132,13 @@ console.log(useremail ," useremail");
       if (result?.data?.[0]) {
         const userData = result.data[0];
         console.log(userData, "otp user data");
+         if (userData?.token) {
+        localStorage.setItem("token", userData.token);
+  }
         
          toast.success(`OTP Verified Welcome ${userData.name} ` )
          localStorage.removeItem("email");
+         localStorage.removeItem("deviceId");
          navigate("/welcome")
       }
     } catch (error) {

@@ -4,7 +4,7 @@ import OptionButton from "./OptionButton";
 
 const Dropdown = ({ label = "Select Your School", options = [], onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState(null);
   const dropdownRef = useRef(null);
 
   // close dropdown if clicked outside
@@ -20,7 +20,7 @@ const Dropdown = ({ label = "Select Your School", options = [], onSelect }) => {
 
   const handleSelect = (option) => {
     setSelected(option);
-    onSelect(option);
+    onSelect(option.value);
     setIsOpen(false);
   };
 
@@ -30,7 +30,7 @@ const Dropdown = ({ label = "Select Your School", options = [], onSelect }) => {
         onClick={() => setIsOpen((prev) => !prev)}
         className="w-full border border-[#7B56FF] rounded-xl px-4 py-2 flex justify-center text-[#7B56FF]   relative"
       >
-        {selected || label}
+        {selected ? selected.label : label}
 
         <div className="absolute right-2 ">
           <svg
@@ -58,12 +58,21 @@ const Dropdown = ({ label = "Select Your School", options = [], onSelect }) => {
       {isOpen && (
         <div className="absolute mt-2 w-full flex flex-col gap-2 border border-[#7B56FF]  rounded-xl shadow-md z-10 p-2 bg-[#EFEAFF]">
           {options.map((option, idx) => (
-            <OptionButton
-              key={idx}
-              option={option}
-              selected={selected}
-              onSelect={handleSelect}
-            />
+            // <OptionButton
+            //   key={idx}
+            //   option={option}
+            //   selected={selected}
+            //   onSelect={handleSelect}
+            // />
+
+  <OptionButton
+    key={idx}
+    option={option.label}                // 👈 sirf naam dikhane ke liye
+    selected={selected?.label}           // 👈 selected school name
+    onSelect={() => handleSelect(option)} // 👈 value return karega
+  />
+
+
           ))}
         </div>
       )}
