@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import InteractiveAstronaut from "../components/welcome/InteractiveAstronaut";
-
+import { useSelector } from "react-redux";
 export default function Welcome() {
   const [animationStep, setAnimationStep] = useState(0);
   const MotionLink = motion(Link);
-
+  const { user } = useSelector((state) => state.auth);
   useEffect(() => {
     const timeouts = [
       setTimeout(() => setAnimationStep(1), 500),
@@ -66,7 +66,7 @@ export default function Welcome() {
                 className="text-3xl font-bold"
                 style={{ color: "#4ED0AA" }}
               >
-                <TypewriterText text="Welcome, Aakaanksh" />
+                <TypewriterText text={`Welcome ${user?.name}`} />
               </motion.h1>
             )}
           </AnimatePresence>
