@@ -2,8 +2,8 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="h-[70px] rounded-t-3xl bg-white border border-b-0 flex justify-between items-center px-4">
-      <div className="flex items-center flex-col">
+    <div className="h-[70px] rounded-t-3xl bg-white border border-b-0 flex justify-between items-center ">
+      <div className="flex flex-1 flex-col items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="21"
@@ -18,7 +18,7 @@ const Footer = () => {
         </svg>
         <h4>DashBoard</h4>
       </div>
-      <div className="flex items-center flex-col">
+      <div className="flex flex-1 flex-col items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -40,7 +40,7 @@ const Footer = () => {
         </svg>
         <h4>Explore</h4>
       </div>
-      <div className="flex items-center flex-col">
+      <div className="flex flex-1 flex-col items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="25"

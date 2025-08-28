@@ -8,7 +8,7 @@ import Subject from "./Subject";
 import Skills from "./Skills";
 import SkillsCare from "./SkillsCare";
 import Ambition from "./Ambition";
-import QuestionFinalLoad from "./QuestionFinalLoad";
+
 const Question = () => {
   const { step, setStep } = useOutletContext();
   const stepComponents = {
