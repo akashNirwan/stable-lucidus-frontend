@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import InteractiveAstronautLoad from "../components/loadingAst";
 import LoadingBar from "../components/loadingComp";
+
 const QuestionFinalLoad = () => {
   return (
     <div className="min-h-screen relative overflow-hidden">
