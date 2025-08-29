@@ -88,7 +88,7 @@ const SkillsCare = ({ setStep, stepsData }) => {
                   alt={sdg.sdg}
                   className="w-full h-full object-cover relative inset-0"
                 />
-                <span className="font-medium flex items-center truncate gap-2 px-2 absolute top-0 text-xs left-0  z-10 text-white rounded">
+                <span className="font-medium flex items-center truncate gap-2 px-2 absolute top-0  left-0  z-10 text-white rounded">
                   <span className="text-[24px]">{i + 1}</span>{" "}
                   <span>{sdg.sdg}</span>
                 </span>
