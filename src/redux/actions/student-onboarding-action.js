@@ -265,3 +265,30 @@ export const updateSdg = createAsyncThunk(
     }
   }
 );
+
+
+
+export const updateAmbition = createAsyncThunk(
+  "student/updateAmbition",
+  async (payload, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage();
+
+    try {
+      const response = await client.put(
+        `/user/user-details`,   
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      toast.success(response.data.message || "Ambition Updated");
+      return response.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Failed to add Ambition");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);

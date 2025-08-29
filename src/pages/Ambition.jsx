@@ -1,11 +1,36 @@
 import React, { useState } from "react";
 import Button from "../components/common/Button";
 import { useNavigate } from "react-router-dom";
+import { updateAmbition } from "../redux/actions/student-onboarding-action";
+import { useDispatch, useSelector } from "react-redux";
+import LoadingSpinner from "../components/common/LoadingSpinner";
+
+
+
+
 const FigureOut = ({ stepsData }) => {
   const [text, setText] = useState("");
+  
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.student);
   const navigate = useNavigate();
-  const handleChange = (e) => {
+
+   const handleChange = (e) => {
     setText(e.target.value);
+  };
+
+  const handleNext = () => {
+    if (!text.trim()) return;
+
+    const payload = {
+      ambitions: text.trim(),
+    };
+
+    dispatch(updateAmbition(payload)).then((res) => {
+      if (res.payload && res.payload.code === 200) {
+        navigate("/question-load");
+      }
+    });
   };
 
   return (
@@ -25,10 +50,10 @@ const FigureOut = ({ stepsData }) => {
       <Button
         type="button"
         isActive={text.trim().length > 0}
-        onClick={() => navigate("/question-load")}
-        disabled={text.trim().length === 0}
+        onClick={handleNext}
+        disabled={loading || text.trim().length === 0}
       >
-        Next
+        {loading ?  <LoadingSpinner size="20px" />  : "Next"}
       </Button>
     </div>
   );
