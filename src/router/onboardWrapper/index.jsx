@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Outlet } from "react-router-dom";
+import { Outlet , useLocation} from "react-router-dom";
+
 export default function OnBoardWrapper() {
-  const [step, setStep] = useState(1);
-  const totalSteps = 7;
+  // const [step, setStep] = useState(1);
+  // const totalSteps = 7;
+  const steps = ["school", "grade", "figure-out", "subject", "skills", "skills-care", "ambition"];
+  const location = useLocation();
+  const currentStepName = location.pathname.split("/").pop();
+  const currentStepIndex = steps.indexOf(currentStepName);
   return (
     <div className="h-screen relative overflow-hidden">
       <div className="bg-gradient-to-b from-[#130934] to-[#24A57F] h-screen w-full" />
@@ -58,12 +63,13 @@ export default function OnBoardWrapper() {
       </div>
 
       <div className="absolute top-4 left-1/2 -translate-x-1/2 w-full max-w-[375px] px-4">
+       
         <div className="flex items-center justify-center gap-2">
-          {Array.from({ length: totalSteps }).map((_, i) => (
+          {steps.map((_, i) => (
             <div
               key={i}
               className={`h-1.5 flex-1 rounded-full ${
-                i < step ? "bg-white" : "bg-gray-600"
+                i <= currentStepIndex ? "bg-white" : "bg-gray-600"
               }`}
             />
           ))}
@@ -91,7 +97,8 @@ export default function OnBoardWrapper() {
           backdropFilter: "blur(10px)",
         }}
       >
-        <Outlet context={{ step, setStep }} />
+        {/* <Outlet context={{ step, setStep }} /> */}
+        <Outlet />
       </motion.div>
     </div>
   );

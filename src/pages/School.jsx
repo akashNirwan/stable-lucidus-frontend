@@ -6,7 +6,7 @@ import Button from "../components/common/Button";
 import { fetchSchools , updateSchool} from "../redux/actions/student-onboarding-action";
 import { useSelector, useDispatch } from "react-redux";
 import LoadingSpinner from "../components/common/LoadingSpinner";
-
+import { useNavigate } from "react-router-dom";
 
 
 const School = ({ setStep, stepsData }) => {
@@ -17,7 +17,7 @@ const School = ({ setStep, stepsData }) => {
   
   const [isOpen, setIsOpen] = useState(false);
   const [selectedSchool, setSelectedSchool] = useState("");
-
+  const navigate = useNavigate()
 
     useEffect(() => {
     dispatch(fetchSchools());
@@ -34,14 +34,18 @@ const handleNext = () => {
      console.log(response, "response");
      
     if (response.payload && response.payload.code === 201) {
-      setStep(2);
+      navigate("/questions/grade")
     }
   });
 };
 
  
 
-  return loading ?  ( <LoadingSpinner></LoadingSpinner>
+  return loading ?  (
+    
+    <div className="flex items-center justify-center min-h-[400px]">
+      <LoadingSpinner size={64} />
+    </div>
     ) : (
       <div className="text-center flex flex-col gap-3 ">
       <h2 className="font-bold text-[20px]">{stepsData.title}</h2>
@@ -54,8 +58,8 @@ const handleNext = () => {
   options={
     Array.isArray(schools)
       ? schools.map((s) => ({
-          label: s.school, // 👈 yaha naam use karo
-          value: s._id,    // 👈 unique value id se
+          label: s.school, 
+          value: s._id,    
         }))
       : []
   }

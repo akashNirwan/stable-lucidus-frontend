@@ -4,12 +4,12 @@ import OptionButton from "../components/common/OptionButton";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGrades, updateGrades } from "../redux/actions/student-onboarding-action";
 import LoadingSpinner from "../components/common/LoadingSpinner";
-
+import { useNavigate } from "react-router-dom";
 
 const Grade = ({ setStep, stepsData }) => {
    const dispatch = useDispatch();
-  const { grades, loading } = useSelector((state) => state.student);
-  
+  const { grades, loading ,gradeLoading,} = useSelector((state) => state.student);
+  const navigate = useNavigate()
 const [selectedGrade, setSelectedGrade] = useState(null);
    useEffect(() => {
     dispatch(fetchGrades());
@@ -24,11 +24,11 @@ const [selectedGrade, setSelectedGrade] = useState(null);
 
     dispatch(
       updateGrades({
-        gradeId: [selectedGrade._id], // payload API ke hisaab se
+        gradeId: [selectedGrade._id], 
       })
     ).then((res) => {
       if (res.payload && res.payload.code === 201) {
-        setStep((prev) => prev + 1); // ✅ next step
+        navigate(`/questions/figure-out?gradeId=${selectedGrade._id}`)
       }
     });
   };
@@ -36,7 +36,9 @@ const [selectedGrade, setSelectedGrade] = useState(null);
 
 
   return loading ? (
-<LoadingSpinner></LoadingSpinner>
+ <div className="flex items-center justify-center min-h-[400px]">
+      <LoadingSpinner size={64} />
+    </div>
    
   ): (
 
@@ -64,9 +66,9 @@ const [selectedGrade, setSelectedGrade] = useState(null);
         type="button"
         isActive={!!selectedGrade}
         onClick={handleNext}
-        disabled={loading}
+        disabled={loading || gradeLoading}
       >
-        Next
+        {gradeLoading ? <LoadingSpinner size="20px" /> : "Next"}
       </Button>
     </div>
   )

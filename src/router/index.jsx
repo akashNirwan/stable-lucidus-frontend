@@ -33,7 +33,20 @@ const router = createBrowserRouter([
   {
     path: "/questions",
     element: <OnBoardWrapper />,
-    children: [{ index: true, element: <Question /> }],
+    // children: [{ index: true, element: <Question /> }],
+    
+  
+  children: [
+    { path: "school", element: <Question stepName="school" /> },
+    { path: "grade", element: <Question stepName="grade" /> },
+    { path: "figure-out", element: <Question stepName="figure-out" /> },
+    { path: "subject", element: <Question stepName="subject" /> },
+    { path: "skills", element: <Question stepName="skills" /> },
+    { path: "skills-care", element: <Question stepName="skills-care" /> },
+    { path: "ambition", element: <Question stepName="ambition" /> },
+  ],
+
+
   },
   {
     path: "/question-load",

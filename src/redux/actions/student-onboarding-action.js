@@ -108,3 +108,160 @@ export const updateGrades = createAsyncThunk(
     }
   }
 );
+
+
+
+export const fetchSkills = createAsyncThunk(
+  "student/fetchSkills",
+  async (_, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage()
+
+    try {
+      const response = await client.get(
+        `user/skill`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      
+
+      return response.data;
+    } catch (error) {
+      
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);
+
+
+export const updateSkills = createAsyncThunk(
+  "student/updateSkills",
+  async (payload, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage();
+
+    try {
+      const response = await client.post(
+        `onboarding/user/select-skill`,   
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      toast.success(response.data.message || "Skills Updated");
+      return response.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Failed to update Skills");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);
+
+
+
+
+export const fetchSubjects = createAsyncThunk(
+  "student/fetchSubjects",
+  async (gradeid, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage()
+
+    try {
+      const response = await client.get(
+        `user/subject?gradeId=${gradeid}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      
+
+      return response.data;
+    } catch (error) {
+      
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);
+
+
+export const updateSubjects = createAsyncThunk(
+  "student/updateSubjects",
+  async (payload, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage();
+
+    try {
+      const response = await client.post(
+        `onboarding/user/select-subject`,   
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      toast.success(response.data.message || "Subject Updated");
+      return response.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Failed to update Subject");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);
+
+
+
+export const fetchSdg = createAsyncThunk(
+  "student/fetchSdg",
+  async (_, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage()
+
+    try {
+      const response = await client.get(
+        `user/sdg`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      
+
+      return response.data;
+    } catch (error) {
+      
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);
+
+
+export const updateSdg = createAsyncThunk(
+  "student/updateSdg",
+  async (payload, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage();
+
+    try {
+      const response = await client.post(
+        `onboarding/user/select-sdg`,   
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      toast.success(response.data.message || "Sdg Updated");
+      return response.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Failed to update Skills");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);
