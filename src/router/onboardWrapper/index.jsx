@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Outlet , useLocation} from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 export default function OnBoardWrapper() {
-  // const [step, setStep] = useState(1);
-  // const totalSteps = 7;
-  const steps = ["school", "grade", "figure-out", "subject", "skills", "skills-care", "ambition"];
+  const steps = [
+    "grade",
+    "figure-out",
+    "subject",
+    "skills",
+    "skills-care",
+    "ambition",
+  ];
   const location = useLocation();
   const currentStepName = location.pathname.split("/").pop();
   const currentStepIndex = steps.indexOf(currentStepName);
@@ -63,7 +68,6 @@ export default function OnBoardWrapper() {
       </div>
 
       <div className="absolute top-4 left-1/2 -translate-x-1/2 w-full max-w-[375px] px-4">
-       
         <div className="flex items-center justify-center gap-2">
           {steps.map((_, i) => (
             <div
@@ -97,7 +101,6 @@ export default function OnBoardWrapper() {
           backdropFilter: "blur(10px)",
         }}
       >
-        {/* <Outlet context={{ step, setStep }} /> */}
         <Outlet />
       </motion.div>
     </div>
