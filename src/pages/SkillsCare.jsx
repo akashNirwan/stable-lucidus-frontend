@@ -1,19 +1,22 @@
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../components/common/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSdg, updateSdg } from "../redux/actions/student-onboarding-action";
+import {
+  fetchSdg,
+  updateSdg,
+} from "../redux/actions/student-onboarding-action";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { useNavigate } from "react-router-dom";
 const SkillsCare = ({ setStep, stepsData }) => {
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const { sdgs, loading, SdgsLoading } = useSelector((state) => state.student);
   const [selected, setSelected] = useState([]);
-const navigate = useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(fetchSdg());
   }, [dispatch]);
 
-   const handleSelect = (sdg) => {
+  const handleSelect = (sdg) => {
     if (selected.some((s) => s._id === sdg._id)) {
       // already selected → remove
       setSelected(selected.filter((item) => item._id !== sdg._id));
@@ -25,8 +28,6 @@ const navigate = useNavigate()
     }
   };
 
-
-
   const handleNext = () => {
     if (selected.length === 0) return;
 
@@ -36,17 +37,17 @@ const navigate = useNavigate()
 
     dispatch(updateSdg(payload)).then((res) => {
       if (res.payload && res.payload.code === 201) {
-        navigate("/questions/ambition")
+        navigate("/questions/ambition");
       }
     });
   };
- 
 
   return loading ? (
     <div className="flex items-center justify-center min-h-[400px]">
-         <LoadingSpinner size={64} />
-       </div>
-  ) : (<div className="text-center flex flex-col gap-3">
+      <LoadingSpinner size={64} />
+    </div>
+  ) : (
+    <div className="text-center flex flex-col gap-3">
       <h2 className="font-bold text-[20px]">{stepsData.title}</h2>
       <h3 className="text-gray-600">{stepsData.subtitle}</h3>
       <h4 className="text-[#24A57F] font-medium">I care about:</h4>
@@ -72,31 +73,40 @@ const navigate = useNavigate()
         })} */}
 
         {Array.isArray(sdgs) &&
-          sdgs.map((sdg) => {
+          sdgs.map((sdg, i) => {
             const isSelected = selected.some((s) => s._id === sdg._id);
             return (
               <div
                 key={sdg._id}
                 onClick={() => handleSelect(sdg)}
-                className={`w-[92px] h-[92px] cursor-pointer rounded-lg flex items-center justify-center
-                  ${isSelected ? "border-[#4823CF] border-2 bg-[#E6F8F3]" : ""}
-                `}
+                className={`w-[92px] h-[92px] border cursor-pointer rounded-lg flex items-center justify-center relative overflow-hidden
+    ${isSelected ? "border-[#4823CF] border-2 bg-[#E6F8F3]" : ""}
+  `}
               >
-                <span className="font-medium truncate px-2">{sdg.sdg}</span>
+                <img
+                  src={sdg.image}
+                  alt={sdg.sdg}
+                  className="w-full h-full object-cover relative inset-0"
+                />
+                <span className="font-medium flex items-center truncate gap-2 px-2 absolute top-0 text-xs left-0  z-10 text-white rounded">
+                  <span className="text-[24px]">{i + 1}</span>{" "}
+                  <span>{sdg.sdg}</span>
+                </span>
               </div>
             );
           })}
       </div>
 
-     <Button
+      <Button
         type="button"
         isActive={selected.length > 0}
         onClick={handleNext}
         disabled={SdgsLoading || loading}
       >
-        {SdgsLoading ? <LoadingSpinner size="20px" /> : "Next"}
+        {SdgsLoading ? <LoadingSpinner size="20px" /> : "Show Me Careers"}
       </Button>
-    </div> )
+    </div>
+  );
 };
 
 export default SkillsCare;
