@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchSchools , updateSchool, fetchGrades, updateGrades, fetchSkills, updateSkills, fetchSubjects, updateSubjects, fetchSdg, updateSdg, updateAmbition, fetchStudentData} from "../actions/student-onboarding-action";
+import { fetchSchools , updateSchool, fetchGrades, updateGrades, fetchSkills, updateSkills, fetchSubjects, updateSubjects, fetchSdg, updateSdg, updateAmbition, fetchStudentData, updateFigureout} from "../actions/student-onboarding-action";
 
 const initialState = {
   schools : null,
@@ -21,6 +21,7 @@ const initialState = {
   updateAmbition: null,
   StudentData:null,
   StudentDataLoading:false,
+  updateFigureout: null,
 };
 
 const studentSlice = createSlice({
@@ -210,6 +211,21 @@ const studentSlice = createSlice({
       .addCase(fetchStudentData.rejected, (state, action) => {
         state.StudentDataLoading = false;
         state.error = action.payload ;
+      });
+
+
+      builder
+      .addCase(updateFigureout.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateFigureout.fulfilled, (state, action) => {
+        state.loading = false;
+        state.updateFigureout = action.payload;  
+      })
+      .addCase(updateFigureout.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Failed to update Sdgs";
       });
     
   },

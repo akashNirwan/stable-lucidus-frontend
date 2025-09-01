@@ -1,27 +1,74 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../components/common/Button";
 import OptionButton from "../components/common/OptionButton";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateFigureout,
+  fetchStudentData,
+} from "../redux/actions/student-onboarding-action";
+import LoadingSpinner from "../components/common/LoadingSpinner";
+import { getSelectedIds } from "../utils/getSelectedIds";
+
 const FigureOut = ({ setStep, stepsData }) => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [selected, setSelected] = useState("");
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const { loading, StudentData, StudentDataLoading } = useSelector(
+    (state) => state.student
+  );
   const gradeId = searchParams.get("gradeId");
+
+  useEffect(() => {
+    dispatch(fetchStudentData()).then(() => {
+      setIsDataLoaded(true);
+    });
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (isDataLoaded && StudentData && !selected) {
+      const { figureout } = getSelectedIds(StudentData);
+      if (figureout) {
+        setSelected(figureout);
+      }
+    }
+  }, [isDataLoaded, StudentData, selected]);
+
   const handleSelect = (option) => {
     setSelected(option);
-  };
-
-  const handleClick = () => {
-    navigate(`/questions/subject?gradeId=${gradeId}`);
   };
 
   const handleBack = () => {
     navigate("/questions/grade");
   };
 
-  return (
+  const handleClick = () => {
+    if (!selected) return;
+
+    const payload = {
+      figureout: selected,
+    };
+
+    dispatch(updateFigureout(payload)).then((res) => {
+      if (
+        res.payload &&
+        (res.payload.code === 200 || res.payload.code === 201)
+      ) {
+        navigate(`/questions/subject?gradeId=${gradeId}`);
+      }
+    });
+  };
+
+  return StudentDataLoading && !isDataLoaded ? (
+    <div className="flex items-center justify-center min-h-[400px]">
+      <LoadingSpinner size={64} />
+    </div>
+  ) : (
     <div className="text-center flex flex-col gap-3">
       {/* Back Button */}
       <div className="flex items-center justify-start ">
@@ -57,7 +104,7 @@ const FigureOut = ({ setStep, stepsData }) => {
       </div>
 
       <Button type="button" isActive={!!selected} onClick={handleClick}>
-        Next
+        {loading ? <LoadingSpinner size="20px" /> : "Next"}
       </Button>
     </div>
   );

@@ -13,7 +13,8 @@ export const getSelectedIds = (studentData) => {
       selectedSkillIds: [],
       selectedSubjectIds: [],
       selectedSdgIds: [],
-      ambitions: ''
+      ambitions: '',
+      figureout: ''
     };
   }
 
@@ -25,7 +26,8 @@ export const getSelectedIds = (studentData) => {
     selectedSkillIds: data.selected_skill?.map(skill => skill.skillId) || [],
     selectedSubjectIds: data.selected_subject?.map(subject => subject.subjectId) || [],
     selectedSdgIds: data.selected_sdg?.map(sdg => sdg.sdgId) || [],
-    ambitions: data.ambitions || ''
+    ambitions: data.ambitions || '',
+    figureout: data.figureout || ''
   };
 };
 

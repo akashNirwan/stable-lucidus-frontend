@@ -78,13 +78,13 @@ const Subject = ({ setStep, stepsData }) => {
 
     dispatch(updateSubjects(payload)).then((res) => {
       if (res.payload && res.payload.code === 201) {
-        navigate("/questions/skills");
+        navigate(`/questions/skills?gradeId=${gradeId}`);
       }
     });
   };
 
   const handleBack = () => {
-    navigate(`/questions/figure-out`);
+    navigate(`/questions/figure-out?gradeId=${gradeId}`);
   };
 
   return loading && !isDataLoaded && StudentDataLoading ? (
