@@ -1,7 +1,3 @@
-
-
-
-
 import React, { useState, useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import Button from "../components/common/Button";
@@ -9,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchSdg,
   updateSdg,
-  fetchStudentData
+  fetchStudentData,
 } from "../redux/actions/student-onboarding-action";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { useNavigate } from "react-router-dom";
@@ -17,31 +13,28 @@ import { getSelectedIds, getPreSelectedItems } from "../utils/getSelectedIds";
 
 const SkillsCare = ({ setStep, stepsData }) => {
   const dispatch = useDispatch();
-  const { sdgs, loading, SdgsLoading, StudentData } = useSelector((state) => state.student);
+  const { sdgs, loading, SdgsLoading, StudentData } = useSelector(
+    (state) => state.student
+  );
   const [selected, setSelected] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
-      await Promise.all([
-        dispatch(fetchSdg()),
-        dispatch(fetchStudentData())
-      ]);
+      await Promise.all([dispatch(fetchSdg()), dispatch(fetchStudentData())]);
       setIsDataLoaded(true);
     };
-    
+
     fetchData();
   }, [dispatch]);
 
-  
   useEffect(() => {
     if (isDataLoaded && sdgs && StudentData && selected.length === 0) {
       const { selectedSdgIds } = getSelectedIds(StudentData);
       const preSelectedSdgs = getPreSelectedItems(sdgs, selectedSdgIds);
-      
+
       if (preSelectedSdgs.length > 0) {
-        
         setSelected(preSelectedSdgs.slice(0, 3));
       }
     }
@@ -49,10 +42,8 @@ const SkillsCare = ({ setStep, stepsData }) => {
 
   const handleSelect = (sdg) => {
     if (selected.some((s) => s._id === sdg._id)) {
-      
       setSelected(selected.filter((item) => item._id !== sdg._id));
     } else {
-     
       if (selected.length < 3) {
         setSelected([...selected, sdg]);
       }
@@ -89,27 +80,32 @@ const SkillsCare = ({ setStep, stepsData }) => {
           onClick={handleBack}
           className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors"
         >
-          <ArrowLeft size={20} />
-         
+          <button className="p-2 rounded-full hover:bg-gray-100 transition">
+            <ArrowLeft
+              size={20}
+              className="text-violet-800 hover:text-violet-900 cursor-pointer"
+            />
+          </button>
         </button>
 
-      <h2 className="font-bold text-[20px]">{stepsData.title}</h2>
+        <h2 className="font-bold text-[20px]">{stepsData.title}</h2>
       </div>
 
       <h3 className="text-gray-600">{stepsData.subtitle}</h3>
       <h4 className="text-[#24A57F] font-medium">I care about:</h4>
-      
+
       {/* Selection Counter */}
       <p className="text-sm text-gray-500">
-        Selected: {selected.length}/3 {selected.length === 3 && "(Maximum reached)"}
+        Selected: {selected.length}/3{" "}
+        {selected.length === 3 && "(Maximum reached)"}
       </p>
 
-      <div className="h-[320px] overflow-y-auto grid grid-cols-3 gap-2">
+      <div className="h-[270px] overflow-y-auto grid grid-cols-3 gap-2">
         {Array.isArray(sdgs) &&
           sdgs.map((sdg, i) => {
             const isSelected = selected.some((s) => s._id === sdg._id);
             const canSelect = selected.length < 3 || isSelected;
-            
+
             return (
               <div
                 key={sdg._id}

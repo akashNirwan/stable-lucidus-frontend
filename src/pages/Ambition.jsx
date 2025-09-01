@@ -1,14 +1,10 @@
-
-
-
-
 import React, { useState, useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import Button from "../components/common/Button";
 import { useNavigate } from "react-router-dom";
-import { 
-  updateAmbition, 
-  fetchStudentData 
+import {
+  updateAmbition,
+  fetchStudentData,
 } from "../redux/actions/student-onboarding-action";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../components/common/LoadingSpinner";
@@ -19,17 +15,17 @@ const Ambition = ({ stepsData }) => {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
 
   const dispatch = useDispatch();
-  const {StudentDataLoading , StudentData , loading} = useSelector((state) => state.student);
+  const { StudentDataLoading, StudentData, loading } = useSelector(
+    (state) => state.student
+  );
   const navigate = useNavigate();
 
   useEffect(() => {
-  
     dispatch(fetchStudentData()).then(() => {
       setIsDataLoaded(true);
     });
   }, [dispatch]);
 
-  
   useEffect(() => {
     if (isDataLoaded && StudentData && !text) {
       const { ambitions } = getSelectedIds(StudentData);
@@ -61,29 +57,32 @@ const Ambition = ({ stepsData }) => {
     navigate("/questions/skills-care");
   };
 
-  return StudentDataLoading ?  (
-       <div className="flex items-center justify-center min-h-[400px]">
-             <LoadingSpinner size={64} />
-           </div>
-  ): (
-         <div className="text-center flex flex-col gap-3">
+  return StudentDataLoading ? (
+    <div className="flex items-center justify-center min-h-[400px]">
+      <LoadingSpinner size={64} />
+    </div>
+  ) : (
+    <div className="text-center flex flex-col gap-3">
       {/* Back Button */}
       <div className="flex items-center justify-start ">
         <button
           onClick={handleBack}
           className=" flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors"
         >
-          <ArrowLeft size={20} />
-         
+          <button className="p-2 rounded-full hover:bg-gray-100 transition">
+            <ArrowLeft
+              size={20}
+              className="text-violet-800 hover:text-violet-900 cursor-pointer"
+            />
+          </button>
         </button>
-        <div className="flex-row"> 
+        <div className="flex-row">
           <h2 className="font-bold text-[20px]">{stepsData.title}</h2>
-      <h3 className="text-green-600 text-[14px]">{stepsData.subtitle}</h3>
+          <h3 className="text-green-600 text-[14px] leading-[120%]">
+            {stepsData.subtitle}
+          </h3>
         </div>
-        
       </div>
-
-      
 
       <div className="h-[340px] overflow-y-auto flex flex-col gap-2">
         <textarea
@@ -92,7 +91,7 @@ const Ambition = ({ stepsData }) => {
           value={text}
           onChange={handleChange}
         />
-        
+
         {/* Character count */}
         <div className="text-right text-sm text-gray-500">
           {text.length} characters
@@ -108,7 +107,7 @@ const Ambition = ({ stepsData }) => {
         {loading ? <LoadingSpinner size="20px" /> : "Next"}
       </Button>
     </div>
-  )
+  );
 };
 
 export default Ambition;

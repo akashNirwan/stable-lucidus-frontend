@@ -17,35 +17,35 @@ const FigureOut = ({ setStep, stepsData }) => {
     navigate(`/questions/subject?gradeId=${gradeId}`);
   };
 
-   const handleBack = () => {
+  const handleBack = () => {
     navigate("/questions/grade");
   };
 
-
-
   return (
     <div className="text-center flex flex-col gap-3">
-
-       {/* Back Button */}
+      {/* Back Button */}
       <div className="flex items-center justify-start ">
         <button
           onClick={handleBack}
           className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors"
         >
-          <ArrowLeft size={20} />
-
-          
-         
+          <button className="p-2 rounded-full hover:bg-gray-100 transition">
+            <ArrowLeft
+              size={20}
+              className="text-violet-800 hover:text-violet-900 cursor-pointer"
+            />
+          </button>
         </button>
         <h2 className="font-bold text-[20px]">
-        What are you here to <span className="text-[#5f35f1]">figure</span> out?{" "}
-      </h2>
+          What are you here to <span className="text-[#5f35f1]">figure</span>{" "}
+          out?{" "}
+        </h2>
       </div>
-     
+
       <h3 className="text-gray-600">{stepsData.subtitle}</h3>
       <h4 className="text-[#24A57F] font-medium">I want to:</h4>
 
-      <div className="h-[320px] overflow-y-auto flex flex-col gap-2">
+      <div className="h-[300px] overflow-y-auto flex flex-col gap-2">
         {stepsData.options.map((option, ind) => (
           <OptionButton
             key={ind}

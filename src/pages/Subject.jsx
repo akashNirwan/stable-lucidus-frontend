@@ -1,6 +1,3 @@
-
-
-
 import React, { useState, useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import Button from "../components/common/Button";
@@ -8,7 +5,7 @@ import TwoLineOption from "../components/common/TwoLineOption";
 import {
   fetchSubjects,
   updateSubjects,
-  fetchStudentData
+  fetchStudentData,
 } from "../redux/actions/student-onboarding-action";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../components/common/LoadingSpinner";
@@ -20,9 +17,13 @@ const Subject = ({ setStep, stepsData }) => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { subjects, loading, SubjectsLoading, StudentData, StudentDataLoading } = useSelector(
-    (state) => state.student
-  );
+  const {
+    subjects,
+    loading,
+    SubjectsLoading,
+    StudentData,
+    StudentDataLoading,
+  } = useSelector((state) => state.student);
   const [selectedSubjects, setSelectedSubjects] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const gradeId = searchParams.get("gradeId");
@@ -32,21 +33,28 @@ const Subject = ({ setStep, stepsData }) => {
       if (gradeId) {
         await Promise.all([
           dispatch(fetchSubjects(gradeId)),
-          dispatch(fetchStudentData())
+          dispatch(fetchStudentData()),
         ]);
         setIsDataLoaded(true);
       }
     };
-    
+
     fetchData();
   }, [dispatch, gradeId]);
 
- 
   useEffect(() => {
-    if (isDataLoaded && subjects && StudentData && selectedSubjects.length === 0) {
+    if (
+      isDataLoaded &&
+      subjects &&
+      StudentData &&
+      selectedSubjects.length === 0
+    ) {
       const { selectedSubjectIds } = getSelectedIds(StudentData);
-      const preSelectedSubjects = getPreSelectedItems(subjects, selectedSubjectIds);
-      
+      const preSelectedSubjects = getPreSelectedItems(
+        subjects,
+        selectedSubjectIds
+      );
+
       if (preSelectedSubjects.length > 0) {
         setSelectedSubjects(preSelectedSubjects);
       }
@@ -54,11 +62,10 @@ const Subject = ({ setStep, stepsData }) => {
   }, [isDataLoaded, subjects, StudentData, selectedSubjects.length]);
 
   const handleSelect = (subject) => {
-    setSelectedSubjects(
-      (prev) =>
-        prev.some((s) => s._id === subject._id)
-          ? prev.filter((s) => s._id !== subject._id) 
-          : [...prev, subject] 
+    setSelectedSubjects((prev) =>
+      prev.some((s) => s._id === subject._id)
+        ? prev.filter((s) => s._id !== subject._id)
+        : [...prev, subject]
     );
   };
 
@@ -92,20 +99,23 @@ const Subject = ({ setStep, stepsData }) => {
           onClick={handleBack}
           className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors"
         >
-          <ArrowLeft size={20} />
-         
+          <button className="p-2 rounded-full hover:bg-gray-100 transition">
+            <ArrowLeft
+              size={20}
+              className="text-violet-800 hover:text-violet-900 cursor-pointer"
+            />
+          </button>
         </button>
         <h2 className="font-bold text-[20px]">
-        Pick the <span className="text-[#5f35f1]">subjects</span> that excite
-        you{" "}
-      </h2>
+          Pick the <span className="text-[#5f35f1]">subjects</span> that excite
+          you{" "}
+        </h2>
       </div>
 
-      
       <h3 className="text-gray-600 h-12 line-clamp-2">{stepsData.subtitle}</h3>
       <h4 className="text-[#24A57F] font-medium">I want to:</h4>
 
-      <div className="max-h-[300px] overflow-y-auto grid gap-2">
+      <div className="max-h-[280px] overflow-y-auto grid gap-2">
         {Array.isArray(subjects) &&
           subjects.map((subject) => (
             <TwoLineOption
