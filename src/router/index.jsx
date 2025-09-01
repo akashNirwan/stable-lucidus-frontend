@@ -10,6 +10,8 @@ import Question from "../pages/Question";
 import DashBoardLayout from "./dashboardWrapper";
 import DashBoard from "../pages/DashBoard";
 import Level from "../pages/MicroExperience";
+import MicroExperienceLayout from "./microIntroWrapper";
+import MicroIntoScreen from "../pages/MicroIntoScreen";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -58,6 +60,11 @@ const router = createBrowserRouter([
   {
     path: "/level",
     element: <Level />,
+  },
+  {
+    path: "/micro-intro",
+    element: <MicroExperienceLayout />,
+    children: [{ index: true, element: <MicroIntoScreen /> }],
   },
 ]);
 
