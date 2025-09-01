@@ -12,6 +12,7 @@ import DashBoard from "../pages/DashBoard";
 import Level from "../pages/MicroExperience";
 import MicroExperienceLayout from "./microIntroWrapper";
 import MicroIntoScreen from "../pages/MicroIntoScreen";
+import BadgeEarned from "../pages/BadgeEarned";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
     path: "/micro-intro",
     element: <MicroExperienceLayout />,
     children: [{ index: true, element: <MicroIntoScreen /> }],
+  },
+  {
+    path: "/badge-earned",
+    element: <BadgeEarned />,
   },
 ]);
 

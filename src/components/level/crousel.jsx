@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-
 import {
   Carousel,
   CarouselContent,
@@ -9,8 +8,10 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-
+import Button from "../common/Button";
+import { useNavigate } from "react-router-dom";
 export default function LevelCarousel() {
+  const navigate = useNavigate();
   const items = [
     {
       img: "/assets/lvl-2.svg",
@@ -32,18 +33,8 @@ export default function LevelCarousel() {
     },
   ];
 
-  const [api, setApi] = React.useState<any>(null);
-  const [selected, setSelected] = React.useState(0);
-
-  React.useEffect(() => {
-    if (!api) return;
-
-    setSelected(api.selectedScrollSnap());
-
-    api.on("select", () => {
-      setSelected(api.selectedScrollSnap());
-    });
-  }, [api]);
+  const [api, setApi] = React.useState(null);
+  const [selected, setSelected] = React.useState(null);
 
   return (
     <div className="w-full md:max-w-sm mx-auto">
@@ -56,17 +47,21 @@ export default function LevelCarousel() {
           {items.map((item, i) => (
             <CarouselItem key={i}>
               <div
-                className={`bg-white rounded-2xl my-4 shadow-md overflow-hidden p-4 flex flex-col items-center text-center transition-all duration-300 ${
+                onClick={() => {
+                  api?.scrollTo(i);
+                  setSelected(i); // ✅ only update on click
+                }}
+                className={`bg-white rounded-2xl my-4 shadow-md overflow-hidden p-4 flex flex-col items-center text-center transition-all duration-300 cursor-pointer ${
                   selected === i
                     ? "opacity-100 scale-100"
                     : "opacity-50 scale-95"
                 }`}
               >
-                <div className="rounded-xl overflow-hidden">
+                <div className="rounded-xl overflow-hidden w-[250px] h-[250px]">
                   <img
                     src={item.img}
                     alt={item.title}
-                    className="rounded-xl object-cover size-[250px]"
+                    className="rounded-xl object-cover w-full h-full"
                   />
                 </div>
                 <h3 className="text-sm font-bold text-gray-800 mt-4">
@@ -77,7 +72,12 @@ export default function LevelCarousel() {
                 </p>
                 <p className="text-sm text-gray-600 mt-2">{item.description}</p>
 
-                <div className="w-6 h-6 border-2 border-green-600 rounded-full flex items-center justify-center mt-4" />
+                {/* ✅ Circle: outlined by default, filled only when clicked */}
+                <div
+                  className={`w-6 h-6 rounded-full flex items-center justify-center mt-4 border-2 border-green-600 ${
+                    selected === i ? "bg-green-600" : "bg-transparent"
+                  }`}
+                />
               </div>
             </CarouselItem>
           ))}
@@ -92,13 +92,24 @@ export default function LevelCarousel() {
         {items.map((_, i) => (
           <button
             key={i}
-            onClick={() => api?.scrollTo(i)}
+            onClick={() => {
+              api?.scrollTo(i);
+              setSelected(i); // ✅ sync with click
+            }}
             className={`h-2 rounded-full transition-all duration-300 ${
               selected === i ? "w-4 bg-purple-500" : "w-2 bg-gray-500"
             }`}
           />
         ))}
       </div>
+
+      <Button
+        onClick={() => navigate("/badge-earned")}
+        disabled={selected === null ? true : false}
+        className="mt-2 max-w-[320px] flex justify-center mx-auto"
+      >
+        Approve Zuri Loan's
+      </Button>
     </div>
   );
 }

@@ -1,5 +1,5 @@
-import React from 'react';
-import { FaArrowLeft, FaTimes } from 'react-icons/fa';
+import React from "react";
+import { FaArrowLeft, FaTimes } from "react-icons/fa";
 const Header = () => {
   return (
     <header className="p-6 pb-0">

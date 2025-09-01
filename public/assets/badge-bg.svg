@@ -1,0 +1,34 @@
+<svg width="360" height="800" viewBox="0 0 360 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_493_8947)">
+<rect width="360" height="800" fill="#130934"/>
+<g filter="url(#filter0_f_493_8947)">
+<path d="M388.528 129.111C456.399 126.282 478.367 67.1987 477.42 15.6798C476.725 -22.1567 443.244 -45.7949 405.193 -52.9288L358.989 -61.5913C313.599 -70.1011 266.863 -40.9069 254.601 3.61585L179.167 277.514C166.809 322.386 232.762 354.643 230.647 309.286C225.083 189.989 284.288 133.455 388.528 129.111Z" fill="url(#paint0_radial_493_8947)"/>
+</g>
+<g filter="url(#filter1_f_493_8947)">
+<path d="M21.2122 556.151C58.9309 499.655 24.1491 447.084 -18.0277 417.483C-49.0032 395.744 -87.8331 408.859 -116.023 435.392L-150.254 467.612C-183.882 499.264 -187.844 554.226 -159.104 590.374L17.6991 812.75C46.6638 849.181 111.596 814.914 73.708 789.889C-25.9437 724.069 -36.7179 642.92 21.2122 556.151Z" fill="url(#paint1_radial_493_8947)"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_f_493_8947" x="45.623" y="-195.066" width="563.826" height="658.254" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="66" result="effect1_foregroundBlur_493_8947"/>
+</filter>
+<filter id="filter1_f_493_8947" x="-310.312" y="274.547" width="527.578" height="686.085" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="66" result="effect1_foregroundBlur_493_8947"/>
+</filter>
+<radialGradient id="paint0_radial_493_8947" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(437.442 56.2469) rotate(126.674) scale(411.574 296.403)">
+<stop stop-color="#FF8B4C"/>
+<stop offset="1" stop-color="#24A57F"/>
+</radialGradient>
+<radialGradient id="paint1_radial_493_8947" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-8.81952 473.689) rotate(72.7888) scale(411.574 296.403)">
+<stop stop-color="#FF8B4C"/>
+<stop offset="1" stop-color="#24A57F"/>
+</radialGradient>
+<clipPath id="clip0_493_8947">
+<rect width="360" height="800" fill="white"/>
+</clipPath>
+</defs>
+</svg>

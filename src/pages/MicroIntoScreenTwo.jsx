@@ -13,7 +13,6 @@ const MicroIntoScreenTwo = () => {
         carefully.
       </p>
 
-      {/* Redirect to another page */}
       <Button onClick={() => navigate("/level")}>Help Zuri</Button>
     </div>
   );

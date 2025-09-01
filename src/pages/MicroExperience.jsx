@@ -10,7 +10,6 @@ const Level = () => {
       <Header />
       <Question />
       <LevelCarousel />
-      {/* <Button /> */}
     </div>
   );
 };
