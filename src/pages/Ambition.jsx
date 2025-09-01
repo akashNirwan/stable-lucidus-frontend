@@ -61,7 +61,7 @@ const Ambition = ({ stepsData }) => {
     navigate("/questions/skills-care");
   };
 
-  return StudentDataLoading ?  (
+  return StudentDataLoading && !isDataLoaded?  (
        <div className="flex items-center justify-center min-h-[400px]">
              <LoadingSpinner size={64} />
            </div>
