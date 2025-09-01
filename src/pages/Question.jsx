@@ -9,6 +9,7 @@ import SkillsCare from "./SkillsCare";
 import Ambition from "./Ambition";
 import QuestionFinalLoad from "./QuestionFinalLoad";
 
+
 const Question = ({ stepName }) => {
   const stepDataIndex = {
     grade: 1,
