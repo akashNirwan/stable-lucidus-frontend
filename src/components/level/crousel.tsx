@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+
 import {
   Carousel,
   CarouselContent,
@@ -63,12 +63,10 @@ export default function LevelCarousel() {
                 }`}
               >
                 <div className="rounded-xl overflow-hidden">
-                  <Image
+                  <img
                     src={item.img}
                     alt={item.title}
-                    width={250}
-                    height={250}
-                    className="rounded-xl object-cover"
+                    className="rounded-xl object-cover size-[250px]"
                   />
                 </div>
                 <h3 className="text-sm font-bold text-gray-800 mt-4">
