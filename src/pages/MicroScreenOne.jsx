@@ -1,16 +1,26 @@
 import React from "react";
 import Button from "../components/common/Button";
-const MicroIntoScreenOne = ({ setScreen }) => {
+const MicroIntoScreenOne = ({ setScreen , data}) => {
+
+ 
+   
   return (
     <div className="">
-      <h3> You're a Trainee Microfinance Specialist in rural Kenya.</h3>
+      <h3>
+        {data?.career?.[0]?.career }
+      </h3>
       <p>
-        Your organization manages a $200,000 regional budget for small loans.
+        {data?.career?.[0]?.description }
       </p>
       <p>
-        You are introduced to Zuri, a mother of three, who needs a $33 loan.
+        {data?.questionintros?.[0]?.titleOne}
       </p>
-      <Button onClick={() => setScreen(2)}>Talk to Zuri</Button>
+      <p>
+        {data?.questionintros?.[0]?.titleTwo }
+      </p>
+      <Button onClick={() => setScreen(2)}>
+        {data?.questionintros?.[0]?.buttonName }
+      </Button>
     </div>
   );
 };

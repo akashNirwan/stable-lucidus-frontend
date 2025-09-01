@@ -1,9 +1,9 @@
 import React, { useState, useMemo } from "react";
-
-const CareerCard = ({ title, tags, description, image }) => {
+import { useNavigate } from "react-router-dom";
+const CareerCard = ({ careerId,title, tags, description, image }) => {
   const [saved, setSaved] = useState(false);
   const [activeBtn, setActiveBtn] = useState("experience");
-
+const navigate = useNavigate();
   const colors = [
     { bg: "bg-orange-200", text: "text-amber-800" },
     { bg: "bg-blue-200", text: "text-blue-700" },
@@ -21,7 +21,9 @@ const CareerCard = ({ title, tags, description, image }) => {
     colors[Math.floor(Math.random() * colors.length)];
 
   const tagColors = useMemo(() => tags.map(() => getRandomColor()), [tags]);
-
+  const handleExperienceClick = () => {
+    navigate(`/micro-intro?careerId=${careerId}`);
+  };
   return (
     <div className="text-white h-[510px] grid border rounded-2xl overflow-hidden relative">
       <div className="bg-red-400 flex items-center justify-center relative">
@@ -102,7 +104,7 @@ const CareerCard = ({ title, tags, description, image }) => {
           </button>
 
           <button
-            onClick={() => setActiveBtn("experience")}
+            onClick={handleExperienceClick}
             className={`py-[12px] px-[32px] rounded-xl flex items-center justify-center ${
               activeBtn === "experience"
                 ? "bg-[#24A57F] text-white"
