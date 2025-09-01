@@ -6,9 +6,9 @@ const MicroIntoScreenTwo = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <h3>A Tough Call</h3>
-      <p>
+    <div className="text-center grid gap-4">
+      <h3 className="font-bold text-[20px] text-center">A Tough Call</h3>
+      <p className="text-center text-[#042119]">
         This is your first solo loan assignment. Think through the options
         carefully.
       </p>

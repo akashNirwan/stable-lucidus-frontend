@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import MicroIntoScreenOne from "./MicroScreenOne";
 import MicroIntoScreenTwo from "./MicroIntoScreenTwo";
+import { useOutletContext } from "react-router-dom";
 const MicroIntoScreen = () => {
-  const [screen, setScreen] = useState(1);
-
+  const { screen, setScreen } = useOutletContext();
   const screenComponent = {
     1: <MicroIntoScreenOne setScreen={setScreen} />,
     2: <MicroIntoScreenTwo setScreen={setScreen} />,
