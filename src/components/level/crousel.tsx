@@ -1,14 +1,14 @@
 // "use client";
 
-import React from "react";
-
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+// import React from "react";
+// import Image from "next/image";
+// import {
+//   Carousel,
+//   CarouselContent,
+//   CarouselItem,
+//   CarouselNext,
+//   CarouselPrevious,
+// } from "@/components/ui/carousel";
 
 // export default function LevelCarousel() {
 //   const items = [
@@ -45,37 +45,39 @@ import {
 //     });
 //   }, [api]);
 
-  return (
-    <div className="w-full md:max-w-sm mx-auto">
-      <Carousel
-        setApi={setApi}
-        opts={{ align: "center", loop: true }}
-        className="relative"
-      >
-        <CarouselContent>
-          {items.map((item, i) => (
-            <CarouselItem key={i}>
-              <div
-                className={`bg-white rounded-2xl my-4 shadow-md overflow-hidden p-4 flex flex-col items-center text-center transition-all duration-300 ${
-                  selected === i
-                    ? "opacity-100 scale-100"
-                    : "opacity-50 scale-95"
-                }`}
-              >
-                <div className="rounded-xl overflow-hidden">
-                  <img
-                    src={item.img}
-                    alt={item.title}
-                    className="rounded-xl object-cover size-[250px]"
-                  />
-                </div>
-                <h3 className="text-sm font-bold text-gray-800 mt-4">
-                  {item.title}
-                </h3>
-                <p className="text-[12px] font-bold text-purple-600 uppercase mt-1">
-                  {item.subtitle}
-                </p>
-                <p className="text-sm text-gray-600 mt-2">{item.description}</p>
+//   return (
+//     <div className="w-full md:max-w-sm mx-auto">
+//       <Carousel
+//         setApi={setApi}
+//         opts={{ align: "center", loop: true }}
+//         className="relative"
+//       >
+//         <CarouselContent>
+//           {items.map((item, i) => (
+//             <CarouselItem key={i}>
+//               <div
+//                 className={`bg-white rounded-2xl my-4 shadow-md overflow-hidden p-4 flex flex-col items-center text-center transition-all duration-300 ${
+//                   selected === i
+//                     ? "opacity-100 scale-100"
+//                     : "opacity-50 scale-95"
+//                 }`}
+//               >
+//                 <div className="rounded-xl overflow-hidden">
+//                   <Image
+//                     src={item.img}
+//                     alt={item.title}
+//                     width={250}
+//                     height={250}
+//                     className="rounded-xl object-cover"
+//                   />
+//                 </div>
+//                 <h3 className="text-sm font-bold text-gray-800 mt-4">
+//                   {item.title}
+//                 </h3>
+//                 <p className="text-[12px] font-bold text-purple-600 uppercase mt-1">
+//                   {item.subtitle}
+//                 </p>
+//                 <p className="text-sm text-gray-600 mt-2">{item.description}</p>
 
 //                 <div className="w-6 h-6 border-2 border-green-600 rounded-full flex items-center justify-center mt-4" />
 //               </div>
