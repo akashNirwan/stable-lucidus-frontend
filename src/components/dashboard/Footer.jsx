@@ -4,7 +4,7 @@ const Footer = ({ setMenu, menu }) => {
   return (
     <div className="py-4 rounded-t-3xl bg-white border border-b-0 flex justify-between items-center w-full max-w-[750px] mx-auto">
       <div
-        className="flex flex-1 flex-col items-center"
+        className="flex flex-1 flex-col items-center cursor-pointer"
         onClick={() => setMenu(1)}
       >
         <svg
@@ -22,7 +22,7 @@ const Footer = ({ setMenu, menu }) => {
         <h4>DashBoard</h4>
       </div>
       <div
-        className="flex flex-1 flex-col items-center"
+        className="flex flex-1 flex-col items-center cursor-pointer"
         onClick={() => setMenu(2)}
       >
         <svg
@@ -47,7 +47,7 @@ const Footer = ({ setMenu, menu }) => {
         <h4>Explore</h4>
       </div>
       <div
-        className="flex flex-1 flex-col items-center"
+        className="flex flex-1 flex-col items-center cursor-pointer"
         onClick={() => setMenu(3)}
       >
         <svg

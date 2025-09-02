@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoadingBar = () => {
   const [progress, setProgress] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -12,20 +14,27 @@ const LoadingBar = () => {
         }
         return old + 5;
       });
-    }, 300); // speed of progress
+    }, 300);
+
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if (progress === 100) {
+      const timeout = setTimeout(() => {
+        navigate("/dashboard");
+      }, 500);
+      return () => clearTimeout(timeout);
+    }
+  }, [progress, navigate]);
+
   return (
     <div className="flex flex-col w-full ">
-      {/* Title */}
       <h2 className="text-[#A187FF] text-xs font-semibold mb-4">
         Loading Potential Careers...
       </h2>
 
-      {/* Progress bar container */}
-      <div className="w-full  bg-blue-900 rounded-full overflow-hidden border border-blue-400">
-        {/* Progress bar */}
+      <div className="w-full bg-blue-900 rounded-full overflow-hidden border border-blue-400">
         <div
           className="bg-green-500 h-3 rounded-full transition-all duration-500"
           style={{ width: `${progress}%` }}

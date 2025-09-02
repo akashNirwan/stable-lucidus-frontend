@@ -16,6 +16,7 @@ import BadgeEarned from "../pages/BadgeEarned";
 import OnChoiceFeedBack from "./choiceFeedBack";
 import FeedBackForm from "../pages/FeedBackForm";
 import ServeyPage from "../pages/ServeyPage";
+import EncycloPediaWrapper from "./encyclopediaWrapper";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -82,6 +83,11 @@ const router = createBrowserRouter([
     path: "/student-choice",
     element: <OnChoiceFeedBack />,
     children: [{ index: true, element: <FeedBackForm /> }],
+  },
+  {
+    path: "/encylopedia",
+    element: <EncycloPediaWrapper />,
+    children: [{ index: true, element: <div>Hello</div> }],
   },
 ]);
 
