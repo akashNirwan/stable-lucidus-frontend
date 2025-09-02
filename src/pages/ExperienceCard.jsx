@@ -7,13 +7,12 @@ const CareerExperienceCard = () => {
 
   const handleExperienceClick = () => {
     setActiveBtn("experience");
-    // 👉 Replace this with navigation, modal, or API call
+
     alert("Experience It clicked 🚀");
   };
 
   return (
     <div className="h-[350px] w-[320px] mx-auto rounded-2xl relative shadow-lg overflow-hidden">
-      {/* Image Section */}
       <div className="h-[250px] w-full">
         <img
           src="/assets/lvl-1.svg"
@@ -22,9 +21,7 @@ const CareerExperienceCard = () => {
         />
       </div>
 
-      {/* Card Bottom Section */}
       <div className="absolute bottom-0 left-0 h-[120px] w-full bg-white rounded-2xl">
-        {/* Title Row */}
         <div className="flex m-4 justify-between items-center">
           <div className="text-xl text-[#042119] font-semibold">
             Hydrologist
@@ -34,7 +31,6 @@ const CareerExperienceCard = () => {
           </div>
         </div>
 
-        {/* Buttons Row */}
         <div className="flex justify-between mt-2 px-4">
           <button
             onClick={() => setActiveBtn("more")}
