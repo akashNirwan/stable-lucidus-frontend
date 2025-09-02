@@ -1,14 +1,66 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {  saveFeedback } from "../redux/actions/microexperience-action";
+import LoadingSpinner from "../components/common/LoadingSpinner";
+import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
+
 export default function CareerSurvey() {
+   const dispatch = useDispatch();
+    const {  saveFeedbackLoading } = useSelector(
+      (state) => state.microexperience
+    );
+
+ const [searchParams] = useSearchParams();
+ const careerLevelId = searchParams.get("careerLevelId");
+console.log(careerLevelId, "careerLevelId");
+
+
   const [islike, setIsLike] = useState("");
   const navigate = useNavigate();
+  
+  
+
+   const handleNext = () => {
+      const payload = {
+        careerLevelId: microexperience?.[0]?._id,
+        badge: microexperience?.[0]?.questionbadges?.[0]?.badges?.[0]?.image,
+      };
+  
+      dispatch(saveBadge(payload)).then((res) => {
+       
+        if (res.payload && res.payload.code === 201 || res.payload.statusCode === 200) {
+               navigate(`/student-choice?questionId=${questionId}&careerId=${careerId}`)
+        }
+      });
+    };
+  
   const handleChoice = (choice) => {
     setIsLike(choice);
-    navigate("/dashboard");
+
+    
+    dispatch(
+      saveFeedback({
+        likeDislike: choice === "like" ? "Like" : "Dislike",
+        careerLevelId: careerLevelId,
+      })
+    ).then((res) => {
+       
+        if (res.payload && res.payload.code === 201 || res.payload.statusCode === 200) {
+               navigate("/dashboard");
+        }
+      });
+
+    
+   
   };
 
-  return (
+  return saveFeedbackLoading ? (
+               <div className="flex items-center justify-center min-h-[400px]">
+                    <LoadingSpinner size={64} />
+                  </div>
+  ) : (
+
     <div className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-[#130934] to-[#24A57F] h-screen w-full">
         <div className="fixed inset-0">
@@ -70,5 +122,5 @@ export default function CareerSurvey() {
         />
       </div>
     </div>
-  );
+  )
 }

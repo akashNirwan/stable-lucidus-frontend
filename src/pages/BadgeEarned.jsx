@@ -7,6 +7,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const BadgeEarned = () => {
   const [searchParams] = useSearchParams();
@@ -14,13 +15,14 @@ const BadgeEarned = () => {
   const { microexperience, loading, error, saveBadgeLoading } = useSelector(
     (state) => state.microexperience
   );
-
+   const navigate = useNavigate()
   console.log(
     microexperience?.[0]?.questionbadges?.[0]?.badges?.[0]?.image,
     "microexperience"
   );
 
   const careerId = searchParams.get("careerId");
+  const questionId = searchParams.get("questionId");
   useEffect(() => {
     if (careerId) {
       dispatch(fetchMicroexperience(careerId));
@@ -37,8 +39,9 @@ const BadgeEarned = () => {
     };
 
     dispatch(saveBadge(payload)).then((res) => {
-      if (res.payload && res.payload.code === 201 || res.payload.code === 200) {
-        alert("hii")
+     
+      if (res.payload && res.payload.code === 201 || res.payload.statusCode === 200) {
+             navigate(`/student-choice?questionId=${questionId}&careerId=${careerId}`)
       }
     });
   };
@@ -64,7 +67,9 @@ const BadgeEarned = () => {
           <p className="text-white text-center">
             Keep exploring to unlock more achievements!
           </p>
-          <Button onClick={handleNext}>Continue</Button>
+          <Button onClick={handleNext}>
+            {saveBadgeLoading ? <LoadingSpinner size={20}></LoadingSpinner> : "Continue"}
+            </Button>
         </div>
       </div>
     </div>

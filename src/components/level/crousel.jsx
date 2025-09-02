@@ -37,14 +37,14 @@ export default function LevelCarousel({data, careerId}) {
     if (!selectedQuestion) return;
 
     const payload = {
-      questionId: selectedQuestion._id, // ✅ API payload
+      questionId: selectedQuestion._id,
     };
 
     // Dispatch saveAnswer API
     await dispatch(saveAnswer(payload));
 
     // Navigate after API success
-    navigate(`/badge-earned?careerId=${careerId}`);
+    navigate(`/badge-earned?careerId=${careerId}&questionId=${selectedQuestion._id}`);
   };
 
   return (

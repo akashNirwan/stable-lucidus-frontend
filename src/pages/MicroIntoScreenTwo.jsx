@@ -5,7 +5,10 @@ import Button from "../components/common/Button";
 const MicroIntoScreenTwo = ({data}) => {
   const navigate = useNavigate();
 
-const careerId = data?.careerId
+
+const careerId = data?.career[0]._id
+console.log(careerId, "careerid");
+console.log(data?.career[0]._id, "data");
 
   return (
     <div>

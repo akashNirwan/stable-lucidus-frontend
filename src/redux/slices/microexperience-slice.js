@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchMicroexperience , saveAnswer, saveBadge} from "../actions/microexperience-action";
+import { fetchMicroexperience , saveAnswer, saveBadge, saveInsight, saveFeedback} from "../actions/microexperience-action";
 
 
 const initialState = {
@@ -11,6 +11,10 @@ const initialState = {
   saveAnswerLoading : false,
   saveBadge: null,
   saveBadgeLoading : false,
+  saveInsight :null,
+  saveInsightLoading : false,
+  saveFeedback : null,
+  saveFeedbackLoading : false,
 };
 
 
@@ -72,8 +76,37 @@ const microexperienceSlice = createSlice({
                     state.saveBadgeLoading = false;
                     state.error = action.payload || "Failed to Save Badge";
                   });
+                  // save Insight
+      
+              builder
+                  .addCase(saveInsight.pending, (state) => {
+                    state.saveInsightLoading = true;
+                    state.error = null;
+                  })
+                  .addCase(saveInsight.fulfilled, (state, action) => {
+                    state.saveInsightLoading = false;
+                    state.saveInsight = action.payload; 
+                  })
+                  .addCase(saveInsight.rejected, (state, action) => {
+                    state.saveInsightLoading = false;
+                    state.error = action.payload || "Failed to Save Insight";
+                  });
 
-    
+               // save Feedback
+      
+              builder
+                  .addCase(saveFeedback.pending, (state) => {
+                    state.saveFeedbackLoading = true;
+                    state.error = null;
+                  })
+                  .addCase(saveFeedback.fulfilled, (state, action) => {
+                    state.saveFeedbackLoading = false;
+                    state.saveFeedback = action.payload; 
+                  })
+                  .addCase(saveFeedback.rejected, (state, action) => {
+                    state.saveFeedbackLoading = false;
+                    state.error = action.payload || "Failed to Save Feedback";
+                  });
   },
 });
 

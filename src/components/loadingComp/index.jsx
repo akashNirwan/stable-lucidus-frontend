@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 const LoadingBar = () => {
   const [progress, setProgress] = useState(0);
-
+   const navigate = useNavigate()
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((old) => {
@@ -16,6 +16,14 @@ const LoadingBar = () => {
     return () => clearInterval(interval);
   }, []);
 
+   useEffect(() => {
+    if (progress === 100) {
+      const timer = setTimeout(() => {
+        navigate("/dashboard");
+      }, 800); 
+      return () => clearTimeout(timer);
+    }
+  }, [progress, navigate]);
   return (
     <div className="flex flex-col w-full ">
       {/* Title */}
