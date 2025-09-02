@@ -1,44 +1,40 @@
-import React from "react";
 import { useState } from "react";
-import { X } from "lucide-react";
+import NextLevelModal from "../components/dashboard/Modal";
+import DashBoardMicro from "./DashBoardMicro";
+import SavedCareer from "./SavedCareer";
 const DashBoardMenuOne = () => {
   const [open, setOpen] = useState(true);
-
-  if (!open) return null;
+  const [activeTab, setActiveTab] = useState("micro");
   return (
-    <div className="text-white grid place-content-center h-[80vh]">
-      Comming Soon...😉
-      <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-        {/* Modal box */}
-        <div className="relative bg-white rounded-2xl shadow-lg p-6 w-80 text-center">
-          {/* Close button */}
-          <button
-            onClick={() => setOpen(false)}
-            className="absolute top-3 right-3 text-gray-400 hover:text-gray-600"
-          >
-            <X className="w-5 h-5" />
-          </button>
+    <div>
+      <div className="flex justify-between bg-[#120C2A] p-4">
+        <button
+          onClick={() => setActiveTab("micro")}
+          className={`relative text-lg font-medium transition-colors ${
+            activeTab === "micro" ? "text-teal-400" : "text-purple-300"
+          }`}
+        >
+          Micro-experiences
+          {activeTab === "micro" && (
+            <span className="absolute left-0 -bottom-1 h-[3px] w-full bg-teal-400 rounded"></span>
+          )}
+        </button>
 
-          {/* Title */}
-          <h2 className="text-[#4C3AE3] font-bold text-lg mb-2">
-            Zuri’s story continues.
-          </h2>
-
-          {/* Subtitle */}
-          <p className="text-gray-800 mb-6">
-            A new Microfinance challenge awaits you.
-          </p>
-
-          {/* CTA Button */}
-          <button
-            onClick={() => alert("Go to Level 2")}
-            className="w-full py-3 bg-[#24A57F] text-white font-semibold rounded-lg hover:bg-[#1e896a] transition"
-          >
-            Try Level 2
-          </button>
-        </div>
+        <button
+          onClick={() => setActiveTab("saved")}
+          className={`relative text-lg font-medium transition-colors ${
+            activeTab === "saved" ? "text-teal-400" : "text-purple-300"
+          }`}
+        >
+          Saved Careers
+          {activeTab === "saved" && (
+            <span className="absolute left-0 -bottom-1 h-[3px] w-full bg-teal-400 rounded"></span>
+          )}
+        </button>
       </div>
-      ;
+
+      {activeTab === "micro" ? <DashBoardMicro /> : <SavedCareer />}
+      <NextLevelModal open={open} onClose={() => setOpen(false)} />
     </div>
   );
 };
