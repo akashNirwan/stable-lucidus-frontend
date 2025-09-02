@@ -1,9 +1,19 @@
 import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { saveCareer } from "../../redux/actions/dashboard-action";
+
 const CareerCard = ({ careerId,title, tags, description, image }) => {
   const [saved, setSaved] = useState(false);
   const [activeBtn, setActiveBtn] = useState("experience");
 const navigate = useNavigate();
+ const dispatch = useDispatch();
+
+
+  const handleSaveClick = () => {
+    setSaved(!saved); 
+    dispatch(saveCareer({ careerId })); 
+  };
   const colors = [
     { bg: "bg-orange-200", text: "text-amber-800" },
     { bg: "bg-blue-200", text: "text-blue-700" },
@@ -42,7 +52,7 @@ const navigate = useNavigate();
         <div className="flex justify-between items-center ">
           <h4 className="text-[#042119] text-[20px] line-clamp-1">{title}</h4>
 
-          <button onClick={() => setSaved(!saved)}>
+          <button onClick={handleSaveClick}>
             {saved ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"

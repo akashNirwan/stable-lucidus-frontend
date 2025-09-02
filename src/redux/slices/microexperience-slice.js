@@ -1,12 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchMicroexperience } from "../actions/microexperience-action";
+import { fetchMicroexperience , saveAnswer, saveBadge} from "../actions/microexperience-action";
 
 
 const initialState = {
  microexperience : [],
  loading: false,
   error: null,
+  saveAnswer : null,
+  saveAnswerLoading : false,
+  saveBadge: null,
+  saveBadgeLoading : false,
 };
 
 
@@ -34,6 +38,40 @@ const microexperienceSlice = createSlice({
         state.loading = false;
         state.error = action.payload?.message || "Failed to fetch Microexperience";
       });
+
+
+
+      // save Answer
+      
+              builder
+                  .addCase(saveAnswer.pending, (state) => {
+                    state.saveAnswerLoading = true;
+                    state.error = null;
+                  })
+                  .addCase(saveAnswer.fulfilled, (state, action) => {
+                    state.saveAnswerLoading = false;
+                    state.saveAnswer = action.payload; 
+                  })
+                  .addCase(saveAnswer.rejected, (state, action) => {
+                    state.saveAnswerLoading = false;
+                    state.error = action.payload || "Failed to Save Answer";
+                  });
+
+                  // save Badge
+      
+              builder
+                  .addCase(saveBadge.pending, (state) => {
+                    state.saveBadgeLoading = true;
+                    state.error = null;
+                  })
+                  .addCase(saveBadge.fulfilled, (state, action) => {
+                    state.saveBadgeLoading = false;
+                    state.saveBadge = action.payload; 
+                  })
+                  .addCase(saveBadge.rejected, (state, action) => {
+                    state.saveBadgeLoading = false;
+                    state.error = action.payload || "Failed to Save Badge";
+                  });
 
     
   },

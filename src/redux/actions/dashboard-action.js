@@ -32,3 +32,29 @@ export const fetchCareers = createAsyncThunk(
     }
   }
 );
+
+
+export const saveCareer = createAsyncThunk(
+  "dashboard/saveCareer",
+  async (payload, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage();
+
+    try {
+      const response = await client.post(
+        `user/save-career`,   
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      toast.success(response.data.message || "Career Saved Successfully");
+      return response.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Failed to save career");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);

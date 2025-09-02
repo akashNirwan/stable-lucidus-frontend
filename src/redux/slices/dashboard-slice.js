@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchCareers } from "../actions/dashboard-action";
+import { fetchCareers, saveCareer } from "../actions/dashboard-action";
 
 
 const initialState = {
   dashboard : [],
  loading: false,
   error: null,
+  saveCareer : null,
+  saveCareerLoading : false,
 };
 
 
@@ -35,7 +37,21 @@ const dashboardSlice = createSlice({
         state.error = action.payload?.message || "Failed to fetch Careers";
       });
 
-    
+      // save career
+
+        builder
+            .addCase(saveCareer.pending, (state) => {
+              state.saveCareerLoading = true;
+              state.error = null;
+            })
+            .addCase(saveCareer.fulfilled, (state, action) => {
+              state.saveCareerLoading = false;
+              state.saveCareer = action.payload; 
+            })
+            .addCase(saveCareer.rejected, (state, action) => {
+              state.saveCareerLoading = false;
+              state.error = action.payload || "Failed to Save Career";
+            });
   },
 });
 

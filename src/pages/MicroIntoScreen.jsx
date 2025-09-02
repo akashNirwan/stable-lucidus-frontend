@@ -16,9 +16,10 @@ const { microexperience, loading, error } = useSelector(
     (state) => state.microexperience
   );
 
+const careerId = searchParams.get("careerId");
 
 useEffect(() => {
-    const careerId = searchParams.get("careerId");
+    
     if (careerId) {
       dispatch(fetchMicroexperience(careerId));
     }
