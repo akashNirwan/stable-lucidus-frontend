@@ -13,6 +13,9 @@ import Level from "../pages/MicroExperience";
 import MicroExperienceLayout from "./microIntroWrapper";
 import MicroIntoScreen from "../pages/MicroIntoScreen";
 import BadgeEarned from "../pages/BadgeEarned";
+import OnChoiceFeedBack from "./choiceFeedBack";
+import FeedBackForm from "../pages/FeedBackForm";
+import ServeyPage from "../pages/ServeyPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -70,6 +73,15 @@ const router = createBrowserRouter([
   {
     path: "/badge-earned",
     element: <BadgeEarned />,
+  },
+  {
+    path: "/survey-page",
+    element: <ServeyPage />,
+  },
+  {
+    path: "/student-choice",
+    element: <OnChoiceFeedBack />,
+    children: [{ index: true, element: <FeedBackForm /> }],
   },
 ]);
 

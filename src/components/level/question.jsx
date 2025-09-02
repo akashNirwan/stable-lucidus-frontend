@@ -1,9 +1,7 @@
-export default function Question({data}) {
-
-
+export default function Question() {
   return (
     <h2 className="font-bold  text-lg text-center text-[#D9D9D9] px-8">
-      {data?.questions?.[0]?.question}
+      Which loan do you think will help Zuri’s family most right now?
     </h2>
   );
 }
