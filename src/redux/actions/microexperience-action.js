@@ -88,3 +88,55 @@ export const saveBadge = createAsyncThunk(
     }
   }
 );
+
+
+export const saveInsight = createAsyncThunk(
+  "microexperience/saveInsight",
+  async (payload, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage();
+
+    try {
+      const response = await client.post(
+        `user/micro-interaction/save-insight`,   
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      toast.success(response.data.message || "Insight Saved Successfully");
+      return response.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Failed to save Insight");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);
+
+
+export const saveFeedback = createAsyncThunk(
+  "microexperience/saveFeedback",
+  async (payload, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage();
+
+    try {
+      const response = await client.post(
+        `user/micro-interaction/save-feedback`,   
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      toast.success(response.data.message || "Feedback Saved Successfully");
+      return response.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Failed to save Feedback");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);
