@@ -9,6 +9,14 @@ import QuestionFinalLoad from "../pages/QuestionFinalLoad";
 import Question from "../pages/Question";
 import DashBoardLayout from "./dashboardWrapper";
 import DashBoard from "../pages/DashBoard";
+import Level from "../pages/MicroExperience";
+import MicroExperienceLayout from "./microIntroWrapper";
+import MicroIntoScreen from "../pages/MicroIntoScreen";
+import BadgeEarned from "../pages/BadgeEarned";
+import OnChoiceFeedBack from "./choiceFeedBack";
+import FeedBackForm from "../pages/FeedBackForm";
+import ServeyPage from "../pages/ServeyPage";
+import EncycloPediaWrapper from "./encyclopediaWrapper";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -34,19 +42,16 @@ const router = createBrowserRouter([
     path: "/questions",
     element: <OnBoardWrapper />,
     // children: [{ index: true, element: <Question /> }],
-    
-  
-  children: [
-    { path: "school", element: <Question stepName="school" /> },
-    { path: "grade", element: <Question stepName="grade" /> },
-    { path: "figure-out", element: <Question stepName="figure-out" /> },
-    { path: "subject", element: <Question stepName="subject" /> },
-    { path: "skills", element: <Question stepName="skills" /> },
-    { path: "skills-care", element: <Question stepName="skills-care" /> },
-    { path: "ambition", element: <Question stepName="ambition" /> },
-  ],
 
-
+    children: [
+      { path: "school", element: <Question stepName="school" /> },
+      { path: "grade", element: <Question stepName="grade" /> },
+      { path: "figure-out", element: <Question stepName="figure-out" /> },
+      { path: "subject", element: <Question stepName="subject" /> },
+      { path: "skills", element: <Question stepName="skills" /> },
+      { path: "skills-care", element: <Question stepName="skills-care" /> },
+      { path: "ambition", element: <Question stepName="ambition" /> },
+    ],
   },
   {
     path: "/question-load",
@@ -56,6 +61,33 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <DashBoardLayout />,
     children: [{ index: true, element: <DashBoard /> }],
+  },
+  {
+    path: "/level",
+    element: <Level />,
+  },
+  {
+    path: "/micro-intro",
+    element: <MicroExperienceLayout />,
+    children: [{ index: true, element: <MicroIntoScreen /> }],
+  },
+  {
+    path: "/badge-earned",
+    element: <BadgeEarned />,
+  },
+  {
+    path: "/survey-page",
+    element: <ServeyPage />,
+  },
+  {
+    path: "/student-choice",
+    element: <OnChoiceFeedBack />,
+    children: [{ index: true, element: <FeedBackForm /> }],
+  },
+  {
+    path: "/encylopedia",
+    element: <EncycloPediaWrapper />,
+    children: [{ index: true, element: <div>Hello</div> }],
   },
 ]);
 

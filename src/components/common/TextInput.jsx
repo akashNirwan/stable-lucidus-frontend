@@ -5,6 +5,8 @@ export default function TextInput({
   value, 
   onChange, 
   onBlur,
+  minLength,   
+  maxLength,
   name
 }, ref) {
   return (
@@ -17,6 +19,8 @@ export default function TextInput({
         onChange={onChange}
         onBlur={onBlur}
         placeholder={placeholder}
+        minLength={minLength}   
+          maxLength={maxLength} 
         className="w-full h-12 placeholder:text-[#7B56FF] rounded-full border border-[#7B56FF] bg-[#EFEAFF] px-6 text-center text-[rgba(123,86,255,1)] outline-none"
       />
       {error && (

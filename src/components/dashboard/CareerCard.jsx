@@ -1,9 +1,19 @@
 import React, { useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { saveCareer } from "../../redux/actions/dashboard-action";
 
-const CareerCard = ({ title, tags, description, image }) => {
+const CareerCard = ({ careerId,title, tags, description, image }) => {
   const [saved, setSaved] = useState(false);
   const [activeBtn, setActiveBtn] = useState("experience");
+const navigate = useNavigate();
+ const dispatch = useDispatch();
 
+
+  const handleSaveClick = () => {
+    setSaved(!saved); 
+    dispatch(saveCareer({ careerId })); 
+  };
   const colors = [
     { bg: "bg-orange-200", text: "text-amber-800" },
     { bg: "bg-blue-200", text: "text-blue-700" },
@@ -21,7 +31,9 @@ const CareerCard = ({ title, tags, description, image }) => {
     colors[Math.floor(Math.random() * colors.length)];
 
   const tagColors = useMemo(() => tags.map(() => getRandomColor()), [tags]);
-
+  const handleExperienceClick = () => {
+    navigate(`/micro-intro?careerId=${careerId}`);
+  };
   return (
     <div className="text-white h-[510px] grid border rounded-2xl overflow-hidden relative">
       <div className="bg-red-400 flex items-center justify-center relative">
@@ -40,7 +52,7 @@ const CareerCard = ({ title, tags, description, image }) => {
         <div className="flex justify-between items-center ">
           <h4 className="text-[#042119] text-[20px] line-clamp-1">{title}</h4>
 
-          <button onClick={() => setSaved(!saved)}>
+          <button onClick={handleSaveClick}>
             {saved ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +114,7 @@ const CareerCard = ({ title, tags, description, image }) => {
           </button>
 
           <button
-            onClick={() => setActiveBtn("experience")}
+            onClick={handleExperienceClick}
             className={`py-[12px] px-[32px] rounded-xl flex items-center justify-center ${
               activeBtn === "experience"
                 ? "bg-[#24A57F] text-white"

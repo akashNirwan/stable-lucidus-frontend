@@ -292,3 +292,56 @@ export const updateAmbition = createAsyncThunk(
     }
   }
 );
+
+
+
+export const fetchStudentData = createAsyncThunk(
+  "student/fetchStudentData",
+  async (_, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage()
+
+    try {
+      const response = await client.get(
+        `onboarding/user/selected-onboarding`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      
+
+      return response.data;
+    } catch (error) {
+      
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);
+
+
+
+export const updateFigureout = createAsyncThunk(
+  "student/updateFigureout",
+  async (payload, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage();
+
+    try {
+      const response = await client.put(
+        `/user/user-details`,   
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      toast.success(response.data.message || "Figureout Updated");
+      return response.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Failed to add Figureout");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchSchools , updateSchool, fetchGrades, updateGrades, fetchSkills, updateSkills, fetchSubjects, updateSubjects, fetchSdg, updateSdg, updateAmbition} from "../actions/student-onboarding-action";
+import { fetchSchools , updateSchool, fetchGrades, updateGrades, fetchSkills, updateSkills, fetchSubjects, updateSubjects, fetchSdg, updateSdg, updateAmbition, fetchStudentData, updateFigureout} from "../actions/student-onboarding-action";
 
 const initialState = {
   schools : null,
@@ -19,6 +19,9 @@ const initialState = {
   updateSdgs : null,
   SdgsLoading : false,
   updateAmbition: null,
+  StudentData:null,
+  StudentDataLoading:false,
+  updateFigureout: null,
 };
 
 const studentSlice = createSlice({
@@ -192,6 +195,35 @@ const studentSlice = createSlice({
         state.updateAmbition = action.payload;  
       })
       .addCase(updateAmbition.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Failed to update Sdgs";
+      });
+
+      builder
+      .addCase(fetchStudentData.pending, (state) => {
+        state.StudentDataLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchStudentData.fulfilled, (state, action) => {
+        state.StudentDataLoading = false;
+        state.StudentData = action.payload;  
+      })
+      .addCase(fetchStudentData.rejected, (state, action) => {
+        state.StudentDataLoading = false;
+        state.error = action.payload ;
+      });
+
+
+      builder
+      .addCase(updateFigureout.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateFigureout.fulfilled, (state, action) => {
+        state.loading = false;
+        state.updateFigureout = action.payload;  
+      })
+      .addCase(updateFigureout.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "Failed to update Sdgs";
       });

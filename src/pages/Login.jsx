@@ -163,6 +163,14 @@ export default function Login() {
             render={({ field }) => (
               <TextInput
                 {...field}
+                onInput={(e) => {
+                e.target.value = e.target.value.replace(/[^a-zA-Z0-9@.]/g, "");
+              }}
+              onKeyDown={(e) => {
+                if (e.key === " ") {
+                  e.preventDefault();
+                }
+              }}
                 type="email"
                 placeholder="Enter Your School Email"
                 error={errors.email}
