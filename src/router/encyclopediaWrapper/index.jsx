@@ -7,15 +7,15 @@ const EncycloPediaWrapper = () => {
   const tabs = ["Purpose", "Process", "Path", "Prediction"];
 
   return (
-    <div className="bg-[#130934] w-full min-h-screen flex flex-col">
+    <div className="bg-[#130934] w-full min-h-screen flex flex-col relative">
       {/* Header Logo */}
-      <div className="p-4">
+      <div className="p-4 ">
         <div className="w-[20px] h-[24px]">
           <img src="/assets/header_logo.svg" alt="logo" className="size-full" />
         </div>
       </div>
 
-      <div className="flex gap-2 items-center justify-start p-4">
+      <div className="flex gap-2 items-center justify-start p-4 max-w-[600px] mx-auto ">
         <div className="text-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +38,7 @@ const EncycloPediaWrapper = () => {
         </div>
       </div>
 
-      <div className="flex gap-6 text-white w-full overflow-x-auto p-4">
+      <div className="flex gap-6 text-white w-full overflow-x-auto p-4 max-w-[600px] mx-auto md:justify-center">
         {tabs.map((tab) => (
           <button
             key={tab}
@@ -54,11 +54,11 @@ const EncycloPediaWrapper = () => {
         ))}
       </div>
 
-      <div className="flex-1 overflow-y-auto p-4">
+      <div className="flex-1 overflow-y-auto p-4 max-w-[600px] mx-auto ">
         <Outlet context={{ activeTab, setActiveTab }} />
       </div>
 
-      <div className="flex justify-center gap-4 bg-white p-6 rounded-t-2xl shadow-md">
+      <div className="flex justify-center gap-4 bg-white p-6 rounded-t-2xl shadow-md w-full max-w-[600px]">
         <button className="px-6 py-3 border border-green-600 text-green-600 font-semibold rounded-xl shadow-sm hover:bg-green-50 transition">
           Roadmap
         </button>

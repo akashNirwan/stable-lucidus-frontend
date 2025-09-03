@@ -17,6 +17,7 @@ import OnChoiceFeedBack from "./choiceFeedBack";
 import FeedBackForm from "../pages/FeedBackForm";
 import ServeyPage from "../pages/ServeyPage";
 import EncycloPediaWrapper from "./encyclopediaWrapper";
+import EncyclopediaTabs from "../pages/EncyclopediaTabs";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -87,7 +88,7 @@ const router = createBrowserRouter([
   {
     path: "/encylopedia",
     element: <EncycloPediaWrapper />,
-    children: [{ index: true, element: <div>Hello</div> }],
+    children: [{ index: true, element: <EncyclopediaTabs /> }],
   },
 ]);
 
