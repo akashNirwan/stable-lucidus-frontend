@@ -29,7 +29,7 @@ const DashBoardMenuThree = () => {
           badges.map((badge, index) => (
             <div
               key={badge._id || index}
-              className="w-[200px] h-[200px] flex items-center justify-center bg-gray-900 rounded-2xl shadow-lg"
+              className="w-[200px] h-[200px] flex items-center justify-center rounded-2xl shadow-lg"
             >
               <img
                 src={badge.badge}
