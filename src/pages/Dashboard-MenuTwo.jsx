@@ -49,6 +49,7 @@ const DashBoardMenuTwo = () => {
               }
               description={career.description}
               image={career.image}
+              savedCareerCount={career.savedCareerCount}
             />
           ))}
         </div>

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchCareers, saveCareer } from "../actions/dashboard-action";
+import { fetchCareers, saveCareer, fetchBadges, fetchSavedCareers } from "../actions/dashboard-action";
 
 
 const initialState = {
@@ -9,6 +9,11 @@ const initialState = {
   error: null,
   saveCareer : null,
   saveCareerLoading : false,
+  badgesLoading: false,
+  badges:[],
+  fetchsavedCareer : [],
+  savedCareerLoading : false,
+
 };
 
 
@@ -52,6 +57,42 @@ const dashboardSlice = createSlice({
               state.saveCareerLoading = false;
               state.error = action.payload || "Failed to Save Career";
             });
+              // fetch badges
+             builder
+      .addCase(fetchBadges.pending, (state) => {
+        state.badgesLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchBadges.fulfilled, (state, action) => {
+        state.badgesLoading = false;
+        state.badges = action.payload.data;
+        console.log(state.badges, "state badges");
+        
+        
+      })
+      .addCase(fetchBadges.rejected, (state, action) => {
+        state.badgesLoading = false;
+        state.error = action.payload?.message || "Failed to fetch Badges";
+      });
+
+
+      // fetchsaved careers
+             builder
+      .addCase(fetchSavedCareers.pending, (state) => {
+        state.savedCareerLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchSavedCareers.fulfilled, (state, action) => {
+        state.savedCareerLoading = false;
+        state.fetchsavedCareer = action.payload.data;
+        console.log(action.payload.data, "savedcareers");
+        
+        
+      })
+      .addCase(fetchSavedCareers.rejected, (state, action) => {
+        state.savedCareerLoading = false;
+        state.error = action.payload?.message || "Failed to fetch saved Careers";
+      });
   },
 });
 
