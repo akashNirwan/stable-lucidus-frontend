@@ -58,3 +58,55 @@ export const saveCareer = createAsyncThunk(
     }
   }
 );
+
+
+
+export const fetchBadges = createAsyncThunk(
+  "dashboard/fetchBadges",
+  async (_, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage()
+
+    try {
+      const response = await client.get(
+        `user/user-wins`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      
+
+      return response.data;
+    } catch (error) {
+      
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);
+
+
+
+export const fetchSavedCareers = createAsyncThunk(
+  "dashboard/fetchSavedCareers",
+  async (_, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage()
+
+    try {
+      const response = await client.get(
+        `user/save-career`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      
+
+      return response.data;
+    } catch (error) {
+      
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);

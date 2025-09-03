@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { saveCareer } from "../../redux/actions/dashboard-action";
 
-const CareerCard = ({ careerId,title, tags, description, image }) => {
-  const [saved, setSaved] = useState(false);
+const CareerCard = ({ careerId,title, tags, description, image, savedCareerCount = 0 }) => {
+  const [saved, setSaved] = useState(savedCareerCount > 0);
   const [activeBtn, setActiveBtn] = useState("experience");
 const navigate = useNavigate();
  const dispatch = useDispatch();
