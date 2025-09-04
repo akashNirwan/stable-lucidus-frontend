@@ -1,7 +1,7 @@
 import React from "react";
 import PurposeCrousel from "../components/encylopedia/PurposeCrousel";
-import { ArrowRight, Lock } from "lucide-react"; // icons (lucide-react)
-
+import { ArrowRight, Lock } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 const Purpose = () => {
   const steps = [
     {
@@ -21,6 +21,7 @@ const Purpose = () => {
       status: "locked",
     },
   ];
+  const navigate = useNavigate("");
   return (
     <div className="text-white">
       <PurposeCrousel />
@@ -47,7 +48,10 @@ const Purpose = () => {
             </div>
 
             {step.status === "active" ? (
-              <div className="h-8 w-8 flex items-center justify-center rounded-full bg-green-500 text-white">
+              <div
+                className="h-8 w-8 flex items-center justify-center rounded-full bg-green-500 text-white"
+                onClick={() => navigate("/encylopedia-todo")}
+              >
                 <ArrowRight size={18} />
               </div>
             ) : (

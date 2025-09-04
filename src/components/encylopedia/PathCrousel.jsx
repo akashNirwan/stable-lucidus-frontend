@@ -58,7 +58,7 @@ export default function PathCrousel() {
             transition={{ duration: 0.3 }}
             className="bg-[#2a1760] text-white p-6 rounded-2xl shadow-lg"
           >
-            <h2 className="font-semibold text-lg mb-4 flex items-center gap-2">
+            <h2 className="font-semibold text-lg mb-4 flex items-center gap-2 min-w-[285px]">
               {slides[current].title}{" "}
               {slides[current].exper && (
                 <div className="text-[12px] font-normal">
@@ -66,20 +66,6 @@ export default function PathCrousel() {
                 </div>
               )}
             </h2>
-
-            {/* Tags */}
-            {slides[current].tags && (
-              <div className="flex flex-wrap gap-3">
-                {slides[current].tags.map((tag, idx) => (
-                  <span
-                    key={idx}
-                    className="px-4 py-2 bg-purple-300/70 text-black rounded-full text-xs font-medium shadow-sm"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            )}
 
             {slides[current].salaries && (
               <div>
@@ -100,7 +86,6 @@ export default function PathCrousel() {
         </AnimatePresence>
       </div>
 
-      {/* Dots */}
       <div className="flex mt-4 gap-2 justify-center">
         {slides.map((_, i) => (
           <span

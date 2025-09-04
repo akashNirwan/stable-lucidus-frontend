@@ -18,6 +18,8 @@ import FeedBackForm from "../pages/FeedBackForm";
 import ServeyPage from "../pages/ServeyPage";
 import EncycloPediaWrapper from "./encyclopediaWrapper";
 import EncyclopediaTabs from "../pages/EncyclopediaTabs";
+import EncylopediaWrapperTodo from "./encyclopediaTodoWrapper";
+import EncylopediaTab from "../pages/EncylopediaTab";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -89,6 +91,16 @@ const router = createBrowserRouter([
     path: "/encylopedia",
     element: <EncycloPediaWrapper />,
     children: [{ index: true, element: <EncyclopediaTabs /> }],
+  },
+  {
+    path: "/encylopedia-todo",
+    element: <EncylopediaWrapperTodo />,
+    children: [
+      {
+        index: true,
+        element: <EncylopediaTab />,
+      },
+    ],
   },
 ]);
 
