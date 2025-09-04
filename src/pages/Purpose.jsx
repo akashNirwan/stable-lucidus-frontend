@@ -26,11 +26,11 @@ const Purpose = () => {
       <PurposeCrousel />
       <h2>Lessons</h2>
 
-      <div className=" h-[182px] overflow-hidden overflow-y-auto grid gap-4">
+      <div className=" h-[182px] md:h-[250px] overflow-hidden overflow-y-auto grid gap-4">
         {steps.map((step, i) => (
           <div
             key={i}
-            className="flex items-center justify-between w-full max-w-sm rounded-full bg-[#2a1760] px-4 py-3"
+            className="flex items-center justify-between w-full max-w-[600px]rounded-full bg-[#2a1760] px-4 py-3"
           >
             <div className="flex items-center gap-3">
               {step.status === "active" ? (

@@ -1,7 +1,11 @@
-import React from "react";
+import PathCrousel from "../components/encylopedia/PathCrousel";
 
-const Path = () => {
-  return <div className="text-white">Path</div>;
+const Process = () => {
+  return (
+    <div className="text-white">
+      <PathCrousel />
+    </div>
+  );
 };
 
-export default Path;
+export default Process;

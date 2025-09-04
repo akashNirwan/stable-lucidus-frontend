@@ -54,11 +54,11 @@ const EncycloPediaWrapper = () => {
         ))}
       </div>
 
-      <div className="flex-1 overflow-y-auto p-4 max-w-[600px] mx-auto ">
+      <div className="flex-1 overflow-y-auto p-4 max-w-[600px] mx-auto w-full flex justify-center ">
         <Outlet context={{ activeTab, setActiveTab }} />
       </div>
 
-      <div className="flex justify-center gap-4 bg-white p-6 rounded-t-2xl shadow-md w-full max-w-[600px]">
+      <div className="flex justify-center gap-4 bg-white p-6 rounded-t-2xl shadow-md w-full max-w-[600px] mx-auto">
         <button className="px-6 py-3 border border-green-600 text-green-600 font-semibold rounded-xl shadow-sm hover:bg-green-50 transition">
           Roadmap
         </button>

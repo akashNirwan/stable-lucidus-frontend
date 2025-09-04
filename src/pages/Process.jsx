@@ -1,12 +1,12 @@
 import React from "react";
-import PurposeCrousel from "../components/encylopedia/PurposeCrousel";
+import ProcessCrousel from "../components/encylopedia/ProcessCrousel";
 import { ArrowRight, Lock } from "lucide-react";
 
-const Purpose = () => {
+const Process = () => {
   const steps = [
     {
       title: "What Do They Do?",
-      status: "active",
+      status: "locked",
     },
     {
       title: "Where Do They Work?",
@@ -23,7 +23,7 @@ const Purpose = () => {
   ];
   return (
     <div className="text-white">
-      <PurposeCrousel />
+      <ProcessCrousel />
       <h2>Lessons</h2>
 
       <div className=" h-[182px] overflow-hidden overflow-y-auto grid gap-4">
@@ -62,4 +62,4 @@ const Purpose = () => {
   );
 };
 
-export default Purpose;
+export default Process;
