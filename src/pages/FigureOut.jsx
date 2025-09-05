@@ -72,17 +72,6 @@ const FigureOut = ({ setStep, stepsData }) => {
     <div className="text-center flex flex-col gap-3">
       {/* Back Button */}
       <div className="flex items-center justify-start ">
-        <button
-          onClick={handleBack}
-          className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors"
-        >
-          <button className="p-2 rounded-full hover:bg-gray-100 transition">
-            <ArrowLeft
-              size={20}
-              className="text-violet-800 hover:text-violet-900 cursor-pointer"
-            />
-          </button>
-        </button>
         <h2 className="font-bold text-[20px]">
           What are you here to <span className="text-[#5f35f1]">figure</span>{" "}
           out?{" "}
@@ -102,10 +91,20 @@ const FigureOut = ({ setStep, stepsData }) => {
           />
         ))}
       </div>
+      <div className="flex gap-3 ">
+        <Button
+          type="button"
+          isActive={!!selected}
+          onClick={handleBack}
+          className="bg-white !text-[#0F8864] border !border-[#0F8864]"
+        >
+          {"Previous"}
+        </Button>
 
-      <Button type="button" isActive={!!selected} onClick={handleClick}>
-        {loading ? <LoadingSpinner size="20px" /> : "Next"}
-      </Button>
+        <Button type="button" isActive={!!selected} onClick={handleClick}>
+          {loading ? <LoadingSpinner size="20px" /> : "Next"}
+        </Button>
+      </div>
     </div>
   );
 };

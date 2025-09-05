@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import Button from "../components/common/Button";
@@ -17,11 +15,11 @@ import { useSearchParams } from "react-router-dom";
 
 const Skills = ({ setStep, stepsData }) => {
   const dispatch = useDispatch();
-   const [searchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const { skills, loading, skillsLoading, StudentData } = useSelector(
     (state) => state.student
   );
-    const gradeId = searchParams.get("gradeId");
+  const gradeId = searchParams.get("gradeId");
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const navigate = useNavigate();
@@ -92,20 +90,6 @@ const Skills = ({ setStep, stepsData }) => {
       {/* Back Button */}
       <div className="flex items-center justify-between  ">
         <div>
-          <button
-            onClick={handleBack}
-            className="flex items-center gap-3 text-gray-600 hover:text-gray-800 transition-colors"
-          >
-            <button className="p-2 rounded-full hover:bg-gray-100 transition">
-              <ArrowLeft
-                size={20}
-                className="text-violet-800 hover:text-violet-900 cursor-pointer"
-              />
-            </button>
-          </button>
-        </div>
-
-        <div>
           <h2 className="font-bold text-[20px]">{stepsData.title}</h2>
         </div>
       </div>
@@ -113,7 +97,7 @@ const Skills = ({ setStep, stepsData }) => {
       <h3 className="text-gray-600 h-12 line-clamp-2">{stepsData.subtitle}</h3>
       <h4 className="text-[#24A57F] font-medium">I am good at:</h4>
 
-      <div className="max-h-[300px] overflow-y-auto grid gap-2">
+      <div className="h-[288px] overflow-y-auto grid gap-2">
         {Array.isArray(skills) &&
           skills.map((skill) => (
             <TwoLineOption
@@ -126,15 +110,24 @@ const Skills = ({ setStep, stepsData }) => {
             />
           ))}
       </div>
+      <div className="flex gap-3 ">
+        <Button
+          type="button"
+          onClick={handleBack}
+          className="bg-white !text-[#0F8864] border !border-[#0F8864]"
+        >
+          {"Previous"}
+        </Button>
 
-      <Button
-        type="button"
-        isActive={selectedSkills.length > 0}
-        onClick={handleNext}
-        disabled={skillsLoading}
-      >
-        {skillsLoading ? <LoadingSpinner size="20px" /> : "Next"}
-      </Button>
+        <Button
+          type="button"
+          isActive={selectedSkills.length > 0}
+          onClick={handleNext}
+          disabled={skillsLoading}
+        >
+          {skillsLoading ? <LoadingSpinner size="20px" /> : "Next"}
+        </Button>
+      </div>
     </div>
   );
 };

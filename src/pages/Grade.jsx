@@ -1,7 +1,3 @@
-
-
-
-
 import React, { useState, useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import Button from "../components/common/Button";
@@ -10,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchGrades,
   updateGrades,
-  fetchStudentData
+  fetchStudentData,
 } from "../redux/actions/student-onboarding-action";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { useNavigate } from "react-router-dom";
@@ -26,24 +22,22 @@ const Grade = ({ setStep, stepsData }) => {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
 
   useEffect(() => {
-    
     const fetchData = async () => {
       await Promise.all([
         dispatch(fetchGrades()),
-        dispatch(fetchStudentData())
+        dispatch(fetchStudentData()),
       ]);
       setIsDataLoaded(true);
     };
-    
+
     fetchData();
   }, [dispatch]);
 
-  
   useEffect(() => {
     if (isDataLoaded && grades && StudentData && !selectedGrade) {
       const { selectedGradeIds } = getSelectedIds(StudentData);
       const preSelectedGrades = getPreSelectedItems(grades, selectedGradeIds);
-      
+
       if (preSelectedGrades.length > 0) {
         setSelectedGrade(preSelectedGrades[0]); // Since grade is single selection
       }
@@ -68,16 +62,12 @@ const Grade = ({ setStep, stepsData }) => {
     });
   };
 
- 
-
   return loading && !isDataLoaded ? (
     <div className="flex items-center justify-center min-h-[400px]">
       <LoadingSpinner size={64} />
     </div>
   ) : (
     <div className="text-center flex flex-col gap-3">
-     
-
       {/* Title & Subtitle */}
       <h2 className="font-bold text-[20px]">
         What <span className="text-[#5f35f1]">grade</span> are you in?
@@ -86,7 +76,7 @@ const Grade = ({ setStep, stepsData }) => {
       <h4 className="text-[#24A57F] font-medium">I am in:</h4>
 
       {/* Options */}
-      <div className="h-[320px] overflow-y-auto flex flex-col gap-2">
+      <div className="h-[300px] overflow-y-auto flex flex-col gap-2">
         {Array.isArray(grades) &&
           grades.map((grade) => (
             <OptionButton

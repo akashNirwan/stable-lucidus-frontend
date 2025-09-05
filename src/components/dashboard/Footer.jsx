@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = ({ setMenu, menu }) => {
   return (
-    <div className="py-4 rounded-t-3xl bg-white border border-b-0 flex justify-between items-center w-full max-w-[750px] mx-auto">
+    <div className="py-4 rounded-t-3xl bg-white border border-b-0 flex justify-between items-center w-full max-w-[375px] mx-auto">
       <div
         className="flex flex-1 flex-col items-center cursor-pointer"
         onClick={() => setMenu(1)}

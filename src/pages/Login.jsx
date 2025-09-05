@@ -105,7 +105,6 @@ export default function Login() {
         backdropFilter: "blur(10px)",
       }}
     >
-      {/* Toggle Buttons */}
       <div className="flex w-full gap-2">
         <button
           type="button"
@@ -127,7 +126,7 @@ export default function Login() {
         </button>
       </div>
 
-      <div className="w-full space-y-4 my-6">
+      <div className={`w-full space-y-4 ${isLogin ? "my-6" : "-my-2"} `}>
         {!isLogin ? (
           <>
             <Controller
@@ -164,13 +163,16 @@ export default function Login() {
               <TextInput
                 {...field}
                 onInput={(e) => {
-                e.target.value = e.target.value.replace(/[^a-zA-Z0-9@.]/g, "");
-              }}
-              onKeyDown={(e) => {
-                if (e.key === " ") {
-                  e.preventDefault();
-                }
-              }}
+                  e.target.value = e.target.value.replace(
+                    /[^a-zA-Z0-9@.]/g,
+                    ""
+                  );
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === " ") {
+                    e.preventDefault();
+                  }
+                }}
                 type="email"
                 placeholder="Enter Your School Email"
                 error={errors.email}
@@ -179,8 +181,6 @@ export default function Login() {
           />
         )}
       </div>
-
-      {/* Submit Button */}
 
       <Button type="submit" disabled={loginLoading || !isValid}>
         {isLogin ? "Send OTP" : "Create Account"}

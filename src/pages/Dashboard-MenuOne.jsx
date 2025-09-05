@@ -7,7 +7,7 @@ const DashBoardMenuOne = () => {
   const [activeTab, setActiveTab] = useState("micro");
   return (
     <div>
-      <div className="flex justify-between bg-[#120C2A] p-4 max-w-[600px] mx-auto">
+      <div className="flex justify-between bg-[#120C2A] p-4 max-w-[385px] mx-auto">
         <button
           onClick={() => setActiveTab("micro")}
           className={`relative text-lg font-medium transition-colors ${

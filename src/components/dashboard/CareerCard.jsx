@@ -3,16 +3,22 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { saveCareer } from "../../redux/actions/dashboard-action";
 
-const CareerCard = ({ careerId,title, tags, description, image, savedCareerCount = 0 }) => {
+const CareerCard = ({
+  careerId,
+  title,
+  tags,
+  description,
+  image,
+  savedCareerCount = 0,
+}) => {
   const [saved, setSaved] = useState(savedCareerCount > 0);
   const [activeBtn, setActiveBtn] = useState("experience");
-const navigate = useNavigate();
- const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSaveClick = () => {
-    setSaved(!saved); 
-    dispatch(saveCareer({ careerId })); 
+    setSaved(!saved);
+    dispatch(saveCareer({ careerId }));
   };
   const colors = [
     { bg: "bg-orange-200", text: "text-amber-800" },
@@ -35,8 +41,8 @@ const navigate = useNavigate();
     navigate(`/micro-intro?careerId=${careerId}`);
   };
   return (
-    <div className="text-white h-[510px] grid border rounded-2xl overflow-hidden relative">
-      <div className="bg-red-400 flex items-center justify-center relative">
+    <div className="text-white h-[510px] grid border rounded-2xl overflow-hidden relative w-[345px] mx-auto">
+      <div className="bg-red-400 flex items-center justify-center relative ">
         {image ? (
           <img
             src={image}
@@ -83,7 +89,7 @@ const navigate = useNavigate();
         {/* Tags */}
         <div className="flex gap-4 my-2">
           {tags.map((tag, i) => {
-            const color = tagColors[i]; // ✅ stable color for each tag
+            const color = tagColors[i];
             return (
               <span
                 key={i}
