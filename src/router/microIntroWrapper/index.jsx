@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 export default function MicroExperienceLayout() {
   const steps = ["grade", "figure-out"];
   const [screen, setScreen] = React.useState(1);
-  const currentStepIndex = screen;
+
   return (
     <div className="w-full min-h-screen bg-[url(/assets/badge-bg.svg)] bg-no-repeat bg-center bg-cover relative overflow-hidden">
       <div className="absolute top-4 left-1/2 -translate-x-1/2 w-full max-w-[375px] px-4 z-20">
@@ -14,7 +14,7 @@ export default function MicroExperienceLayout() {
             <div
               key={i}
               className={`h-1.5 flex-1 rounded-full ${
-                i + 1 <= currentStepIndex ? "bg-white" : "bg-gray-600"
+                i + 1 <= screen ? "bg-white" : "bg-gray-600"
               }`}
             />
           ))}
