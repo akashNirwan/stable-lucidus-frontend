@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowLeft } from "lucide-react";
+import ProgressBar from "../components/common/ProgressBar";
 const RoadMap = () => {
   return (
     <div className="text-white">
@@ -24,6 +25,7 @@ const RoadMap = () => {
             Kickstart your career exploration in Grade 9!
           </p>
         </div>
+        <ProgressBar />
       </div>
     </div>
   );

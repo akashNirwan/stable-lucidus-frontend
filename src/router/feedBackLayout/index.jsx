@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { Outlet } from "react-router-dom";
 
-export default function OnChoiceFeedBack() {
-  const steps = ["grade", "figure-out"];
-
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+export default function FeedBackLayout() {
   return (
     <div className="h-screen relative overflow-hidden">
       <div className="bg-gradient-to-b from-[#130934] to-[#24A57F] h-screen w-full" />
@@ -59,19 +56,6 @@ export default function OnChoiceFeedBack() {
         </div>
       </div>
 
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 w-full max-w-[375px] px-4">
-        <div className="flex items-center justify-center gap-2">
-          {steps.map((_, i) => (
-            <div
-              key={i}
-              className={`h-1.5 flex-1 rounded-full ${
-                i <= currentStepIndex ? "bg-white" : "bg-gray-600"
-              }`}
-            />
-          ))}
-        </div>
-      </div>
-
       <div className="absolute top-[50px] left-1/2 -translate-x-1/2 z-10">
         <img
           src="/assets/grade/grade-emoji.svg"
@@ -93,7 +77,7 @@ export default function OnChoiceFeedBack() {
           backdropFilter: "blur(10px)",
         }}
       >
-        <Outlet context={{ currentStepIndex, setCurrentStepIndex }} />
+        <Outlet />
       </motion.div>
     </div>
   );

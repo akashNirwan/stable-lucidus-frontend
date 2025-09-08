@@ -23,6 +23,7 @@ import EncylopediaTab from "../pages/EncylopediaTab";
 import RoadMapWrapper from "./roadMapWrapper";
 import RoadMap from "../pages/RoadMap";
 import FeedBackFormOne from "../pages/FeedBackFormOne";
+import FeedBackLayout from "./feedBackLayout";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -79,8 +80,10 @@ const router = createBrowserRouter([
   },
   {
     path: "/feedbackform",
-    element: <FeedBackFormOne />,
+    element: <FeedBackLayout />,
+    children: [{ index: true, element: <FeedBackFormOne /> }],
   },
+
   {
     path: "/badge-earned",
     element: <BadgeEarned />,

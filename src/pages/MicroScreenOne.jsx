@@ -1,25 +1,22 @@
 import React from "react";
 import Button from "../components/common/Button";
-const MicroIntoScreenOne = ({ setScreen , data}) => {
-
- 
-   
+const MicroIntoScreenOne = ({ setScreen, data }) => {
   return (
-    <div className="">
-      <h3>
-        {data?.career?.[0]?.career }
+    <div className="grid gap-2">
+      <h3 className="font-bold text-[20px] text-center">
+        {data?.career?.[0]?.career}
       </h3>
-      <p>
-        {data?.career?.[0]?.description }
+      <p className="text-center text-[#042119]">
+        {data?.career?.[0]?.description}
       </p>
-      <p>
+      <p className="text-center text-[#042119]">
         {data?.questionintros?.[0]?.titleOne}
       </p>
-      <p>
-        {data?.questionintros?.[0]?.titleTwo }
+      <p className="text-center text-[#042119]">
+        {data?.questionintros?.[0]?.titleTwo}
       </p>
       <Button onClick={() => setScreen(2)}>
-        {data?.questionintros?.[0]?.buttonName }
+        {data?.questionintros?.[0]?.buttonName}
       </Button>
     </div>
   );
