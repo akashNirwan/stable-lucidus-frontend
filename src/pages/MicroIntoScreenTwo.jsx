@@ -6,19 +6,22 @@ const MicroIntoScreenTwo = ({ data }) => {
   const navigate = useNavigate();
 
   const careerLevelId = data?._id;
-  console.log(careerLevelId, "careerLevelId");
-  console.log(data?.career[0]._id, "data");
 
   return (
-    <div className="text-center grid gap-4">
+    <div className="text-center grid gap-4 relative">
       <h3 className="font-bold text-[20px] text-center">
         {data?.questionintros?.[1]?.titleOne}
       </h3>
+      <p className="text-center text-white absolute -top-[125px] left-0 leading-[140%]">
+        "I really need your help. There are three things my family needs... I
+        need your help in making the right choice on how to utilise the $33
+        loan."
+      </p>
+
       <p className="text-center text-[#042119]">
         {data?.questionintros?.[1]?.titleTwo}
       </p>
 
-      {/* Redirect to another page */}
       <Button onClick={() => navigate(`/level?careerLevelId=${careerLevelId}`)}>
         {data?.questionintros?.[1]?.buttonName}
       </Button>
