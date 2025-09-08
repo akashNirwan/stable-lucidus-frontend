@@ -3,10 +3,12 @@ import { FaArrowLeft, FaTimes } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 const Header = ({data}) => {
     const navigate = useNavigate()
-     const careerId = data?.careerId
+     const careerLevelId = data?._id
    const handleBack = () => {
-    navigate(`/micro-intro?careerId=${careerId}`);
+    navigate(`/micro-intro?careerLevelId=${careerLevelId}`);
   };
+     console.log(data, "data in level ");
+     
 
   return (
     <header className="p-6 pb-0">
@@ -19,7 +21,7 @@ const Header = ({data}) => {
         </div>
         <div>
           <button className="bg-[#7B5CFF] text-white text-xs font-semibold px-4 py-1 rounded-full">
-            LEVEL 1
+            {data?.careerLevel}
           </button>
         </div>
         <div>

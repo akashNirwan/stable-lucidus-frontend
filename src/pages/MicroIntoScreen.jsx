@@ -17,13 +17,31 @@ const { microexperience, loading, error } = useSelector(
   );
 
 const careerId = searchParams.get("careerId");
+ const careerLevelId = searchParams.get("careerLevelId");
+ const levelNumber = searchParams.get("levelNumber");
+
+// useEffect(() => {
+    
+//     if (careerId) {
+//       dispatch(fetchMicroexperience(careerId));
+//     }
+//   }, [dispatch, searchParams]);
 
 useEffect(() => {
     
     if (careerId) {
-      dispatch(fetchMicroexperience(careerId));
+     
+      dispatch(fetchMicroexperience({ 
+        careerId: careerId,
+        levelNumber: levelNumber || 1 
+      }));
+    } else if (careerLevelId) {
+      
+      dispatch(fetchMicroexperience({ 
+        careerLevelId: careerLevelId 
+      }));
     }
-  }, [dispatch, searchParams]);
+  }, [dispatch, careerId, careerLevelId, levelNumber]);
 
   const experienceData = microexperience?.[0];
 

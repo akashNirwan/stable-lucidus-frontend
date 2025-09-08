@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchCareers, saveCareer, fetchBadges, fetchSavedCareers } from "../actions/dashboard-action";
+import { fetchCareers, saveCareer, fetchBadges, fetchSavedCareers, fetchDashboardMicroexperience } from "../actions/dashboard-action";
 
 
 const initialState = {
@@ -13,6 +13,8 @@ const initialState = {
   badges:[],
   fetchsavedCareer : [],
   savedCareerLoading : false,
+  dashboardMicroexperience : null,
+  dashboardMicroexperienceLoading: false,
 
 };
 
@@ -52,6 +54,9 @@ const dashboardSlice = createSlice({
             .addCase(saveCareer.fulfilled, (state, action) => {
               state.saveCareerLoading = false;
               state.saveCareer = action.payload; 
+              state.fetchsavedCareer = state.fetchsavedCareer.filter(
+        (career) => career.careerId !== action.payload.careerId
+      );
             })
             .addCase(saveCareer.rejected, (state, action) => {
               state.saveCareerLoading = false;
@@ -92,6 +97,26 @@ const dashboardSlice = createSlice({
       .addCase(fetchSavedCareers.rejected, (state, action) => {
         state.savedCareerLoading = false;
         state.error = action.payload?.message || "Failed to fetch saved Careers";
+      });
+
+
+      
+       //fetchdashboardmicroexperience
+       builder
+      .addCase(fetchDashboardMicroexperience.pending, (state) => {
+        state.dashboardMicroexperienceLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchDashboardMicroexperience.fulfilled, (state, action) => {
+        state.dashboardMicroexperienceLoading = false;
+        state.dashboardMicroexperience = action.payload.data;
+        console.log(action.payload.data, "dashboardsavedcareers");
+        
+        
+      })
+      .addCase(fetchDashboardMicroexperience.rejected, (state, action) => {
+        state.dashboardMicroexperienceLoading = false;
+        state.error = action.payload?.message || "Failed to fetch Careers";
       });
   },
 });

@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginSchema, signupSchema } from "../validation/auth-validaion";
 import { getDeviceInfo } from "../utils/deviceInfo";
 import toast from "react-hot-toast";
+import LoadingSpinner from "../components/common/LoadingSpinner";
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const dispatch = useDispatch();
@@ -138,6 +139,12 @@ export default function Login() {
                   {...field}
                   type="text"
                   placeholder="Enter Your User Name"
+                  onInput={(e) => {
+                    e.target.value = e.target.value.replace(/[^a-zA-Z]/g, "");
+                  }}
+                  minLength={2}
+                  maxLength={50}
+                   disabled={loginLoading}
                   error={errors.username}
                 />
               )}
@@ -150,7 +157,16 @@ export default function Login() {
                 <TextInput
                   {...field}
                   type="email"
+                  onInput={(e) => {
+                    e.target.value = e.target.value.replace(
+                      /[^a-zA-Z0-9@.]/g,
+                      ""
+                    );
+                  }}
+                  minLength={2}
+                  maxLength={100}
                   placeholder="Enter Your School Email"
+                   disabled={loginLoading}
                   error={errors.email}
                 />
               )}
@@ -164,15 +180,16 @@ export default function Login() {
               <TextInput
                 {...field}
                 onInput={(e) => {
-                e.target.value = e.target.value.replace(/[^a-zA-Z0-9@.]/g, "");
-              }}
-              onKeyDown={(e) => {
-                if (e.key === " ") {
-                  e.preventDefault();
-                }
-              }}
+                  e.target.value = e.target.value.replace(
+                    /[^a-zA-Z0-9@.]/g,
+                    ""
+                  );
+                }}
+                minLength={2}
+                  maxLength={100}
                 type="email"
                 placeholder="Enter Your School Email"
+                disabled={loginLoading}
                 error={errors.email}
               />
             )}
@@ -182,8 +199,9 @@ export default function Login() {
 
       {/* Submit Button */}
 
-      <Button type="submit" disabled={loginLoading || !isValid}>
-        {isLogin ? "Send OTP" : "Create Account"}
+      <Button type="submit" disabled={loginLoading || !isValid} >
+        {/* {isLogin ? "Send OTP" : "Create Account"} */}
+        {loginLoading ? <LoadingSpinner size={20}></LoadingSpinner>: (isLogin ? "Send OTP" : "Create Account")}
       </Button>
     </motion.form>
   );

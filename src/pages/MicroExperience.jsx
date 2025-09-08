@@ -14,11 +14,14 @@ const [searchParams] = useSearchParams();
 const { microexperience, loading, error } = useSelector(
     (state) => state.microexperience
   );
-  const careerId = searchParams.get("careerId");
+  const careerLevelId = searchParams.get("careerLevelId");
+console.log(careerLevelId, "careerLevelId in level");
+
+
   useEffect(() => {
       
-      if (careerId) {
-        dispatch(fetchMicroexperience(careerId));
+      if (careerLevelId) {
+        dispatch(fetchMicroexperience({careerLevelId}));
       }
     }, [dispatch, searchParams]);
   const experienceData = microexperience?.[0];
@@ -31,7 +34,7 @@ const { microexperience, loading, error } = useSelector(
        <div className="bg-[#130934] min-h-screen overflow-x-hidden">
       <Header data={experienceData}/>
       <Question data={experienceData} />
-      <LevelCarousel data={experienceData} careerId={careerId}/>
+      <LevelCarousel data={experienceData} careerLevelId={careerLevelId}/>
     </div>
   )
 };

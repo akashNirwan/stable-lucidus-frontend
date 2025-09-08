@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { saveAnswer } from "../../redux/actions/microexperience-action";
 import LoadingSpinner from "../common/LoadingSpinner";
 
-export default function LevelCarousel({data, careerId}) {
+export default function LevelCarousel({data, careerLevelId}) {
 
   console.log(data, "level data");
   const { saveAnswerLoading } = useSelector(
@@ -44,7 +44,7 @@ export default function LevelCarousel({data, careerId}) {
     await dispatch(saveAnswer(payload));
 
     // Navigate after API success
-    navigate(`/badge-earned?careerId=${careerId}&questionId=${selectedQuestion._id}`);
+    navigate(`/feedbackform?careerLevelId=${careerLevelId}&questionId=${selectedQuestion._id}`);
   };
 
   return (

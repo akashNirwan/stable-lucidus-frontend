@@ -13,6 +13,7 @@ const SavedCareer = () => {
     (state) => state.dashboard
   );
     
+  console.log(fetchsavedCareer,"fetch save data");
   
   
   useEffect(() => {

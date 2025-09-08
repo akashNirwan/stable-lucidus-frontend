@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { saveInsight } from "../redux/actions/microexperience-action";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../components/common/LoadingSpinner";
-const FeedBackFormTwo = ({microexperience}) => {
+const FeedBackFormTwo = ({microexperience, careerLevelId}) => {
 const dispatch = useDispatch()
   
 const {  saveInsightLoading } = useSelector(
@@ -34,20 +34,7 @@ const {  saveInsightLoading } = useSelector(
 
 
 
-   const handleNext = () => {
-      const payload = {
-        careerLevelId: microexperience?.[0]?._id,
-        badge: microexperience?.[0]?.questionbadges?.[0]?.badges?.[0]?.image,
-      };
   
-      dispatch(saveBadge(payload)).then((res) => {
-       
-        if (res.payload && res.payload.code === 201 || res.payload.statusCode === 200) {
-               navigate(`/student-choice?questionId=${questionId}&careerId=${careerId}`)
-        }
-      });
-    };
-
 
 
 

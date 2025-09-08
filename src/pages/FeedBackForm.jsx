@@ -22,13 +22,13 @@ const FeedBackForm = () => {
 
      const navigate = useNavigate()
 const questionId = searchParams.get("questionId");
-const careerId = searchParams.get("careerId");
+const careerLevelId = searchParams.get("careerLevelId");
 console.log(questionId, "questionid");
 console.log(microexperience?.[0]?.questions, "microexperience");
 
 useEffect(() => {
-    if (careerId) {
-      dispatch(fetchMicroexperience(careerId));
+    if (careerLevelId) {
+      dispatch(fetchMicroexperience({careerLevelId}));
     }
   }, [dispatch, searchParams]);
 
@@ -44,8 +44,8 @@ const selectedQuestion = useMemo(() => {
   const { currentStepIndex, setCurrentStepIndex } = useOutletContext();
   console.log(currentStepIndex);
   const formObj = {
-    0: <FeedBackFormOne setCurrentStepIndex={setCurrentStepIndex}  selectedQuestion={selectedQuestion}/>,
-    1: <FeedBackFormTwo microexperience={microexperience} />,
+    // 0: <FeedBackFormOne setCurrentStepIndex={setCurrentStepIndex}  selectedQuestion={selectedQuestion}/>,
+    0: <FeedBackFormTwo microexperience={microexperience} careerLevelId={careerLevelId} />,
   };
   return loading ? (
     <div className="flex items-center justify-center min-h-[400px]">

@@ -4,11 +4,13 @@ import authSlice from "./slices/auth-slice";
 import studentSlice from './slices/student-onboarding-slice'
 import dashboardSlice from './slices/dashboard-slice'
 import microexperienceSlice from './slices/microexperience-slice'
+import encyclopediaSlice from './slices/encyclopedia-slice'
 export const store = configureStore({
   reducer: {
     auth: authSlice,
     student : studentSlice,
     dashboard : dashboardSlice,
     microexperience : microexperienceSlice,
+    encyclopedia : encyclopediaSlice,
   },
 });

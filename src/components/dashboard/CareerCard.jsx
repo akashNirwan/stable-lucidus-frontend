@@ -34,6 +34,12 @@ const navigate = useNavigate();
   const handleExperienceClick = () => {
     navigate(`/micro-intro?careerId=${careerId}`);
   };
+
+ const handleMore = ()=>{
+    navigate(`/encyclopedia?careerId=${careerId}`);
+
+
+ }
   return (
     <div className="text-white h-[510px] grid border rounded-2xl overflow-hidden relative">
       <div className="bg-red-400 flex items-center justify-center relative">
@@ -103,7 +109,7 @@ const navigate = useNavigate();
         {/* Buttons */}
         <div className="flex justify-between mt-4">
           <button
-            onClick={() => setActiveBtn("more")}
+            onClick={handleMore}
             className={`py-[12px] px-[32px] rounded-xl flex items-center justify-center ${
               activeBtn === "more"
                 ? "bg-[#24A57F] text-white"

@@ -21,27 +21,27 @@ const BadgeEarned = () => {
     "microexperience"
   );
 
-  const careerId = searchParams.get("careerId");
+  const careerLevelId = searchParams.get("careerLevelId");
   const questionId = searchParams.get("questionId");
   useEffect(() => {
-    if (careerId) {
-      dispatch(fetchMicroexperience(careerId));
+    if (careerLevelId) {
+      dispatch(fetchMicroexperience({careerLevelId}));
     }
   }, [dispatch, searchParams]);
 
-  const careerLevelId = microexperience?.[0]?._id;
-  console.log(careerLevelId, "careerLevelId");
+  // const careerLevelId = microexperience?.[0]?._id;
+  // console.log(careerLevelId, "careerLevelId");
 
   const handleNext = () => {
     const payload = {
-      careerLevelId: microexperience?.[0]?._id,
+      careerLevelId: careerLevelId,
       badge: microexperience?.[0]?.questionbadges?.[0]?.badges?.[0]?.image,
     };
 
     dispatch(saveBadge(payload)).then((res) => {
      
       if (res.payload && res.payload.code === 201 || res.payload.statusCode === 200) {
-             navigate(`/student-choice?questionId=${questionId}&careerId=${careerId}`)
+             navigate(`/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}`)
       }
     });
   };

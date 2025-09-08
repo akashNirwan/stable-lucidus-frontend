@@ -35,6 +35,11 @@ const dispatch = useDispatch()
 
       dispatch(saveCareer(payload)); 
   }
+
+
+  const handlemore = ()=>{
+    navigate(`/encyclopedia?careerId=${careerId}`)
+  }
   return (
     <div className="h-[350px] w-[320px] mx-auto rounded-2xl relative shadow-lg overflow-hidden">
       <div className="h-[250px] w-full">
@@ -60,7 +65,7 @@ const dispatch = useDispatch()
 
         <div className="flex justify-between mt-2 px-4">
           <button
-            onClick={() => setActiveBtn("more")}
+            onClick={handlemore}
             className={`py-[10px] px-[28px] rounded-xl flex items-center justify-center font-medium transition ${
               activeBtn === "more"
                 ? "bg-[#24A57F] text-white"

@@ -2,12 +2,13 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/common/Button";
 
+
 const MicroIntoScreenTwo = ({data}) => {
   const navigate = useNavigate();
 
 
-const careerId = data?.career[0]._id
-console.log(careerId, "careerid");
+const careerLevelId = data?._id
+console.log(careerLevelId, "careerLevelId");
 console.log(data?.career[0]._id, "data");
 
   return (
@@ -22,7 +23,7 @@ console.log(data?.career[0]._id, "data");
             
 
       {/* Redirect to another page */}
-      <Button onClick={() => navigate(`/level?careerId=${careerId}`)}>{data?.questionintros?.[1]?.buttonName }</Button>
+      <Button onClick={() => navigate(`/level?careerLevelId=${careerLevelId}`)}>{data?.questionintros?.[1]?.buttonName }</Button>
     </div>
   );
 };

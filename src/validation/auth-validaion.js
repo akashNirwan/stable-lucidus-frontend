@@ -1,11 +1,11 @@
 import * as yup from "yup";
 
-
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 export const loginSchema = yup.object().shape({
   email: yup
     .string()
-    .email("Enter a valid email")
+    .matches(emailRegex, "Invalid email format")
     .required("Email is required"),
 });
 
@@ -13,7 +13,7 @@ export const signupSchema = yup.object().shape({
   username: yup.string().required("Username is required"),
   email: yup
     .string()
-    .email("Enter a valid email")
+    .matches(emailRegex, "Invalid email format")
     .required("Email is required"),
 });
 

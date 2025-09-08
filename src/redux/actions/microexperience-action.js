@@ -9,14 +9,48 @@ const getTokenFromLocalStorage = () => {
 };
 
 
+// export const fetchMicroexperience = createAsyncThunk(
+//   "microexperience/fetchMicroexperience",
+//   async (careerId, { rejectWithValue }) => {
+//     const token = getTokenFromLocalStorage()
+
+//     try {
+//       const response = await client.get(
+//         `user/micro-interaction?careerId=${careerId}&levelNumber=${1}`,
+//         {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//           },
+//         }
+//       );
+      
+
+//       return response.data;
+//     } catch (error) {
+      
+//       return rejectWithValue(error?.response?.data?.message || error?.message);
+//     }
+//   }
+// );
+
 export const fetchMicroexperience = createAsyncThunk(
   "microexperience/fetchMicroexperience",
-  async (careerId, { rejectWithValue }) => {
-    const token = getTokenFromLocalStorage()
+  async (params, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage();
+    
+    
+    let queryParams = '';
+    if (params.careerId) {
+      queryParams = `careerId=${params.careerId}&levelNumber=${params.levelNumber || 1}`;
+    } else if (params.careerLevelId) {
+      queryParams = `careerLevelId=${params.careerLevelId}`;
+    } else {
+      return rejectWithValue("Either careerId or careerLevelId is required");
+    }
 
     try {
       const response = await client.get(
-        `user/micro-interaction?careerId=${careerId}&levelNumber=${1}`,
+        `user/micro-interaction?${queryParams}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -24,16 +58,12 @@ export const fetchMicroexperience = createAsyncThunk(
         }
       );
       
-
       return response.data;
     } catch (error) {
-      
       return rejectWithValue(error?.response?.data?.message || error?.message);
     }
   }
 );
-
-
 
 
 export const saveAnswer = createAsyncThunk(
@@ -140,3 +170,34 @@ export const saveFeedback = createAsyncThunk(
     }
   }
 );
+
+
+
+
+export const saveSteps = createAsyncThunk(
+  "microexperience/saveSteps",
+  async (payload, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage();
+
+    try {
+      const response = await client.post(
+        `user/micro-interaction/save-steps'`,   
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      toast.success(response.data.message || "Step Saved Successfully");
+      return response.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Failed to save Step");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);
+
+
+

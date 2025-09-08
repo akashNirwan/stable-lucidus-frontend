@@ -7,6 +7,8 @@ export default function TextInput({
   onBlur,
   minLength,   
   maxLength,
+  onInput,
+  disabled,
   name
 }, ref) {
   return (
@@ -18,9 +20,11 @@ export default function TextInput({
         value={value || ""}
         onChange={onChange}
         onBlur={onBlur}
+        onInput={onInput}
         placeholder={placeholder}
         minLength={minLength}   
           maxLength={maxLength} 
+          disabled={disabled}
         className="w-full h-12 placeholder:text-[#7B56FF] rounded-full border border-[#7B56FF] bg-[#EFEAFF] px-6 text-center text-[rgba(123,86,255,1)] outline-none"
       />
       {error && (

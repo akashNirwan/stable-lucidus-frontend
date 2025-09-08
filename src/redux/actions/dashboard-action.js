@@ -51,7 +51,10 @@ export const saveCareer = createAsyncThunk(
       );
 
       toast.success(response.data.message || "Career Saved Successfully");
-      return response.data;
+      return {
+        ...response.data,
+        careerId: payload.careerId  
+      };
     } catch (error) {
       toast.error(error?.response?.data?.message || "Failed to save career");
       return rejectWithValue(error?.response?.data?.message || error?.message);
@@ -110,3 +113,31 @@ export const fetchSavedCareers = createAsyncThunk(
     }
   }
 );
+
+
+
+export const fetchDashboardMicroexperience = createAsyncThunk(
+  "dashboard/fetchDashboardMicroexperience",
+  async (_, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage()
+
+    try {
+      const response = await client.get(
+        `user/micro-experiences`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      
+
+      return response.data;
+    } catch (error) {
+      
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);
+
+

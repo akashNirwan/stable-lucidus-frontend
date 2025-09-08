@@ -20,6 +20,7 @@ import EncycloPediaWrapper from "./encyclopediaWrapper";
 import EncyclopediaTabs from "../pages/EncyclopediaTabs";
 import EncylopediaWrapperTodo from "./encyclopediaTodoWrapper";
 import EncylopediaTab from "../pages/EncylopediaTab";
+import FeedBackFormOne from "../pages/FeedBackFormOne";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
     children: [{ index: true, element: <MicroIntoScreen /> }],
   },
   {
+    path: "/feedbackform",
+    element: <FeedBackFormOne />,
+  },
+  {
     path: "/badge-earned",
     element: <BadgeEarned />,
   },
@@ -88,7 +93,7 @@ const router = createBrowserRouter([
     children: [{ index: true, element: <FeedBackForm /> }],
   },
   {
-    path: "/encylopedia",
+    path: "/encyclopedia",
     element: <EncycloPediaWrapper />,
     children: [{ index: true, element: <EncyclopediaTabs /> }],
   },

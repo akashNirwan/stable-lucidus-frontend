@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchMicroexperience , saveAnswer, saveBadge, saveInsight, saveFeedback} from "../actions/microexperience-action";
+import { fetchMicroexperience , saveAnswer, saveBadge, saveInsight, saveFeedback, saveSteps} from "../actions/microexperience-action";
 
 
 const initialState = {
@@ -15,6 +15,8 @@ const initialState = {
   saveInsightLoading : false,
   saveFeedback : null,
   saveFeedbackLoading : false,
+  saveSteps: null,
+  saveStepsLoading: false,
 };
 
 
@@ -106,6 +108,23 @@ const microexperienceSlice = createSlice({
                   .addCase(saveFeedback.rejected, (state, action) => {
                     state.saveFeedbackLoading = false;
                     state.error = action.payload || "Failed to Save Feedback";
+                  });
+
+
+                   // save Steps
+      
+              builder
+                  .addCase(saveSteps.pending, (state) => {
+                    state.saveStepsLoading = true;
+                    state.error = null;
+                  })
+                  .addCase(saveSteps.fulfilled, (state, action) => {
+                    state.saveStepsLoading = false;
+                    state.saveSteps = action.payload; 
+                  })
+                  .addCase(saveSteps.rejected, (state, action) => {
+                    state.saveStepsLoading = false;
+                    state.error = action.payload || "Failed to Save Steps";
                   });
   },
 });

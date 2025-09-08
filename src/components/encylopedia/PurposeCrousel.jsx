@@ -1,35 +1,78 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const slides = [
-  {
-    title: "About",
-    text: "A Chief Financial Officer (CFO) is the money boss of a company. They decide how to spend, save, and grow funds. Their choices drive profits, create jobs, and shape how the business impacts people and communities.",
-  },
-  {
-    title: "Role",
-    list: [
-      "Ensures financial health",
-      "Manages budgets effectively",
-      "Provides strategies for long-term growth",
-      "Aligns money decisions with company goals",
-    ],
-  },
-  {
-    title: "Impact",
-    text: "By leading financial planning and risk management, CFOs help businesses stay stable, expand into new markets, and create opportunities for innovation and employees.",
-  },
-];
+import { fetchPredictionandPurpose } from "../../redux/actions/encyclopedia-action";
+import { useSearchParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 export default function PurposeCrousel() {
+  const dispatch = useDispatch();
+  const [searchparams] = useSearchParams();
+  const careerId = searchparams.get("careerId");
+  console.log(careerId, "careerid");
+
+  const { predictionandPurpose, loading } = useSelector(
+    (state) => state.encyclopedia
+  );
+
+  useEffect(() => {
+    const careerId = searchparams.get("careerId");
+    dispatch(fetchPredictionandPurpose({ careerId, tab: "Purpose" }));
+  }, [dispatch, searchparams]);
+
+  const slides = useMemo(() => {
+    if (!predictionandPurpose || !Array.isArray(predictionandPurpose)) {
+      return [];
+    }
+
+    return predictionandPurpose.map((item) => ({
+      title: item.title,
+      text: item.description,
+      id: item._id,
+    }));
+  }, [predictionandPurpose]);
+
   const [current, setCurrent] = useState(0);
 
-  const nextSlide = () => setCurrent((prev) => (prev + 1) % slides.length);
-  const prevSlide = () =>
-    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+  useEffect(() => {
+    if (slides.length > 0) {
+      setCurrent(0);
+    }
+  }, [slides.length]);
 
-  return (
-    <div className="flex flex-col  bg-[#130934] overflow-hidden">
+
+   const nextSlide = () => {
+    if (slides.length > 0) {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }
+  };
+
+  const prevSlide = () => {
+    if (slides.length > 0) {
+      setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+    }
+  };
+    
+
+  
+
+  return loading ? (
+    <div className="flex items-center justify-center min-h-[400px]">
+      <LoadingSpinner size={64} />
+    </div>
+  ) : (
+
+
+    <div className="flex flex-col bg-[#130934] overflow-hidden">
+   
+    {(!slides || slides.length === 0) ? (
+      <div className="flex items-center justify-center min-h-[400px] text-white">
+        <p>No purpose data available</p>
+      </div>
+    
+  ) : (
+
+     <div className="flex flex-col  bg-[#130934] overflow-hidden">
       {/* Slide */}
       <div className="relative w-full max-w-md">
         <AnimatePresence mode="wait">
@@ -83,5 +126,7 @@ export default function PurposeCrousel() {
         ))}
       </div>
     </div>
-  );
+  )}
+  </div>
+  )
 }
