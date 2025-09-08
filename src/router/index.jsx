@@ -20,6 +20,8 @@ import EncycloPediaWrapper from "./encyclopediaWrapper";
 import EncyclopediaTabs from "../pages/EncyclopediaTabs";
 import EncylopediaWrapperTodo from "./encyclopediaTodoWrapper";
 import EncylopediaTab from "../pages/EncylopediaTab";
+import RoadMapWrapper from "./roadMapWrapper";
+import RoadMap from "../pages/RoadMap";
 import FeedBackFormOne from "../pages/FeedBackFormOne";
 const router = createBrowserRouter([
   {
@@ -106,6 +108,11 @@ const router = createBrowserRouter([
         element: <EncylopediaTab />,
       },
     ],
+  },
+  {
+    path: "/roadmap",
+    element: <RoadMapWrapper />,
+    children: [{ index: true, element: <RoadMap /> }],
   },
 ]);
 

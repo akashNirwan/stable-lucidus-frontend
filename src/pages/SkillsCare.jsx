@@ -76,18 +76,6 @@ const SkillsCare = ({ setStep, stepsData }) => {
     <div className="text-center flex flex-col gap-3">
       {/* Back Button */}
       <div className="flex items-center justify-start mb-2">
-        <button
-          onClick={handleBack}
-          className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors"
-        >
-          <button className="p-2 rounded-full hover:bg-gray-100 transition">
-            <ArrowLeft
-              size={20}
-              className="text-violet-800 hover:text-violet-900 cursor-pointer"
-            />
-          </button>
-        </button>
-
         <h2 className="font-bold text-[20px]">{stepsData.title}</h2>
       </div>
 
@@ -95,12 +83,12 @@ const SkillsCare = ({ setStep, stepsData }) => {
       <h4 className="text-[#24A57F] font-medium">I care about:</h4>
 
       {/* Selection Counter */}
-      <p className="text-sm text-gray-500">
+      {/* <p className="text-sm text-gray-500">
         Selected: {selected.length}/3{" "}
         {selected.length === 3 && "(Maximum reached)"}
-      </p>
+      </p> */}
 
-      <div className="h-[270px] overflow-y-auto grid grid-cols-3 gap-2">
+      <div className="h-[290px] overflow-y-auto grid grid-cols-3 gap-2">
         {Array.isArray(sdgs) &&
           sdgs.map((sdg, i) => {
             const isSelected = selected.some((s) => s._id === sdg._id);
@@ -110,18 +98,25 @@ const SkillsCare = ({ setStep, stepsData }) => {
               <div
                 key={sdg._id}
                 onClick={() => canSelect && handleSelect(sdg)}
-                className={`w-[92px] h-[92px] border cursor-pointer rounded-lg flex items-center justify-center relative overflow-hidden
-                  ${isSelected ? "border-[#4823CF] border-2 bg-[#E6F8F3]" : ""}
-                  ${!canSelect ? "opacity-50 cursor-not-allowed" : ""}
-                `}
+                className={`relative w-[92px] h-[92px] rounded-lg cursor-pointer overflow-hidden
+            ${!canSelect ? "opacity-50 cursor-not-allowed" : ""}
+          `}
               >
+                {/* Image */}
                 <img
                   src={sdg.image}
                   alt={sdg.sdg}
-                  className="w-full h-full object-cover relative inset-0"
+                  className="w-full h-full object-cover"
                 />
-                <span className="font-medium flex items-center truncate gap-2 px-2 absolute top-0  left-0  z-10 text-white rounded">
-                  <span className="text-[24px]">{i + 1}</span>{" "}
+
+                {/* Visible Highlight overlay */}
+                {isSelected && (
+                  <div className="absolute inset-0 rounded-lg bg-[#4823CF]/40 border-2 border-[#4823CF] shadow-[0_0_10px_rgba(72,35,207,0.7)]" />
+                )}
+
+                {/* Label */}
+                <span className="font-medium flex items-center truncate gap-2 px-2 absolute top-0 left-0 z-10 text-white rounded">
+                  <span className="text-[24px]">{i + 1}</span>
                   <span>{sdg.sdg}</span>
                 </span>
               </div>
@@ -129,14 +124,24 @@ const SkillsCare = ({ setStep, stepsData }) => {
           })}
       </div>
 
-      <Button
-        type="button"
-        isActive={selected.length > 0}
-        onClick={handleNext}
-        disabled={SdgsLoading || loading}
-      >
-        {SdgsLoading ? <LoadingSpinner size="20px" /> : "Show Me Careers"}
-      </Button>
+      <div className="flex gap-3 ">
+        <Button
+          type="button"
+          onClick={handleBack}
+          className="bg-white !text-[#0F8864] border !border-[#0F8864]"
+        >
+          {"Previous"}
+        </Button>
+
+        <Button
+          type="button"
+          isActive={selected.length > 0}
+          onClick={handleNext}
+          disabled={SdgsLoading || loading}
+        >
+          {SdgsLoading ? <LoadingSpinner size="20px" /> : "Show Me Careers"}
+        </Button>
+      </div>
     </div>
   );
 };

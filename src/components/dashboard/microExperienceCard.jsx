@@ -3,8 +3,8 @@ import { ArrowRight } from "lucide-react"; // install lucide-react if not alread
 
 const CareerCard = () => {
   return (
-    <div className="flex items-center justify-between bg-white rounded-2xl shadow-md p-3 w-full max-w-[360px] mx-auto">
-      <div className="flex items-start gap-3">
+    <div className="flex items-center justify-between bg-white rounded-2xl shadow-md p-3 w-full max-w-[360px] mx-auto gap-8">
+      <div className="flex items-start gap-3 ">
         <div className="h-12 w-12 rounded-xl bg-gradient-to-tr from-green-400 to-teal-500 flex items-center justify-center">
           <div className="w-[80px] h-[80px]">
             <img
@@ -20,7 +20,7 @@ const CareerCard = () => {
             Microfinance Specialist
           </h3>
 
-          <div className="mt-2 w-[200px]">
+          <div className="mt-2 w-[180px]">
             <div className="h-2 bg-purple-200 rounded-full">
               <div className="h-2 w-[30%] bg-green-500 rounded-full"></div>
             </div>

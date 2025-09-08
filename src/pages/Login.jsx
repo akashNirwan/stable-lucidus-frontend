@@ -106,7 +106,6 @@ export default function Login() {
         backdropFilter: "blur(10px)",
       }}
     >
-      {/* Toggle Buttons */}
       <div className="flex w-full gap-2">
         <button
           type="button"
@@ -128,7 +127,7 @@ export default function Login() {
         </button>
       </div>
 
-      <div className="w-full space-y-4 my-6">
+      <div className={`w-full space-y-4 ${isLogin ? "my-6" : "-my-2"} `}>
         {!isLogin ? (
           <>
             <Controller

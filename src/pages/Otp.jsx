@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -11,31 +10,27 @@ import Button from "../components/common/Button";
 import toast from "react-hot-toast";
 import { otpSchema } from "../validation/auth-validaion";
 
-
-
-
 export default function Otp() {
   const [otp, setOtp] = useState(Array(6).fill(""));
   const inputRefs = useRef([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
-  const { 
-    verifyOtpLoading, 
-    verifyOtpError, 
-    resendOtpLoading, 
+  const {
+    verifyOtpLoading,
+    verifyOtpError,
+    resendOtpLoading,
     resendOtpError,
     user,
-    otpRequestId 
+    otpRequestId,
   } = useSelector((state) => state.auth);
 
   console.log(user, "user login account user details ");
   console.log(otpRequestId, "otp request id");
-  
-   const useremail = localStorage.getItem("email");
-    
-console.log(useremail ," useremail");
+
+  const useremail = localStorage.getItem("email");
+
+  console.log(useremail, " useremail");
 
   const RESEND_KEY = "otpResendExpiry";
   const RESEND_DURATION = 30; // seconds
@@ -43,7 +38,6 @@ console.log(useremail ," useremail");
   const [timer, setTimer] = useState(RESEND_DURATION);
   const [canResend, setCanResend] = useState(false);
 
-  
   const {
     control,
     handleSubmit,
@@ -57,7 +51,6 @@ console.log(useremail ," useremail");
     },
   });
 
-  
   useEffect(() => {
     const expiry = localStorage.getItem(RESEND_KEY);
     let remaining = RESEND_DURATION;
@@ -95,19 +88,17 @@ console.log(useremail ," useremail");
     return () => clearInterval(interval);
   }, [canResend]);
 
- 
-
   const handleChange = (value, index) => {
     if (!/^[0-9]?$/.test(value)) return;
-    
+
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
-    
+
     // Update form value
     const otpString = newOtp.join("");
     setValue("otp", otpString);
-    
+
     if (value && index < 5) {
       inputRefs.current[index + 1]?.focus();
     }
@@ -122,29 +113,28 @@ console.log(useremail ," useremail");
   const onSubmit = async (data) => {
     const payload = {
       otp: parseInt(data.otp),
-      id: user?.id, 
+      id: user?.id,
     };
-     console.log(payload , "payload in 1231313");
-     
+    console.log(payload, "payload in 1231313");
+
     try {
       const result = await dispatch(verifyOtp(payload)).unwrap();
-      
+
       if (result?.data?.[0]) {
         const userData = result.data[0];
         console.log(userData, "otp user data");
-         if (userData?.token) {
-        localStorage.setItem("token", userData.token);
-  }
-        
-         toast.success(`OTP Verified Welcome ${userData.name} ` )
-         localStorage.removeItem("email");
-         localStorage.removeItem("deviceId");
-         navigate("/welcome")
+        if (userData?.token) {
+          localStorage.setItem("token", userData.token);
+        }
+
+        toast.success(`OTP Verified Welcome ${userData.name} `);
+        localStorage.removeItem("email");
+        localStorage.removeItem("deviceId");
+        navigate("/welcome");
       }
     } catch (error) {
-      
       console.log();
-      
+
       setOtp(Array(6).fill(""));
       reset();
       inputRefs.current[0]?.focus();
@@ -154,15 +144,13 @@ console.log(useremail ," useremail");
   const handleResend = async () => {
     if (!canResend || resendOtpLoading) return;
 
-    
-    
     const payload = {
-       email :  user?.email || useremail,
-     }
-    
+      email: user?.email || useremail,
+    };
+
     try {
       await dispatch(resendOtp(payload)).unwrap();
-      
+
       const expiryTime = Date.now() + RESEND_DURATION * 1000;
       localStorage.setItem(RESEND_KEY, expiryTime.toString());
 
@@ -172,7 +160,7 @@ console.log(useremail ," useremail");
       reset();
       inputRefs.current[0]?.focus();
     } catch (error) {
-      toast.error("Resend otp failed")
+      toast.error("Resend otp failed");
     }
   };
 
@@ -190,7 +178,7 @@ console.log(useremail ," useremail");
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.4 }}
-      className="fixed bottom-0 left-0 right-0 mx-auto w-full max-w-[360px] flex flex-col items-center gap-4 p-6"
+      className="fixed bottom-0 left-0 right-0 mx-auto w-full max-w-[360px] flex flex-col items-center gap-1 p-6"
       style={{
         borderRadius: "24px 24px 0 0",
         background:
@@ -203,8 +191,9 @@ console.log(useremail ," useremail");
           type="button"
           onClick={handleBack}
           disabled={verifyOtpLoading}
+          className="text-[#24A57F]"
         >
-          ← Back
+          ←
         </button>
       </div>
 
@@ -214,11 +203,8 @@ console.log(useremail ," useremail");
       <h2 className="text-center text-[20px] font-semibold">
         OTP Verification
       </h2>
-      <p className="text-center leading-[150%]">
-        Enter the 6-digit OTP sent to your registered email.
-      </p>
 
-      <div className="flex justify-center gap-2 my-6">
+      <div className="flex justify-center gap-2 my-2">
         <Controller
           name="otp"
           control={control}
@@ -240,7 +226,7 @@ console.log(useremail ," useremail");
                       ? "border-[#7B56FF] shadow-md shadow-[#7B56FF]/40 bg-[#EFEAFF]"
                       : "border-gray-300 bg-gray-50"
                   } focus:outline-none focus:border-[#40279c] focus:ring-[#7B56FF]/60 focus:shadow-md focus:shadow-[#7B56FF]/40 ${
-                    verifyOtpLoading ? 'opacity-50 cursor-not-allowed' : ''
+                    verifyOtpLoading ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                 />
               ))}
@@ -249,42 +235,35 @@ console.log(useremail ," useremail");
         />
       </div>
 
-      {/* Error Display */}
       {errors.otp && (
-        <p className="text-red-500 text-sm text-center">
-          {errors.otp.message}
-        </p>
+        <p className="text-red-500 text-sm text-center">{errors.otp.message}</p>
       )}
-      
+
       {verifyOtpError && (
-        <p className="text-red-500 text-sm text-center">
-          {verifyOtpError}
-        </p>
+        <p className="text-red-500 text-sm text-center">{verifyOtpError}</p>
       )}
 
       <p
         onClick={handleResend}
         className={`text-center cursor-pointer hover:underline ${
-          canResend && !resendOtpLoading 
-            ? "text-red-500" 
+          canResend && !resendOtpLoading
+            ? "text-[#24A57F]"
             : "text-gray-400 cursor-not-allowed"
         }`}
       >
-        {resendOtpLoading 
-          ? "Sending..." 
-          : canResend 
-            ? "Resend OTP" 
-            : `Resend OTP in ${timer}s`}
+        {resendOtpLoading
+          ? "Sending..."
+          : canResend
+          ? "Resend OTP"
+          : `Resend OTP in ${timer}s`}
       </p>
 
       {resendOtpError && (
-        <p className="text-red-500 text-sm text-center">
-          {resendOtpError}
-        </p>
+        <p className="text-red-500 text-sm text-center">{resendOtpError}</p>
       )}
 
-      <Button 
-        type="submit" 
+      <Button
+        type="submit"
         isActive={otp.join("").length === 6 && !verifyOtpLoading}
         disabled={verifyOtpLoading || resendOtpLoading}
       >

@@ -65,17 +65,6 @@ const Ambition = ({ stepsData }) => {
     <div className="text-center flex flex-col gap-3">
       {/* Back Button */}
       <div className="flex items-center justify-start ">
-        <button
-          onClick={handleBack}
-          className=" flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors"
-        >
-          <button className="p-2 rounded-full hover:bg-gray-100 transition">
-            <ArrowLeft
-              size={20}
-              className="text-violet-800 hover:text-violet-900 cursor-pointer"
-            />
-          </button>
-        </button>
         <div className="flex-row">
           <h2 className="font-bold text-[20px]">{stepsData.title}</h2>
           <h3 className="text-green-600 text-[14px] leading-[120%]">
@@ -84,7 +73,7 @@ const Ambition = ({ stepsData }) => {
         </div>
       </div>
 
-      <div className="h-[340px] overflow-y-auto flex flex-col gap-2">
+      <div className="h-[320px] overflow-y-auto flex flex-col gap-2">
         <textarea
           placeholder={stepsData.highlight}
           className="placeholder:text-center w-full h-full border border-[#7B56FF] placeholder:text-[#7B56FF] text-[#7B56FF] rounded-md p-4 resize-none"
@@ -97,15 +86,24 @@ const Ambition = ({ stepsData }) => {
           {text.length} characters
         </div>
       </div>
+      <div className="flex gap-3 ">
+        <Button
+          type="button"
+          onClick={handleBack}
+          className="bg-white !text-[#0F8864] border !border-[#0F8864]"
+        >
+          {"Previous"}
+        </Button>
 
-      <Button
-        type="button"
-        isActive={text.trim().length > 0}
-        onClick={handleNext}
-        disabled={loading || text.trim().length === 0}
-      >
-        {loading ? <LoadingSpinner size="20px" /> : "Next"}
-      </Button>
+        <Button
+          type="button"
+          isActive={text.trim().length > 0}
+          onClick={handleNext}
+          disabled={loading || text.trim().length === 0}
+        >
+          {loading ? <LoadingSpinner size="20px" /> : "Next"}
+        </Button>
+      </div>
     </div>
   );
 };
