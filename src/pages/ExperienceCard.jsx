@@ -28,13 +28,14 @@ const bookmark =  true;
       careerId: careerId,
     };
 
-      dispatch(saveCareer(payload)); 
-  }
+    dispatch(saveCareer(payload));
+  };
 
+  const handlemore = () => {
+    navigate(`/encyclopedia?careerId=${careerId}`);
+  };
 
-  const handlemore = ()=>{
-    navigate(`/encyclopedia?careerId=${careerId}`)
-  }
+  const bookmark = true;
   return (
     <div className="h-[350px] w-[320px] mx-auto rounded-2xl relative shadow-lg overflow-hidden">
       <div className="h-[250px] w-full">
