@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <div className="flex justify-between items-center text-white p-4">
@@ -11,7 +11,7 @@ const Header = () => {
           height={24}
         />
       </div>
-      <div>
+      <Link to="/profile">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="32"
@@ -31,7 +31,7 @@ const Header = () => {
             </clipPath>
           </defs>
         </svg>
-      </div>
+      </Link>
     </div>
   );
 };

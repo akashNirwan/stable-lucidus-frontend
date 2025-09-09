@@ -19,7 +19,7 @@ const Footer = ({ setMenu, menu }) => {
             fill={menu === 1 ? "#24A57F" : "#A187FF"}
           />
         </svg>
-        <h4>DashBoard</h4>
+        <h4>Dashboard</h4>
       </div>
       <div
         className="flex flex-1 flex-col items-center cursor-pointer"

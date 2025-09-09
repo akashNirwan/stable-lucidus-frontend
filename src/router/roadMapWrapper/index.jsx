@@ -5,9 +5,9 @@ import { Outlet } from "react-router-dom";
 import RoadMapFooter from "../../components/roadmap/RoadMapFooter";
 const RoadMapWrapper = () => {
   return (
-    <div className="flex flex-col h-screen bg-[#130934]">
+    <div className="flex flex-col h-screen bg-[#130934] ">
       <Header />
-      <main className="flex-grow overflow-y-auto bg-[#130934]">
+      <main className="flex-grow overflow-y-auto bg-[#130934] max-w-[400px] mx-auto ">
         <Outlet />
       </main>
       <RoadMapFooter />

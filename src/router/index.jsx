@@ -28,6 +28,8 @@ import Purpose from "../pages/Purpose";
 import Process from "../pages/Process";
 import Prediction from "../pages/Prediction";
 import Path from "../pages/Path";
+import Profile from "../pages/Profile";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -97,6 +99,10 @@ const router = createBrowserRouter([
     element: <ServeyPage />,
   },
   {
+    path: "/profile",
+    element: <Profile />,
+  },
+  {
     path: "/student-choice",
     element: <OnChoiceFeedBack />,
     children: [{ index: true, element: <FeedBackForm /> }],
@@ -107,25 +113,25 @@ const router = createBrowserRouter([
   //   children: [{ index: true, element: <EncyclopediaTabs /> }],
   // },
   {
-  path: "/encyclopedia/purpose",
-  element: <EncycloPediaWrapper />,
-  children: [{ index: true, element: <Purpose /> }],
-},
-{
-  path: "/encyclopedia/process", 
-  element: <EncycloPediaWrapper />,
-  children: [{ index: true, element: <Process /> }],
-},
-{
-  path: "/encyclopedia/path",
-  element: <EncycloPediaWrapper />,
-  children: [{ index: true, element: <Path /> }],
-},
-{
-  path: "/encyclopedia/prediction",
-  element: <EncycloPediaWrapper />,
-  children: [{ index: true, element: <Prediction /> }],
-},
+    path: "/encyclopedia/purpose",
+    element: <EncycloPediaWrapper />,
+    children: [{ index: true, element: <Purpose /> }],
+  },
+  {
+    path: "/encyclopedia/process",
+    element: <EncycloPediaWrapper />,
+    children: [{ index: true, element: <Process /> }],
+  },
+  {
+    path: "/encyclopedia/path",
+    element: <EncycloPediaWrapper />,
+    children: [{ index: true, element: <Path /> }],
+  },
+  {
+    path: "/encyclopedia/prediction",
+    element: <EncycloPediaWrapper />,
+    children: [{ index: true, element: <Prediction /> }],
+  },
   {
     path: "/encylopedia-todo",
     element: <EncylopediaWrapperTodo />,
