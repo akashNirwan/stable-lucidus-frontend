@@ -96,9 +96,7 @@ const RoadmapData = ({ roadmapData }) => {
                   </div>
 
                   <div
-                    className={`flex-1 px-4 py-3 rounded-full text-white font-medium cursor-pointer shadow-md ${
-                      section.active ? "b" : "b"
-                    }`}
+                    className={`flex-1 px-4  rounded-full text-white font-medium line-clamp-1 cursor-pointer shadow-md`}
                     onClick={() => toggle(index)}
                   >
                     {section.title}

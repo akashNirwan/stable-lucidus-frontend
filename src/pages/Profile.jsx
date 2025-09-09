@@ -74,7 +74,7 @@ const Profile = () => {
           <button className="border border-[#0F8864] text-[#0F8864] py-3 rounded-lg font-medium">
             Retake Quiz
           </button>
-          <button className="border border-red-800 text-red-800 py-3 rounded-lg font-medium flex items-center justify-center gap-2">
+          <button className="border border-[#0F8864] text-[#0F8864] py-3 rounded-lg font-medium flex items-center justify-center gap-2">
             <LogOut className="w-5 h-5" />
             Logout
           </button>
@@ -82,7 +82,7 @@ const Profile = () => {
 
         {/* Bottom Sheet Modal */}
         {isEditing && (
-          <div className="fixed inset-0 bg-black/40 flex items-end justify-center z-50">
+          <div className="fixed inset-0 bg-black/40 flex items-end justify-center z-50 max-w-[400px] mx-auto">
             <div className="bg-white w-full rounded-t-3xl p-6 shadow-lg">
               {/* Close */}
               <div className="flex justify-end">
