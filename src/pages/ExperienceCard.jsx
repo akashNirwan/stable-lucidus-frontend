@@ -22,7 +22,7 @@ const CareerExperienceCard = ({ careerData, savedCareer, careerId }) => {
     }
     return "/assets/lvl-1.svg";
   };
-const bookmark =  true;
+  const bookmark = true;
   const handlebookmark = () => {
     const payload = {
       careerId: careerId,
@@ -35,7 +35,6 @@ const bookmark =  true;
     navigate(`/encyclopedia?careerId=${careerId}`);
   };
 
-  const bookmark = true;
   return (
     <div className="h-[350px] w-[320px] mx-auto rounded-2xl relative shadow-lg overflow-hidden">
       <div className="h-[250px] w-full">

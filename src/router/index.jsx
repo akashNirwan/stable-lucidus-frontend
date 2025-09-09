@@ -24,6 +24,7 @@ import RoadMapWrapper from "./roadMapWrapper";
 import RoadMap from "../pages/RoadMap";
 import FeedBackFormOne from "../pages/FeedBackFormOne";
 import FeedBackLayout from "./feedBackLayout";
+import Profile from "../pages/Profile";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -91,6 +92,10 @@ const router = createBrowserRouter([
   {
     path: "/survey-page",
     element: <ServeyPage />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
   },
   {
     path: "/student-choice",

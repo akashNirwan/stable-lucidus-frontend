@@ -12,7 +12,7 @@ const RoadMap = () => {
           </h1>
         </div>
 
-        <div className="bg-gradient-to-r from-[#2c0f65] to-[#1a0b44] rounded-2xl px-4 flex items-center gap-4 w-fit">
+        <div className="bg-[#261172] rounded-2xl px-4 flex items-center gap-4 w-fit">
           <div className="w-[100px] h-[80px]">
             <img
               src="/road-map-robot.svg"
