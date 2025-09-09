@@ -2,26 +2,42 @@ import React from "react";
 import PurposeCrousel from "../components/encylopedia/PurposeCrousel";
 import { ArrowRight, Lock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Purpose = () => {
-  const steps = [
-    {
-      title: "What Do They Do?",
-      status: "active",
-    },
-    {
-      title: "Where Do They Work?",
-      status: "locked",
-    },
-    {
-      title: "Where Do They Work?",
-      status: "locked",
-    },
-    {
-      title: "Where Do They Work?",
-      status: "locked",
-    },
-  ];
-  const navigate = useNavigate("");
+     const navigate = useNavigate("");
+   const { predictionandPurpose, loading } = useSelector(
+      (state) => state.encyclopedia
+    );
+
+console.log(predictionandPurpose?.[0]?.encyclolessons, "prediction purpose");
+
+const steps = predictionandPurpose?.[0]?.encyclolessons.map((item, index) => ({
+    title: item.lesson[0]?.lesson, 
+    status: index === 0 ? "active" : "locked", 
+    lessonId: item.lesson[0]?._id,
+  })) || []; 
+
+
+
+  // const steps = [
+  //   {
+  //     title: "What Do They Do?",
+  //     status: "active",
+  //   },
+  //   {
+  //     title: "Where Do They Work?",
+  //     status: "locked",
+  //   },
+  //   {
+  //     title: "Where Do They Work?",
+  //     status: "locked",
+  //   },
+  //   {
+  //     title: "Where Do They Work?",
+  //     status: "locked",
+  //   },
+  // ];
+ 
   return (
     <div className="text-white">
       <PurposeCrousel />
@@ -50,7 +66,9 @@ const Purpose = () => {
             {step.status === "active" ? (
               <div
                 className="h-8 w-8 flex items-center justify-center rounded-full bg-green-500 text-white"
-                onClick={() => navigate("/encylopedia-todo")}
+                onClick={() =>
+                  navigate(`/encylopedia-todo?LessonId=${step.lessonId}`)
+                }
               >
                 <ArrowRight size={18} />
               </div>

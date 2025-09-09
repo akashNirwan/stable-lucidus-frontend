@@ -1,9 +1,18 @@
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 export default function EncylopediaWrapperTodo() {
-  const steps = ["grade", "figure-out", "subject", "skills", "skills-care"];
+  // const steps = ["grade", "figure-out", "subject", "skills", "skills-care"];
   const [state, setState] = useState(0);
+  const { lesson } = useSelector((state) => state.encyclopedia);
 
+  const getStepsCount = () => {
+    if (lesson && lesson.length > 0) {
+      return lesson.length;
+    }
+    return 5; 
+  };
+  const stepsCount = getStepsCount();
   return (
     <div className="min-h-screen relative overflow-hidden">
       <div className="fixed inset-0 bg-[url('/assets/welcome/welcome-bg.svg')] bg-no-repeat bg-center bg-cover z-0" />
@@ -41,7 +50,8 @@ export default function EncylopediaWrapperTodo() {
       <div className="relative z-20">
         <div className="absolute top-4 left-1/2 -translate-x-1/2 w-full max-w-[375px] px-4">
           <div className="flex items-center justify-center gap-2">
-            {steps.map((_, i) => (
+            
+            {[...Array(stepsCount)].map((_, i) => (
               <div
                 key={i}
                 className={`h-1.5 flex-1 rounded-full ${
@@ -51,7 +61,7 @@ export default function EncylopediaWrapperTodo() {
             ))}
           </div>
         </div>
-        <Outlet context={{ state, setState }} />
+        <Outlet context={{ state, setState, stepsCount }} />
       </div>
     </div>
   );

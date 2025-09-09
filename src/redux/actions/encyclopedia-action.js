@@ -113,3 +113,28 @@ export const fetchRoadmap = createAsyncThunk(
     }
   }
 );
+
+
+export const fetchLesson = createAsyncThunk(
+  "encyclopedia/fetchLesson",
+  async (LessonId ,{ rejectWithValue }) => {
+    const token = getTokenFromLocalStorage()
+
+    try {
+      const response = await client.get(
+        `user/lesson-detail?lessonId=${LessonId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      
+
+      return response.data;
+    } catch (error) {
+      
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);

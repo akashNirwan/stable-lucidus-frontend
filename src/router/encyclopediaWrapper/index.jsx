@@ -1,8 +1,18 @@
 import React, { useState , useEffect} from "react";
 import { Outlet,  useNavigate, useLocation, useSearchParams  } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const EncycloPediaWrapper = () => {
 
+
+    const { predictionandPurpose, loading } = useSelector(
+      (state) => state.encyclopedia
+    );
+
+
+   const careername = predictionandPurpose?.[0]?.career?.[0]?.career
+   console.log(careername, "career name ");
+   
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams] = useSearchParams(); 
@@ -77,7 +87,7 @@ const [activeTab, setActiveTab] = useState(getActiveTabFromRoute());
           
         </div>
         <div className="text-white font-semibold text-xl">
-          Chief Financial Officer (CFO)
+          {careername}
         </div>
       </div>
 
