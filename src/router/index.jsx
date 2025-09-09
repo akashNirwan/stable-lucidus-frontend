@@ -28,6 +28,8 @@ import Purpose from "../pages/Purpose";
 import Process from "../pages/Process";
 import Prediction from "../pages/Prediction";
 import Path from "../pages/Path";
+import Profile from "../pages/Profile";
+
 const router = createBrowserRouter([
   {
     path: "/",
