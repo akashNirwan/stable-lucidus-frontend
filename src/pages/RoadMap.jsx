@@ -1,14 +1,48 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { ArrowLeft } from "lucide-react";
-import ProgressBar from "../components/common/ProgressBar";
+import RoadmapData from "../components/common/ProgressBar";
+import { fetchRoadmap } from "../redux/actions/encyclopedia-action";
+import { useDispatch, useSelector } from "react-redux";
+import LoadingSpinner from "../components/common/LoadingSpinner";
+import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const RoadMap = () => {
-  return (
-    <div className="text-white">
+const [searchParams] = useSearchParams()
+const navigate = useNavigate()
+ const dispatch = useDispatch();
+  const { roadmap, roadmapLoading, error } = useSelector((state) => state.encyclopedia);
+
+  const career = roadmap?.[0]?.career?.[0]?.career
+  console.log(career, "career");
+    const careerId = searchParams.get("careerId")
+    useEffect(() => {
+
+    if (careerId) {
+      dispatch(fetchRoadmap(careerId));
+    }
+  }, [dispatch, searchParams]);
+
+
+  const handleArrow = ()=>{
+    navigate(`/encyclopedia/purpose?careerId=${careerId}`)
+  }
+  return roadmapLoading ?(
+
+     <div className="flex items-center justify-center min-h-[400px]">
+           <LoadingSpinner size={64} />
+         </div>
+   
+  ) : (
+
+      <div className="text-white">
       <div className="bg-[#0f0630] min-h-screen text-white p-4">
         <div className="flex items-center gap-2 mb-6">
-          <ArrowLeft className="w-5 h-5" />
+          <button onClick={handleArrow} >
+             <ArrowLeft className="w-5 h-5" />
+          </button>
+         
           <h1 className="text-lg font-semibold">
-            Chief Financial Officer (CFO)
+            {career}
           </h1>
         </div>
 
@@ -25,10 +59,11 @@ const RoadMap = () => {
             Kickstart your career exploration in Grade 9!
           </p>
         </div>
-        <ProgressBar />
+         <RoadmapData roadmapData={roadmap} />
       </div>
     </div>
-  );
+
+  )
 };
 
 export default RoadMap;

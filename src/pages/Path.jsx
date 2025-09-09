@@ -1,7 +1,7 @@
 import PathCrousel from "../components/encylopedia/PathCrousel";
 import CareerCard from "../components/dashboard/microExperienceCard";
 import RelatedCareerCard from "../components/dashboard/RelatedCareerCard";
-const Process = () => {
+const Path = () => {
   return (
     <div className="text-white">
       <PathCrousel />
@@ -24,4 +24,4 @@ const Process = () => {
   );
 };
 
-export default Process;
+export default Path;

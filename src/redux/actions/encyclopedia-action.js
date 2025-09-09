@@ -87,3 +87,29 @@ export const fetchProcess = createAsyncThunk(
     }
   }
 );
+
+
+
+export const fetchRoadmap = createAsyncThunk(
+  "encyclopedia/fetchRoadmap",
+  async (careerId ,{ rejectWithValue }) => {
+    const token = getTokenFromLocalStorage()
+
+    try {
+      const response = await client.get(
+        `user/roadmap?careerId=${careerId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      
+
+      return response.data;
+    } catch (error) {
+      
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);
