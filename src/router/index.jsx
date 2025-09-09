@@ -24,7 +24,10 @@ import RoadMapWrapper from "./roadMapWrapper";
 import RoadMap from "../pages/RoadMap";
 import FeedBackFormOne from "../pages/FeedBackFormOne";
 import FeedBackLayout from "./feedBackLayout";
-import Profile from "../pages/Profile";
+import Purpose from "../pages/Purpose";
+import Process from "../pages/Process";
+import Prediction from "../pages/Prediction";
+import Path from "../pages/Path";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -102,10 +105,30 @@ const router = createBrowserRouter([
     element: <OnChoiceFeedBack />,
     children: [{ index: true, element: <FeedBackForm /> }],
   },
+  // {
+  //   path: "/encyclopedia",
+  //   element: <EncycloPediaWrapper />,
+  //   children: [{ index: true, element: <EncyclopediaTabs /> }],
+  // },
   {
-    path: "/encyclopedia",
+    path: "/encyclopedia/purpose",
     element: <EncycloPediaWrapper />,
-    children: [{ index: true, element: <EncyclopediaTabs /> }],
+    children: [{ index: true, element: <Purpose /> }],
+  },
+  {
+    path: "/encyclopedia/process",
+    element: <EncycloPediaWrapper />,
+    children: [{ index: true, element: <Process /> }],
+  },
+  {
+    path: "/encyclopedia/path",
+    element: <EncycloPediaWrapper />,
+    children: [{ index: true, element: <Path /> }],
+  },
+  {
+    path: "/encyclopedia/prediction",
+    element: <EncycloPediaWrapper />,
+    children: [{ index: true, element: <Prediction /> }],
   },
   {
     path: "/encylopedia-todo",

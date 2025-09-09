@@ -4,6 +4,7 @@ import { fetchPredictionandPurpose } from "../../redux/actions/encyclopedia-acti
 import { useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../common/LoadingSpinner";
+import EncycloPediaWrapper from "../../router/encyclopediaWrapper";
 
 export default function PurposeCrousel() {
   const dispatch = useDispatch();

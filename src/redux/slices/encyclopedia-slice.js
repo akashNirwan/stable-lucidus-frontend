@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchPredictionandPurpose , fetchPath, fetchProcess} from "../actions/encyclopedia-action";
+import { fetchPredictionandPurpose , fetchPath, fetchProcess, fetchRoadmap} from "../actions/encyclopedia-action";
 
 
 const initialState = {
@@ -10,8 +10,9 @@ const initialState = {
   path : null,
   pathLoading: false,
   process: null,
-  processLoading: null
-
+  processLoading: null,
+   roadmap : null,
+   roadmapLoading : false,
 };
 
 
@@ -74,6 +75,24 @@ const encyclopediaSlice = createSlice({
       .addCase(fetchProcess.rejected, (state, action) => {
         state.processLoading = false;
         state.error = action.payload?.message || "Failed to fetch process";
+      });
+
+      // Fetchroadmap
+    builder
+      .addCase(fetchRoadmap.pending, (state) => {
+        state.roadmapLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchRoadmap.fulfilled, (state, action) => {
+        state.roadmapLoading = false;
+        state.roadmap = action.payload.data;
+        console.log(state.roadmap, "state roadmap ");
+        
+        
+      })
+      .addCase(fetchRoadmap.rejected, (state, action) => {
+        state.roadmapLoading = false;
+        state.error = action.payload?.message || "Failed to fetch roadmap";
       });
 
       
