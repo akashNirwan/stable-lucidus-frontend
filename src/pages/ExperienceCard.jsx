@@ -22,7 +22,7 @@ const CareerExperienceCard = ({ careerData, savedCareer, careerId }) => {
     }
     return "/assets/lvl-1.svg";
   };
-
+const bookmark =  true;
   const handlebookmark = () => {
     const payload = {
       careerId: careerId,

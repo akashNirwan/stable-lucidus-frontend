@@ -6,14 +6,14 @@ import LoadingSpinner from "../components/common/LoadingSpinner";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useMemo, useEffect } from "react";
-
+import { saveSteps } from "../redux/actions/microexperience-action";
 
 
 const FeedBackFormOne = () => {
 
   const [searchParams] = useSearchParams();
      const dispatch = useDispatch();
-     const { microexperience, loading } = useSelector(
+     const { microexperience, loading ,saveStepsLoading} = useSelector(
        (state) => state.microexperience
      );
  
@@ -38,9 +38,27 @@ const FeedBackFormOne = () => {
      );
    }, [microexperience, questionId]);
 
-const    handleClick = ()=>{
-  navigate(`/badge-earned?careerLevelId=${careerLevelId}&questionId=${questionId}`)
-}
+    const handleClick = () => {
+       
+   
+       const payload = {
+         careerLevelId : careerLevelId,
+         route : `/feedbackform?careerLevelId=${careerLevelId}&questionId=${questionId}`,
+         levelPercent : "25"
+       };
+   
+       dispatch(saveSteps(payload)).then((res) => {
+         if (res.payload && res.payload.code === 200 || res.payload.code === 201) {
+          navigate(`/badge-earned?careerLevelId=${careerLevelId}&questionId=${questionId}`)
+         }
+       });
+     };
+
+
+// const    handleClick = ()=>{
+
+//   navigate(`/badge-earned?careerLevelId=${careerLevelId}&questionId=${questionId}`)
+// }
   
   return loading ? (
             <div className="flex items-center justify-center min-h-[400px]">
@@ -75,7 +93,7 @@ const    handleClick = ()=>{
         </p>
       </div>
       <Button onClick={handleClick} className="mt-4">
-        Continue
+        {saveStepsLoading ? <LoadingSpinner size={20}> </LoadingSpinner> : "Continue"}
       </Button>
     </div>
   )

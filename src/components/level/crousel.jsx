@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import {
   Carousel,
@@ -13,21 +11,40 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { saveAnswer } from "../../redux/actions/microexperience-action";
 import LoadingSpinner from "../common/LoadingSpinner";
-
-export default function LevelCarousel({data, careerLevelId}) {
-
+import { saveSteps } from "../../redux/actions/microexperience-action";
+export default function LevelCarousel({ data, careerLevelId }) {
   console.log(data, "level data");
-  const { saveAnswerLoading } = useSelector(
-      (state) => state.microexperience
-    );
+  const { saveAnswerLoading, saveStepsLoading } = useSelector((state) => state.microexperience);
 
   const navigate = useNavigate();
- const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-//  const careerId = data?.careerId.
+  //  const careerId = data?.careerId.
 
   const [api, setApi] = React.useState(null);
   const [selected, setSelected] = React.useState(null);
+
+  // const handleSaveAnswer = async () => {
+  //   if (selected === null) return;
+
+  //   const selectedQuestion = data?.questions?.[selected];
+
+  //   if (!selectedQuestion) return;
+
+  //   const payload = {
+  //     questionId: selectedQuestion._id,
+  //   };
+  //    const saveStepsPayload = {
+  //     careerLevelId : careerLevelId,
+  //     route : "/level",
+  //     levelPercent : "16.66"
+  //    }
+
+  //   await dispatch(saveAnswer(payload));
+  //   await dispatch(saveSteps(saveStepsPayload));
+
+  //   navigate(`/feedbackform?careerLevelId=${careerLevelId}&questionId=${selectedQuestion._id}`);
+  // };
 
   const handleSaveAnswer = async () => {
     if (selected === null) return;
@@ -38,15 +55,31 @@ export default function LevelCarousel({data, careerLevelId}) {
 
     const payload = {
       questionId: selectedQuestion._id,
+      careerLevelId: careerLevelId,
     };
 
-    // Dispatch saveAnswer API
-    await dispatch(saveAnswer(payload));
+    const saveStepsPayload = {
+      careerLevelId: careerLevelId,
+      route: `/level?careerLevelId=${careerLevelId}&questionId=${selectedQuestion._id}`,
+      levelPercent: "16.66",
+    };
 
-    // Navigate after API success
-    navigate(`/feedbackform?careerLevelId=${careerLevelId}&questionId=${selectedQuestion._id}`);
+    const saveAnswerRes = await dispatch(saveAnswer(payload));
+
+    const saveStepsRes = await dispatch(saveSteps(saveStepsPayload));
+
+    const isSaveAnswerSuccess =
+      saveAnswerRes.payload?.code === 200 ||
+      saveAnswerRes.payload?.code === 201;
+    const isSaveStepsSuccess =
+      saveStepsRes.payload?.code === 200 || saveStepsRes.payload?.code === 201;
+
+    if (isSaveAnswerSuccess && isSaveStepsSuccess) {
+      navigate(
+        `/feedbackform?careerLevelId=${careerLevelId}&questionId=${selectedQuestion._id}`
+      );
+    }
   };
-
   return (
     <div className="w-full md:max-w-sm mx-auto">
       <Carousel
@@ -60,7 +93,7 @@ export default function LevelCarousel({data, careerLevelId}) {
               <div
                 onClick={() => {
                   api?.scrollTo(i);
-                  setSelected(i); // ✅ only update on click
+                  setSelected(i); 
                 }}
                 className={`bg-white rounded-2xl my-4 shadow-md overflow-hidden p-4 flex flex-col items-center text-center transition-all duration-300 cursor-pointer ${
                   selected === i
@@ -105,7 +138,7 @@ export default function LevelCarousel({data, careerLevelId}) {
             key={i}
             onClick={() => {
               api?.scrollTo(i);
-              setSelected(i); 
+              setSelected(i);
             }}
             className={`h-2 rounded-full transition-all duration-300 ${
               selected === i ? "w-4 bg-purple-500" : "w-2 bg-gray-500"
@@ -116,10 +149,14 @@ export default function LevelCarousel({data, careerLevelId}) {
 
       <Button
         onClick={handleSaveAnswer}
-        disabled={selected === null }
+        disabled={selected === null}
         className="mt-2 max-w-[320px] flex justify-center mx-auto"
       >
-        { saveAnswerLoading? <LoadingSpinner size={20}></LoadingSpinner> :   data?.questions?.[0]?.buttonName}
+        {saveAnswerLoading || saveStepsLoading ? (
+          <LoadingSpinner size={20}></LoadingSpinner>
+        ) : (
+          data?.questions?.[0]?.buttonName
+        )}
       </Button>
     </div>
   );

@@ -181,7 +181,7 @@ export const saveSteps = createAsyncThunk(
 
     try {
       const response = await client.post(
-        `user/micro-interaction/save-steps'`,   
+        `user/micro-interaction/save-steps`,   
         payload,
         {
           headers: {

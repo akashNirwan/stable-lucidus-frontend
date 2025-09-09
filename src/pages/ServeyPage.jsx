@@ -4,10 +4,11 @@ import {  saveFeedback } from "../redux/actions/microexperience-action";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
+import { saveSteps } from "../redux/actions/microexperience-action";
 
 export default function CareerSurvey() {
    const dispatch = useDispatch();
-    const {  saveFeedbackLoading } = useSelector(
+    const {  saveFeedbackLoading , saveStepsLoading} = useSelector(
       (state) => state.microexperience
     );
 
@@ -21,41 +22,64 @@ console.log(careerLevelId, "careerLevelId");
   
   
 
-   const handleNext = () => {
-      const payload = {
-        careerLevelId: microexperience?.[0]?._id,
-        badge: microexperience?.[0]?.questionbadges?.[0]?.badges?.[0]?.image,
-      };
-  
-      dispatch(saveBadge(payload)).then((res) => {
-       
-        if (res.payload && res.payload.code === 201 || res.payload.statusCode === 200) {
-               navigate(`/student-choice?questionId=${questionId}&careerId=${careerId}`)
-        }
-      });
-    };
-  
-  const handleChoice = (choice) => {
-    setIsLike(choice);
 
-    
-    dispatch(
-      saveFeedback({
-        likeDislike: choice === "like" ? "Like" : "Dislike",
-        careerLevelId: careerLevelId,
-      })
-    ).then((res) => {
+  
+  // const handleChoice = (choice) => {
+
+  //   const payload = {
+  //     careerLevelId : careerLevelId,
+  //     route : "/survey-page",
+  //     levelPercent : "50"
+  //   }
+  //   setIsLike(choice);
+     
+  //   dispatch(saveSteps(payload))
+  //   dispatch(
+  //     saveFeedback({
+  //       likeDislike: choice === "like" ? "Like" : "Dislike",
+  //       careerLevelId: careerLevelId,
+  //     })
+  //   ).then((res) => {
        
-        if (res.payload && res.payload.code === 201 || res.payload.statusCode === 200) {
-               navigate("/dashboard");
-        }
-      });
+  //       if (res.payload && res.payload.code === 201 || res.payload.statusCode === 200) {
+  //              navigate("/dashboard");
+  //       }
+  //     });
 
     
    
+  // };
+
+  const handleChoice = async (choice) => {
+  const payload = {
+    careerLevelId: careerLevelId,
+    route: "/survey-page",
+    levelPercent: "50",
   };
 
-  return saveFeedbackLoading ? (
+  setIsLike(choice);
+
+  const saveStepsRes = await dispatch(saveSteps(payload));
+  const saveFeedbackRes = await dispatch(
+    saveFeedback({
+      likeDislike: choice === "like" ? "Like" : "Dislike",
+      careerLevelId: careerLevelId,
+    })
+  );
+
+  const isSaveStepsSuccess =
+    saveStepsRes.payload?.code === 200 ||
+    saveStepsRes.payload?.code === 201;
+
+  const isSaveFeedbackSuccess =
+    saveFeedbackRes.payload?.code === 200 ||
+    saveFeedbackRes.payload?.code === 201;
+
+  if (isSaveStepsSuccess && isSaveFeedbackSuccess) {
+    navigate("/dashboard");
+  }
+};
+  return saveFeedbackLoading || saveStepsLoading ? (
                <div className="flex items-center justify-center min-h-[400px]">
                     <LoadingSpinner size={64} />
                   </div>

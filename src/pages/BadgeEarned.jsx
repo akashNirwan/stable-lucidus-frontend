@@ -8,11 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { saveSteps } from "../redux/actions/microexperience-action";
 
 const BadgeEarned = () => {
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
-  const { microexperience, loading, error, saveBadgeLoading } = useSelector(
+  const { microexperience, loading, error, saveBadgeLoading, saveStepsLoading } = useSelector(
     (state) => state.microexperience
   );
    const navigate = useNavigate()
@@ -32,19 +33,52 @@ const BadgeEarned = () => {
   // const careerLevelId = microexperience?.[0]?._id;
   // console.log(careerLevelId, "careerLevelId");
 
-  const handleNext = () => {
-    const payload = {
-      careerLevelId: careerLevelId,
-      badge: microexperience?.[0]?.questionbadges?.[0]?.badges?.[0]?.image,
-    };
+  // const handleNext = () => {
+  //   const payload = {
+  //     careerLevelId: careerLevelId,
+  //     badge: microexperience?.[0]?.questionbadges?.[0]?.badges?.[0]?.image,
+  //   };
 
-    dispatch(saveBadge(payload)).then((res) => {
+  //   const saveStepPayload = {
+  //     careerLevelId : careerLevelId,
+  //     route : "badge-earned",
+  //     levelPercent : "33"
+  //   }
+  //        dispatch(saveSteps(saveStepPayload))
+  //   dispatch(saveBadge(payload)).then((res) => {
      
-      if (res.payload && res.payload.code === 201 || res.payload.statusCode === 200) {
-             navigate(`/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}`)
-      }
-    });
+  //     if (res.payload && res.payload.code === 201 || res.payload.statusCode === 200) {
+  //            navigate(`/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}`)
+  //     }
+  //   });
+  // };
+
+  const handleNext = async () => {
+  const payload = {
+    careerLevelId: careerLevelId,
+    badge: microexperience?.[0]?.questionbadges?.[0]?.badges?.[0]?.image,
   };
+
+  const saveStepPayload = {
+    careerLevelId: careerLevelId,
+    route: `/badge-earned?questionId=${questionId}&careerLevelId=${careerLevelId}`,
+    levelPercent: "33",
+  };
+
+  const saveStepsRes = await dispatch(saveSteps(saveStepPayload));
+  const saveBadgeRes = await dispatch(saveBadge(payload));
+
+  const isSaveStepsSuccess =
+    saveStepsRes.payload?.code === 200 || saveStepsRes.payload?.code === 201;
+  const isSaveBadgeSuccess =
+    saveBadgeRes.payload?.code === 200 || saveBadgeRes.payload?.code === 201;
+
+  if (isSaveStepsSuccess && isSaveBadgeSuccess) {
+    navigate(
+      `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}`
+    );
+  }
+};
 
   return loading ? (
     <div className="flex items-center justify-center min-h-[400px]">
@@ -68,7 +102,7 @@ const BadgeEarned = () => {
             Keep exploring to unlock more achievements!
           </p>
           <Button onClick={handleNext}>
-            {saveBadgeLoading ? <LoadingSpinner size={20}></LoadingSpinner> : "Continue"}
+            {saveBadgeLoading || saveStepsLoading ? <LoadingSpinner size={20}></LoadingSpinner> : "Continue"}
             </Button>
         </div>
       </div>
