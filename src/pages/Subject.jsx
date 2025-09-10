@@ -93,18 +93,15 @@ const Subject = ({ setStep, stepsData }) => {
     </div>
   ) : (
     <div className="text-center flex flex-col gap-3">
-      {/* Back Button */}
-      <div className="flex items-center justify-start ">
-        <h2 className="font-bold text-[20px]">
-          Pick the <span className="text-[#5f35f1]">subjects</span> that excite
-          you{" "}
-        </h2>
-      </div>
+      <h2 className="font-bold text-[20px]">
+        Pick the <span className="text-[#5f35f1]">subjects</span> that excite
+        you{" "}
+      </h2>
 
       <h3 className="text-[#066146]  line-clamp-2">{stepsData.subtitle}</h3>
       <h4 className="text-[#24A57F] font-bold mb-1 text-[14px]">I want to:</h4>
 
-      <div className="max-h-[350px] overflow-y-auto grid gap-3">
+      <div className="max-h-[275px] overflow-y-auto grid gap-3">
         {Array.isArray(subjects) &&
           subjects.map((subject) => (
             <TwoLineOption

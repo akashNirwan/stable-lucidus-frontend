@@ -74,21 +74,14 @@ const SkillsCare = ({ setStep, stepsData }) => {
     </div>
   ) : (
     <div className="text-center flex flex-col gap-3">
-      {/* Back Button */}
-      <div className="flex items-center justify-start mb-2">
+      <div className=" justify-start mb-2">
         <h2 className="font-bold text-[20px]">{stepsData.title}</h2>
       </div>
 
       <h3 className="text-[#066146]">{stepsData.subtitle}</h3>
       <h4 className="text-[#24A57F] font-medium">I care about:</h4>
 
-      {/* Selection Counter */}
-      {/* <p className="text-sm text-gray-500">
-        Selected: {selected.length}/3{" "}
-        {selected.length === 3 && "(Maximum reached)"}
-      </p> */}
-
-      <div className="h-[370px] overflow-y-auto grid grid-cols-3 gap-2">
+      <div className="h-[290px] overflow-y-auto grid grid-cols-3 gap-2">
         {Array.isArray(sdgs) &&
           sdgs.map((sdg, i) => {
             const isSelected = selected.some((s) => s._id === sdg._id);
