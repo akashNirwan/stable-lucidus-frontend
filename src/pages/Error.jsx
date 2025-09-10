@@ -52,7 +52,6 @@ export default function Error() {
         ))}
       </div>
 
-      {/* Planets */}
       <div className="relative z-10 flex flex-col items-center justify-start h-screen px-4 pt-12">
         <div className="absolute top-30 left-4">
           <img src="/assets/blue-planet.svg" alt="road-map" />
@@ -95,7 +94,7 @@ export default function Error() {
       {/* 404 Message - Centered */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
         <p className="text-[90px] font-bold text-[#FF9A64]">404</p>
-        <p className="text-white text-[24px] font-bold">
+        <p className="text-white text-[24px] font-bold]">
           Oops!
           <br />
           You seem to be lost...
