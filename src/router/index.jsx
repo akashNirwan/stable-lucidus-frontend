@@ -29,7 +29,7 @@ import Process from "../pages/Process";
 import Prediction from "../pages/Prediction";
 import Path from "../pages/Path";
 import Profile from "../pages/Profile";
-
+import Error from "../pages/Error";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -102,6 +102,7 @@ const router = createBrowserRouter([
     path: "/profile",
     element: <Profile />,
   },
+
   {
     path: "/student-choice",
     element: <OnChoiceFeedBack />,
@@ -146,6 +147,10 @@ const router = createBrowserRouter([
     path: "/roadmap",
     element: <RoadMapWrapper />,
     children: [{ index: true, element: <RoadMap /> }],
+  },
+  {
+    path: "*",
+    element: <Error />,
   },
 ]);
 
