@@ -1,39 +1,39 @@
-import React, { useState , useEffect} from "react";
-import { Outlet,  useNavigate, useLocation, useSearchParams  } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import {
+  Outlet,
+  useNavigate,
+  useLocation,
+  useSearchParams,
+} from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const EncycloPediaWrapper = () => {
+  const { predictionandPurpose, loading } = useSelector(
+    (state) => state.encyclopedia
+  );
 
+  const careername = predictionandPurpose?.[0]?.career?.[0]?.career;
+  console.log(careername, "career name ");
 
-    const { predictionandPurpose, loading } = useSelector(
-      (state) => state.encyclopedia
-    );
-
-
-   const careername = predictionandPurpose?.[0]?.career?.[0]?.career
-   console.log(careername, "career name ");
-   
   const navigate = useNavigate();
   const location = useLocation();
-  const [searchParams] = useSearchParams(); 
-  const careerId = searchParams.get("careerId"); 
-  
+  const [searchParams] = useSearchParams();
+  const careerId = searchParams.get("careerId");
+
   console.log(careerId, "careerId in wrapper");
 
-   const getActiveTabFromRoute = () => {
+  const getActiveTabFromRoute = () => {
     const path = location.pathname;
-    if (path.includes('/purpose')) return 'Purpose';
-    if (path.includes('/process')) return 'Process'; 
-    if (path.includes('/path')) return 'Path';
-    if (path.includes('/prediction')) return 'Prediction';
-    return 'Purpose';
+    if (path.includes("/purpose")) return "Purpose";
+    if (path.includes("/process")) return "Process";
+    if (path.includes("/path")) return "Path";
+    if (path.includes("/prediction")) return "Prediction";
+    return "Purpose";
   };
-const [activeTab, setActiveTab] = useState(getActiveTabFromRoute());
-
-
+  const [activeTab, setActiveTab] = useState(getActiveTabFromRoute());
 
   // const [activeTab, setActiveTab] = useState("Purpose");
- useEffect(() => {
+  useEffect(() => {
     setActiveTab(getActiveTabFromRoute());
   }, [location.pathname]);
 
@@ -44,16 +44,15 @@ const [activeTab, setActiveTab] = useState(getActiveTabFromRoute());
     navigate(route);
   };
 
-   const handleRoadmap = () => {
-    navigate(`/roadmap?careerId=${careerId}`)
+  const handleRoadmap = () => {
+    navigate(`/roadmap?careerId=${careerId}`);
   };
   const handleExperience = () => {
-    navigate(`/micro-intro?careerId=${careerId}`)
+    navigate(`/micro-intro?careerId=${careerId}`);
   };
   const handleNaviagte = () => {
-    navigate(`/dashboard`)
+    navigate(`/dashboard`);
   };
-
 
   return (
     <div className="bg-[#130934] w-full min-h-screen flex flex-col relative">
@@ -64,31 +63,27 @@ const [activeTab, setActiveTab] = useState(getActiveTabFromRoute());
         </div>
       </div>
 
-      <div className="flex gap-2 items-center justify-start p-4 max-w-[600px] mx-auto ">
+      <div className="flex gap-2 items-center justify-start p-4 max-w-[600px] ">
         <div className="text-white">
           <button onClick={handleNaviagte}>
             <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-arrow-left"
-          >
-            <path d="m12 19-7-7 7-7" />
-            <path d="M19 12H5" />
-          </svg>
-
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-arrow-left"
+            >
+              <path d="m12 19-7-7 7-7" />
+              <path d="M19 12H5" />
+            </svg>
           </button>
-          
         </div>
-        <div className="text-white font-semibold text-xl">
-          {careername}
-        </div>
+        <div className="text-white font-semibold text-xl">{careername}</div>
       </div>
 
       <div className="flex gap-6 text-white w-full overflow-x-auto p-4 max-w-[600px] mx-auto md:justify-center">
@@ -112,11 +107,17 @@ const [activeTab, setActiveTab] = useState(getActiveTabFromRoute());
       </div>
 
       <div className="flex justify-center gap-4 bg-white p-6 rounded-t-2xl shadow-md w-full max-w-[600px] mx-auto">
-        <button onClick={handleRoadmap} className="px-6 py-3 border border-green-600 text-green-600 font-semibold rounded-xl shadow-sm hover:bg-green-50 transition">
+        <button
+          onClick={handleRoadmap}
+          className="px-6 py-3 border border-green-600 text-green-600 font-semibold rounded-xl shadow-sm hover:bg-green-50 transition"
+        >
           Roadmap
         </button>
 
-        <button onClick={handleExperience} className="px-6 py-3 bg-green-600 text-white font-semibold rounded-xl shadow-md hover:bg-green-700 transition">
+        <button
+          onClick={handleExperience}
+          className="px-6 py-3 bg-green-600 text-white font-semibold rounded-xl shadow-md hover:bg-green-700 transition"
+        >
           Experience It
         </button>
       </div>
