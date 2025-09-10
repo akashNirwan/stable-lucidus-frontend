@@ -29,7 +29,7 @@ import Process from "../pages/Process";
 import Prediction from "../pages/Prediction";
 import Path from "../pages/Path";
 import Profile from "../pages/Profile";
-import { PublicRoute, ProtectedRoute } from "../utils/protectRoutes";
+import Error from "../pages/Error";import { PublicRoute, ProtectedRoute } from "../utils/protectRoutes";
 
 const router = createBrowserRouter([
   {
@@ -153,6 +153,7 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
+
   {
     path: "/student-choice",
     element:(
@@ -225,6 +226,10 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: [{ index: true, element: <RoadMap /> }],
+  },
+  {
+    path: "*",
+    element: <Error />,
   },
 ]);
 

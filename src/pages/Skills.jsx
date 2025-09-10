@@ -87,17 +87,16 @@ const Skills = ({ setStep, stepsData }) => {
     </div>
   ) : (
     <div className="text-center flex flex-col gap-2">
-      {/* Back Button */}
       <div className="flex items-center justify-between  ">
         <div>
           <h2 className="font-bold text-[20px]">{stepsData.title}</h2>
         </div>
       </div>
 
-      <h3 className="text-gray-600 h-12 line-clamp-2">{stepsData.subtitle}</h3>
+      <h3 className="text-[#066146]  line-clamp-2">{stepsData.subtitle}</h3>
       <h4 className="text-[#24A57F] font-medium">I am good at:</h4>
 
-      <div className="h-[288px] overflow-y-auto grid gap-2">
+      <div className="h-[390px] overflow-y-auto grid gap-3">
         {Array.isArray(skills) &&
           skills.map((skill) => (
             <TwoLineOption
@@ -114,7 +113,7 @@ const Skills = ({ setStep, stepsData }) => {
         <Button
           type="button"
           onClick={handleBack}
-          className="bg-white !text-[#0F8864] border !border-[#0F8864]"
+          className="bg-white !text-[#0F8864] border !border-[#0F8864] !w-[60%]"
         >
           {"Previous"}
         </Button>
