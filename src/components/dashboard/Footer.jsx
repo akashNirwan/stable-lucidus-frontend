@@ -1,11 +1,34 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; 
+
 
 const Footer = ({ setMenu, menu }) => {
+  const navigate = useNavigate();
+const handleMenuClick = (menuNumber) => {
+    setMenu(menuNumber);
+
+
+    switch (menuNumber) {
+      case 1:
+        navigate("/dashboard"); 
+        break;
+      case 2:
+        navigate("/dashboard/explorecareers"); 
+        break;
+      case 3:
+        navigate("/dashboard/badges"); 
+        break;
+      default:
+        navigate("/dashboard");
+    }
+  };
+
   return (
     <div className="py-4 rounded-t-3xl bg-white border border-b-0 flex justify-between items-center w-full max-w-[375px] mx-auto">
       <div
         className="flex flex-1 flex-col items-center cursor-pointer"
-        onClick={() => setMenu(1)}
+        // onClick={() => setMenu(1)}
+        onClick={() => handleMenuClick(1)}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -23,7 +46,8 @@ const Footer = ({ setMenu, menu }) => {
       </div>
       <div
         className="flex flex-1 flex-col items-center cursor-pointer"
-        onClick={() => setMenu(2)}
+        // onClick={() => setMenu(2)}
+        onClick={() => handleMenuClick(2)}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +72,8 @@ const Footer = ({ setMenu, menu }) => {
       </div>
       <div
         className="flex flex-1 flex-col items-center cursor-pointer"
-        onClick={() => setMenu(3)}
+        // onClick={() => setMenu(3)}
+         onClick={() => handleMenuClick(3)}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

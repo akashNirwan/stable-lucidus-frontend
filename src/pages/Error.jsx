@@ -1,8 +1,12 @@
 import Button from "../components/common/Button";
-
+import { useNavigate } from "react-router-dom";
 export default function Error() {
+  const navigate = useNavigate()
+  const handleDashboard = () =>{
+    navigate(`/dashboard`)
+  }
   return (
-    <div className="h-screen relative overflow-hidden">
+    <div className="h-screen relative overflow-hidden z-10">
       {/* Background */}
       <div
         className="fixed inset-0"
@@ -102,8 +106,8 @@ export default function Error() {
       </div>
 
       {/* Button - Centered at Bottom */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
-        <Button className="px-4">Go to Dashboard</Button>
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20">
+        <Button onClick={handleDashboard} className="px-4">Go to Dashboard</Button>
       </div>
     </div>
   );

@@ -29,8 +29,14 @@ import Process from "../pages/Process";
 import Prediction from "../pages/Prediction";
 import Path from "../pages/Path";
 import Profile from "../pages/Profile";
-import Error from "../pages/Error";import { PublicRoute, ProtectedRoute } from "../utils/protectRoutes";
-
+import Error from "../pages/Error";
+import { PublicRoute, ProtectedRoute } from "../utils/protectRoutes";
+import DashBoardMenuOne from "../pages/Dashboard-MenuOne";
+import DashBoardMenuTwo from "../pages/Dashboard-MenuTwo";
+import DashBoardMenuThree from "../pages/Dashboard-MenuThree";
+import SavedCareer from "../pages/SavedCareer";
+import DashBoardMicro from "../pages/DashBoardMicro";
+import { Navigate } from "react-router-dom";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -93,15 +99,32 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
-  {
-    path: "/dashboard",
-    element:(
-      <ProtectedRoute>
-        <DashBoardLayout />
-      </ProtectedRoute>
-    ),
-    children: [{ index: true, element: <DashBoard /> }],
-  },
+  // {
+  //   path: "/dashboard",
+  //   element:(
+  //     <ProtectedRoute>
+  //       <DashBoardLayout />
+  //     </ProtectedRoute>
+  //   ),
+  //   children: [{ index: true, element: <DashBoard /> }],
+  // },
+//  
+
+{
+  path: "/dashboard",
+  element: (
+    <ProtectedRoute>
+      <DashBoardLayout />
+    </ProtectedRoute>
+  ),
+  children: [
+    { index: true, element: <Navigate to="/dashboard/microexperience" /> }, 
+    { path: "microexperience", element: <DashBoardMenuOne /> },  
+    { path: "savedcareers", element: <DashBoardMenuOne /> },    
+    { path: "explorecareers", element: <DashBoardMenuTwo /> },
+    { path: "badges", element: <DashBoardMenuThree /> },
+  ],
+},
   {
     path: "/level",
     element:  (
@@ -229,7 +252,7 @@ const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: <Error />,
+    element: ( <ProtectedRoute><Error /></ProtectedRoute>),
   },
 ]);
 
