@@ -141,3 +141,55 @@ export const fetchDashboardMicroexperience = createAsyncThunk(
 );
 
 
+
+export const fetchProfile = createAsyncThunk(
+  "dashboard/fetchProfile",
+  async (_, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage()
+
+    try {
+      const response = await client.get(
+        `user/user-details`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      
+
+      return response.data;
+    } catch (error) {
+      
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);
+
+
+export const updateName = createAsyncThunk(
+  "dashboard/updateName",
+  async (payload, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage();
+
+    try {
+      const response = await client.put(
+        `/user/user-details`,   
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      toast.success(response.data.message || "Username Updated");
+      return response.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Failed to Update username");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);
+
+

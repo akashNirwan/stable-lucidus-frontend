@@ -56,7 +56,7 @@ const navigate = useNavigate()
           </div>
 
           <p className="text-base font-medium max-w-xs">
-            Kickstart your career exploration in Grade 9!
+            Kickstart your career exploration in Grade {roadmap?.[0]?.career?.[0]?.grades?.[0]?.grade} !
           </p>
         </div>
          <RoadmapData roadmapData={roadmap} />

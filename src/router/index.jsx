@@ -29,19 +29,30 @@ import Process from "../pages/Process";
 import Prediction from "../pages/Prediction";
 import Path from "../pages/Path";
 import Profile from "../pages/Profile";
+import { PublicRoute, ProtectedRoute } from "../utils/protectRoutes";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <PublicRoute>
+        <App />
+      </PublicRoute>
+    ),
   },
   {
     path: "/about",
-    element: <div>About </div>,
+    element: <PublicRoute>
+        <div>About</div>
+      </PublicRoute>,
   },
   {
     path: "/auth",
-    element: <AuthLayout />,
+    element: (
+      <PublicRoute>
+        <AuthLayout />
+      </PublicRoute>
+    ),
     children: [
       { path: "login", element: <Login /> },
       { path: "otp", element: <Otp /> },
@@ -49,11 +60,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/welcome",
-    element: <Welcome />,
+    element: (
+      <ProtectedRoute>
+        <Welcome />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/questions",
-    element: <OnBoardWrapper />,
+    element: (
+      <ProtectedRoute>
+        <OnBoardWrapper />
+      </ProtectedRoute>
+    ),
     // children: [{ index: true, element: <Question /> }],
 
     children: [
@@ -68,43 +87,79 @@ const router = createBrowserRouter([
   },
   {
     path: "/question-load",
-    element: <QuestionFinalLoad />,
+    element: (
+      <ProtectedRoute>
+        <QuestionFinalLoad />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/dashboard",
-    element: <DashBoardLayout />,
+    element:(
+      <ProtectedRoute>
+        <DashBoardLayout />
+      </ProtectedRoute>
+    ),
     children: [{ index: true, element: <DashBoard /> }],
   },
   {
     path: "/level",
-    element: <Level />,
+    element:  (
+      <ProtectedRoute>
+        <Level />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/micro-intro",
-    element: <MicroExperienceLayout />,
+    element: (
+      <ProtectedRoute>
+        <MicroExperienceLayout />
+      </ProtectedRoute>
+    ),
     children: [{ index: true, element: <MicroIntoScreen /> }],
   },
   {
     path: "/feedbackform",
-    element: <FeedBackLayout />,
+    element: (
+      <ProtectedRoute>
+        <FeedBackLayout />
+      </ProtectedRoute>
+    ),
     children: [{ index: true, element: <FeedBackFormOne /> }],
   },
 
   {
     path: "/badge-earned",
-    element: <BadgeEarned />,
+    element: (
+      <ProtectedRoute>
+        <BadgeEarned />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/survey-page",
-    element: <ServeyPage />,
+    element: (
+      <ProtectedRoute>
+        <ServeyPage />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/profile",
-    element: <Profile />,
+    element:(
+      <ProtectedRoute>
+        <Profile />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/student-choice",
-    element: <OnChoiceFeedBack />,
+    element:(
+      <ProtectedRoute>
+        <OnChoiceFeedBack />
+      </ProtectedRoute>
+    ),
     children: [{ index: true, element: <FeedBackForm /> }],
   },
   // {
@@ -114,27 +169,47 @@ const router = createBrowserRouter([
   // },
   {
     path: "/encyclopedia/purpose",
-    element: <EncycloPediaWrapper />,
+    element: (
+      <ProtectedRoute>
+        <EncycloPediaWrapper />
+      </ProtectedRoute>
+    ),
     children: [{ index: true, element: <Purpose /> }],
   },
   {
     path: "/encyclopedia/process",
-    element: <EncycloPediaWrapper />,
+    element: (
+      <ProtectedRoute>
+        <EncycloPediaWrapper />
+      </ProtectedRoute>
+    ),
     children: [{ index: true, element: <Process /> }],
   },
   {
     path: "/encyclopedia/path",
-    element: <EncycloPediaWrapper />,
+    element: (
+      <ProtectedRoute>
+        <EncycloPediaWrapper />
+      </ProtectedRoute>
+    ),
     children: [{ index: true, element: <Path /> }],
   },
   {
     path: "/encyclopedia/prediction",
-    element: <EncycloPediaWrapper />,
+    element: (
+      <ProtectedRoute>
+        <EncycloPediaWrapper />
+      </ProtectedRoute>
+    ),
     children: [{ index: true, element: <Prediction /> }],
   },
   {
     path: "/encylopedia-todo",
-    element: <EncylopediaWrapperTodo />,
+    element: (
+      <ProtectedRoute>
+        <EncylopediaWrapperTodo />
+      </ProtectedRoute>
+    ),
     children: [
       {
         index: true,
@@ -144,7 +219,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/roadmap",
-    element: <RoadMapWrapper />,
+    element: (
+      <ProtectedRoute>
+        <RoadMapWrapper />
+      </ProtectedRoute>
+    ),
     children: [{ index: true, element: <RoadMap /> }],
   },
 ]);

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchCareers, saveCareer, fetchBadges, fetchSavedCareers, fetchDashboardMicroexperience } from "../actions/dashboard-action";
+import { fetchCareers, saveCareer, fetchBadges, fetchSavedCareers, fetchDashboardMicroexperience, fetchProfile, updateName} from "../actions/dashboard-action";
 
 
 const initialState = {
@@ -15,7 +15,10 @@ const initialState = {
   savedCareerLoading : false,
   dashboardMicroexperience : null,
   dashboardMicroexperienceLoading: false,
-
+   profile : null, 
+   profileLoading: false,
+   username : null, 
+   userLoading : false,
 };
 
 
@@ -117,6 +120,43 @@ const dashboardSlice = createSlice({
       .addCase(fetchDashboardMicroexperience.rejected, (state, action) => {
         state.dashboardMicroexperienceLoading = false;
         state.error = action.payload?.message || "Failed to fetch Careers";
+      });
+
+
+      //fetchprofile
+       builder
+      .addCase(fetchProfile.pending, (state) => {
+        state.profileLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchProfile.fulfilled, (state, action) => {
+        state.profileLoading = false;
+        state.profile = action.payload.data;
+        console.log(action.payload.data, "profile data state");
+        
+        
+      })
+      .addCase(fetchProfile.rejected, (state, action) => {
+        state.profileLoading = false;
+        state.error = action.payload?.message || "Failed to fetch profile";
+      });
+
+      //update username
+       builder
+      .addCase(updateName.pending, (state) => {
+        state.userLoading = true;
+        state.error = null;
+      })
+      .addCase(updateName.fulfilled, (state, action) => {
+        state.userLoading = false;
+        state.username = action.payload.data;
+        console.log(action.payload.data, "username state");
+        
+        
+      })
+      .addCase(updateName.rejected, (state, action) => {
+        state.userLoading = false;
+        state.error = action.payload?.message || "Failed to update username";
       });
   },
 });

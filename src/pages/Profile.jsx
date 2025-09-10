@@ -1,23 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Pencil, ArrowLeft, LogOut, X } from "lucide-react";
-
+import { fetchProfile,updateName } from "../redux/actions/dashboard-action";
+import { useDispatch, useSelector } from "react-redux";
+import LoadingSpinner from "../components/common/LoadingSpinner";
+import { useNavigate } from "react-router-dom";
 const Profile = () => {
+  const navigate = useNavigate()
+   const dispatch = useDispatch();
+    const {profile ,  profileLoading, userLoading} = useSelector((state) => state.dashboard);
+    
+     const UserName = profile?.[0]?.name
+     const UserEmail = profile?.[0]?.email
+     console.log(UserEmail, UserName, "username profiles ");
+     
+
+     useEffect(() => {
+        dispatch(fetchProfile());
+      }, [dispatch]);
+    console.log(profile, "profile user ");
+      
   const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState("Jane Smith");
+  const [name, setName] = useState(UserName || "");
   const [tempName, setTempName] = useState(name);
 
-  const handleSave = () => {
+ const handleSave = async () => {
+  if (tempName.trim()) {
+    await dispatch(updateName({ name: tempName }));
+    await dispatch(fetchProfile())
     setName(tempName);
     setIsEditing(false);
-  };
+  }
+};
 
-  return (
-    <div className="bg-[#0B0132]">
+const handleBack = ()=>{
+   navigate(-1)
+}
+
+const handleLogout = () =>{
+  localStorage.removeItem('token');
+  navigate(`/auth/login`)
+}
+
+const handleRetake = () =>{
+
+  navigate('/dashboard')
+}
+
+const isValidName = () => {
+  const trimmedName = tempName.trim();
+  return trimmedName.length > 0 && trimmedName !== UserName?.trim();
+};
+
+  return profileLoading? (
+      <div className="flex items-center justify-center min-h-[400px]">
+            <LoadingSpinner size={64} />
+          </div>
+  ) : (
+
+     <div className="bg-[#0B0132]">
       <div className="min-h-screen  bg-[#0B0132] text-white flex flex-col relative max-w-[400px] mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-3">
           <div className="flex items-center gap-3">
-            <ArrowLeft className="w-6 h-6 cursor-pointer" />
+            <button onClick={handleBack}>  <ArrowLeft className="w-6 h-6 cursor-pointer" /></button>
+           
             <h1 className="text-lg font-semibold">Profile</h1>
           </div>
 
@@ -49,7 +95,7 @@ const Profile = () => {
           <div>
             <label className="block text-sm mb-1">Name</label>
             <div className="flex items-center bg-[#E8DFFB] rounded-lg px-4 py-3 text-black justify-between">
-              <span className="text-[#5C2DB3] font-medium">{name}</span>
+              <span className="text-[#5C2DB3] font-medium">{UserName}</span>
               <Pencil
                 className="w-4 h-4 text-[#5C2DB3] cursor-pointer"
                 onClick={() => {
@@ -64,17 +110,17 @@ const Profile = () => {
           <div>
             <label className="block text-sm mb-1">Email</label>
             <div className="bg-[#E8DFFB] rounded-lg px-4 py-3 text-[#5C2DB3]">
-              janesmith@example.com
+              {UserEmail}
             </div>
           </div>
         </div>
 
         {/* Buttons */}
         <div className="mt-auto flex flex-col gap-4 px-6 pb-8">
-          <button className="border border-[#0F8864] text-[#0F8864] py-3 rounded-lg font-medium">
+          <button onClick={handleRetake} className="border border-[#0F8864] text-[#0F8864] py-3 rounded-lg font-medium">
             Retake Quiz
           </button>
-          <button className="border border-[#0F8864] text-[#0F8864] py-3 rounded-lg font-medium flex items-center justify-center gap-2">
+          <button  onClick={handleLogout}  className="border border-[#0F8864] text-[#0F8864] py-3 rounded-lg font-medium flex items-center justify-center gap-2">
             <LogOut className="w-5 h-5" />
             Logout
           </button>
@@ -105,17 +151,18 @@ const Profile = () => {
 
               {/* Save Button */}
               <button
+              disabled={userLoading || !isValidName()}
                 onClick={handleSave}
                 className="w-full bg-[#0F8864] text-white py-3 rounded-lg font-medium"
               >
-                Save Name
+               {userLoading ? "Saving..." : "Save Name"}
               </button>
             </div>
           </div>
         )}
       </div>
     </div>
-  );
+  )
 };
 
 export default Profile;
