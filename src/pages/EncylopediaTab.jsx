@@ -1,61 +1,69 @@
-import React from "react";
+
+
+
+
+import React, { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
+import { fetchLesson } from "../redux/actions/encyclopedia-action";
+import { useSelector, useDispatch } from "react-redux";
+import LoadingSpinner from "../components/common/LoadingSpinner";
+import { useSearchParams } from "react-router-dom";
 
 const EncylopediaTab = () => {
+  const dispatch = useDispatch();
+  const [searchparams] = useSearchParams();
+  const { lessonLoading, lesson } = useSelector(
+    (state) => state.encyclopedia
+  );
+
   const { state, setState } = useOutletContext();
 
-  let content;
-  switch (state) {
-    case 0:
-      content = (
-        <div className="text-white font-semibold text-[32px] text-center">
-          Oversee financial planning, budgeting, & reporting
-        </div>
-      );
-      break;
-    case 1:
-      content = (
-        <div className="text-white font-semibold text-[32px] text-center">
-          Make strategic decisions about spending & investments
-        </div>
-      );
-      break;
-    case 2:
-      content = (
-        <div className="text-white font-semibold text-[32px] text-center">
-          Analyze data to identify trends, risks & opportunities
-        </div>
-      );
-      break;
-    case 3:
-      content = (
-        <div className="text-white font-semibold text-[32px] text-center">
-          Present financial strategies to CEOs, boards & investors
-        </div>
-      );
-      break;
-    case 4:
-      content = (
-        <div className="text-white font-semibold text-[32px] text-center">
-          Ensure legal compliance
-        </div>
-      );
-      break;
-    default:
-      content = (
-        <div className="text-white font-semibold text-[32px] text-center">
-          No data
-        </div>
-      );
-  }
+  useEffect(() => {
+    const LessonId = searchparams.get("LessonId");
+    if (LessonId) {
+      dispatch(fetchLesson(LessonId));
+    }
+  }, [dispatch, searchparams]);
+
+  
+  const getCurrentLessonDetail = () => {
+    if (lesson && lesson.length > 0) {
+     
+      const currentIndex = state % lesson.length;
+      return lesson[currentIndex];
+    }
+    return null;
+  };
+
+  const currentLesson = getCurrentLessonDetail();
+  
+  
+  const totalSteps = lesson ? lesson.length : 5;
 
   return (
-    <div
-      className="h-screen flex justify-center items-center cursor-pointer"
-      onClick={() => setState((prev) => (prev + 1) % 5)}
-    >
-      {content}
-    </div>
+    <>
+      {lessonLoading ? (
+        <div className="h-screen flex justify-center items-center">
+          <LoadingSpinner />
+        </div>
+      ) : !lesson || lesson.length === 0 ? (
+        <div className="h-screen flex justify-center items-center cursor-pointer"
+             onClick={() => setState((prev) => (prev + 1) % (stepsCount || 5))}>
+          <div className="text-white font-semibold text-[32px] text-center">
+            No lesson data available
+          </div>
+        </div>
+      ) : (
+        <div
+          className="h-screen flex justify-center items-center cursor-pointer"
+          onClick={() => setState((prev) => (prev + 1) % totalSteps)}
+        >
+          <div className="text-white font-semibold text-[32px] text-center px-4">
+            {currentLesson ? currentLesson.detail : "No data"}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
