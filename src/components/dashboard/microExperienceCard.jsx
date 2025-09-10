@@ -73,7 +73,7 @@ const CareerCard = ({ data }) => {
           <div className="mt-2 w-[180px]">
             <div className="h-2 bg-purple-200 rounded-full">
               <div
-                className="h-2 w-[30%] bg-green-500 rounded-full"
+                className="h-2 w-[30%] bg-[#24A57F] rounded-full"
                 style={{ width: `${levelPercent}%` }}
               ></div>
             </div>
@@ -88,7 +88,7 @@ const CareerCard = ({ data }) => {
 
       <button
         onClick={handleArrowClick}
-        className="h-8 w-8 flex items-center justify-center rounded-full bg-green-500 text-white shadow"
+        className="h-8 w-8 flex items-center justify-center rounded-full bg-[#24A57F] text-white shadow"
       >
         <ArrowRight size={16} />
       </button>
