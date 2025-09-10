@@ -78,10 +78,10 @@ const FigureOut = ({ setStep, stepsData }) => {
         </h2>
       </div>
 
-      <h3 className="text-gray-600">{stepsData.subtitle}</h3>
-      <h4 className="text-[#24A57F] font-medium">I want to:</h4>
+      <h3 className="text-[#066146]">{stepsData.subtitle}</h3>
+      <h4 className="text-[#24A57F] font-bold mb-1 text-[14px]">I want to:</h4>
 
-      <div className="h-[300px] overflow-y-auto flex flex-col gap-2">
+      <div className="h-[370px] overflow-y-auto flex flex-col gap-3">
         {stepsData.options.map((option, ind) => (
           <OptionButton
             key={ind}
@@ -91,12 +91,12 @@ const FigureOut = ({ setStep, stepsData }) => {
           />
         ))}
       </div>
-      <div className="flex gap-3 ">
+      <div className="flex gap-4 ">
         <Button
           type="button"
           isActive={!!selected}
           onClick={handleBack}
-          className="bg-white !text-[#0F8864] border !border-[#0F8864]"
+          className="bg-white !text-[#0F8864] border !border-[#0F8864] !w-[60%]"
         >
           {"Previous"}
         </Button>

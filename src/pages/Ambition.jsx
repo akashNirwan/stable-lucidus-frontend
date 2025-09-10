@@ -65,18 +65,18 @@ const Ambition = ({ stepsData }) => {
     <div className="text-center flex flex-col gap-3">
       {/* Back Button */}
       <div className="flex items-center justify-start ">
-        <div className="flex-row">
+        <div className="flex-row space-y-4">
           <h2 className="font-bold text-[20px]">{stepsData.title}</h2>
-          <h3 className="text-green-600 text-[14px] leading-[120%]">
+          <h3 className="text-green-600 text-[14px] leading-[120%] mb-4">
             {stepsData.subtitle}
           </h3>
         </div>
       </div>
 
-      <div className="h-[320px] overflow-y-auto flex flex-col gap-2">
+      <div className="h-[380px] overflow-y-auto flex flex-col gap-2">
         <textarea
           placeholder={stepsData.highlight}
-          className="placeholder:text-center w-full h-full border border-[#7B56FF] placeholder:text-[#7B56FF] text-[#7B56FF] rounded-md p-4 resize-none"
+          className="placeholder:text-center w-full h-full border bg-[#EFEAFF] border-[#7B56FF] placeholder:text-[#7B56FF] text-[#7B56FF] rounded-md p-4 resize-none"
           value={text}
           onChange={handleChange}
         />
@@ -90,7 +90,7 @@ const Ambition = ({ stepsData }) => {
         <Button
           type="button"
           onClick={handleBack}
-          className="bg-white !text-[#0F8864] border !border-[#0F8864]"
+          className="bg-white !text-[#0F8864] border !border-[#0F8864] !w-[60%]"
         >
           {"Previous"}
         </Button>

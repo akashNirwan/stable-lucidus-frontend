@@ -245,7 +245,7 @@ export default function Otp() {
 
       <p
         onClick={handleResend}
-        className={`text-center cursor-pointer hover:underline ${
+        className={`text-center cursor-pointer hover:underline text-sm ${
           canResend && !resendOtpLoading
             ? "text-[#24A57F]"
             : "text-gray-400 cursor-not-allowed"
