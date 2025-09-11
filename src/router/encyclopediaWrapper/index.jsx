@@ -25,7 +25,7 @@ const EncycloPediaWrapper = () => {
   const getActiveTabFromRoute = () => {
     const path = location.pathname;
     if (path.includes("/purpose")) return "Purpose";
-    if (path.includes("/process")) return "Process";
+    if (path.includes("/prowess")) return "Prowess";
     if (path.includes("/path")) return "Path";
     if (path.includes("/prediction")) return "Prediction";
     return "Purpose";
@@ -37,7 +37,7 @@ const EncycloPediaWrapper = () => {
     setActiveTab(getActiveTabFromRoute());
   }, [location.pathname]);
 
-  const tabs = ["Purpose", "Process", "Path", "Prediction"];
+  const tabs = ["Purpose", "Prowess", "Path", "Prediction"];
   const handleTabClick = (tab) => {
     setActiveTab(tab);
     const route = `/encyclopedia/${tab.toLowerCase()}${location.search}`; // preserve query params
@@ -87,36 +87,39 @@ const EncycloPediaWrapper = () => {
       </div>
 
       <div className="flex gap-6 text-white w-full overflow-x-auto p-4 max-w-[600px] mx-auto md:justify-center">
-        {tabs.map((tab) => (
-          <button
-            key={tab}
-            onClick={() => handleTabClick(tab)}
-            className={`px-4 py-2 rounded-lg transition ${
-              activeTab === tab
-                ? "bg-[#24A57F] text-white font-semibold"
-                : "bg-transparent text-gray-300 hover:text-white"
-            }`}
-          >
-            {tab}
-          </button>
-        ))}
+        {tabs.map((tab) => {
+          console.log(tab, activeTab, "tabs");
+          return (
+            <button
+              key={tab}
+              onClick={() => handleTabClick(tab)}
+              className={`px-4 py-2 rounded-lg transition ${
+                activeTab === tab
+                  ? "bg-[#24A57F] text-white font-semibold"
+                  : "bg-transparent text-gray-300 hover:text-white"
+              }`}
+            >
+              {tab}
+            </button>
+          );
+        })}
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 max-w-[600px] mx-auto w-full flex justify-center ">
         <Outlet context={{ activeTab, setActiveTab }} />
       </div>
 
-      <div className="flex justify-center gap-4 bg-white p-6 rounded-t-2xl shadow-md w-full max-w-[600px] mx-auto">
+      <div className="flex justify-center gap-4 bg-white p-4 rounded-t-2xl shadow-md w-full max-w-[600px] mx-auto">
         <button
           onClick={handleRoadmap}
-          className="px-6 py-3 border border-green-600 text-green-600 font-semibold rounded-xl shadow-sm hover:bg-green-50 transition"
+          className="px-8 py-3 border border-green-600 text-green-600 font-semibold rounded-xl shadow-sm hover:bg-green-50 transition"
         >
           Roadmap
         </button>
 
         <button
           onClick={handleExperience}
-          className="px-6 py-3 bg-green-600 text-white font-semibold rounded-xl shadow-md hover:bg-green-700 transition"
+          className="px-8 py-3 bg-green-600 text-white font-semibold rounded-xl shadow-md hover:bg-green-700 transition"
         >
           Experience It
         </button>
