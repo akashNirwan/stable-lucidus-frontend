@@ -70,18 +70,14 @@ const FigureOut = ({ setStep, stepsData }) => {
     </div>
   ) : (
     <div className="text-center flex flex-col gap-3">
-      {/* Back Button */}
-      <div className="flex items-center justify-start ">
-        <h2 className="font-bold text-[20px]">
-          What are you here to <span className="text-[#5f35f1]">figure</span>{" "}
-          out?{" "}
-        </h2>
-      </div>
+      <h2 className="font-bold text-[20px]">
+        What are you here to <span className="text-[#5f35f1]">figure</span> out?{" "}
+      </h2>
 
       <h3 className="text-[#066146]">{stepsData.subtitle}</h3>
       <h4 className="text-[#24A57F] font-bold mb-1 text-[14px]">I want to:</h4>
 
-      <div className="h-[370px] overflow-y-auto flex flex-col gap-3">
+      <div className="h-[300px] overflow-y-auto flex flex-col gap-3">
         {stepsData.options.map((option, ind) => (
           <OptionButton
             key={ind}

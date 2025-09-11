@@ -98,7 +98,7 @@ export default function Login() {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.4 }}
-      className="fixed bottom-0 left-0 right-0 mx-auto w-full max-w-[360px] flex flex-col items-center gap-5 p-6"
+      className="fixed bottom-0 left-0 right-0 mx-auto w-full max-w-[400px] flex flex-col items-center gap-5 p-6"
       style={{
         borderRadius: "24px 24px 0 0",
         background:
@@ -143,7 +143,7 @@ export default function Login() {
                   }}
                   minLength={2}
                   maxLength={50}
-                   disabled={loginLoading}
+                  disabled={loginLoading}
                   error={errors.username}
                 />
               )}
@@ -165,7 +165,7 @@ export default function Login() {
                   minLength={2}
                   maxLength={100}
                   placeholder="Enter Your School Email"
-                   disabled={loginLoading}
+                  disabled={loginLoading}
                   error={errors.email}
                 />
               )}
@@ -185,7 +185,7 @@ export default function Login() {
                   );
                 }}
                 minLength={2}
-                  maxLength={100}
+                maxLength={100}
                 type="email"
                 placeholder="Enter Your School Email"
                 disabled={loginLoading}
@@ -198,9 +198,15 @@ export default function Login() {
 
       {/* Submit Button */}
 
-      <Button type="submit" disabled={loginLoading || !isValid} >
+      <Button type="submit" disabled={loginLoading || !isValid}>
         {/* {isLogin ? "Send OTP" : "Create Account"} */}
-        {loginLoading ? <LoadingSpinner size={20}></LoadingSpinner>: (isLogin ? "Send OTP" : "Create Account")}
+        {loginLoading ? (
+          <LoadingSpinner size={20}></LoadingSpinner>
+        ) : isLogin ? (
+          "Send OTP"
+        ) : (
+          "Create Account"
+        )}
       </Button>
     </motion.form>
   );

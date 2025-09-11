@@ -68,13 +68,15 @@ const Grade = ({ setStep, stepsData }) => {
     </div>
   ) : (
     <div className="text-center flex flex-col gap-3">
+      {/* Title & Subtitle */}
       <h2 className="font-bold text-[20px]">
         What <span className="text-[#5f35f1]">grade</span> are you in?
       </h2>
-      <h3 className=" text-[#066146]">{stepsData.subtitle}</h3>
-      <h4 className="text-[#24A57F] font-bold mb-1 text-[14px]">I am in:</h4>
+      <h3 className="text-gray-600">{stepsData.subtitle}</h3>
+      <h4 className="text-[#24A57F] font-medium">I am in:</h4>
 
-      <div className="h-[370px] overflow-y-auto flex flex-col gap-3">
+      {/* Options */}
+      <div className="h-[300px] overflow-y-auto flex flex-col gap-2">
         {Array.isArray(grades) &&
           grades.map((grade) => (
             <OptionButton
@@ -86,6 +88,7 @@ const Grade = ({ setStep, stepsData }) => {
           ))}
       </div>
 
+      {/* Next Button */}
       <Button
         type="button"
         isActive={!!selectedGrade}

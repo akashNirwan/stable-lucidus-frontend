@@ -17,10 +17,9 @@ export default function ProcessCarousel() {
 
   useEffect(() => {
     const careerId = searchparams.get("careerId");
-    dispatch(fetchProcess( careerId ));
+    dispatch(fetchProcess(careerId));
   }, [dispatch, searchparams]);
 
- 
   const slides = useMemo(() => {
     if (!process || !Array.isArray(process)) {
       return [];
@@ -32,21 +31,34 @@ export default function ProcessCarousel() {
         id: item._id,
       };
 
-     
-      if (item.title === "Essential Skills" && item.skills && item.skills.length > 0) {
-        slide.skills = item.skills.map(skill => `${skill.icon} ${skill.skill}`);
+      if (
+        item.title === "Essential Skills" &&
+        item.skills &&
+        item.skills.length > 0
+      ) {
+        slide.skills = item.skills.map(
+          (skill) => `${skill.icon} ${skill.skill}`
+        );
       }
 
-     
-      if (item.title === "What To Study" && item.subjects && item.subjects.length > 0) {
-        slide.subjects = item.subjects.map(subject => `${subject.icon} ${subject.subject}`);
+      if (
+        item.title === "What To Study" &&
+        item.subjects &&
+        item.subjects.length > 0
+      ) {
+        slide.subjects = item.subjects.map(
+          (subject) => `${subject.icon} ${subject.subject}`
+        );
       }
 
-     
-      if (item.title === "Salary Snapshot" && item.salaryData && item.salaryData.length > 0) {
-        slide.salaries = item.salaryData.map(salary => ({
+      if (
+        item.title === "Salary Snapshot" &&
+        item.salaryData &&
+        item.salaryData.length > 0
+      ) {
+        slide.salaries = item.salaryData.map((salary) => ({
           level: salary.level,
-          salary: `$${salary.min}k to $${salary.max}k`
+          salary: `$${salary.min}k to $${salary.max}k`,
         }));
       }
 
@@ -79,8 +91,8 @@ export default function ProcessCarousel() {
       <LoadingSpinner size={64} />
     </div>
   ) : (
-    <div className="flex flex-col bg-[#130934] overflow-hidden items-center justify-center">
-      <div className="relative w-full max-w-md">
+    <div className="flex flex-col bg-[#130934] overflow-hidden items-center justify-center overflow-x-hidden">
+      <div className="relative w-full max-w-md min-w-[350px]">
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
@@ -145,14 +157,19 @@ export default function ProcessCarousel() {
                     </div>
                   ))}
                 </div>
-                <p className="mt-4 text-sm text-gray-300">Note: Salary varies by country</p>
+                <p className="mt-4 text-sm text-gray-300">
+                  Note: Salary varies by country
+                </p>
               </div>
             )}
 
-            
-            {!slides[current]?.skills && !slides[current]?.subjects && !slides[current]?.salaries && (
-              <p className="text-gray-400 text-center py-8">No data available for this section</p>
-            )}
+            {!slides[current]?.skills &&
+              !slides[current]?.subjects &&
+              !slides[current]?.salaries && (
+                <p className="text-gray-400 text-center py-8">
+                  No data available for this section
+                </p>
+              )}
           </motion.div>
         </AnimatePresence>
       </div>

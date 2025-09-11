@@ -31,7 +31,7 @@ const handleTabClick = (tab) => {
 
   return (
     <div>
-      <div className="flex justify-between bg-[#120C2A] p-4 max-w-[385px] mx-auto">
+      <div className="flex justify-between bg-[#120C2A] p-4 w-[375px] mx-auto">
         <button
           // onClick={() => setActiveTab("micro")}
            onClick={() => handleTabClick("micro")}

@@ -40,13 +40,13 @@ const RoadmapData = ({ roadmapData }) => {
           items = section.subjects.map((subject) => ({
             label: subject.subject,
             description: subject.description,
-            icon: subject.icon,
+            // icon: subject.icon,
           }));
         } else if (section.skills?.length > 0) {
           items = section.skills.map((skill) => ({
             label: skill.skill,
             description: skill.description,
-            icon: skill.icon,
+            // icon: skill.icon,
           }));
         } else if (section.pathways?.length > 0) {
           items = section.pathways.map((pathway) => ({
@@ -104,7 +104,7 @@ const RoadmapData = ({ roadmapData }) => {
                 </div>
                 <button
                   onClick={() => toggle(index)}
-                  className={`w-10 h-10 flex items-center cursor-pointer justify-center rounded-full shadow-md ${
+                  className={`w-10 h-10 flex items-center cursor-pointer shrink-0 justify-center rounded-full shadow-md ${
                     openIndex === index ? "bg-[#24A57F]" : "bg-[#5E35F1]"
                   }`}
                 >
@@ -129,9 +129,9 @@ const RoadmapData = ({ roadmapData }) => {
                           )}`}
                           title={item.description || item.category || ""}
                         >
-                          {item.icon && (
+                          {/* {item.icon && (
                             <span className="mr-1">{item.icon}</span>
-                          )}
+                          )} */}
                           <span>{item.label}</span>
                         </div>
                       ))}

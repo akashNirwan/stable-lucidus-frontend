@@ -48,9 +48,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/about",
-    element: <PublicRoute>
+    element: (
+      <PublicRoute>
         <div>About</div>
-      </PublicRoute>,
+      </PublicRoute>
+    ),
   },
   {
     path: "/auth",
@@ -108,26 +110,26 @@ const router = createBrowserRouter([
   //   ),
   //   children: [{ index: true, element: <DashBoard /> }],
   // },
-//  
+  //
 
-{
-  path: "/dashboard",
-  element: (
-    <ProtectedRoute>
-      <DashBoardLayout />
-    </ProtectedRoute>
-  ),
-  children: [
-    { index: true, element: <Navigate to="/dashboard/microexperience" /> }, 
-    { path: "microexperience", element: <DashBoardMenuOne /> },  
-    { path: "savedcareers", element: <DashBoardMenuOne /> },    
-    { path: "explorecareers", element: <DashBoardMenuTwo /> },
-    { path: "badges", element: <DashBoardMenuThree /> },
-  ],
-},
+  {
+    path: "/dashboard",
+    element: (
+      <ProtectedRoute>
+        <DashBoardLayout />
+      </ProtectedRoute>
+    ),
+    children: [
+      { index: true, element: <Navigate to="/dashboard/microexperience" /> },
+      { path: "microexperience", element: <DashBoardMenuOne /> },
+      { path: "savedcareers", element: <DashBoardMenuOne /> },
+      { path: "explorecareers", element: <DashBoardMenuTwo /> },
+      { path: "badges", element: <DashBoardMenuThree /> },
+    ],
+  },
   {
     path: "/level",
-    element:  (
+    element: (
       <ProtectedRoute>
         <Level />
       </ProtectedRoute>
@@ -170,7 +172,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/profile",
-    element:(
+    element: (
       <ProtectedRoute>
         <Profile />
       </ProtectedRoute>
@@ -179,7 +181,7 @@ const router = createBrowserRouter([
 
   {
     path: "/student-choice",
-    element:(
+    element: (
       <ProtectedRoute>
         <OnChoiceFeedBack />
       </ProtectedRoute>
@@ -201,7 +203,7 @@ const router = createBrowserRouter([
     children: [{ index: true, element: <Purpose /> }],
   },
   {
-    path: "/encyclopedia/process",
+    path: "/encyclopedia/prowess",
     element: (
       <ProtectedRoute>
         <EncycloPediaWrapper />
@@ -252,7 +254,11 @@ const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: ( <ProtectedRoute><Error /></ProtectedRoute>),
+    element: (
+      <ProtectedRoute>
+        <Error />
+      </ProtectedRoute>
+    ),
   },
 ]);
 
