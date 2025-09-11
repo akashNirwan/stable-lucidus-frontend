@@ -77,7 +77,7 @@ export default function Welcome() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1 }}
-                className="text-white text-lg max-w-sm mx-auto leading-relaxed"
+                className="text-[#C2B1FF] text-lg max-w-sm mx-auto leading-relaxed"
               >
                 Lucidus is here to support and prepare you for the real world.
               </motion.p>
@@ -96,12 +96,12 @@ export default function Welcome() {
                 className="flex flex-col items-center space-y-3"
               >
                 <div
-                  className="w-16 h-16 rounded-full flex items-center justify-center text-2xl"
+                  className="w-16 h-16 rounded-full flex items-center justify-center text-2xl rotate-90"
                   style={{ background: "#4823CF" }}
                 >
                   🔍
                 </div>
-                <span className="text-white text-xl font-medium">
+                <span className="!text-[#C2B1FF] text-xl font-medium">
                   Explore Careers.
                 </span>
               </motion.div>
@@ -120,9 +120,9 @@ export default function Welcome() {
                   className="w-16 h-16 rounded-full flex items-center justify-center text-2xl"
                   style={{ background: "#4823CF" }}
                 >
-                  ✨
+                  🙌
                 </div>
-                <span className="text-white text-xl font-medium">
+                <span className="text-[#C2B1FF] text-xl font-medium">
                   Try Micro-experiences.
                 </span>
               </motion.div>
@@ -143,7 +143,7 @@ export default function Welcome() {
                 >
                   💎
                 </div>
-                <span className="text-white text-xl font-medium text-center">
+                <span className="text-[#C2B1FF] text-xl font-medium text-center">
                   Get Custom Plans for School,
                   <br />
                   University, & Beyond.
