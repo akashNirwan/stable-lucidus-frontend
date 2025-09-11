@@ -92,12 +92,12 @@ export const fetchBadges = createAsyncThunk(
 
 export const fetchSavedCareers = createAsyncThunk(
   "dashboard/fetchSavedCareers",
-  async (_, { rejectWithValue }) => {
+  async ({ page = 1 } = {}, { rejectWithValue }) => {
     const token = getTokenFromLocalStorage()
 
     try {
       const response = await client.get(
-        `user/save-career`,
+        `user/save-career?page=${page}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -106,7 +106,13 @@ export const fetchSavedCareers = createAsyncThunk(
       );
       
 
-      return response.data;
+       return {
+        data: response.data.data,
+        total: response.data.total,
+        message: response.data.message,
+        page,
+        isLoadMore: page > 1
+      };
     } catch (error) {
       
       return rejectWithValue(error?.response?.data?.message || error?.message);
@@ -118,12 +124,12 @@ export const fetchSavedCareers = createAsyncThunk(
 
 export const fetchDashboardMicroexperience = createAsyncThunk(
   "dashboard/fetchDashboardMicroexperience",
-  async (_, { rejectWithValue }) => {
+  async ({ page = 1 } = {}, { rejectWithValue }) => {
     const token = getTokenFromLocalStorage()
 
     try {
       const response = await client.get(
-        `user/micro-experiences`,
+        `user/micro-experiences?page=${page}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -132,7 +138,13 @@ export const fetchDashboardMicroexperience = createAsyncThunk(
       );
       
 
-      return response.data;
+      return {
+        data: response.data.data,
+        total: response.data.total,
+        message: response.data.message,
+        page,
+        isLoadMore: page > 1
+      };
     } catch (error) {
       
       return rejectWithValue(error?.response?.data?.message || error?.message);

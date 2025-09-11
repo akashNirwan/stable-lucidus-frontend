@@ -1,10 +1,11 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { motion } from "framer-motion";
 
 export default function MicroExperienceLayout() {
   const steps = ["grade", "figure-out"];
-  const [screen, setScreen] = React.useState(1);
+  const [screen, setScreen] = useState(1);
+   const [videoUrl, setVideoUrl] = useState(null);
 
   return (
     <div className="w-full min-h-screen bg-[url(/assets/badge-bg.svg)] bg-no-repeat bg-center bg-cover relative overflow-hidden">
@@ -20,7 +21,36 @@ export default function MicroExperienceLayout() {
           ))}
         </div>
       </div>
-      <video
+      {videoUrl ? (
+  videoUrl.endsWith('.gif') ? (
+    <img
+      key={videoUrl}
+      src={videoUrl}
+      alt="Visual content"
+      className="absolute inset-0 w-[600px] h-full object-cover z-10 mx-auto"
+    />
+  ) : (
+    <video
+      key={videoUrl}
+      autoPlay
+      loop
+      muted
+      playsInline
+      className="absolute inset-0 w-[600px] h-full object-cover z-10 mx-auto"
+    >
+      <source src={videoUrl} type="video/mp4" />
+      <source src={videoUrl} type="video/webm" />
+      Your browser does not support the video tag.
+    </video>
+  )
+) : (
+        <div className="absolute inset-0 w-[600px] h-full flex items-center justify-center z-10 mx-auto">
+          <div className="bg-black/50 text-white px-4 py-2 rounded-lg">
+            No visuals available
+          </div>
+        </div>
+      )}
+      {/* <video
         autoPlay
         loop
         muted
@@ -29,7 +59,7 @@ export default function MicroExperienceLayout() {
       >
         <source src="/assets/Video.mp4" type="video/mp4" />
         Your browser does not support the video tag.
-      </video>
+      </video> */}
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -44,7 +74,7 @@ export default function MicroExperienceLayout() {
         }}
       >
         <Suspense fallback={<p>Loading form...</p>}>
-          <Outlet context={{ screen, setScreen }} />
+          <Outlet context={{ screen, setScreen ,setVideoUrl}} />
         </Suspense>
       </motion.div>
     </div>

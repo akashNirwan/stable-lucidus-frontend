@@ -80,7 +80,7 @@ const {  saveInsightLoading , saveStepsLoading} = useSelector(
     const saveStepsPayload = {
       careerLevelId: careerLevelId,
       route: `/student-choice?careerLevelId=${careerLevelId}`,
-      levelPercent: "42",
+      levelPercent: "5",
     };
 
     const saveStepsRes = await dispatch(saveSteps(saveStepsPayload));
@@ -117,7 +117,9 @@ const {  saveInsightLoading , saveStepsLoading} = useSelector(
           />
         ))}
       </div>
-      <Button onClick={handleContinue}>
+      <Button 
+       disabled={saveInsightLoading || saveStepsLoading}
+      onClick={handleContinue}>
         {saveInsightLoading || saveStepsLoading ? <LoadingSpinner size={20}></LoadingSpinner> : "Continue"}
         </Button>
     </div>

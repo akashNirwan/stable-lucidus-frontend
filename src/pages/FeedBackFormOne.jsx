@@ -44,7 +44,7 @@ const FeedBackFormOne = () => {
        const payload = {
          careerLevelId : careerLevelId,
          route : `/feedbackform?careerLevelId=${careerLevelId}&questionId=${questionId}`,
-         levelPercent : "25"
+         levelPercent : "5"
        };
    
        dispatch(saveSteps(payload)).then((res) => {
@@ -72,17 +72,11 @@ const FeedBackFormOne = () => {
         <div className="text-[12px] text-[#034230] px-2 py-1  rounded-2xl w-fit mx-auto bg-[#4ED0AA]">
           DECISION OUTCOME
         </div>
-        <p className="text-[14px]">
-          {selectedQuestion?.decisionOutCome}
-        </p>
-        {/* <p className="text-[14px]">
-          By recommending Mosquito Nets, you helped prevent another health
-          crisis.
-        </p>
-        <p className="text-[14px]">
-          In Microfinance, protecting families from medical debt often matters
-          more than immediate income.
-        </p> */}
+        <div
+    className="text-[14px]"
+    dangerouslySetInnerHTML={{ __html: selectedQuestion?.decisionOutCome || "" }}
+  />
+       
       </div>
       <div className="text-center space-y-4 border border-[#5E35F1] rounded-2xl p-4 mt-4 bg-[#EFEAFF]">
         <div className="text-[12px] text-[#034230] px-2 py-1  rounded-2xl w-fit mx-auto bg-[#C2B1FF]">
@@ -92,7 +86,9 @@ const FeedBackFormOne = () => {
           {selectedQuestion?.foodForThought}
         </p>
       </div>
-      <Button onClick={handleClick} className="mt-4">
+      <Button onClick={handleClick} 
+      disabled={saveStepsLoading}
+      className="mt-4">
         {saveStepsLoading ? <LoadingSpinner size={20}> </LoadingSpinner> : "Continue"}
       </Button>
     </div>

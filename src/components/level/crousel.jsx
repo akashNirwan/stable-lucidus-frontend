@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
   Carousel,
   CarouselContent,
@@ -21,9 +21,18 @@ export default function LevelCarousel({ data, careerLevelId }) {
 
   //  const careerId = data?.careerId.
 
-  const [api, setApi] = React.useState(null);
-  const [selected, setSelected] = React.useState(null);
+  const [api, setApi] = useState(null);
+  const [selected, setSelected] = useState(null);
+  const [currentSlide, setCurrentSlide] = useState(0)
 
+useEffect(() => {
+  if (!api) return;
+  
+  api.on("select", () => {
+    setCurrentSlide(api.selectedScrollSnap()); 
+    
+  });
+}, [api]);
   // const handleSaveAnswer = async () => {
   //   if (selected === null) return;
 
@@ -61,7 +70,7 @@ export default function LevelCarousel({ data, careerLevelId }) {
     const saveStepsPayload = {
       careerLevelId: careerLevelId,
       route: `/level?careerLevelId=${careerLevelId}&questionId=${selectedQuestion._id}`,
-      levelPercent: "16.66",
+      levelPercent: "5",
     };
 
     const saveAnswerRes = await dispatch(saveAnswer(payload));
@@ -140,16 +149,19 @@ export default function LevelCarousel({ data, careerLevelId }) {
               api?.scrollTo(i);
               setSelected(i);
             }}
+            // className={`h-2 rounded-full transition-all duration-300 ${
+            //   selected === i ? "w-4 bg-purple-500" : "w-2 bg-gray-500"
+            // }`}
             className={`h-2 rounded-full transition-all duration-300 ${
-              selected === i ? "w-4 bg-purple-500" : "w-2 bg-gray-500"
-            }`}
+  currentSlide === i ? "w-4 bg-purple-500" : "w-2 bg-gray-500"
+}`}
           />
         ))}
       </div>
 
       <Button
         onClick={handleSaveAnswer}
-        disabled={selected === null}
+        disabled={selected === null || saveAnswerLoading|| saveStepsLoading}
         className="mt-2 max-w-[320px] flex justify-center mx-auto"
       >
         {saveAnswerLoading || saveStepsLoading ? (

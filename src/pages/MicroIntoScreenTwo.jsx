@@ -23,7 +23,7 @@ console.log(data?.career[0]._id, "data");
     const payload = {
       careerLevelId: careerLevelId,
       route: `/micro-intro?careerLevelId=${careerLevelId}`,
-      levelPercent : "8.33"
+      levelPercent : "5"
     };
 
     dispatch(saveSteps(payload)).then((res) => {
@@ -49,8 +49,8 @@ console.log(data?.career[0]._id, "data");
         {data?.questionintros?.[1]?.titleTwo}
       </p>
 
-      <Button onClick={() => navigate(`/level?careerLevelId=${careerLevelId}`)}>
-        {data?.questionintros?.[1]?.buttonName}
+      <Button onClick={handleNext} disabled={saveStepsLoading} >
+        { saveStepsLoading ? <LoadingSpinner size={20}></LoadingSpinner> : data?.questionintros?.[1]?.buttonName}
       </Button>
     </div>
   );

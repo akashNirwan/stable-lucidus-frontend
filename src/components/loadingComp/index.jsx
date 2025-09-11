@@ -20,7 +20,7 @@ const LoadingBar = () => {
   useEffect(() => {
     if (progress === 100) {
       const timeout = setTimeout(() => {
-        navigate("/dashboard");
+        navigate("/dashboard/explorecareers");
       }, 500);
       return () => clearTimeout(timeout);
     }

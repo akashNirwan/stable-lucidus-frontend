@@ -62,7 +62,7 @@ const BadgeEarned = () => {
   const saveStepPayload = {
     careerLevelId: careerLevelId,
     route: `/badge-earned?questionId=${questionId}&careerLevelId=${careerLevelId}`,
-    levelPercent: "33",
+    levelPercent: "5",
   };
 
   const saveStepsRes = await dispatch(saveSteps(saveStepPayload));
@@ -101,7 +101,10 @@ const BadgeEarned = () => {
           <p className="text-white text-center">
             Keep exploring to unlock more achievements!
           </p>
-          <Button onClick={handleNext}>
+          <Button
+          disabled={saveBadgeLoading|| saveStepsLoading}
+           onClick={handleNext}
+           >
             {saveBadgeLoading || saveStepsLoading ? <LoadingSpinner size={20}></LoadingSpinner> : "Continue"}
             </Button>
         </div>

@@ -4,7 +4,7 @@ import Footer from "../../components/dashboard/Footer";
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
 const DashBoardWrapper = () => {
-  const [menu, setMenu] = useState(1);
+  const [menu, setMenu] = useState(2);
   return (
     <div className="flex flex-col h-screen bg-[#130934]">
       <Header />

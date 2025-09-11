@@ -7,7 +7,7 @@ import { fetchMicroexperience } from "../redux/actions/microexperience-action";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { useOutletContext } from "react-router-dom";
 const MicroIntoScreen = () => {
-  const { screen, setScreen } = useOutletContext();
+  const { screen, setScreen, setVideoUrl } = useOutletContext();
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
   const { microexperience, loading, error } = useSelector(
@@ -43,6 +43,54 @@ const MicroIntoScreen = () => {
   }, [dispatch, careerId, careerLevelId, levelNumber]);
 
   const experienceData = microexperience?.[0];
+
+  useEffect(() => {
+    if (experienceData?.questionintros && setVideoUrl) {
+      const currentVideoUrl = experienceData?.questionintros[screen - 1]?.image;
+      {console.log(experienceData?.questionintros[screen - 1]?.image, "experiencedata");
+      }
+      if (currentVideoUrl) {
+        setVideoUrl(currentVideoUrl);
+        {console.log(setVideoUrl, "video. url");
+        }
+      }
+    }
+  }, [screen, experienceData, setVideoUrl]);
+
+ 
+  
+
+// useEffect(() => {
+//     console.log("🔥 useEffect TRIGGERED");
+//     console.log("=== VIDEO URL DEBUG ===");
+//     console.log("setVideoUrl function:", setVideoUrl);
+//     console.log("experienceData:", experienceData);
+//     console.log("experienceData?.questionintros:", experienceData?.questionintros);
+//     console.log("current screen:", screen);
+//     console.log("screen - 1 (array index):", screen - 1);
+    
+//     if (experienceData?.questionintros && setVideoUrl) {
+//       const currentVideoUrl = experienceData.questionintros[screen - 1]?.image;
+//       console.log("currentVideoUrl:", currentVideoUrl);
+//       console.log("questionintros[0]:", experienceData.questionintros[0]);
+//       console.log("questionintros[1]:", experienceData.questionintros[1]);
+      
+//       if (currentVideoUrl) {
+//         console.log("✅ Setting video URL to:", currentVideoUrl);
+//         setVideoUrl(currentVideoUrl);
+//       } else {
+//         console.log("❌ No video URL found for current screen");
+//       }
+//     } else {
+//       console.log("⚠️ Missing data or setVideoUrl function");
+//       console.log("experienceData?.questionintros exists:", !!experienceData?.questionintros);
+//       console.log("setVideoUrl exists:", !!setVideoUrl);
+//     }
+//     console.log("=== END DEBUG ===");
+//   }, [screen, experienceData, setVideoUrl]);
+  
+
+
 
   const screenComponent = {
     1: <MicroIntoScreenOne setScreen={setScreen} data={experienceData} />,

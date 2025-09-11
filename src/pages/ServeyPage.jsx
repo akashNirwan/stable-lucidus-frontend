@@ -51,7 +51,7 @@ export default function CareerSurvey() {
   const payload = {
     careerLevelId: careerLevelId,
     route: "/survey-page",
-    levelPercent: "50",
+    levelPercent: "20",
   };
 
   setIsLike(choice);

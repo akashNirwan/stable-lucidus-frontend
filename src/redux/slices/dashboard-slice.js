@@ -13,6 +13,10 @@ const initialState = {
   badges:[],
   fetchsavedCareer : [],
   savedCareerLoading : false,
+  loadMoreLoading: false, 
+  hasMoreCareers: true, 
+  currentPage: 1, 
+  totalCareers: 0,
   dashboardMicroexperience : null,
   dashboardMicroexperienceLoading: false,
    profile : null, 
@@ -91,9 +95,24 @@ const dashboardSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchSavedCareers.fulfilled, (state, action) => {
+        const { data, total, page, isLoadMore } = action.payload;
         state.savedCareerLoading = false;
-        state.fetchsavedCareer = action.payload.data;
-        console.log(action.payload.data, "savedcareers");
+         state.loadMoreLoading = false;
+
+         if (isLoadMore) {
+          // Append new data for load more
+          state.fetchsavedCareer = [...state.fetchsavedCareer, ...data];
+        } else {
+          // Replace data for first page
+          state.fetchsavedCareer = data;
+        }
+        
+        state.currentPage = page;
+        state.totalCareers = total;
+        state.hasMoreCareers = state.fetchsavedCareer.length < total;
+
+        // state.fetchsavedCareer = action.payload.data;
+        // console.log(action.payload.data, "savedcareers");
         
         
       })
@@ -111,9 +130,25 @@ const dashboardSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchDashboardMicroexperience.fulfilled, (state, action) => {
+         const { data, total, page, isLoadMore } = action.payload;
         state.dashboardMicroexperienceLoading = false;
-        state.dashboardMicroexperience = action.payload.data;
-        console.log(action.payload.data, "dashboardsavedcareers");
+         state.loadMoreLoading = false;
+
+            if (isLoadMore) {
+          // Append new data for load more
+          state.dashboardMicroexperience = [...state.dashboardMicroexperience, ...data];
+        } else {
+          // Replace data for first page
+          state.dashboardMicroexperience = data;
+        }
+        
+        state.currentPage = page;
+        state.totalCareers = total;
+        state.hasMoreCareers = state.dashboardMicroexperience.length < total;
+
+
+        // state.dashboardMicroexperience = action.payload.data;
+        // console.log(action.payload.data, "dashboardsavedcareers");
         
         
       })
