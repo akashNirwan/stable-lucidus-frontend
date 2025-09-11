@@ -13,10 +13,14 @@ import { saveSteps } from "../redux/actions/microexperience-action";
 const BadgeEarned = () => {
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
-  const { microexperience, loading, error, saveBadgeLoading, saveStepsLoading } = useSelector(
-    (state) => state.microexperience
-  );
-   const navigate = useNavigate()
+  const {
+    microexperience,
+    loading,
+    error,
+    saveBadgeLoading,
+    saveStepsLoading,
+  } = useSelector((state) => state.microexperience);
+  const navigate = useNavigate();
   console.log(
     microexperience?.[0]?.questionbadges?.[0]?.badges?.[0]?.image,
     "microexperience"
@@ -26,7 +30,7 @@ const BadgeEarned = () => {
   const questionId = searchParams.get("questionId");
   useEffect(() => {
     if (careerLevelId) {
-      dispatch(fetchMicroexperience({careerLevelId}));
+      dispatch(fetchMicroexperience({ careerLevelId }));
     }
   }, [dispatch, searchParams]);
 
@@ -46,7 +50,7 @@ const BadgeEarned = () => {
   //   }
   //        dispatch(saveSteps(saveStepPayload))
   //   dispatch(saveBadge(payload)).then((res) => {
-     
+
   //     if (res.payload && res.payload.code === 201 || res.payload.statusCode === 200) {
   //            navigate(`/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}`)
   //     }
@@ -54,31 +58,31 @@ const BadgeEarned = () => {
   // };
 
   const handleNext = async () => {
-  const payload = {
-    careerLevelId: careerLevelId,
-    badge: microexperience?.[0]?.questionbadges?.[0]?.badges?.[0]?.image,
+    const payload = {
+      careerLevelId: careerLevelId,
+      badge: microexperience?.[0]?.questionbadges?.[0]?.badges?.[0]?.image,
+    };
+
+    const saveStepPayload = {
+      careerLevelId: careerLevelId,
+      route: `/badge-earned?questionId=${questionId}&careerLevelId=${careerLevelId}`,
+      levelPercent: "5",
+    };
+
+    const saveStepsRes = await dispatch(saveSteps(saveStepPayload));
+    const saveBadgeRes = await dispatch(saveBadge(payload));
+
+    const isSaveStepsSuccess =
+      saveStepsRes.payload?.code === 200 || saveStepsRes.payload?.code === 201;
+    const isSaveBadgeSuccess =
+      saveBadgeRes.payload?.code === 200 || saveBadgeRes.payload?.code === 201;
+
+    if (isSaveStepsSuccess && isSaveBadgeSuccess) {
+      navigate(
+        `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}`
+      );
+    }
   };
-
-  const saveStepPayload = {
-    careerLevelId: careerLevelId,
-    route: `/badge-earned?questionId=${questionId}&careerLevelId=${careerLevelId}`,
-    levelPercent: "5",
-  };
-
-  const saveStepsRes = await dispatch(saveSteps(saveStepPayload));
-  const saveBadgeRes = await dispatch(saveBadge(payload));
-
-  const isSaveStepsSuccess =
-    saveStepsRes.payload?.code === 200 || saveStepsRes.payload?.code === 201;
-  const isSaveBadgeSuccess =
-    saveBadgeRes.payload?.code === 200 || saveBadgeRes.payload?.code === 201;
-
-  if (isSaveStepsSuccess && isSaveBadgeSuccess) {
-    navigate(
-      `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}`
-    );
-  }
-};
 
   return loading ? (
     <div className="flex items-center justify-center min-h-[400px]">
@@ -97,16 +101,21 @@ const BadgeEarned = () => {
           <img
             src={`${microexperience?.[0]?.questionbadges?.[0]?.badges?.[0]?.image}`}
             alt="badge"
+            className="w-[180px] mx-auto"
           />
           <p className="text-white text-center">
             Keep exploring to unlock more achievements!
           </p>
           <Button
-          disabled={saveBadgeLoading|| saveStepsLoading}
-           onClick={handleNext}
-           >
-            {saveBadgeLoading || saveStepsLoading ? <LoadingSpinner size={20}></LoadingSpinner> : "Continue"}
-            </Button>
+            disabled={saveBadgeLoading || saveStepsLoading}
+            onClick={handleNext}
+          >
+            {saveBadgeLoading || saveStepsLoading ? (
+              <LoadingSpinner size={20}></LoadingSpinner>
+            ) : (
+              "Continue"
+            )}
+          </Button>
         </div>
       </div>
     </div>
