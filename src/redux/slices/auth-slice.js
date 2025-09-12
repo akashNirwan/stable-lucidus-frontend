@@ -10,7 +10,7 @@ const initialState = {
   user: null,
   loginLoading: false,
   loginerror: null,
-  signuploading: null,
+  signuploading: false,
   signuperror: null,
   verifyOtpData: null,
   verifyOtpLoading: false,

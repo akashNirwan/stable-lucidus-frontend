@@ -201,3 +201,26 @@ export const saveSteps = createAsyncThunk(
 
 
 
+export const fetchLevelBadges = createAsyncThunk(
+  "microexperience/fetchLevelBadges",
+  async (_, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage()
+
+    try {
+      const response = await client.get(
+        `user/badge`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      
+
+      return response.data;
+    } catch (error) {
+      
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Button from "../components/common/Button";
 import {
-  fetchMicroexperience,
+  
   saveBadge,
+  fetchLevelBadges
 } from "../redux/actions/microexperience-action";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../components/common/LoadingSpinner";
@@ -13,50 +14,54 @@ import { saveSteps } from "../redux/actions/microexperience-action";
 const BadgeEarned = () => {
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
-  const { microexperience, loading, error, saveBadgeLoading, saveStepsLoading } = useSelector(
+  const {  saveBadgeLoading, saveStepsLoading, levelBadge, levelBadgeLoading } = useSelector(
     (state) => state.microexperience
   );
    const navigate = useNavigate()
-  console.log(
-    microexperience?.[0]?.questionbadges?.[0]?.badges?.[0]?.image,
-    "microexperience"
-  );
+  
+console.log(levelBadge, "level badge ");
 
   const careerLevelId = searchParams.get("careerLevelId");
   const questionId = searchParams.get("questionId");
+  
+  
+  const completedCareerLevelCount = parseInt(searchParams.get("completedCareerLevelCount"));
+  
+  
+  
   useEffect(() => {
-    if (careerLevelId) {
-      dispatch(fetchMicroexperience({careerLevelId}));
-    }
-  }, [dispatch, searchParams]);
+    
+      dispatch(fetchLevelBadges());
+    
+  }, [dispatch]);
 
-  // const careerLevelId = microexperience?.[0]?._id;
-  // console.log(careerLevelId, "careerLevelId");
+  
 
-  // const handleNext = () => {
-  //   const payload = {
-  //     careerLevelId: careerLevelId,
-  //     badge: microexperience?.[0]?.questionbadges?.[0]?.badges?.[0]?.image,
-  //   };
 
-  //   const saveStepPayload = {
-  //     careerLevelId : careerLevelId,
-  //     route : "badge-earned",
-  //     levelPercent : "33"
-  //   }
-  //        dispatch(saveSteps(saveStepPayload))
-  //   dispatch(saveBadge(payload)).then((res) => {
-     
-  //     if (res.payload && res.payload.code === 201 || res.payload.statusCode === 200) {
-  //            navigate(`/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}`)
-  //     }
-  //   });
-  // };
+  const selectedBadge =
+    levelBadge?.data?.find((b) =>
+      (completedCareerLevelCount === 0 && b.badgeName === "The Explorer") ||
+      (completedCareerLevelCount === 2 && b.badgeName === "The Voyager") ||
+      (completedCareerLevelCount === 4 && b.badgeName === "The Wayfarer")
+    ) || null;
+
+
+    let IncomingBadgeName = "";
+
+if (completedCareerLevelCount === 0) {
+  IncomingBadgeName = "Explorer";
+} else if (completedCareerLevelCount === 2) {
+  IncomingBadgeName = "Voyager";
+} else if (completedCareerLevelCount === 4) {
+  IncomingBadgeName = "Wayfarer";
+}
+    
 
   const handleNext = async () => {
   const payload = {
     careerLevelId: careerLevelId,
-    badge: microexperience?.[0]?.questionbadges?.[0]?.badges?.[0]?.image,
+    badge: selectedBadge.image,
+    badgeName: selectedBadge.badgeName
   };
 
   const saveStepPayload = {
@@ -80,7 +85,7 @@ const BadgeEarned = () => {
   }
 };
 
-  return loading ? (
+  return levelBadgeLoading ? (
     <div className="flex items-center justify-center min-h-[400px]">
       <LoadingSpinner size={64} />
     </div>
@@ -92,12 +97,15 @@ const BadgeEarned = () => {
         </div>
         <div className=" flex flex-col gap-18 w-[325px] mx-auto">
           <h2 className="text-center text-[#4ED0AA] text-bold text-3xl mt-4">
-            Your're an Explorer
+            Your're an {IncomingBadgeName}
           </h2>
-          <img
-            src={`${microexperience?.[0]?.questionbadges?.[0]?.badges?.[0]?.image}`}
-            alt="badge"
-          />
+          {selectedBadge && (
+            <img
+              src={selectedBadge.image}
+              alt={selectedBadge.badgeName}
+              className="mx-auto"
+            />
+          )}
           <p className="text-white text-center">
             Keep exploring to unlock more achievements!
           </p>

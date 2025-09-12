@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchMicroexperience , saveAnswer, saveBadge, saveInsight, saveFeedback, saveSteps} from "../actions/microexperience-action";
+import { fetchMicroexperience , saveAnswer, saveBadge, saveInsight, saveFeedback, saveSteps, fetchLevelBadges} from "../actions/microexperience-action";
 
 
 const initialState = {
@@ -17,6 +17,8 @@ const initialState = {
   saveFeedbackLoading : false,
   saveSteps: null,
   saveStepsLoading: false,
+  levelBadge : null,
+  levelBadgeLoading : false,
 };
 
 
@@ -125,6 +127,23 @@ const microexperienceSlice = createSlice({
                   .addCase(saveSteps.rejected, (state, action) => {
                     state.saveStepsLoading = false;
                     state.error = action.payload || "Failed to Save Steps";
+                  });
+
+
+                  // fetch level badges
+      
+              builder
+                  .addCase(fetchLevelBadges.pending, (state) => {
+                    state.levelBadgeLoading = true;
+                    state.error = null;
+                  })
+                  .addCase(fetchLevelBadges.fulfilled, (state, action) => {
+                    state.levelBadgeLoading = false;
+                    state.levelBadge = action.payload; 
+                  })
+                  .addCase(fetchLevelBadges.rejected, (state, action) => {
+                    state.levelBadgeLoading = false;
+                    state.error = action.payload || "Failed to fetch badge";
                   });
   },
 });

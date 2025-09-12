@@ -7,7 +7,7 @@ const App = () => {
     navigate("/auth/login");
   }, [navigate]);
 
-  return <div>React App</div>;
+  return 
 };
 
 export default App;

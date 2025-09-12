@@ -19,11 +19,12 @@ console.log(data?.career[0]._id, "data");
 
  const handleNext = () => {
     
-
+    
     const payload = {
       careerLevelId: careerLevelId,
       route: `/micro-intro?careerLevelId=${careerLevelId}`,
-      levelPercent : "5"
+      levelPercent : "5",
+      
     };
 
     dispatch(saveSteps(payload)).then((res) => {

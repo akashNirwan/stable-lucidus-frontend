@@ -25,7 +25,10 @@ const FeedBackFormOne = () => {
  
  console.log(questionId, "questionid");
  console.log(microexperience?.[0]?.questions, "microexperience");
- 
+ console.log(microexperience?.[0]?.completedCareerLevelCount, "count");
+ const completedCareerLevelCount = microexperience?.[0]?.completedCareerLevelCount
+
+
  useEffect(() => {
      if (careerLevelId) {
        dispatch(fetchMicroexperience({careerLevelId}));
@@ -48,10 +51,16 @@ const FeedBackFormOne = () => {
        };
    
        dispatch(saveSteps(payload)).then((res) => {
-         if (res.payload && res.payload.code === 200 || res.payload.code === 201) {
-          navigate(`/badge-earned?careerLevelId=${careerLevelId}&questionId=${questionId}`)
-         }
-       });
+    if (res.payload && (res.payload.code === 200 || res.payload.code === 201)) {
+      
+      if ([0, 2, 4].includes(completedCareerLevelCount)) {
+        navigate(`/badge-earned?careerLevelId=${careerLevelId}&questionId=${questionId}&completedCareerLevelCount=${completedCareerLevelCount}`);
+      } else {
+        navigate(`/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}`);
+      }
+
+    }
+  });
      };
 
 
