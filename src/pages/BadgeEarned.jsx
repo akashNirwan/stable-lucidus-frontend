@@ -64,26 +64,26 @@ if (completedCareerLevelCount === 0) {
     badgeName: selectedBadge.badgeName
   };
 
-  const saveStepPayload = {
-    careerLevelId: careerLevelId,
-    route: `/badge-earned?questionId=${questionId}&careerLevelId=${careerLevelId}`,
-    levelPercent: "5",
+    const saveStepPayload = {
+      careerLevelId: careerLevelId,
+      route: `/badge-earned?questionId=${questionId}&careerLevelId=${careerLevelId}`,
+      levelPercent: "5",
+    };
+
+    const saveStepsRes = await dispatch(saveSteps(saveStepPayload));
+    const saveBadgeRes = await dispatch(saveBadge(payload));
+
+    const isSaveStepsSuccess =
+      saveStepsRes.payload?.code === 200 || saveStepsRes.payload?.code === 201;
+    const isSaveBadgeSuccess =
+      saveBadgeRes.payload?.code === 200 || saveBadgeRes.payload?.code === 201;
+
+    if (isSaveStepsSuccess && isSaveBadgeSuccess) {
+      navigate(
+        `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}`
+      );
+    }
   };
-
-  const saveStepsRes = await dispatch(saveSteps(saveStepPayload));
-  const saveBadgeRes = await dispatch(saveBadge(payload));
-
-  const isSaveStepsSuccess =
-    saveStepsRes.payload?.code === 200 || saveStepsRes.payload?.code === 201;
-  const isSaveBadgeSuccess =
-    saveBadgeRes.payload?.code === 200 || saveBadgeRes.payload?.code === 201;
-
-  if (isSaveStepsSuccess && isSaveBadgeSuccess) {
-    navigate(
-      `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}`
-    );
-  }
-};
 
   return levelBadgeLoading ? (
     <div className="flex items-center justify-center min-h-[400px]">
@@ -110,11 +110,15 @@ if (completedCareerLevelCount === 0) {
             Keep exploring to unlock more achievements!
           </p>
           <Button
-          disabled={saveBadgeLoading|| saveStepsLoading}
-           onClick={handleNext}
-           >
-            {saveBadgeLoading || saveStepsLoading ? <LoadingSpinner size={20}></LoadingSpinner> : "Continue"}
-            </Button>
+            disabled={saveBadgeLoading || saveStepsLoading}
+            onClick={handleNext}
+          >
+            {saveBadgeLoading || saveStepsLoading ? (
+              <LoadingSpinner size={20}></LoadingSpinner>
+            ) : (
+              "Continue"
+            )}
+          </Button>
         </div>
       </div>
     </div>
