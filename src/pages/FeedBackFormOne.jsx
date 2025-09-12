@@ -46,7 +46,7 @@ const FeedBackFormOne = () => {
    
        const payload = {
          careerLevelId : careerLevelId,
-         route : `/feedbackform?careerLevelId=${careerLevelId}&questionId=${questionId}`,
+         route : `/feedbackform?careerLevelId=${careerLevelId}&questionId=${questionId}&completedCareerLevelCount=${completedCareerLevelCount}`,
          levelPercent : "5"
        };
    
