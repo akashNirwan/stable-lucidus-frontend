@@ -1,4 +1,4 @@
-import { useState , useEffect} from "react";
+import { useState, useEffect } from "react";
 import NextLevelModal from "../components/dashboard/Modal";
 import DashBoardMicro from "./DashBoardMicro";
 import SavedCareer from "./SavedCareer";
@@ -9,7 +9,6 @@ const DashBoardMenuOne = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState("micro");
 
-  
   useEffect(() => {
     if (location.pathname === "/dashboard/savedcareers") {
       setActiveTab("saved");
@@ -18,8 +17,7 @@ const DashBoardMenuOne = () => {
     }
   }, [location.pathname]);
 
-  
-const handleTabClick = (tab) => {
+  const handleTabClick = (tab) => {
     setActiveTab(tab);
     if (tab === "micro") {
       navigate("/dashboard/microexperience");
@@ -28,14 +26,13 @@ const handleTabClick = (tab) => {
     }
   };
 
-
   return (
     <div>
       <div className="flex justify-between bg-[#120C2A] p-4 w-[375px] mx-auto">
         <button
           // onClick={() => setActiveTab("micro")}
-           onClick={() => handleTabClick("micro")}
-          className={`relative text-lg font-medium transition-colors ${
+          onClick={() => handleTabClick("micro")}
+          className={`relative text-lg font-medium transition-colors cursor-pointer ${
             activeTab === "micro" ? "text-teal-400" : "text-purple-300"
           }`}
         >
@@ -48,7 +45,7 @@ const handleTabClick = (tab) => {
         <button
           // onClick={() => setActiveTab("saved")}
           onClick={() => handleTabClick("saved")}
-          className={`relative text-lg font-medium transition-colors ${
+          className={`relative text-lg font-medium transition-colors cursor-pointer ${
             activeTab === "saved" ? "text-teal-400" : "text-purple-300"
           }`}
         >

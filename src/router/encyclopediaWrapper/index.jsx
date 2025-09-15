@@ -93,7 +93,7 @@ const EncycloPediaWrapper = () => {
             <button
               key={tab}
               onClick={() => handleTabClick(tab)}
-              className={`px-4 py-2 rounded-lg transition ${
+              className={`px-4 py-2 rounded-lg transition cursor-pointer ${
                 activeTab === tab
                   ? "bg-[#24A57F] text-white font-semibold"
                   : "bg-transparent text-gray-300 hover:text-white"
@@ -112,14 +112,14 @@ const EncycloPediaWrapper = () => {
       <div className="flex justify-center gap-4 bg-white p-4 rounded-t-2xl shadow-md w-full max-w-[600px] mx-auto">
         <button
           onClick={handleRoadmap}
-          className="px-8 py-3 border border-green-600 text-green-600 font-semibold rounded-xl shadow-sm hover:bg-green-50 transition"
+          className="px-8 py-3 border cursor-pointer border-green-600 text-green-600 font-semibold rounded-xl shadow-sm hover:bg-green-50 transition"
         >
           Roadmap
         </button>
 
         <button
           onClick={handleExperience}
-          className="px-8 py-3 bg-green-600 text-white font-semibold rounded-xl shadow-md hover:bg-green-700 transition"
+          className="px-8 py-3 bg-green-600 cursor-pointer text-white font-semibold rounded-xl shadow-md hover:bg-green-700 transition"
         >
           Experience It
         </button>
