@@ -103,18 +103,19 @@ const Subject = ({ setStep, stepsData }) => {
       <LoadingSpinner size={64} />
     </div>
   ) : (
-    <div className="text-center flex flex-col gap-3">
+    <div className="text-center flex flex-col gap-3  h-[72vh]">
       <h2 className="font-bold text-[20px] w-full">
         Pick the <span className="text-[#5f35f1]">subjects</span> that excite
         you{" "}
       </h2>
 
-      <h3 className="text-[#066146] text-sm line-clamp-2">
-        {stepsData.subtitle}
+      <h3 className="text-[#066146] text-sm line-clamp-1">
+        {/* {stepsData.subtitle} */}
+        You don’t have to be great at it. Select up to five
       </h3>
 
       <StatusTitle text={"I want to:"} />
-      <div className="max-h-[302px] overflow-y-auto grid gap-3">
+      <div className="flex-1 overflow-y-auto flex flex-col gap-2">
         {Array.isArray(subjects) &&
           subjects.map((subject) => (
             <TwoLineOption

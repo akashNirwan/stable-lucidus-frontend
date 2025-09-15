@@ -78,17 +78,20 @@ const SkillsCare = ({ setStep, stepsData }) => {
       <LoadingSpinner size={64} />
     </div>
   ) : (
-    <div className="text-center flex flex-col gap-3">
+    <div className="text-center flex flex-col gap-3  h-[72vh]">
       <div className=" justify-start mb-2">
         <h2 className="font-bold text-[20px]">
           What <span className="text-[#5f35f1]">issues</span> do you care about?
         </h2>
       </div>
 
-      <h3 className="text-[#066146] text-sm">{stepsData.subtitle}</h3>
+      <h3 className="text-[#066146] text-sm">
+        {/* {stepsData.subtitle} */}
+        Select any <span className="font-bold">three.</span>
+      </h3>
       <StatusTitle text={"I care about:"} />
 
-      <div className="h-[290px] overflow-y-auto grid grid-cols-3 gap-2">
+      <div className="flex-1 overflow-y-auto grid grid-cols-3 ">
         {Array.isArray(sdgs) &&
           sdgs.map((sdg, i) => {
             const isSelected = selected.some((s) => s._id === sdg._id);

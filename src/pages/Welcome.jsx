@@ -21,6 +21,9 @@ export default function Welcome() {
 
   return (
     <div className="min-h-screen relative overflow-hidden ">
+      <div className="absolute right-0 z-20 top-[40%]">
+        <img src="/welcome-rob.svg" alt="" className="" />
+      </div>
       {/* Background */}
       <div className="fixed inset-0 bg-[url('/assets/welcome/welcome-bg.svg')] bg-no-repeat bg-center bg-cover" />
 
@@ -171,7 +174,7 @@ export default function Welcome() {
           )}
         </AnimatePresence>
 
-        <InteractiveAstronaut />
+        {/* <InteractiveAstronaut /> */}
       </div>
     </div>
   );

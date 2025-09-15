@@ -89,7 +89,7 @@ const Skills = ({ setStep, stepsData }) => {
       <LoadingSpinner size={64} />
     </div>
   ) : (
-    <div className="text-center flex flex-col gap-2">
+    <div className="text-center flex flex-col gap-3  h-[72vh]">
       <div>
         {/* <h2 className="font-bold text-[20px]">{stepsData.title}</h2> */}
         <h2 className="font-bold text-[20px]">
@@ -98,12 +98,13 @@ const Skills = ({ setStep, stepsData }) => {
         </h2>
       </div>
 
-      <h3 className="text-[#066146]  line-clamp-2 text-sm">
-        {stepsData.subtitle}
+      <h3 className="text-[#066146]  line-clamp-1 text-sm">
+        {/* {stepsData.subtitle} */}
+        Select any that apply.
       </h3>
       <StatusTitle text={"I am good at:"} />
 
-      <div className="h-[320px] overflow-y-auto grid gap-3">
+      <div className="flex-1 overflow-y-auto flex flex-col gap-2">
         {Array.isArray(skills) &&
           skills.map((skill) => (
             <TwoLineOption

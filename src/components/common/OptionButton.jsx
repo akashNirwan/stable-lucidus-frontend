@@ -6,7 +6,7 @@ const OptionButton = ({ option, selected, optionId, onSelect, img = "" }) => {
   return (
     <button
       onClick={() => onSelect(optionId || option)}
-      className={`w-full flex items-center justify-center gap-2  bg-[#EFEAFF] px-4 py-3 rounded-[12px] border truncate border-[#7B56FF] ${
+      className={`w-full flex items-center flex-shrink-0 justify-center gap-2  bg-[#EFEAFF] px-4 py-3 rounded-[12px] border truncate border-[#7B56FF] ${
         isSelected
           ? "!bg-[#4823CF] text-white"
           : "text-[#7B56FF] hover:bg-[#4823CF] hover:text-white"

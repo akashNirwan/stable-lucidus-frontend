@@ -70,15 +70,18 @@ const FigureOut = ({ setStep, stepsData }) => {
       <LoadingSpinner size={64} />
     </div>
   ) : (
-    <div className="text-center flex flex-col gap-3">
+    <div className="text-center flex flex-col gap-3  h-[72vh]">
       <h2 className="font-bold text-[20px]">
         What are you here to <span className="text-[#5f35f1]">figure</span> out?{" "}
       </h2>
 
-      <h3 className="text-[#066146] text-sm">{stepsData.subtitle}</h3>
+      {/* <h3 className="text-[#066146] text-sm">{stepsData.subtitle}</h3> */}
+      <h3 className="text-[#066146]">
+        Select <span className="font-bold">all</span> that apply.
+      </h3>
       <StatusTitle text={"I want to:"} />
 
-      <div className="h-[300px] overflow-y-auto flex flex-col gap-3">
+      <div className="flex-1 overflow-y-auto flex flex-col gap-2">
         {stepsData.options.map((option, ind) => (
           <OptionButton
             key={ind}

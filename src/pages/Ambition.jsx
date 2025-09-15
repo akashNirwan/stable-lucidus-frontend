@@ -63,7 +63,7 @@ const Ambition = ({ stepsData }) => {
       <LoadingSpinner size={64} />
     </div>
   ) : (
-    <div className="text-center flex flex-col gap-3">
+    <div className="text-center flex flex-col gap-3  h-[72vh]">
       {/* Back Button */}
       <div className="flex items-center justify-start ">
         <div className="flex-row space-y-4">
@@ -76,7 +76,7 @@ const Ambition = ({ stepsData }) => {
         </div>
       </div>
 
-      <div className="h-[300px] overflow-y-auto flex flex-col gap-2">
+      <div className="flex-1 overflow-y-auto flex flex-col gap-2">
         <textarea
           placeholder={stepsData.highlight}
           className="placeholder:text-center w-full h-full border bg-[#EFEAFF] border-[#7B56FF] placeholder:text-[#7B56FF] text-[#7B56FF] rounded-md p-4 resize-none"
