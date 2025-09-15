@@ -22,19 +22,18 @@ const CareerCard = ({
   // };
 
   const handleSaveClick = () => {
-  dispatch(saveCareer({ careerId }))
-    .then((response) => {
-     
-      if (response.payload?.code === 200 || response.payload?.code === 201) {
-        setSaved(prev => !prev);
-      } else {
-        console.error("Career not saved, code:", response.payload?.code);
-      }
-    })
-    .catch((error) => {
-      console.error("Error saving career:", error);
-    });
-};
+    dispatch(saveCareer({ careerId }))
+      .then((response) => {
+        if (response.payload?.code === 200 || response.payload?.code === 201) {
+          setSaved((prev) => !prev);
+        } else {
+          console.error("Career not saved, code:", response.payload?.code);
+        }
+      })
+      .catch((error) => {
+        console.error("Error saving career:", error);
+      });
+  };
   const colors = [
     { bg: "bg-orange-200", text: "text-amber-800" },
     { bg: "bg-blue-200", text: "text-blue-700" },
@@ -63,7 +62,7 @@ const CareerCard = ({
  }
   return (
     <div className="text-white h-[510px] grid border rounded-2xl overflow-hidden relative w-[345px] mx-auto">
-      <div className="bg-red-400 flex items-center justify-center relative ">
+      <div className=" flex items-center justify-center relative ">
         {image ? (
           <img
             src={image}
@@ -79,7 +78,7 @@ const CareerCard = ({
         <div className="flex justify-between items-center ">
           <h4 className="text-[#042119] text-[20px] line-clamp-1">{title}</h4>
 
-          <button onClick={handleSaveClick}>
+          <button onClick={handleSaveClick} className="cursor-pointer">
             {saved ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +130,7 @@ const CareerCard = ({
         <div className="flex justify-between mt-4">
           <button
             onClick={handleMore}
-            className={`py-[12px] px-[32px] rounded-xl flex items-center justify-center ${
+            className={`py-[12px] px-[32px] rounded-xl cursor-pointer flex items-center justify-center ${
               activeBtn === "more"
                 ? "bg-[#24A57F] text-white"
                 : "text-[#24A57F]"
@@ -142,7 +141,7 @@ const CareerCard = ({
 
           <button
             onClick={handleExperienceClick}
-            className={`py-[12px] px-[32px] rounded-xl flex items-center justify-center ${
+            className={`py-[12px] px-[32px] rounded-xl cursor-pointer flex items-center justify-center ${
               activeBtn === "experience"
                 ? "bg-[#24A57F] text-white"
                 : "text-[#24A57F]"

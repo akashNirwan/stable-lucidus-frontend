@@ -123,6 +123,16 @@
   display: none;
 }
 
+/* Hide scrollbar for Chrome, Safari, Edge */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+* {
+  scrollbar-width: none; /* Firefox */
+}
+
 ol {
   list-style-type: decimal;
   padding-left: 1.5rem;
