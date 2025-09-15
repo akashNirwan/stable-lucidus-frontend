@@ -55,11 +55,9 @@ const CareerCard = ({
     navigate(`/micro-intro?careerId=${careerId}`);
   };
 
- const handleMore = ()=>{
+  const handleMore = () => {
     navigate(`/encyclopedia/purpose?careerId=${careerId}`);
-
-
- }
+  };
   return (
     <div className="text-white h-[510px] grid border rounded-2xl overflow-hidden relative w-[345px] mx-auto">
       <div className=" flex items-center justify-center relative ">
@@ -84,7 +82,7 @@ const CareerCard = ({
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"
                 height="32"
-                fill="#24A57F"
+                fill="#0F8864"
                 viewBox="0 0 32 32"
               >
                 <path d="M22.6665 4H9.33317C7.8665 4 6.6665 5.2 6.6665 6.66667V28L15.9998 24L25.3332 28V6.66667C25.3332 5.2 24.1332 4 22.6665 4Z" />
@@ -99,7 +97,7 @@ const CareerCard = ({
               >
                 <path
                   d="M22.6665 4H9.33317C7.8665 4 6.6665 5.2 6.6665 6.66667V28L15.9998 24L25.3332 28V6.66667C25.3332 5.2 24.1332 4 22.6665 4ZM22.6665 24L15.9998 21.0933L9.33317 24V8C9.33317 7.26667 9.93317 6.66667 10.6665 6.66667H21.3332C22.0665 6.66667 22.6665 7.26667 22.6665 8V24Z"
-                  fill="#24A57F"
+                  fill="#0F8864"
                 />
               </svg>
             )}
@@ -132,8 +130,8 @@ const CareerCard = ({
             onClick={handleMore}
             className={`py-[12px] px-[32px] rounded-xl cursor-pointer flex items-center justify-center ${
               activeBtn === "more"
-                ? "bg-[#24A57F] text-white"
-                : "text-[#24A57F]"
+                ? "bg-[#0F8864] text-white"
+                : "text-[#0F8864]"
             }`}
           >
             More
@@ -143,8 +141,8 @@ const CareerCard = ({
             onClick={handleExperienceClick}
             className={`py-[12px] px-[32px] rounded-xl cursor-pointer flex items-center justify-center ${
               activeBtn === "experience"
-                ? "bg-[#24A57F] text-white"
-                : "text-[#24A57F]"
+                ? "bg-[#0F8864] text-white"
+                : "text-[#0F8864]"
             }`}
           >
             Experience It

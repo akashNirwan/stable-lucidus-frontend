@@ -85,8 +85,8 @@ const CareerExperienceCard = ({ careerData, savedCareer, careerId }) => {
             onClick={handlemore}
             className={`py-[10px] px-[28px] rounded-xl cursor-pointer flex items-center justify-center font-medium transition ${
               activeBtn === "more"
-                ? "bg-[#24A57F] text-white"
-                : "text-[#24A57F] "
+                ? "bg-[#0F8864] text-white"
+                : "text-[#0F8864] "
             }`}
           >
             More
@@ -96,8 +96,8 @@ const CareerExperienceCard = ({ careerData, savedCareer, careerId }) => {
             onClick={handleExperienceClick}
             className={`py-[10px] px-[28px] rounded-xl cursor-pointer flex items-center justify-center font-medium transition ${
               activeBtn === "experience"
-                ? "bg-[#24A57F] text-white"
-                : "text-[#24A57F] "
+                ? "bg-[#0F8864] text-white"
+                : "text-[#0F8864] "
             }`}
           >
             Experience It
