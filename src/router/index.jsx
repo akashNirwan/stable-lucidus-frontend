@@ -37,7 +37,8 @@ import DashBoardMenuThree from "../pages/Dashboard-MenuThree";
 import SavedCareer from "../pages/SavedCareer";
 import DashBoardMicro from "../pages/DashBoardMicro";
 import { Navigate } from "react-router-dom";
-
+import L2S5 from "../pages/L2S5";
+import L2S6 from "../pages/L2S6";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -249,7 +250,14 @@ const router = createBrowserRouter([
     ),
     children: [{ index: true, element: <RoadMap /> }],
   },
-
+  {
+    path: "/l2s5",
+    element: <L2S5 />,
+  },
+  {
+    path: "/l2s6",
+    element: <L2S6 />,
+  },
   {
     path: "*",
     element: (

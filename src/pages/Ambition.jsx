@@ -14,7 +14,7 @@ const Ambition = ({ stepsData }) => {
   const [text, setText] = useState("");
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [searchParams] = useSearchParams();
- const gradeId = searchParams.get("gradeId");
+  const gradeId = searchParams.get("gradeId");
   const dispatch = useDispatch();
   const { StudentDataLoading, StudentData, loading } = useSelector(
     (state) => state.student
@@ -67,8 +67,10 @@ const Ambition = ({ stepsData }) => {
       {/* Back Button */}
       <div className="flex items-center justify-start ">
         <div className="flex-row space-y-4">
-          <h2 className="font-bold text-[20px]">{stepsData.title}</h2>
-          <h3 className="text-green-600 text-[14px] leading-[120%] mb-4">
+          <h2 className="font-bold text-[20px]">
+            What are your <span className="text-[#5f35f1]">ambitions?</span>
+          </h2>
+          <h3 className="text-[#066146] text-[14px] leading-[120%] mb-4">
             {stepsData.subtitle}
           </h3>
         </div>
