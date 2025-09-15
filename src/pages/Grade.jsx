@@ -39,14 +39,19 @@ const Grade = ({ setStep, stepsData }) => {
       const preSelectedGrades = getPreSelectedItems(grades, selectedGradeIds);
 
       if (preSelectedGrades.length > 0) {
-        setSelectedGrade(preSelectedGrades[0]); // Since grade is single selection
+        setSelectedGrade(preSelectedGrades[0]); 
       }
     }
   }, [isDataLoaded, grades, StudentData, selectedGrade]);
 
-  const handleSelect = (grade) => {
-    setSelectedGrade(grade);
-  };
+  // const handleSelect = (grade) => {
+  //   setSelectedGrade(grade);
+  // };
+
+  const handleSelect = (gradeId) => {
+  const selected = grades.find((grade) => grade._id === gradeId);
+  setSelectedGrade(selected);
+};
 
   const handleNext = () => {
     if (!selectedGrade) return;
@@ -81,9 +86,11 @@ const Grade = ({ setStep, stepsData }) => {
           grades.map((grade) => (
             <OptionButton
               key={grade._id}
-              option={grade.grade}
-              selected={selectedGrade?.grade}
-              onSelect={() => handleSelect(grade)}
+              option={`${grade.grade}th Grade`}
+              selected={selectedGrade?._id}
+              onSelect={handleSelect}
+              optionId={grade._id}
+
             />
           ))}
       </div>

@@ -1,11 +1,13 @@
 import React from "react";
 
-const OptionButton = ({ option, selected, onSelect, img = "" }) => {
+const OptionButton = ({ option, selected,optionId, onSelect, img = "" }) => {
+  console.log(optionId, "optionID");
+   const isSelected = optionId ? selected === optionId : selected === option;
   return (
     <button
-      onClick={() => onSelect(option)}
+      onClick={() => onSelect(optionId || option)}
       className={`w-full flex items-center justify-center gap-2  bg-[#EFEAFF] px-4 py-2 rounded-xl border truncate border-[#7B56FF] ${
-        selected === option
+        isSelected
           ? "!bg-[#4823CF] text-white"
           : "text-[#7B56FF] hover:bg-[#4823CF] hover:text-white"
       }`}

@@ -4,7 +4,7 @@ import DashBoardMicro from "./DashBoardMicro";
 import SavedCareer from "./SavedCareer";
 import { useNavigate, useLocation } from "react-router-dom";
 const DashBoardMenuOne = () => {
-  const [open, setOpen] = useState(true);
+  // const [open, s/etOpen] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
   const [activeTab, setActiveTab] = useState("micro");
@@ -60,7 +60,7 @@ const handleTabClick = (tab) => {
       </div>
 
       {activeTab === "micro" ? <DashBoardMicro /> : <SavedCareer />}
-      <NextLevelModal open={open} onClose={() => setOpen(false)} />
+      {/* <NextLevelModal open={open} onClose={() => setOpen(false)} /> */}
     </div>
   );
 };

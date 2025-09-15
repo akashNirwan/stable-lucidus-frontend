@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from "react";
 import CareerCard from "../components/dashboard/CareerCard.jsx";
 // import { Careers } from "../assets/carrerCard.jsx";
+import NextLevelModal from "../components/dashboard/Modal.jsx";
 import { fetchCareers } from "../redux/actions/dashboard-action.js";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../components/common/LoadingSpinner.jsx";
-
+import { useSearchParams } from "react-router-dom";
 const DashBoardMenuTwo = () => {
+const [searchParams] = useSearchParams();
+  const careerLevelId = searchParams.get("careerLevelId");
+  const Modal = searchParams.get("Modal");
+
+
+  const [open, setOpen] = useState(Modal);
   const dispatch = useDispatch();
   const { dashboard, loading, error } = useSelector((state) => state.dashboard);
+ 
 
   useEffect(() => {
     dispatch(fetchCareers());
@@ -49,6 +57,7 @@ const DashBoardMenuTwo = () => {
           ))}
         </div>
       )}
+      <NextLevelModal careerLevelId={careerLevelId} open={open} onClose={() => setOpen(false)} />
     </div>
   );
 };

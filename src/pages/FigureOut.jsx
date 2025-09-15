@@ -97,7 +97,7 @@ const FigureOut = ({ setStep, stepsData }) => {
           {"Previous"}
         </Button>
 
-        <Button type="button" isActive={!!selected} onClick={handleClick}>
+        <Button type="button" isActive={!!selected} disabled={loading} onClick={handleClick}>
           {loading ? <LoadingSpinner size="20px" /> : "Next"}
         </Button>
       </div>

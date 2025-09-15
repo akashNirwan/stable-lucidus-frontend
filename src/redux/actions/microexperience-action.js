@@ -82,7 +82,7 @@ export const saveAnswer = createAsyncThunk(
         }
       );
 
-      toast.success(response.data.message || "Answer Saved Successfully");
+      // toast.success(response.data.message || "Answer Saved Successfully");
       return response.data;
     } catch (error) {
       toast.error(error?.response?.data?.message || "Failed to save Answer");
@@ -110,7 +110,7 @@ export const saveBadge = createAsyncThunk(
         }
       );
 
-      toast.success(response.data.message || "Badge Saved Successfully");
+      // toast.success(response.data.message || "Badge Saved Successfully");
       return response.data;
     } catch (error) {
       toast.error(error?.response?.data?.message || "Failed to save Badge");
@@ -136,7 +136,7 @@ export const saveInsight = createAsyncThunk(
         }
       );
 
-      toast.success(response.data.message || "Insight Saved Successfully");
+      // toast.success(response.data.message || "Insight Saved Successfully");
       return response.data;
     } catch (error) {
       toast.error(error?.response?.data?.message || "Failed to save Insight");
@@ -162,7 +162,7 @@ export const saveFeedback = createAsyncThunk(
         }
       );
 
-      toast.success(response.data.message || "Feedback Saved Successfully");
+      // toast.success(response.data.message || "Feedback Saved Successfully");
       return response.data;
     } catch (error) {
       toast.error(error?.response?.data?.message || "Failed to save Feedback");
@@ -190,7 +190,7 @@ export const saveSteps = createAsyncThunk(
         }
       );
 
-      toast.success(response.data.message || "Step Saved Successfully");
+      // toast.success(response.data.message || "Step Saved Successfully");
       return response.data;
     } catch (error) {
       toast.error(error?.response?.data?.message || "Failed to save Step");

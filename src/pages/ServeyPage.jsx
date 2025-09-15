@@ -74,7 +74,7 @@ const endTime = Date.now();
     saveFeedbackRes.payload?.code === 201;
 
   if (isSaveStepsSuccess && isSaveFeedbackSuccess) {
-    navigate("/dashboard");
+    navigate(`/dashboard/explorecareers?careerLevelId=${careerLevelId}&Modal=true`);
   }
 };
   return saveFeedbackLoading || saveStepsLoading ? (

@@ -1,10 +1,36 @@
 import { X } from "lucide-react";
+import { fetchMicroexperience } from "../../redux/actions/microexperience-action";
+import { useDispatch, useSelector } from "react-redux";
+import LoadingSpinner from "../common/LoadingSpinner";
+import { useEffect } from "react";
 
-export default function NextLevelModal({ open, onClose }) {
+
+export default function NextLevelModal({ open, onClose ,careerLevelId}) {
+
+  
+   const dispatch = useDispatch();
+       const { microexperience, loading ,saveStepsLoading} = useSelector(
+         (state) => state.microexperience
+       );
+
+ useEffect(() => {
+     if (careerLevelId) {
+       dispatch(fetchMicroexperience({careerLevelId}));
+     }
+   }, [dispatch]);
+
+   console.log(microexperience?.[0]?.nextlevels?.[0]);
+   const NextLevel =  microexperience?.[0]?.nextlevels?.[0]
+
   if (!open) return null;
 
-  return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+  return loading ? (
+      <div className="flex items-center justify-center min-h-[400px]">
+                      <LoadingSpinner size={64} />
+                    </div>
+  ) : (
+
+      <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
       <div className="relative bg-white rounded-2xl shadow-lg p-6 w-80 text-center">
         {/* Close Button */}
         <button
@@ -16,12 +42,12 @@ export default function NextLevelModal({ open, onClose }) {
 
         {/* Title */}
         <h2 className="text-[#4C3AE3] font-bold text-lg mb-2">
-          Zuri’s story continues.
+          {NextLevel?.title}
         </h2>
 
         {/* Subtitle */}
         <p className="text-gray-800 mb-6">
-          A new Microfinance challenge awaits you.
+          {NextLevel?.description}
         </p>
 
         {/* CTA Button */}
@@ -29,9 +55,9 @@ export default function NextLevelModal({ open, onClose }) {
           onClick={() => alert("Go to Level 2")}
           className="w-full py-3 bg-[#24A57F] text-white font-semibold rounded-lg hover:bg-[#1e896a] transition"
         >
-          Try Level 2
+          {NextLevel?.buttonName}
         </button>
       </div>
     </div>
-  );
+  )
 }

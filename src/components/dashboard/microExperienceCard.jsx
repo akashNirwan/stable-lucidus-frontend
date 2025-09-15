@@ -11,7 +11,8 @@ const CareerCard = ({ data }) => {
   const careerLevelId = data?.careerLevelId;
   const currentRoute = data?.route;
 
-  const getNextRoute = () => {
+
+const getNextRoute = () => {
     if (!currentRoute) {
       return `/micro-intro?careerLevelId=${careerLevelId}`;
     }
@@ -21,13 +22,22 @@ const CareerCard = ({ data }) => {
     } else if (currentRoute.startsWith("/level")) {
       const urlParams = new URLSearchParams(currentRoute.split("?")[1]);
       const questionId = urlParams.get("questionId");
+      const completedCareerLevelCount = urlParams.get("completedCareerLevelCount") || "0";
+      
       return questionId
-        ? `/feedbackform?careerLevelId=${careerLevelId}&questionId=${questionId}`
+        ? `/feedbackform?careerLevelId=${careerLevelId}&questionId=${questionId}&completedCareerLevelCount=${completedCareerLevelCount}`
         : `/level?careerLevelId=${careerLevelId}`;
     } else if (currentRoute.startsWith("/feedbackform")) {
       const urlParams = new URLSearchParams(currentRoute.split("?")[1]);
       const questionId = urlParams.get("questionId");
-      return `/badge-earned?careerLevelId=${careerLevelId}&questionId=${questionId}`;
+      const completedCareerLevelCount = urlParams.get("completedCareerLevelCount") || "0";
+      
+      // Check if completedCareerLevelCount is 0, 2, or 4
+      if (completedCareerLevelCount === "0" || completedCareerLevelCount === "2" || completedCareerLevelCount === "4") {
+        return `/badge-earned?careerLevelId=${careerLevelId}&questionId=${questionId}&completedCareerLevelCount=${completedCareerLevelCount}`;
+      } else {
+        return `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}`;
+      }
     } else if (currentRoute.startsWith("/badge-earned")) {
       const urlParams = new URLSearchParams(currentRoute.split("?")[1]);
       const questionId = urlParams.get("questionId");
@@ -39,6 +49,37 @@ const CareerCard = ({ data }) => {
     // Default fallback
     return `/micro-intro?careerLevelId=${careerLevelId}`;
   };
+
+
+
+  // const getNextRoute = () => {
+  //   if (!currentRoute) {
+  //     return `/micro-intro?careerLevelId=${careerLevelId}`;
+  //   }
+
+  //   if (currentRoute.startsWith("/micro-intro")) {
+  //     return `/level?careerLevelId=${careerLevelId}`;
+  //   } else if (currentRoute.startsWith("/level")) {
+  //     const urlParams = new URLSearchParams(currentRoute.split("?")[1]);
+  //     const questionId = urlParams.get("questionId");
+  //     return questionId
+  //       ? `/feedbackform?careerLevelId=${careerLevelId}&questionId=${questionId}`
+  //       : `/level?careerLevelId=${careerLevelId}`;
+  //   } else if (currentRoute.startsWith("/feedbackform")) {
+  //     const urlParams = new URLSearchParams(currentRoute.split("?")[1]);
+  //     const questionId = urlParams.get("questionId");
+  //     return `/badge-earned?careerLevelId=${careerLevelId}&questionId=${questionId}`;
+  //   } else if (currentRoute.startsWith("/badge-earned")) {
+  //     const urlParams = new URLSearchParams(currentRoute.split("?")[1]);
+  //     const questionId = urlParams.get("questionId");
+  //     return `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}`;
+  //   } else if (currentRoute.startsWith("/student-choice")) {
+  //     return `/survey-page?careerLevelId=${careerLevelId}`;
+  //   }
+
+  //   // Default fallback
+  //   return `/micro-intro?careerLevelId=${careerLevelId}`;
+  // };
 
   const handleArrowClick = () => {
     const nextRoute = getNextRoute();
