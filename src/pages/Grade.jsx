@@ -11,7 +11,7 @@ import {
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { useNavigate } from "react-router-dom";
 import { getSelectedIds, getPreSelectedItems } from "../utils/getSelectedIds";
-
+import StatusTitle from "../components/common/SubTitle";
 const Grade = ({ setStep, stepsData }) => {
   const dispatch = useDispatch();
   const { grades, loading, gradeLoading, StudentData } = useSelector(
@@ -39,7 +39,7 @@ const Grade = ({ setStep, stepsData }) => {
       const preSelectedGrades = getPreSelectedItems(grades, selectedGradeIds);
 
       if (preSelectedGrades.length > 0) {
-        setSelectedGrade(preSelectedGrades[0]); 
+        setSelectedGrade(preSelectedGrades[0]);
       }
     }
   }, [isDataLoaded, grades, StudentData, selectedGrade]);
@@ -49,9 +49,9 @@ const Grade = ({ setStep, stepsData }) => {
   // };
 
   const handleSelect = (gradeId) => {
-  const selected = grades.find((grade) => grade._id === gradeId);
-  setSelectedGrade(selected);
-};
+    const selected = grades.find((grade) => grade._id === gradeId);
+    setSelectedGrade(selected);
+  };
 
   const handleNext = () => {
     if (!selectedGrade) return;
@@ -77,8 +77,8 @@ const Grade = ({ setStep, stepsData }) => {
       <h2 className="font-bold text-[20px]">
         What <span className="text-[#5f35f1]">grade</span> are you in?
       </h2>
-      <h3 className="text-gray-600">{stepsData.subtitle}</h3>
-      <h4 className="text-[#24A57F] font-medium">I am in:</h4>
+      <h3 className="text-gray-600 text-sm">{stepsData.subtitle}</h3>
+      <StatusTitle text={"I am in:"} />
 
       {/* Options */}
       <div className="h-[300px] overflow-y-auto flex flex-col gap-2">
@@ -90,7 +90,6 @@ const Grade = ({ setStep, stepsData }) => {
               selected={selectedGrade?._id}
               onSelect={handleSelect}
               optionId={grade._id}
-
             />
           ))}
       </div>

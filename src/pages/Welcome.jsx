@@ -20,7 +20,7 @@ export default function Welcome() {
   }, []);
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden ">
       {/* Background */}
       <div className="fixed inset-0 bg-[url('/assets/welcome/welcome-bg.svg')] bg-no-repeat bg-center bg-cover" />
 
@@ -77,7 +77,7 @@ export default function Welcome() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1 }}
-                className="text-[#C2B1FF] text-lg max-w-sm mx-auto leading-relaxed"
+                className="text-white text-lg max-w-sm mx-auto leading-relaxed"
               >
                 Lucidus is here to support and prepare you for the real world.
               </motion.p>
@@ -101,7 +101,7 @@ export default function Welcome() {
                 >
                   🔍
                 </div>
-                <span className="!text-[#C2B1FF] text-xl font-medium">
+                <span className="!text-[#C2B1FF] text-xl ">
                   Explore Careers.
                 </span>
               </motion.div>
@@ -122,7 +122,7 @@ export default function Welcome() {
                 >
                   🙌
                 </div>
-                <span className="text-[#C2B1FF] text-xl font-medium">
+                <span className="text-[#C2B1FF] text-xl ">
                   Try Micro-experiences.
                 </span>
               </motion.div>
@@ -143,7 +143,7 @@ export default function Welcome() {
                 >
                   💎
                 </div>
-                <span className="text-[#C2B1FF] text-xl font-medium text-center">
+                <span className="text-[#C2B1FF] text-xl text-center">
                   Get Custom Plans for School,
                   <br />
                   University, & Beyond.

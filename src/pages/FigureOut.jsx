@@ -4,6 +4,7 @@ import OptionButton from "../components/common/OptionButton";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import StatusTitle from "../components/common/SubTitle";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateFigureout,
@@ -74,8 +75,8 @@ const FigureOut = ({ setStep, stepsData }) => {
         What are you here to <span className="text-[#5f35f1]">figure</span> out?{" "}
       </h2>
 
-      <h3 className="text-[#066146]">{stepsData.subtitle}</h3>
-      <h4 className="text-[#24A57F] font-bold mb-1 text-[14px]">I want to:</h4>
+      <h3 className="text-[#066146] text-sm">{stepsData.subtitle}</h3>
+      <StatusTitle text={"I want to:"} />
 
       <div className="h-[300px] overflow-y-auto flex flex-col gap-3">
         {stepsData.options.map((option, ind) => (
@@ -97,7 +98,12 @@ const FigureOut = ({ setStep, stepsData }) => {
           {"Previous"}
         </Button>
 
-        <Button type="button" isActive={!!selected} disabled={loading} onClick={handleClick}>
+        <Button
+          type="button"
+          isActive={!!selected}
+          disabled={loading}
+          onClick={handleClick}
+        >
           {loading ? <LoadingSpinner size="20px" /> : "Next"}
         </Button>
       </div>
