@@ -9,7 +9,9 @@ const Header = ({data}) => {
   };
      console.log(data, "data in level ");
      
-
+const handleCross = ()=>{
+   navigate(`/dashboard/explorecareers`);
+}
   return (
     <header className="p-6 pb-0">
       <div className="w-[20px] h-[24px]">
@@ -25,7 +27,7 @@ const Header = ({data}) => {
           </button>
         </div>
         <div>
-          <FaTimes />
+          <FaTimes onClick={handleCross} />
         </div>
       </div>
     </header>

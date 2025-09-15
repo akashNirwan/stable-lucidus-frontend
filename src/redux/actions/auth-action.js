@@ -41,9 +41,9 @@ export const verifyOtp = createAsyncThunk(
     try {
       const response = await client.post("user/auth/verify-otp", data);
 
-      if (response?.data?.status_code === 200) {
-        toast.success(response?.data?.message || "OTP verified successfully");
-      }
+      // if (response?.data?.status_code === 200) {
+      //   toast.success(response?.data?.message || "OTP verified successfully");
+      // }
 
       return response.data;
     } catch (error) {
@@ -51,7 +51,7 @@ export const verifyOtp = createAsyncThunk(
         error?.response?.data?.message ||
         error?.message ||
         "OTP verification failed";
-      toast.error(errorMessage);
+      // toast.error(errorMessage);
       return rejectWithValue(errorMessage);
     }
   }
@@ -63,9 +63,9 @@ export const resendOtp = createAsyncThunk(
     try {
       const response = await client.post("user/auth/resend-otp", data);
 
-      if (response?.data?.status_code === 200) {
-        toast.success(response?.data?.message || "OTP sent successfully");
-      }
+      // if (response?.data?.status_code === 200) {
+      //   toast.success(response?.data?.message || "OTP sent successfully");
+      // }
 
       return response.data;
     } catch (error) {

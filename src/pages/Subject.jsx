@@ -26,6 +26,7 @@ const Subject = ({ setStep, stepsData }) => {
   } = useSelector((state) => state.student);
   const [selectedSubjects, setSelectedSubjects] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [isInitialSelectionDone, setIsInitialSelectionDone] = useState(false);
   const gradeId = searchParams.get("gradeId");
 
   useEffect(() => {
@@ -43,12 +44,7 @@ const Subject = ({ setStep, stepsData }) => {
   }, [dispatch, gradeId]);
 
   useEffect(() => {
-    if (
-      isDataLoaded &&
-      subjects &&
-      StudentData &&
-      selectedSubjects.length === 0
-    ) {
+   if (isDataLoaded && subjects && StudentData && !isInitialSelectionDone) {
       const { selectedSubjectIds } = getSelectedIds(StudentData);
       const preSelectedSubjects = getPreSelectedItems(
         subjects,
@@ -58,16 +54,34 @@ const Subject = ({ setStep, stepsData }) => {
       if (preSelectedSubjects.length > 0) {
         setSelectedSubjects(preSelectedSubjects);
       }
+      setIsInitialSelectionDone(true);
     }
-  }, [isDataLoaded, subjects, StudentData, selectedSubjects.length]);
+  }, [isDataLoaded, subjects, StudentData, isInitialSelectionDone]);
+
+  // const handleSelect = (subject) => {
+  //   setSelectedSubjects((prev) =>
+  //     prev.some((s) => s._id === subject._id)
+  //       ? prev.filter((s) => s._id !== subject._id)
+  //       : [...prev, subject]
+  //   );
+  // };
 
   const handleSelect = (subject) => {
-    setSelectedSubjects((prev) =>
-      prev.some((s) => s._id === subject._id)
-        ? prev.filter((s) => s._id !== subject._id)
-        : [...prev, subject]
-    );
-  };
+  setSelectedSubjects((prev) => {
+    const isAlreadySelected = prev.some((s) => s._id === subject._id);
+
+    if (isAlreadySelected) {
+      
+      return prev.filter((s) => s._id !== subject._id);
+    } else if (prev.length < 5) {
+      
+      return [...prev, subject];
+    } else {
+      
+      return prev;
+    }
+  });
+};
 
   const handleNext = () => {
     if (selectedSubjects.length === 0) return;

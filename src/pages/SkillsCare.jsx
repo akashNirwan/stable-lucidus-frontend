@@ -10,14 +10,17 @@ import {
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { useNavigate } from "react-router-dom";
 import { getSelectedIds, getPreSelectedItems } from "../utils/getSelectedIds";
-
+import { useSearchParams } from "react-router-dom";
 const SkillsCare = ({ setStep, stepsData }) => {
   const dispatch = useDispatch();
+   const [searchParams] = useSearchParams();
   const { sdgs, loading, SdgsLoading, StudentData } = useSelector(
     (state) => state.student
   );
+   const gradeId = searchParams.get("gradeId");
   const [selected, setSelected] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [isInitialSelectionDone, setIsInitialSelectionDone] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,15 +33,16 @@ const SkillsCare = ({ setStep, stepsData }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (isDataLoaded && sdgs && StudentData && selected.length === 0) {
+    if (isDataLoaded && sdgs && StudentData && !isInitialSelectionDone) {
       const { selectedSdgIds } = getSelectedIds(StudentData);
       const preSelectedSdgs = getPreSelectedItems(sdgs, selectedSdgIds);
 
       if (preSelectedSdgs.length > 0) {
         setSelected(preSelectedSdgs.slice(0, 3));
       }
+      setIsInitialSelectionDone(true)
     }
-  }, [isDataLoaded, sdgs, StudentData, selected.length]);
+  }, [isDataLoaded, sdgs, StudentData, isInitialSelectionDone]);
 
   const handleSelect = (sdg) => {
     if (selected.some((s) => s._id === sdg._id)) {
@@ -59,13 +63,13 @@ const SkillsCare = ({ setStep, stepsData }) => {
 
     dispatch(updateSdg(payload)).then((res) => {
       if (res.payload && res.payload.code === 201) {
-        navigate("/questions/ambition");
+        navigate(`/questions/ambition?gradeId=${gradeId}`);
       }
     });
   };
 
   const handleBack = () => {
-    navigate("/questions/skills");
+    navigate(`/questions/skills?gradeId=${gradeId}`);
   };
 
   return loading && !isDataLoaded ? (

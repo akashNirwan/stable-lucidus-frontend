@@ -49,7 +49,7 @@ export const updateSchool = createAsyncThunk(
         }
       );
 
-      toast.success(response.data.message || "School Updated");
+      // toast.success(response.data.message || "School Updated");
       return response.data;
     } catch (error) {
       toast.error(error?.response?.data?.message || "Failed to update school");
@@ -100,7 +100,7 @@ export const updateGrades = createAsyncThunk(
         }
       );
 
-      toast.success(response.data.message || "Grade Updated");
+      // toast.success(response.data.message || "Grade Updated");
       return response.data;
     } catch (error) {
       toast.error(error?.response?.data?.message || "Failed to update Grade");
@@ -152,7 +152,7 @@ export const updateSkills = createAsyncThunk(
         }
       );
 
-      toast.success(response.data.message || "Skills Updated");
+      // toast.success(response.data.message || "Skills Updated");
       return response.data;
     } catch (error) {
       toast.error(error?.response?.data?.message || "Failed to update Skills");
@@ -205,7 +205,7 @@ export const updateSubjects = createAsyncThunk(
         }
       );
 
-      toast.success(response.data.message || "Subject Updated");
+      // toast.success(response.data.message || "Subject Updated");
       return response.data;
     } catch (error) {
       toast.error(error?.response?.data?.message || "Failed to update Subject");
@@ -257,10 +257,10 @@ export const updateSdg = createAsyncThunk(
         }
       );
 
-      toast.success(response.data.message || "Sdg Updated");
+      // toast.success(response.data.message || "Sdg Updated");
       return response.data;
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Failed to update Skills");
+      toast.error(error?.response?.data?.message || "Failed to update Sdg");
       return rejectWithValue(error?.response?.data?.message || error?.message);
     }
   }
@@ -284,7 +284,7 @@ export const updateAmbition = createAsyncThunk(
         }
       );
 
-      toast.success(response.data.message || "Ambition Updated");
+      // toast.success(response.data.message || "Ambition Updated");
       return response.data;
     } catch (error) {
       toast.error(error?.response?.data?.message || "Failed to add Ambition");
@@ -337,7 +337,7 @@ export const updateFigureout = createAsyncThunk(
         }
       );
 
-      toast.success(response.data.message || "Figureout Updated");
+      // toast.success(response.data.message || "Figureout Updated");
       return response.data;
     } catch (error) {
       toast.error(error?.response?.data?.message || "Failed to add Figureout");

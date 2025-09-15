@@ -50,7 +50,7 @@ export const saveCareer = createAsyncThunk(
         }
       );
 
-      toast.success(response.data.message || "Career Saved Successfully");
+      // toast.success(response.data.message || "Career Saved Successfully");
       return {
         ...response.data,
         careerId: payload.careerId  
@@ -195,7 +195,7 @@ export const updateName = createAsyncThunk(
         }
       );
 
-      toast.success(response.data.message || "Username Updated");
+      // toast.success(response.data.message || "Username Updated");
       return response.data;
     } catch (error) {
       toast.error(error?.response?.data?.message || "Failed to Update username");

@@ -16,10 +16,25 @@ const CareerCard = ({
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // const handleSaveClick = () => {
+  //   setSaved(!saved);
+  //   dispatch(saveCareer({ careerId }));
+  // };
+
   const handleSaveClick = () => {
-    setSaved(!saved);
-    dispatch(saveCareer({ careerId }));
-  };
+  dispatch(saveCareer({ careerId }))
+    .then((response) => {
+     
+      if (response.payload?.code === 200 || response.payload?.code === 201) {
+        setSaved(prev => !prev);
+      } else {
+        console.error("Career not saved, code:", response.payload?.code);
+      }
+    })
+    .catch((error) => {
+      console.error("Error saving career:", error);
+    });
+};
   const colors = [
     { bg: "bg-orange-200", text: "text-amber-800" },
     { bg: "bg-blue-200", text: "text-blue-700" },

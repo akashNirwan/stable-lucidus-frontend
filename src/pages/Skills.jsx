@@ -19,9 +19,13 @@ const Skills = ({ setStep, stepsData }) => {
   const { skills, loading, skillsLoading, StudentData } = useSelector(
     (state) => state.student
   );
+
+
+
   const gradeId = searchParams.get("gradeId");
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [isInitialSelectionDone, setIsInitialSelectionDone] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,7 +42,7 @@ const Skills = ({ setStep, stepsData }) => {
 
   // Auto-select based on fetched student data
   useEffect(() => {
-    if (isDataLoaded && skills && StudentData && selectedSkills.length === 0) {
+   if (isDataLoaded && skills && StudentData && !isInitialSelectionDone) {
       const { selectedSkillIds } = getSelectedIds(StudentData);
 
       if (selectedSkillIds.length > 0) {
@@ -48,8 +52,9 @@ const Skills = ({ setStep, stepsData }) => {
         );
         setSelectedSkills(validSkillIds);
       }
+      setIsInitialSelectionDone(true);
     }
-  }, [isDataLoaded, skills, StudentData, selectedSkills.length]);
+  }, [isDataLoaded, skills, StudentData, isInitialSelectionDone]);
 
   const handleSelect = (skill) => {
     const skillId = skill._id;
@@ -72,7 +77,7 @@ const Skills = ({ setStep, stepsData }) => {
       })
     ).then((res) => {
       if (res.payload && res.payload.code === 201) {
-        navigate("/questions/skills-care");
+        navigate(`/questions/skills-care?gradeId=${gradeId}`);
       }
     });
   };

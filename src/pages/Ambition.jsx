@@ -9,11 +9,12 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { getSelectedIds } from "../utils/getSelectedIds";
-
+import { useSearchParams } from "react-router-dom";
 const Ambition = ({ stepsData }) => {
   const [text, setText] = useState("");
   const [isDataLoaded, setIsDataLoaded] = useState(false);
-
+  const [searchParams] = useSearchParams();
+ const gradeId = searchParams.get("gradeId");
   const dispatch = useDispatch();
   const { StudentDataLoading, StudentData, loading } = useSelector(
     (state) => state.student
@@ -54,7 +55,7 @@ const Ambition = ({ stepsData }) => {
   };
 
   const handleBack = () => {
-    navigate("/questions/skills-care");
+    navigate(`/questions/skills-care?gradeId=${gradeId}`);
   };
 
   return StudentDataLoading && !isDataLoaded ? (
