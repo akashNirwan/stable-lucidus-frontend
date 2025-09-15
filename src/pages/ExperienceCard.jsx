@@ -50,8 +50,8 @@ const CareerExperienceCard = ({ careerData, savedCareer, careerId }) => {
           <div className="text-xl text-[#042119] font-semibold">
             {careerData?.career || "Career"}
           </div>
-          <div className="flex items-center gap-1 text-gray-600">
-            <button onClick={handlebookmark}>
+          <div className="flex items-center gap-1 text-gray-600 ">
+            <button onClick={handlebookmark} className="cursor-pointer">
               {bookmark ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +83,7 @@ const CareerExperienceCard = ({ careerData, savedCareer, careerId }) => {
         <div className="flex justify-between mt-2 px-4">
           <button
             onClick={handlemore}
-            className={`py-[10px] px-[28px] rounded-xl flex items-center justify-center font-medium transition ${
+            className={`py-[10px] px-[28px] rounded-xl cursor-pointer flex items-center justify-center font-medium transition ${
               activeBtn === "more"
                 ? "bg-[#24A57F] text-white"
                 : "text-[#24A57F] "
@@ -94,7 +94,7 @@ const CareerExperienceCard = ({ careerData, savedCareer, careerId }) => {
 
           <button
             onClick={handleExperienceClick}
-            className={`py-[10px] px-[28px] rounded-xl flex items-center justify-center font-medium transition ${
+            className={`py-[10px] px-[28px] rounded-xl cursor-pointer flex items-center justify-center font-medium transition ${
               activeBtn === "experience"
                 ? "bg-[#24A57F] text-white"
                 : "text-[#24A57F] "
