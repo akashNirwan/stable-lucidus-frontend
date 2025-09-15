@@ -14,7 +14,9 @@ import LoadingSpinner from "../components/common/LoadingSpinner";
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const dispatch = useDispatch();
-  const { loginLoading, loginerror, signuploading } = useSelector((state) => state.auth);
+  const { loginLoading, loginerror, signuploading } = useSelector(
+    (state) => state.auth
+  );
   const navigate = useNavigate();
 
   const recaptcha_token = import.meta.env.VITE_reCAPTCHA_KEY;
@@ -196,11 +198,10 @@ export default function Login() {
         )}
       </div>
 
-      {/* Submit Button */}
-
-      <Button type="submit" 
-      disabled={ loginLoading || !isValid || signuploading}>
-        {/* {isLogin ? "Send OTP" : "Create Account"} */}
+      <Button
+        type="submit"
+        disabled={loginLoading || !isValid || signuploading}
+      >
         {loginLoading ? (
           <LoadingSpinner size={20}></LoadingSpinner>
         ) : isLogin ? (
