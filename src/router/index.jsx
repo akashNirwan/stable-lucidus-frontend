@@ -37,8 +37,7 @@ import DashBoardMenuThree from "../pages/Dashboard-MenuThree";
 import SavedCareer from "../pages/SavedCareer";
 import DashBoardMicro from "../pages/DashBoardMicro";
 import { Navigate } from "react-router-dom";
-import MicroExperienceLayoutTwo from "./microIntroWrapperLvl2";
-import MicroIntroScreen2 from "../pages/MicroIntroScreen2";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -250,15 +249,7 @@ const router = createBrowserRouter([
     ),
     children: [{ index: true, element: <RoadMap /> }],
   },
-  {
-    path: "/micro-intro-two",
-    element: (
-      <ProtectedRoute>
-        <MicroExperienceLayoutTwo />
-      </ProtectedRoute>
-    ),
-    children: [{ index: true, element: <MicroIntroScreen2 /> }],
-  },
+
   {
     path: "*",
     element: (
