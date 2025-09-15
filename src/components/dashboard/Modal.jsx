@@ -3,25 +3,35 @@ import { fetchMicroexperience } from "../../redux/actions/microexperience-action
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../common/LoadingSpinner";
 import { useEffect } from "react";
-
+import { useNavigate } from "react-router-dom";
 
 export default function NextLevelModal({ open, onClose ,careerLevelId}) {
-
+      const navigate = useNavigate();
   
    const dispatch = useDispatch();
        const { microexperience, loading ,saveStepsLoading} = useSelector(
          (state) => state.microexperience
        );
-
+ const NextLevel =  microexperience?.[0]?.nextlevels?.[0]
+  const careerId =   microexperience?.[0]?.career?.[0]?._id 
+       
  useEffect(() => {
      if (careerLevelId) {
        dispatch(fetchMicroexperience({careerLevelId}));
      }
    }, [dispatch]);
 
-   console.log(microexperience?.[0]?.nextlevels?.[0]);
-   const NextLevel =  microexperience?.[0]?.nextlevels?.[0]
+  // console.log(microexperience?.[0]?.career?.[0]?._id,"career id");
+  
+  
 
+    const nextLevelNumber = NextLevel?.buttonName?.match(/\d+/)?.[0] || "";
+
+
+   const  handleClick = ()=>{
+     navigate(`/micro-intro?careerId=${careerId}&levelNumber=${nextLevelNumber}`)
+   }
+       
   if (!open) return null;
 
   return loading ? (
@@ -52,7 +62,7 @@ export default function NextLevelModal({ open, onClose ,careerLevelId}) {
 
         {/* CTA Button */}
         <button
-          onClick={() => alert("Go to Level 2")}
+          onClick={handleClick}
           className="w-full py-3 bg-[#24A57F] text-white font-semibold rounded-lg hover:bg-[#1e896a] transition"
         >
           {NextLevel?.buttonName}
