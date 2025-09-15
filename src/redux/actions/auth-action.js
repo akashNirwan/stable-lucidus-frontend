@@ -26,7 +26,7 @@ export const signupUser = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await client.post("user/auth/signup", data);
-      toast.success(response?.data?.message || "Account successfuly created");
+      toast.success( "OTP sent to Email successfully");
       return response.data;
     } catch (error) {
       toast.error(error?.response?.data?.message || "Signup Failed");

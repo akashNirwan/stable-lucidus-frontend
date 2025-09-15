@@ -110,9 +110,15 @@ const slides = useMemo(() => {
             </h2>
 
             {/* Render paragraph or list */}
-            {slides[current].text && (
+            {/* {slides[current].text && (
               <p className="text-sm leading-relaxed">{slides[current].text}</p>
-            )}
+            )} */}
+            {slides[current].text && (
+  <div
+    className="text-sm leading-relaxed"
+    dangerouslySetInnerHTML={{ __html: slides[current].text }}
+  />
+)}
 
             {slides[current].list && (
               <ul className="list-disc pl-5 space-y-2 text-sm">

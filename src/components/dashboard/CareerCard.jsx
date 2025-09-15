@@ -57,7 +57,7 @@ const CareerCard = ({
   };
 
  const handleMore = ()=>{
-    navigate(`/encyclopedia?careerId=${careerId}`);
+    navigate(`/encyclopedia/purpose?careerId=${careerId}`);
 
 
  }

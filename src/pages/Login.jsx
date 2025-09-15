@@ -76,7 +76,7 @@ export default function Login() {
       }
     } catch (err) {
       console.error("Auth failed:", err);
-      toast.error(err || "Something went wrong");
+      // toast.error(err || "Something went wrong");
     }
   };
 

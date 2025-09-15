@@ -91,9 +91,10 @@ export default function PurposeCrousel() {
 
                 {/* Render paragraph or list */}
                 {slides[current].text && (
-                  <p className="text-sm leading-relaxed">
-                    {slides[current].text}
-                  </p>
+                  <div
+  className="text-sm leading-relaxed"
+  dangerouslySetInnerHTML={{ __html: slides[current].text }}
+></div>
                 )}
 
                 {slides[current].list && (

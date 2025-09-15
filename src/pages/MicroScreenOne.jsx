@@ -5,14 +5,14 @@ const MicroIntoScreenOne = ({ setScreen, data }) => {
   return (
     <div className="grid gap-2">
       <h3 className="font-bold text-[20px] text-center">
-        {data?.career?.[0]?.career}
+       {data?.questionintros?.[0]?.titleOne}
       </h3>
-      <p className="text-center text-[#042119]">
+      {/* <p className="text-center text-[#042119]">
         {data?.career?.[0]?.description}
-      </p>
-      <p className="text-center text-[#042119]">
+      </p> */}
+      {/* <p className="text-center text-[#042119]">
         {data?.questionintros?.[0]?.titleOne}
-      </p>
+      </p> */}
       <p className="text-center text-[#042119]">
         {data?.questionintros?.[0]?.titleTwo}
       </p>
