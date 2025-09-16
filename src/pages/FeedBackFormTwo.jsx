@@ -8,6 +8,7 @@ import { saveInsight } from "../redux/actions/microexperience-action";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { saveSteps } from "../redux/actions/microexperience-action";
+
 const FeedBackFormTwo = ({ microexperience, careerLevelId, levelNumber }) => {
   const dispatch = useDispatch();
 
@@ -106,6 +107,7 @@ const FeedBackFormTwo = ({ microexperience, careerLevelId, levelNumber }) => {
             selected={selected.some((item) => item._id === insight._id)}
             onSelect={() => handleSelect(insight)}
             img={insight.icon}
+            bold={false}
           />
         ))}
       </div>

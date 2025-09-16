@@ -65,14 +65,12 @@ const Dropdown = ({ label = "Select Your School", options = [], onSelect }) => {
             //   onSelect={handleSelect}
             // />
 
-  <OptionButton
-    key={idx}
-    option={option.label}                // 👈 sirf naam dikhane ke liye
-    selected={selected?.label}           // 👈 selected school name
-    onSelect={() => handleSelect(option)} // 👈 value return karega
-  />
-
-
+            <OptionButton
+              key={idx}
+              option={option.label} // 👈 sirf naam dikhane ke liye
+              selected={selected?.label} // 👈 selected school name
+              onSelect={() => handleSelect(option)} // 👈 value return karega
+            />
           ))}
         </div>
       )}
