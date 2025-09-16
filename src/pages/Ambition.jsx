@@ -14,7 +14,7 @@ const Ambition = ({ stepsData }) => {
   const [text, setText] = useState("");
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [searchParams] = useSearchParams();
- const gradeId = searchParams.get("gradeId");
+  const gradeId = searchParams.get("gradeId");
   const dispatch = useDispatch();
   const { StudentDataLoading, StudentData, loading } = useSelector(
     (state) => state.student
@@ -63,18 +63,20 @@ const Ambition = ({ stepsData }) => {
       <LoadingSpinner size={64} />
     </div>
   ) : (
-    <div className="text-center flex flex-col gap-3">
+    <div className="text-center flex flex-col gap-3  h-[72vh]">
       {/* Back Button */}
       <div className="flex items-center justify-start ">
         <div className="flex-row space-y-4">
-          <h2 className="font-bold text-[20px]">{stepsData.title}</h2>
-          <h3 className="text-green-600 text-[14px] leading-[120%] mb-4">
+          <h2 className="font-bold text-[20px]">
+            What are your <span className="text-[#5f35f1]">ambitions?</span>
+          </h2>
+          <h3 className="text-[#066146] text-[14px] leading-[120%] mb-4">
             {stepsData.subtitle}
           </h3>
         </div>
       </div>
 
-      <div className="h-[300px] overflow-y-auto flex flex-col gap-2">
+      <div className="flex-1 overflow-y-auto flex flex-col gap-2">
         <textarea
           placeholder={stepsData.highlight}
           className="placeholder:text-center w-full h-full border bg-[#EFEAFF] border-[#7B56FF] placeholder:text-[#7B56FF] text-[#7B56FF] rounded-md p-4 resize-none"
@@ -102,7 +104,7 @@ const Ambition = ({ stepsData }) => {
           onClick={handleNext}
           disabled={loading || text.trim().length === 0}
         >
-          {loading ? <LoadingSpinner size="20px" /> : "Next"}
+          {loading ? <LoadingSpinner size="20px" /> : "Show Me Careers"}
         </Button>
       </div>
     </div>

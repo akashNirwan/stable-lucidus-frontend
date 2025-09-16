@@ -5,7 +5,7 @@ import LoadingBar from "../components/loadingComp";
 const QuestionFinalLoad = () => {
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <div className="fixed inset-0 bg-[url('/assets/welcome/welcome-bg.svg')] bg-no-repeat bg-center bg-cover" />
+      <div className="fixed inset-0 bg-[url('/welcome-loading.svg')] bg-no-repeat bg-center bg-cover" />
 
       <div className="w-full max-w-[375px] flex mx-auto">
         <div className="fixed inset-0">

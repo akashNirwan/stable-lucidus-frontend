@@ -39,7 +39,7 @@ const Grade = ({ setStep, stepsData }) => {
       const preSelectedGrades = getPreSelectedItems(grades, selectedGradeIds);
 
       if (preSelectedGrades.length > 0) {
-        setSelectedGrade(preSelectedGrades[0]); 
+        setSelectedGrade(preSelectedGrades[0]);
       }
     }
   }, [isDataLoaded, grades, StudentData, selectedGrade]);
@@ -49,9 +49,9 @@ const Grade = ({ setStep, stepsData }) => {
   // };
 
   const handleSelect = (gradeId) => {
-  const selected = grades.find((grade) => grade._id === gradeId);
-  setSelectedGrade(selected);
-};
+    const selected = grades.find((grade) => grade._id === gradeId);
+    setSelectedGrade(selected);
+  };
 
   const handleNext = () => {
     if (!selectedGrade) return;
@@ -72,16 +72,19 @@ const Grade = ({ setStep, stepsData }) => {
       <LoadingSpinner size={64} />
     </div>
   ) : (
-    <div className="text-center flex flex-col gap-3">
+    <div className="text-center flex flex-col gap-3  h-[72vh]">
       {/* Title & Subtitle */}
       <h2 className="font-bold text-[20px]">
         What <span className="text-[#5f35f1]">grade</span> are you in?
       </h2>
-      <h3 className="text-gray-600">{stepsData.subtitle}</h3>
-      <h4 className="text-[#24A57F] font-medium">I am in:</h4>
+      {/* <h3 className="text-gray-600">{stepsData.subtitle}</h3> */}
+      <h3 className="text-[#066146]">
+        Select any <span className="font-bold">one.</span>{" "}
+      </h3>
+      <h4 className="text-[#24A57F] font-bold">I am in:</h4>
 
       {/* Options */}
-      <div className="h-[300px] overflow-y-auto flex flex-col gap-2">
+      <div className="flex-1 overflow-y-auto flex flex-col gap-2">
         {Array.isArray(grades) &&
           grades.map((grade) => (
             <OptionButton
@@ -90,7 +93,6 @@ const Grade = ({ setStep, stepsData }) => {
               selected={selectedGrade?._id}
               onSelect={handleSelect}
               optionId={grade._id}
-
             />
           ))}
       </div>

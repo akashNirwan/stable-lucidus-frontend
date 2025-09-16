@@ -12,7 +12,7 @@ import LoadingSpinner from "../components/common/LoadingSpinner";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { getSelectedIds, getPreSelectedItems } from "../utils/getSelectedIds";
-
+import StatusTitle from "../components/common/SubTitle";
 const Subject = ({ setStep, stepsData }) => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ const Subject = ({ setStep, stepsData }) => {
   }, [dispatch, gradeId]);
 
   useEffect(() => {
-   if (isDataLoaded && subjects && StudentData && !isInitialSelectionDone) {
+    if (isDataLoaded && subjects && StudentData && !isInitialSelectionDone) {
       const { selectedSubjectIds } = getSelectedIds(StudentData);
       const preSelectedSubjects = getPreSelectedItems(
         subjects,
@@ -67,21 +67,18 @@ const Subject = ({ setStep, stepsData }) => {
   // };
 
   const handleSelect = (subject) => {
-  setSelectedSubjects((prev) => {
-    const isAlreadySelected = prev.some((s) => s._id === subject._id);
+    setSelectedSubjects((prev) => {
+      const isAlreadySelected = prev.some((s) => s._id === subject._id);
 
-    if (isAlreadySelected) {
-      
-      return prev.filter((s) => s._id !== subject._id);
-    } else if (prev.length < 5) {
-      
-      return [...prev, subject];
-    } else {
-      
-      return prev;
-    }
-  });
-};
+      if (isAlreadySelected) {
+        return prev.filter((s) => s._id !== subject._id);
+      } else if (prev.length < 5) {
+        return [...prev, subject];
+      } else {
+        return prev;
+      }
+    });
+  };
 
   const handleNext = () => {
     if (selectedSubjects.length === 0) return;
@@ -106,16 +103,19 @@ const Subject = ({ setStep, stepsData }) => {
       <LoadingSpinner size={64} />
     </div>
   ) : (
-    <div className="text-center flex flex-col gap-3">
-      <h2 className="font-bold text-[20px]">
+    <div className="text-center flex flex-col gap-3  h-[72vh]">
+      <h2 className="font-bold text-[20px] w-full">
         Pick the <span className="text-[#5f35f1]">subjects</span> that excite
         you{" "}
       </h2>
 
-      <h3 className="text-[#066146]  line-clamp-2">{stepsData.subtitle}</h3>
-      <h4 className="text-[#24A57F] font-bold mb-1 text-[14px]">I want to:</h4>
+      <h3 className="text-[#066146] text-sm line-clamp-1">
+        {/* {stepsData.subtitle} */}
+        You don’t have to be great at it. Select up to five
+      </h3>
 
-      <div className="max-h-[275px] overflow-y-auto grid gap-3">
+      <StatusTitle text={"I want to:"} />
+      <div className="flex-1 overflow-y-auto flex flex-col gap-2">
         {Array.isArray(subjects) &&
           subjects.map((subject) => (
             <TwoLineOption

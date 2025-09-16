@@ -168,13 +168,13 @@ const handleMakeRecommendation = async () => {
         </button>
       </div>
 
-      {/* Title */}
-      <h2 className="text-center text-xl font-bold mb-1">
-        Choose your strategy
-      </h2>
-      <p className="text-center text-teal-300 mb-6">
-        Drag and reorder to prioritize.
-      </p>
+        {/* Title */}
+        <h2 className="text-center text-xl font-bold mb-1">
+          Choose your strategy
+        </h2>
+        <p className="text-center text-teal-300 mb-6">
+          Drag and reorder to prioritize.
+        </p>
 
       {/* Draggable List */}
       <DragDropContext onDragEnd={handleDragEnd}>
@@ -254,19 +254,19 @@ const handleMakeRecommendation = async () => {
         </button>
       </div>
 
-      {/* Research Popup */}
+        {/* Research Popup */}
 
-      {showResearch && (
-        <>
-          {/* Overlay with blur */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40"
-            onClick={() => setShowResearch(false)} // click outside to close
-          />
+        {showResearch && (
+          <>
+            {/* Overlay with blur */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40"
+              onClick={() => setShowResearch(false)} // click outside to close
+            />
 
           {/* Popup */}
           <motion.div

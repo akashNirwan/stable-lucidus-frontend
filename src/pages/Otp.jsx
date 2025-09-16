@@ -9,7 +9,7 @@ import { verifyOtp, resendOtp } from "../redux/actions/auth-action";
 import Button from "../components/common/Button";
 import toast from "react-hot-toast";
 import { otpSchema } from "../validation/auth-validaion";
-
+import { ArrowLeft } from "lucide-react";
 export default function Otp() {
   const [otp, setOtp] = useState(Array(6).fill(""));
   const inputRefs = useRef([]);
@@ -191,9 +191,9 @@ export default function Otp() {
           type="button"
           onClick={handleBack}
           disabled={verifyOtpLoading}
-          className="text-[#24A57F]"
+          className="text-[#24A57F] font-bold"
         >
-          ←
+          <ArrowLeft className="font-bold" />
         </button>
       </div>
 

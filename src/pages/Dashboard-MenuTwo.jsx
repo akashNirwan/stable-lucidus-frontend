@@ -7,15 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../components/common/LoadingSpinner.jsx";
 import { useSearchParams } from "react-router-dom";
 const DashBoardMenuTwo = () => {
-const [searchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const careerLevelId = searchParams.get("careerLevelId");
   const Modal = searchParams.get("Modal");
-
 
   const [open, setOpen] = useState(Modal);
   const dispatch = useDispatch();
   const { dashboard, loading, error } = useSelector((state) => state.dashboard);
- 
 
   useEffect(() => {
     dispatch(fetchCareers());
@@ -32,8 +30,8 @@ const [searchParams] = useSearchParams();
     </div>
   ) : (
     <div className="p-4 max-w-[375px] md:max-w-[1024px] mx-auto">
-      <h3 className="text-[#A187FF] text-[28px]">Explore Careers</h3>
-      <p className="text-[#EFEAFF] leading-[150%] mb-2">
+      <h3 className="text-[#A187FF] text-[28px] font-bold">Explore Careers</h3>
+      <p className="text-[#EFEAFF] leading-[150%] mb-2 text-sm">
         Try micro-experiences to unlock more{" "}
       </p>
       {careers.length === 0 ? (
@@ -57,7 +55,11 @@ const [searchParams] = useSearchParams();
           ))}
         </div>
       )}
-      <NextLevelModal careerLevelId={careerLevelId} open={open} onClose={() => setOpen(false)} />
+      <NextLevelModal
+        careerLevelId={careerLevelId}
+        open={open}
+        onClose={() => setOpen(false)}
+      />
     </div>
   );
 };

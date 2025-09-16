@@ -12,15 +12,13 @@ import LoadingSpinner from "../components/common/LoadingSpinner";
 import { useNavigate } from "react-router-dom";
 import { getSelectedIds } from "../utils/getSelectedIds";
 import { useSearchParams } from "react-router-dom";
-
+import StatusTitle from "../components/common/SubTitle";
 const Skills = ({ setStep, stepsData }) => {
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const { skills, loading, skillsLoading, StudentData } = useSelector(
     (state) => state.student
   );
-
-
 
   const gradeId = searchParams.get("gradeId");
   const [selectedSkills, setSelectedSkills] = useState([]);
@@ -42,7 +40,7 @@ const Skills = ({ setStep, stepsData }) => {
 
   // Auto-select based on fetched student data
   useEffect(() => {
-   if (isDataLoaded && skills && StudentData && !isInitialSelectionDone) {
+    if (isDataLoaded && skills && StudentData && !isInitialSelectionDone) {
       const { selectedSkillIds } = getSelectedIds(StudentData);
 
       if (selectedSkillIds.length > 0) {
@@ -91,15 +89,22 @@ const Skills = ({ setStep, stepsData }) => {
       <LoadingSpinner size={64} />
     </div>
   ) : (
-    <div className="text-center flex flex-col gap-2">
+    <div className="text-center flex flex-col gap-3  h-[72vh]">
       <div>
-        <h2 className="font-bold text-[20px]">{stepsData.title}</h2>
+        {/* <h2 className="font-bold text-[20px]">{stepsData.title}</h2> */}
+        <h2 className="font-bold text-[20px]">
+          What are your top super{" "}
+          <span className="text-[#5f35f1]">skills?</span>
+        </h2>
       </div>
 
-      <h3 className="text-[#066146]  line-clamp-2">{stepsData.subtitle}</h3>
-      <h4 className="text-[#24A57F] font-medium">I am good at:</h4>
+      <h3 className="text-[#066146]  line-clamp-1 text-sm">
+        {/* {stepsData.subtitle} */}
+        Select any that apply.
+      </h3>
+      <StatusTitle text={"I am good at:"} />
 
-      <div className="h-[320px] overflow-y-auto grid gap-3">
+      <div className="flex-1 overflow-y-auto flex flex-col gap-2">
         {Array.isArray(skills) &&
           skills.map((skill) => (
             <TwoLineOption
