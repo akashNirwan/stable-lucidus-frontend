@@ -14,8 +14,8 @@ export default function OnBoardWrapper() {
   const currentStepName = location.pathname.split("/").pop();
   const currentStepIndex = steps.indexOf(currentStepName);
   return (
-    <div className="h-screen relative overflow-hidden">
-      <div className="bg-[url(/onBoard-bg.jpeg)] h-screen w-full bg-cover bg-center">
+    <div className="h-[100dvh] relative overflow-hidden">
+      <div className="bg-[url(/onBoard-bg.jpeg)] h-full w-full bg-cover bg-center">
         <div className="fixed inset-0">
           {[...Array(30)].map((_, i) => (
             <div
@@ -46,23 +46,12 @@ export default function OnBoardWrapper() {
         </div>
 
         <div className="relative z-10 flex flex-col items-center justify-start h-screen px-4 pt-12">
-          {/* <div className="mb-12">
-            <img
-              src="/assets/logo.svg"
-              alt="Lucidus Logo"
-              width={235}
-              height={44}
-            />
-          </div> */}
-
-          <div>
-            <img
-              src="/onBoard-rob2.png"
-              alt="Astronaut"
-              width={300}
-              height={300}
-            />
-          </div>
+          <img
+            src="/onBoard-rob2.png"
+            alt="Astronaut"
+            width={300}
+            height={300}
+          />
         </div>
 
         <div className="absolute top-4 left-1/2 -translate-x-1/2 w-full max-w-[375px] px-4">
