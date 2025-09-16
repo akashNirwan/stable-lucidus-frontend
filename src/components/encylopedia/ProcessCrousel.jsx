@@ -87,7 +87,7 @@ export default function ProcessCarousel() {
   };
 
   return processLoading ? (
-    <div className="flex items-center justify-center min-h-[400px]">
+    <div className="flex items-center justify-center min-h-[400px] min-h-[275px] min-w-[350px]">
       <LoadingSpinner size={64} />
     </div>
   ) : (

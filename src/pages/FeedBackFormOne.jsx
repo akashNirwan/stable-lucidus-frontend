@@ -81,7 +81,7 @@ const FeedBackFormOne = () => {
     <div className="">
       <h2 className="text-center font-bold text-xl">A Net That Protects</h2>
       <div className="text-center space-y-4 border border-[#4ED0AA] rounded-2xl p-4 mt-4 bg-[#e0ffef]">
-        <div className="text-[12px] text-[#034230] px-2 py-1  rounded-2xl w-fit mx-auto bg-[#4ED0AA]">
+        <div className="text-[12px] text-[#034230] px-2 py-1 font-semibold rounded-2xl w-fit mx-auto bg-[#4ED0AA]">
           DECISION OUTCOME
         </div>
         <div
@@ -92,7 +92,7 @@ const FeedBackFormOne = () => {
         />
       </div>
       <div className="text-center space-y-4 border border-[#5E35F1] rounded-2xl p-4 mt-4 bg-[#EFEAFF]">
-        <div className="text-[12px] text-[#034230] px-2 py-1  rounded-2xl w-fit mx-auto bg-[#C2B1FF]">
+        <div className="text-[12px] text-[#034230] px-2 py-1 font-semibold rounded-2xl w-fit mx-auto bg-[#C2B1FF]">
           FOOD FOR THOUGHT
         </div>
         <p className="text-[14px]">{selectedQuestion?.foodForThought}</p>

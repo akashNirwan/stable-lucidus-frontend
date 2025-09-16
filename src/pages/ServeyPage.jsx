@@ -7,10 +7,10 @@ import { useSearchParams } from "react-router-dom";
 import { saveSteps } from "../redux/actions/microexperience-action";
 
 export default function CareerSurvey() {
-   const dispatch = useDispatch();
-    const {  saveFeedbackLoading , saveStepsLoading} = useSelector(
-      (state) => state.microexperience
-    );
+  const dispatch = useDispatch();
+  const { saveFeedbackLoading, saveStepsLoading } = useSelector(
+    (state) => state.microexperience
+  );
 
   const [searchParams] = useSearchParams();
   const careerLevelId = searchParams.get("careerLevelId");
@@ -20,8 +20,6 @@ export default function CareerSurvey() {
   const [islike, setIsLike] = useState("");
   const navigate = useNavigate();
 
-
-  
   // const handleChoice = (choice) => {
 
   //   const payload = {
@@ -30,7 +28,7 @@ export default function CareerSurvey() {
   //     levelPercent : "50"
   //   }
   //   setIsLike(choice);
-     
+
   //   dispatch(saveSteps(payload))
   //   dispatch(
   //     saveFeedback({
@@ -38,53 +36,52 @@ export default function CareerSurvey() {
   //       careerLevelId: careerLevelId,
   //     })
   //   ).then((res) => {
-       
+
   //       if (res.payload && res.payload.code === 201 || res.payload.statusCode === 200) {
   //              navigate("/dashboard");
   //       }
   //     });
 
-    
-   
   // };
 
   const handleChoice = async (choice) => {
-  const payload = {
-    careerLevelId: careerLevelId,
-    route: "/survey-page",
-    levelPercent: "20",
-  };
-
-  setIsLike(choice);
-const endTime = Date.now(); 
-  const saveStepsRes = await dispatch(saveSteps(payload));
-  const saveFeedbackRes = await dispatch(
-    saveFeedback({
-      likeDislike: choice === "like" ? "Like" : "Dislike",
+    const payload = {
       careerLevelId: careerLevelId,
-      endTime : endTime,
-    })
-  );
+      route: "/survey-page",
+      levelPercent: "20",
+    };
 
-  const isSaveStepsSuccess =
-    saveStepsRes.payload?.code === 200 ||
-    saveStepsRes.payload?.code === 201;
+    setIsLike(choice);
+    const endTime = Date.now();
+    const saveStepsRes = await dispatch(saveSteps(payload));
+    const saveFeedbackRes = await dispatch(
+      saveFeedback({
+        likeDislike: choice === "like" ? "Like" : "Dislike",
+        careerLevelId: careerLevelId,
+        endTime: endTime,
+      })
+    );
 
-  const isSaveFeedbackSuccess =
-    saveFeedbackRes.payload?.code === 200 ||
-    saveFeedbackRes.payload?.code === 201;
+    const isSaveStepsSuccess =
+      saveStepsRes.payload?.code === 200 || saveStepsRes.payload?.code === 201;
 
-  if (isSaveStepsSuccess && isSaveFeedbackSuccess) {
-    navigate(`/dashboard/explorecareers?careerLevelId=${careerLevelId}&Modal=true&levelNumber=${levelNumber}`);
-  }
-};
+    const isSaveFeedbackSuccess =
+      saveFeedbackRes.payload?.code === 200 ||
+      saveFeedbackRes.payload?.code === 201;
+
+    if (isSaveStepsSuccess && isSaveFeedbackSuccess) {
+      navigate(
+        `/dashboard/explorecareers?careerLevelId=${careerLevelId}&Modal=true&levelNumber=${levelNumber}`
+      );
+    }
+  };
   return saveFeedbackLoading || saveStepsLoading ? (
-               <div className="flex items-center justify-center min-h-[400px]">
-                    <LoadingSpinner size={64} />
-                  </div>
+    <div className="flex items-center justify-center min-h-[400px]">
+      <LoadingSpinner size={64} />
+    </div>
   ) : (
-    <div className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#130934] to-[#24A57F] h-screen w-full">
+    <div className="relative min-h-screen flex flex-col items-center  text-center overflow-hidden">
+      <div className="absolute inset-0 bg-[url('/how-feel-bg.svg')] bg-cover bg-center h-screen w-full">
         <div className="fixed inset-0">
           {[...Array(30)].map((_, i) => (
             <div
@@ -120,7 +117,7 @@ const endTime = Date.now();
         <div className="w-42 h-2 bg-white rounded-full" />
       </div>
 
-      <div className="relative z-10 flex flex-col items-center gap-8 px-6">
+      <div className="relative z-10 flex flex-col items-center gap-8 px-6 mt-24">
         <h2 className="text-white text-xl font-semibold leading-snug">
           How do you feel about learning <br /> more about this career?
         </h2>
@@ -135,7 +132,7 @@ const endTime = Date.now();
         </div>
       </div>
 
-      <div className="absolute -bottom-10">
+      <div className="absolute -bottom-10 left-0">
         <img
           src="/survey-robot.svg"
           alt="Astronaut"

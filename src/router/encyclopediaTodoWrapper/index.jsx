@@ -10,12 +10,12 @@ export default function EncylopediaWrapperTodo() {
     if (lesson && lesson.length > 0) {
       return lesson.length;
     }
-    return 5; 
+    return 5;
   };
   const stepsCount = getStepsCount();
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <div className="fixed inset-0 bg-[url('/assets/welcome/welcome-bg.svg')] bg-no-repeat bg-center bg-cover z-0" />
+      <div className="fixed inset-0 bg-[url('/what-do-they-do.svg')] bg-no-repeat bg-center bg-cover z-0" />
 
       <div className="fixed inset-0 z-10">
         {[...Array(40)].map((_, i) => (
@@ -50,7 +50,6 @@ export default function EncylopediaWrapperTodo() {
       <div className="relative z-20">
         <div className="absolute top-4 left-1/2 -translate-x-1/2 w-full max-w-[375px] px-4">
           <div className="flex items-center justify-center gap-2">
-            
             {[...Array(stepsCount)].map((_, i) => (
               <div
                 key={i}
