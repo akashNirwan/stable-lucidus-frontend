@@ -1,7 +1,13 @@
-
 import React from "react";
 
-const TwoLineOption = ({ option, selected, onSelect, img = "", optionSub }) => {
+const TwoLineOption = ({
+  option,
+  selected,
+  onSelect,
+  img = "",
+  optionSub,
+  bold = true,
+}) => {
   return (
     <button
       onClick={onSelect}
@@ -12,20 +18,19 @@ const TwoLineOption = ({ option, selected, onSelect, img = "", optionSub }) => {
       }`}
     >
       <div className="flex items-center justify-center gap-1">
-        {/* {img && (
-          <img
-            src={img}
-            alt={option}
-            className="w-5 h-5 object-contain rounded-md"
-          />
-        )} */}
-
-        {img && (
-  img.startsWith('http') ? 
-    <img src={img} alt={option} className="w-5 h-5 object-contain rounded-md" /> :
-    <span className="text-lg">{img}</span>
-)}
-        <div className="truncate font-semibold">{option}</div>
+        {img &&
+          (img.startsWith("http") ? (
+            <img
+              src={img}
+              alt={option}
+              className="w-5 h-5 object-contain rounded-md"
+            />
+          ) : (
+            <span className="text-lg">{img}</span>
+          ))}
+        <div className={`truncate ${bold ? "font-semibold" : null} `}>
+          {option}
+        </div>
       </div>
       <div className="text-xs">{optionSub}</div>
     </button>

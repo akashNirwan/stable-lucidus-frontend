@@ -8,6 +8,7 @@ import { saveInsight } from "../redux/actions/microexperience-action";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { saveSteps } from "../redux/actions/microexperience-action";
+
 const FeedBackFormTwo = ({ microexperience, careerLevelId, levelNumber }) => {
   const dispatch = useDispatch();
 
@@ -94,7 +95,9 @@ const FeedBackFormTwo = ({ microexperience, careerLevelId, levelNumber }) => {
   return (
     <div className="text-center space-y-4 ">
       <h2 className="font-bold text-[20px]">What guided your choice most?</h2>
-      <p className="text-[#066146]">Select all that apply.</p>
+      <p className="text-[#066146]">
+        Select <span className="font-bold">all</span> that apply.
+      </p>
       <h3 className="text-lg font-bold text-[#24A57F]">I focused on:</h3>
       <div className="h-[260px] overflow-y-auto flex flex-col gap-2">
         {stepsData.map((insight, ind) => (
@@ -104,6 +107,7 @@ const FeedBackFormTwo = ({ microexperience, careerLevelId, levelNumber }) => {
             selected={selected.some((item) => item._id === insight._id)}
             onSelect={() => handleSelect(insight)}
             img={insight.icon}
+            bold={false}
           />
         ))}
       </div>

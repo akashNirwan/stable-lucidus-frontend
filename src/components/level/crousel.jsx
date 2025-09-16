@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -14,7 +14,9 @@ import LoadingSpinner from "../common/LoadingSpinner";
 import { saveSteps } from "../../redux/actions/microexperience-action";
 export default function LevelCarousel({ data, careerLevelId, levelNumber }) {
   console.log(data, "level data");
-  const { saveAnswerLoading, saveStepsLoading } = useSelector((state) => state.microexperience);
+  const { saveAnswerLoading, saveStepsLoading } = useSelector(
+    (state) => state.microexperience
+  );
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -102,7 +104,7 @@ useEffect(() => {
               <div
                 onClick={() => {
                   api?.scrollTo(i);
-                  setSelected(i); 
+                  setSelected(i);
                 }}
                 className={`bg-white rounded-2xl my-4 shadow-md overflow-hidden p-4 flex flex-col items-center text-center transition-all duration-300 cursor-pointer ${
                   selected === i
@@ -153,16 +155,16 @@ useEffect(() => {
             //   selected === i ? "w-4 bg-purple-500" : "w-2 bg-gray-500"
             // }`}
             className={`h-2 rounded-full transition-all duration-300 ${
-  currentSlide === i ? "w-4 bg-purple-500" : "w-2 bg-gray-500"
-}`}
+              currentSlide === i ? "w-4 bg-purple-500" : "w-2 bg-gray-500"
+            }`}
           />
         ))}
       </div>
 
       <Button
         onClick={handleSaveAnswer}
-        disabled={selected === null || saveAnswerLoading|| saveStepsLoading}
-        className="mt-2 max-w-[320px] flex justify-center mx-auto"
+        disabled={selected === null || saveAnswerLoading || saveStepsLoading}
+        className="mt-2 max-w-[320px] flex justify-center mx-auto mb-2"
       >
         {saveAnswerLoading || saveStepsLoading ? (
           <LoadingSpinner size={20}></LoadingSpinner>

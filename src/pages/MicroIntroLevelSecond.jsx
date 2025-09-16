@@ -14,7 +14,7 @@ const MicroIntroLevelSecond = () => {
 
   const careerLevelId = searchParams.get("careerLevelId");
   const levelNumber = searchParams.get("levelNumber");
-  const questionId = searchParams.get("questionId")
+  const questionId = searchParams.get("questionId");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { microexperience, loading, saveStepsLoading } = useSelector(
@@ -38,7 +38,9 @@ const MicroIntroLevelSecond = () => {
 
     dispatch(saveSteps(payload)).then((res) => {
       if (res?.payload?.code === 200 || res?.payload?.code === 201) {
-        navigate(`/drag-and-drop?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`);
+        navigate(
+          `/drag-and-drop?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`
+        );
       }
     });
   };
@@ -66,7 +68,7 @@ const MicroIntroLevelSecond = () => {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
-        className="fixed bottom-0 left-0 right-0 mx-auto w-full max-w-[360px] flex flex-col gap-5 p-6 z-20"
+        className="fixed bottom-0 left-0 right-0 mx-auto w-full max-w-[425px] flex flex-col gap-5 p-6 z-20"
         style={{
           borderRadius: "24px 24px 0 0",
           background:
