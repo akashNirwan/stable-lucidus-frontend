@@ -13,12 +13,15 @@ const MicroIntoScreenTwo = ({ data, levelNumber }) => {
   const careerLevelId = data?._id;
   console.log(careerLevelId, "careerLevelId");
   console.log(data?.career[0]._id, "data");
+  const levelPercent = levelNumber === "1 "? "5" : levelNumber === "2" ? "30" : "0";
+
+console.log(typeof levelNumber, "type")
 
   const handleNext = () => {
     const payload = {
       careerLevelId: careerLevelId,
       route: `/micro-intro?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`,
-      levelPercent: "5",
+      levelPercent: levelPercent,
     };
 
     dispatch(saveSteps(payload)).then((res) => {
@@ -45,9 +48,11 @@ const MicroIntoScreenTwo = ({ data, levelNumber }) => {
       </p>
 
       <p
-  className="text-center "
-  dangerouslySetInnerHTML={{ __html: data?.questionintros?.[1]?.titleTwo }}
-></p>
+        className="text-center "
+        dangerouslySetInnerHTML={{
+          __html: data?.questionintros?.[1]?.titleTwo,
+        }}
+      ></p>
 
       <Button onClick={handleNext} disabled={saveStepsLoading}>
         {saveStepsLoading ? (

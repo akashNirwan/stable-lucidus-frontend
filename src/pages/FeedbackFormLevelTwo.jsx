@@ -41,7 +41,7 @@ const FeedBackFormLevelTwo = () => {
     const payload = {
       careerLevelId: careerLevelId,
       route: `/feedbackform-level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`,
-      levelPercent: "5",
+      levelPercent: "30",
     };
 
     dispatch(saveSteps(payload)).then((res) => {

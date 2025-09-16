@@ -16,7 +16,7 @@ const MicroIntoScreen = () => {
 
   const careerId = searchParams.get("careerId");
   const careerLevelId = searchParams.get("careerLevelId");
-  const levelNumber = searchParams.get("levelNumber");
+  const levelNumber = searchParams.get("levelNumber")|| 1;
 
   // useEffect(() => {
 
@@ -43,7 +43,11 @@ const MicroIntoScreen = () => {
   }, [dispatch, careerId, careerLevelId, levelNumber]);
 
   const experienceData = microexperience?.[0];
-
+    const levelString = microexperience?.[0]?.careerLevel;  // e.g., "Level - 2"
+const levelNumber2 = levelString ? levelString.split('-')[1].trim() : null;  // "2"
+      console.log(levelString, levelNumber2, "level name");
+      
+    
   useEffect(() => {
     if (experienceData?.questionintros && setVideoUrl) {
       const currentVideoUrl = experienceData?.questionintros[screen - 1]?.image;
@@ -94,7 +98,7 @@ const MicroIntoScreen = () => {
 
   const screenComponent = {
     1: <MicroIntoScreenOne setScreen={setScreen} data={experienceData} />,
-    2: <MicroIntoScreenTwo levelNumber={levelNumber} setScreen={setScreen} data={experienceData} />,
+    2: <MicroIntoScreenTwo levelNumber={levelNumber2} setScreen={setScreen} data={experienceData} />,
   };
 
   return loading ? (

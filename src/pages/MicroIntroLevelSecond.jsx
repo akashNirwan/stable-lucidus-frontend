@@ -33,7 +33,7 @@ const MicroIntroLevelSecond = () => {
     const payload = {
       careerLevelId,
       route: `/micro-intro-Level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`,
-      levelPercent: "25",
+      levelPercent: "30",
     };
 
     dispatch(saveSteps(payload)).then((res) => {

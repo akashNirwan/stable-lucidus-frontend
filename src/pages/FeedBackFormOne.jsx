@@ -25,10 +25,10 @@ const FeedBackFormOne = () => {
   console.log(microexperience?.[0]?.completedCareerLevelCount, "count");
   const completedCareerLevelCount =
     microexperience?.[0]?.completedCareerLevelCount;
-  console.log("====================================");
-  console.log(completedCareerLevelCount, "count");
-  console.log("====================================");
+  
 
+
+    const levelPercent = levelNumber === "1 "? "5" : levelNumber === "2" ? "30" : "0";
   useEffect(() => {
     if (careerLevelId) {
       dispatch(fetchMicroexperience({ careerLevelId }));
@@ -43,7 +43,7 @@ const FeedBackFormOne = () => {
     const payload = {
       careerLevelId: careerLevelId,
       route: `/feedbackform?careerLevelId=${careerLevelId}&questionId=${questionId}&completedCareerLevelCount=${completedCareerLevelCount}&levelNumber=${levelNumber}`,
-      levelPercent: "5",
+      levelPercent: levelPercent,
     };
 
     dispatch(saveSteps(payload)).then((res) => {
@@ -95,8 +95,14 @@ const FeedBackFormOne = () => {
         <div className="text-[12px] text-[#034230] px-2 py-1 font-semibold rounded-2xl w-fit mx-auto bg-[#C2B1FF]">
           FOOD FOR THOUGHT
         </div>
-        <p className="text-[14px]">{selectedQuestion?.foodForThought}</p>
+       <div
+          className="text-[14px]"
+          dangerouslySetInnerHTML={{
+            __html: selectedQuestion?.foodForThought || "",
+          }}
+        />
       </div>
+      
       <Button
         onClick={handleClick}
         disabled={saveStepsLoading}

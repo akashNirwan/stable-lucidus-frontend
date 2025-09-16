@@ -18,7 +18,7 @@ const FeedBackFormTwo = ({ microexperience, careerLevelId, levelNumber }) => {
 
   const stepsData = microexperience[0]?.studentinsights || [];
   const [selected, setSelected] = useState([]);
-
+  const levelPercent = levelNumber === "1" ? "5" : levelNumber === "2" ? "30" : "0";
   const handleSelect = (insight) => {
     setSelected((prev) => {
       const isSelected = prev.some((item) => item._id === insight._id);
@@ -70,7 +70,7 @@ const FeedBackFormTwo = ({ microexperience, careerLevelId, levelNumber }) => {
       const saveStepsPayload = {
         careerLevelId: careerLevelId,
         route: `/student-choice?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`,
-        levelPercent: "5",
+        levelPercent: levelPercent,
       };
 
       const saveStepsRes = await dispatch(saveSteps(saveStepsPayload));

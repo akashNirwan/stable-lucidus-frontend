@@ -24,7 +24,7 @@ export default function LevelCarousel({ data, careerLevelId, levelNumber }) {
   const [api, setApi] = useState(null);
   const [selected, setSelected] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0)
-
+const levelPercent = levelNumber === "1" ? "5" : levelNumber === "2" ? "30" : "0";
 useEffect(() => {
   if (!api) return;
   
@@ -70,7 +70,7 @@ useEffect(() => {
     const saveStepsPayload = {
       careerLevelId: careerLevelId,
       route: `/level?careerLevelId=${careerLevelId}&questionId=${selectedQuestion._id}&levelNumber=${levelNumber}`,
-      levelPercent: "5",
+      levelPercent: levelPercent,
     };
 
     const saveAnswerRes = await dispatch(saveAnswer(payload));

@@ -26,7 +26,7 @@ const BadgeEarned = () => {
   const completedCareerLevelCount = parseInt(
     searchParams.get("completedCareerLevelCount")
   );
-
+const levelPercent = levelNumber === "1" ? "5" : levelNumber === "2" ? "30" : "0";
   useEffect(() => {
     dispatch(fetchLevelBadges());
   }, [dispatch]);
@@ -58,8 +58,8 @@ const BadgeEarned = () => {
 
     const saveStepPayload = {
       careerLevelId: careerLevelId,
-      route: `/badge-earned?questionId=${questionId}&careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`,
-      levelPercent: "5",
+      route: `/badge-earned?questionId=${questionId}&careerLevelId=${careerLevelId}&completedCareerLevelCount=${completedCareerLevelCount}&levelNumber=${levelNumber}`,
+      levelPercent: levelPercent,
     };
 
     const saveStepsRes = await dispatch(saveSteps(saveStepPayload));

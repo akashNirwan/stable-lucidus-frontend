@@ -12,81 +12,77 @@ const CareerCard = ({ data }) => {
   const currentRoute = data?.route;
 
   const getNextRoute = () => {
-    if (!currentRoute) {
-      return `/micro-intro?careerLevelId=${careerLevelId}`;
+  if (!currentRoute) {
+    return `/micro-intro?careerLevelId=${careerLevelId}&levelNumber=1`;
+  }
+
+ 
+  const urlParams = new URLSearchParams(currentRoute.split("?")[1]);
+  const levelNumber = urlParams.get("levelNumber") || "1";
+  const questionId = urlParams.get("questionId");
+  const completedCareerLevelCount = urlParams.get("completedCareerLevelCount") || "0";
+  const questionLeveltwoId = urlParams.get("questionLeveltwoId");
+
+  
+  if (currentRoute.startsWith("/micro-intro") && !currentRoute.includes("Level-two")) {
+    return `/level?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`;
+  }
+
+  // Case 2: /level -> /feedbackform
+  else if (currentRoute.startsWith("/level") && !currentRoute.includes("feedbackform")) {
+    return `/feedbackform?careerLevelId=${careerLevelId}&questionId=${questionId}&levelNumber=${levelNumber}`;
+  }
+
+  // Case 3: /feedbackform -> conditional routing
+  else if (currentRoute.startsWith("/feedbackform") && !currentRoute.includes("level-two")) {
+    // Special case for levelNumber = 2
+    if (levelNumber === "2") {
+      return `/micro-intro-Level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`;
     }
-
-    if (currentRoute.startsWith("/micro-intro")) {
-      return `/level?careerLevelId=${careerLevelId}`;
-    } else if (currentRoute.startsWith("/level")) {
-      const urlParams = new URLSearchParams(currentRoute.split("?")[1]);
-      const questionId = urlParams.get("questionId");
-      const completedCareerLevelCount =
-        urlParams.get("completedCareerLevelCount") || "0";
-
-      return questionId
-        ? `/feedbackform?careerLevelId=${careerLevelId}&questionId=${questionId}&completedCareerLevelCount=${completedCareerLevelCount}`
-        : `/level?careerLevelId=${careerLevelId}`;
-    } else if (currentRoute.startsWith("/feedbackform")) {
-      const urlParams = new URLSearchParams(currentRoute.split("?")[1]);
-      const questionId = urlParams.get("questionId");
-      const completedCareerLevelCount =
-        urlParams.get("completedCareerLevelCount") || "0";
-
-      // Check if completedCareerLevelCount is 0, 2, or 4
-      if (
-        completedCareerLevelCount === "0" ||
-        completedCareerLevelCount === "2" ||
-        completedCareerLevelCount === "4"
-      ) {
-        return `/badge-earned?careerLevelId=${careerLevelId}&questionId=${questionId}&completedCareerLevelCount=${completedCareerLevelCount}`;
-      } else {
-        return `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}`;
-      }
-    } else if (currentRoute.startsWith("/badge-earned")) {
-      const urlParams = new URLSearchParams(currentRoute.split("?")[1]);
-      const questionId = urlParams.get("questionId");
-      return `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}`;
-    } else if (currentRoute.startsWith("/student-choice")) {
-      return `/survey-page?careerLevelId=${careerLevelId}`;
+    // Check completedCareerLevelCount for badge or student choice
+    else if ([0, 2, 4].includes(parseInt(completedCareerLevelCount))) {
+      return `/badge-earned?careerLevelId=${careerLevelId}&questionId=${questionId}&completedCareerLevelCount=${completedCareerLevelCount}&levelNumber=${levelNumber}`;
+    } else {
+      return `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`;
     }
+  }
 
-    // Default fallback
-    return `/micro-intro?careerLevelId=${careerLevelId}`;
-  };
+  // Case 4: /badge-earned -> /student-choice
+  else if (currentRoute.startsWith("/badge-earned")) {
+    return `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`;
+  }
 
-  // const getNextRoute = () => {
-  //   if (!currentRoute) {
-  //     return `/micro-intro?careerLevelId=${careerLevelId}`;
-  //   }
+  // Case 5: /student-choice -> /survey-page
+  else if (currentRoute.startsWith("/student-choice")) {
+    // Note: You mentioned microexperience[0]?.studentinsights[0]?.careerLevelId 
+    // but that data isn't available in this component, so using current careerLevelId
+    return `/survey-page?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`;
+  }
 
-  //   if (currentRoute.startsWith("/micro-intro")) {
-  //     return `/level?careerLevelId=${careerLevelId}`;
-  //   } else if (currentRoute.startsWith("/level")) {
-  //     const urlParams = new URLSearchParams(currentRoute.split("?")[1]);
-  //     const questionId = urlParams.get("questionId");
-  //     return questionId
-  //       ? `/feedbackform?careerLevelId=${careerLevelId}&questionId=${questionId}`
-  //       : `/level?careerLevelId=${careerLevelId}`;
-  //   } else if (currentRoute.startsWith("/feedbackform")) {
-  //     const urlParams = new URLSearchParams(currentRoute.split("?")[1]);
-  //     const questionId = urlParams.get("questionId");
-  //     return `/badge-earned?careerLevelId=${careerLevelId}&questionId=${questionId}`;
-  //   } else if (currentRoute.startsWith("/badge-earned")) {
-  //     const urlParams = new URLSearchParams(currentRoute.split("?")[1]);
-  //     const questionId = urlParams.get("questionId");
-  //     return `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}`;
-  //   } else if (currentRoute.startsWith("/student-choice")) {
-  //     return `/survey-page?careerLevelId=${careerLevelId}`;
-  //   }
+  // Case 6: /micro-intro-Level-two -> /drag-and-drop
+  else if (currentRoute.startsWith("/micro-intro-Level-two")) {
+    return `/drag-and-drop?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`;
+  }
 
-  //   // Default fallback
-  //   return `/micro-intro?careerLevelId=${careerLevelId}`;
-  // };
+  // Case 7: /drag-and-drop -> /feedbackform-level-two
+  else if (currentRoute.startsWith("/drag-and-drop")) {
+    return `/feedbackform-level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionLeveltwoId=${questionLeveltwoId}`;
+  }
+
+  // Case 8: /feedbackform-level-two -> /student-choice
+  else if (currentRoute.startsWith("/feedbackform-level-two")) {
+    return `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`;
+  }
+
+  // Default fallback
+  return `/micro-intro?careerLevelId=${careerLevelId}&levelNumber=1`;
+};
+
+
 
   const handleArrowClick = () => {
     const nextRoute = getNextRoute();
-    console.log("Navigating to:", nextRoute); // Debug log
+   
     navigate(nextRoute);
   };
 

@@ -19,7 +19,7 @@ export default function CareerSurvey() {
 
   const [islike, setIsLike] = useState("");
   const navigate = useNavigate();
-
+const levelPercent = levelNumber === "1 "? "20" : levelNumber === "2" ? "50" : "0";
   // const handleChoice = (choice) => {
 
   //   const payload = {
@@ -44,11 +44,12 @@ export default function CareerSurvey() {
 
   // };
 
+
   const handleChoice = async (choice) => {
     const payload = {
       careerLevelId: careerLevelId,
       route: "/survey-page",
-      levelPercent: "20",
+      levelPercent: levelPercent,
     };
 
     setIsLike(choice);

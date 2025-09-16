@@ -101,8 +101,8 @@ useEffect(() => {
 const handleMakeRecommendation = async () => {
   const payload = {
     careerLevelId,
-    route: `/drag-and-drop?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionLeveltwoId=${selectedId}`,
-    levelPercent: "50",
+    route: `/drag-and-drop?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}&questionLeveltwoId=${selectedId}`,
+    levelPercent: "30",
   };
 
   const saveAnswerPayload = {
