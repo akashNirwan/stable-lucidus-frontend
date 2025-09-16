@@ -72,7 +72,7 @@ const Grade = ({ setStep, stepsData }) => {
       <LoadingSpinner size={64} />
     </div>
   ) : (
-    <div className="text-center flex flex-col gap-3  h-[72vh]">
+    <div className="text-center flex flex-col gap-3  ">
       {/* Title & Subtitle */}
       <h2 className="font-bold text-[20px]">
         What <span className="text-[#5f35f1]">grade</span> are you in?
