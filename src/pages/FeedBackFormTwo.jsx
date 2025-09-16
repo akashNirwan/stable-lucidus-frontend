@@ -67,11 +67,11 @@ const FeedBackFormTwo = ({ microexperience, careerLevelId }) => {
         careerLevelId: microexperience[0]?.studentinsights[0]?.careerLevelId,
       };
 
-    const saveStepsPayload = {
-      careerLevelId: careerLevelId,
-      route: `/student-choice?careerLevelId=${careerLevelId}`,
-      levelPercent: "5",
-    };
+      const saveStepsPayload = {
+        careerLevelId: careerLevelId,
+        route: `/student-choice?careerLevelId=${careerLevelId}`,
+        levelPercent: "5",
+      };
 
       const saveStepsRes = await dispatch(saveSteps(saveStepsPayload));
       const saveInsightRes = await dispatch(saveInsight(payload));
@@ -94,7 +94,7 @@ const FeedBackFormTwo = ({ microexperience, careerLevelId }) => {
   return (
     <div className="text-center space-y-4 ">
       <h2 className="font-bold text-[20px]">What guided your choice most?</h2>
-      <p>Select all that apply.</p>
+      <p className="text-[#066146]">Select all that apply.</p>
       <h3 className="text-lg font-bold text-[#24A57F]">I focused on:</h3>
       <div className="h-[260px] overflow-y-auto flex flex-col gap-2">
         {stepsData.map((insight, ind) => (
@@ -107,11 +107,16 @@ const FeedBackFormTwo = ({ microexperience, careerLevelId }) => {
           />
         ))}
       </div>
-      <Button 
-       disabled={saveInsightLoading || saveStepsLoading}
-      onClick={handleContinue}>
-        {saveInsightLoading || saveStepsLoading ? <LoadingSpinner size={20}></LoadingSpinner> : "Continue"}
-        </Button>
+      <Button
+        disabled={saveInsightLoading || saveStepsLoading}
+        onClick={handleContinue}
+      >
+        {saveInsightLoading || saveStepsLoading ? (
+          <LoadingSpinner size={20}></LoadingSpinner>
+        ) : (
+          "Continue"
+        )}
+      </Button>
     </div>
   );
 };

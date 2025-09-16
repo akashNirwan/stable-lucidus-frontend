@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 export default function FeedBackLayout() {
   return (
     <div className="h-screen relative overflow-hidden">
-      <div className="bg-gradient-to-b from-[#130934] to-[#24A57F] h-screen w-full" />
+      <div className="bg-[url(/onBoard-bg.jpeg)] h-screen w-full bg-cover bg-center" />
 
       <div className="fixed inset-0">
         {[...Array(30)].map((_, i) => (
@@ -45,7 +45,7 @@ export default function FeedBackLayout() {
             height={44}
           />
         </div>
-
+        {/* 
         <div>
           <img
             src="/assets/astronaut-login.svg"
@@ -53,15 +53,15 @@ export default function FeedBackLayout() {
             width={300}
             height={300}
           />
-        </div>
+        </div> */}
       </div>
 
       <div className="absolute top-[50px] left-1/2 -translate-x-1/2 z-10">
         <img
-          src="/assets/grade/grade-emoji.svg"
+          src="/onBoard-rob2.png"
           alt="Grade Emoji"
-          width={240}
-          height={240}
+          width={300}
+          height={300}
         />
       </div>
 
