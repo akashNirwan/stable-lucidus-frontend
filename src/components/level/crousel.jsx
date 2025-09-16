@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { saveAnswer } from "../../redux/actions/microexperience-action";
 import LoadingSpinner from "../common/LoadingSpinner";
 import { saveSteps } from "../../redux/actions/microexperience-action";
-export default function LevelCarousel({ data, careerLevelId }) {
+export default function LevelCarousel({ data, careerLevelId, levelNumber }) {
   console.log(data, "level data");
   const { saveAnswerLoading, saveStepsLoading } = useSelector((state) => state.microexperience);
 
@@ -69,7 +69,7 @@ useEffect(() => {
 
     const saveStepsPayload = {
       careerLevelId: careerLevelId,
-      route: `/level?careerLevelId=${careerLevelId}&questionId=${selectedQuestion._id}`,
+      route: `/level?careerLevelId=${careerLevelId}&questionId=${selectedQuestion._id}&levelNumber=${levelNumber}`,
       levelPercent: "5",
     };
 
@@ -85,7 +85,7 @@ useEffect(() => {
 
     if (isSaveAnswerSuccess && isSaveStepsSuccess) {
       navigate(
-        `/feedbackform?careerLevelId=${careerLevelId}&questionId=${selectedQuestion._id}`
+        `/feedbackform?careerLevelId=${careerLevelId}&questionId=${selectedQuestion._id}&levelNumber=${levelNumber}`
       );
     }
   };

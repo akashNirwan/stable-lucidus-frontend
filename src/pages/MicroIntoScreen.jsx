@@ -94,7 +94,7 @@ const MicroIntoScreen = () => {
 
   const screenComponent = {
     1: <MicroIntoScreenOne setScreen={setScreen} data={experienceData} />,
-    2: <MicroIntoScreenTwo setScreen={setScreen} data={experienceData} />,
+    2: <MicroIntoScreenTwo levelNumber={levelNumber} setScreen={setScreen} data={experienceData} />,
   };
 
   return loading ? (

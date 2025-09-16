@@ -1,36 +1,65 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { X, GripVertical, CheckCircle } from "lucide-react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { motion, AnimatePresence } from "framer-motion";
+import { fetchMicroexperience ,saveSteps, saveAnswer, saveOrder} from "../redux/actions/microexperience-action";
+import { useDispatch,useSelector } from "react-redux";
+import LoadingSpinner from "../components/common/LoadingSpinner";
+import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const initialStrategies = [
-  {
-    id: "1",
-    title: "Education Loans",
-    subtitle: "SCHOOL FEES, BOOKS, UNIFORMS",
-    description:
-      "Give families $200 for children's education. Data shows that parents prioritize paying education loans back.",
-  },
-  {
-    id: "2",
-    title: "Business Loans",
-    subtitle: "SHOPS, SERVICES, INCOME GROWTH",
-    description:
-      "Fund small businesses like phone charging or vegetable stands that create village jobs.",
-  },
-  {
-    id: "3",
-    title: "Emergency Loans",
-    subtitle: "HOME REPAIRS, MEDICAL NEEDS",
-    description:
-      "Help families fix roofs, pay for medicine, or handle urgent problems quickly.",
-  },
-];
 
-const L2S6 = () => {
-  const [strategies, setStrategies] = useState(initialStrategies);
+
+const DragAndDrop = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+   const [searchParams] = useSearchParams();
+     const careerLevelId = searchParams.get("careerLevelId");
+  const levelNumber = searchParams.get("levelNumber");
+  const questionId = searchParams.get("questionId")
+  const [strategies, setStrategies] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
   const [showResearch, setShowResearch] = useState(false);
+  const [currentDecisionOutcome, setCurrentDecisionOutcome] = useState("");
+ const { microexperience, loading, saveStepsLoading } = useSelector(
+    (state) => state.microexperience
+  );
+ 
+  const DragandDropData = microexperience?.[0]?.recommendations;
+    console.log(DragandDropData, "DragandDropData");
+
+    const questions = microexperience?.[0]?.questions
+    console.log(questions, "questions");
+    
+    
+useEffect(() => {
+  if (DragandDropData && DragandDropData.length > 0) {
+    setStrategies(
+      DragandDropData.map((item) => ({
+        id: item._id,            
+        title: item.recommendation, 
+      }))
+    );
+  }
+}, [DragandDropData]);
+
+useEffect(() => {
+    if (careerLevelId) {
+      dispatch(fetchMicroexperience({ careerLevelId }));
+    }
+  }, [dispatch, careerLevelId]);
+
+  useEffect(() => {
+  if (questions && questionId) {
+    const matchedQuestion = questions.find(
+      (q) => q._id === questionId
+    );
+
+    if (matchedQuestion) {
+      setCurrentDecisionOutcome(matchedQuestion.decisionOutCome);
+    }
+  }
+}, [questions, questionId]);
 
   const handleDragEnd = (result) => {
     if (!result.destination) return;
@@ -47,8 +76,79 @@ const L2S6 = () => {
     setSelectedId(id);
   };
 
-  return (
-    <div className="min-h-screen bg-[#1A104F] text-white p-5 flex flex-col relative overflow-hidden">
+
+//   const handleMakeRecommendation = () => {
+//   const payload = {
+//     careerLevelId,
+       
+//     route: `/drag-and-drop?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionLeveltwoId=${selectedId}`,
+//     levelPercent: "50",
+//   };
+
+//   const saveAnswerPayload = {
+//     careerLevelId,
+//     questionId: selectedId,
+//   }
+
+
+//   dispatch(saveSteps(payload)).then((res) => {
+//     if (res?.payload?.code === 200 || res?.payload?.code === 201) {
+//       navigate(`/next-step?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`);
+//     }
+//   });
+// };
+
+const handleMakeRecommendation = async () => {
+  const payload = {
+    careerLevelId,
+    route: `/drag-and-drop?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionLeveltwoId=${selectedId}`,
+    levelPercent: "50",
+  };
+
+  const saveAnswerPayload = {
+    careerLevelId,
+    questionId: selectedId,
+  };
+  const saveOrderPayload = {
+    careerLevelId,
+    userOrder: strategies.map((strategy, index) => ({
+      questionId: strategy.id,
+      order: index + 1
+    }))
+  };
+
+  const saveAnswerRes = await dispatch(saveAnswer(saveAnswerPayload));
+   const saveOrderRes = await dispatch(saveOrder(saveOrderPayload));
+  const saveStepsRes = await dispatch(saveSteps(payload));
+
+  const isSaveAnswerSuccess =
+    saveAnswerRes.payload?.code === 200 ||
+    saveAnswerRes.payload?.code === 201;
+
+    const isSaveOrderSuccess = 
+    saveOrderRes.payload?.code === 200 ||
+    saveOrderRes.payload?.code === 201;
+
+  const isSaveStepsSuccess =
+    saveStepsRes.payload?.code === 200 ||
+    saveStepsRes.payload?.code === 201;
+
+  if (isSaveAnswerSuccess && isSaveOrderSuccess && isSaveStepsSuccess) {
+    navigate(
+      `/feedbackform-level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionLeveltwoId=${selectedId}`
+    );
+  }
+};
+  return loading ? (
+
+
+    <div className="flex items-center justify-center min-h-[400px]">
+          <LoadingSpinner size={64} />
+        </div>
+   
+  ) : (
+
+      <div className="min-h-screen bg-[#1A104F] text-white p-5 flex flex-col relative overflow-hidden">
       {/* Header */}
       <div className="mb-4">
         <img
@@ -113,19 +213,14 @@ const L2S6 = () => {
                         </div>
                         <div className="flex-1">
                           <div className="flex justify-between items-start">
-                            <h3 className="text-lg font-semibold text-purple-800">
-                              {item.title}
-                            </h3>
+                           <h2 className=" text-purple-800">
+                <div dangerouslySetInnerHTML={{ __html: item.title }}></div>
+              </h2>
                             {selectedId === item.id && (
                               <CheckCircle className="text-purple-600 w-5 h-5" />
                             )}
                           </div>
-                          <p className="text-xs text-purple-600 font-medium uppercase mb-1">
-                            {item.subtitle}
-                          </p>
-                          <p className="text-sm text-gray-800 leading-snug">
-                            {item.description}
-                          </p>
+                          
                         </div>
                       </div>
                     </div>
@@ -148,9 +243,14 @@ const L2S6 = () => {
         </button>
         <button
           className="w-full bg-[#00A074] text-white py-3 rounded-xl font-semibold disabled:opacity-60"
-          disabled={!selectedId}
+          disabled={!selectedId || saveStepsLoading}
+          onClick={handleMakeRecommendation}
         >
-          Make Recommendation
+         {saveStepsLoading ? (
+    <LoadingSpinner size={20} />
+  ) : (
+    "Make Recommendation"
+  )}
         </button>
       </div>
 
@@ -181,23 +281,16 @@ const L2S6 = () => {
                 YOUR RESEARCH
               </div>
             </div>
-            <p className="text-sm text-gray-800 mb-2">
-              85% of children want devices that look "cool" to help them feel
-              confident at school. 73% of parents worry most about durability
-              and safety. Average family saves $200/month for 18 months to
-              afford one device.
-            </p>
-            <p className="text-sm text-gray-800 font-medium">
-              <strong>By researching patient dreams and goals</strong>, you
-              discovered what matters most to children and families. Biomedical
-              Engineers know that understanding user dreams creates breakthrough
-              solutions.
-            </p>
+            <p
+  className="text-sm text-gray-800 mb-2"
+  dangerouslySetInnerHTML={{ __html: currentDecisionOutcome }}
+></p>
           </motion.div>
         </>
       )}
     </div>
-  );
+
+  )
 };
 
-export default L2S6;
+export default DragAndDrop;

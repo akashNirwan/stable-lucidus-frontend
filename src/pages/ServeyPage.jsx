@@ -14,6 +14,7 @@ export default function CareerSurvey() {
 
   const [searchParams] = useSearchParams();
   const careerLevelId = searchParams.get("careerLevelId");
+  const levelNumber = searchParams.get("levelNumber");
   console.log(careerLevelId, "careerLevelId");
 
   const [islike, setIsLike] = useState("");
@@ -74,7 +75,7 @@ const endTime = Date.now();
     saveFeedbackRes.payload?.code === 201;
 
   if (isSaveStepsSuccess && isSaveFeedbackSuccess) {
-    navigate(`/dashboard/explorecareers?careerLevelId=${careerLevelId}&Modal=true`);
+    navigate(`/dashboard/explorecareers?careerLevelId=${careerLevelId}&Modal=true&levelNumber=${levelNumber}`);
   }
 };
   return saveFeedbackLoading || saveStepsLoading ? (

@@ -23,7 +23,7 @@ console.log(levelBadge, "level badge ");
 
   const careerLevelId = searchParams.get("careerLevelId");
   const questionId = searchParams.get("questionId");
-  
+  const levelNumber = searchParams.get("levelNumber");
   
   const completedCareerLevelCount = parseInt(searchParams.get("completedCareerLevelCount"));
   
@@ -66,7 +66,7 @@ if (completedCareerLevelCount === 0) {
 
     const saveStepPayload = {
       careerLevelId: careerLevelId,
-      route: `/badge-earned?questionId=${questionId}&careerLevelId=${careerLevelId}`,
+      route: `/badge-earned?questionId=${questionId}&careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`,
       levelPercent: "5",
     };
 
@@ -80,7 +80,7 @@ if (completedCareerLevelCount === 0) {
 
     if (isSaveStepsSuccess && isSaveBadgeSuccess) {
       navigate(
-        `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}`
+        `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`
       );
     }
   };
