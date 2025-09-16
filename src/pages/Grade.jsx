@@ -82,7 +82,7 @@ const Grade = ({ setStep, stepsData }) => {
       </h3>
       <h4 className="text-[#24A57F] font-bold">I am in:</h4>
 
-      <div className=" h-[37vh] overflow-y-auto flex flex-col gap-2">
+      <div className=" h-[32vh] overflow-y-auto flex flex-col gap-2">
         {Array.isArray(grades) &&
           grades.map((grade) => (
             <OptionButton
