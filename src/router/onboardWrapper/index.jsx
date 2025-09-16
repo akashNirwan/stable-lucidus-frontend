@@ -14,7 +14,7 @@ export default function OnBoardWrapper() {
   const currentStepName = location.pathname.split("/").pop();
   const currentStepIndex = steps.indexOf(currentStepName);
   return (
-    <div className="h-screen relative overflow-hidden">
+    <div className=" relative overflow-hidden">
       <div className="bg-[url(/onBoard-bg.jpeg)] h-screen w-full bg-cover bg-center">
         <div className="fixed inset-0">
           {[...Array(30)].map((_, i) => (
