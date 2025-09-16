@@ -104,7 +104,7 @@ const Ambition = ({ stepsData }) => {
           onClick={handleNext}
           disabled={loading || text.trim().length === 0}
         >
-          {loading ? <LoadingSpinner size="20px" /> : "Next"}
+          {loading ? <LoadingSpinner size="20px" /> : "Show Me Careers"}
         </Button>
       </div>
     </div>

@@ -4,27 +4,25 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 
-
-
 const DashBoardMenuThree = () => {
-  const dispatch = useDispatch()
-   const { badges, badgesLoading, error } = useSelector((state) => state.dashboard);
-    useEffect(() => {
+  const dispatch = useDispatch();
+  const { badges, badgesLoading, error } = useSelector(
+    (state) => state.dashboard
+  );
+  useEffect(() => {
     dispatch(fetchBadges());
   }, [dispatch]);
 
-
-
   return badgesLoading ? (
-          <div className="flex items-center justify-center min-h-[400px]">
-               <LoadingSpinner size={64} />
-             </div>
-  ): (
-       <div className="text-white ">
-      <h2 className="text-center text-[#A187FF] text-[28px] font-bold">
+    <div className="flex items-center justify-center min-h-[400px]">
+      <LoadingSpinner size={64} />
+    </div>
+  ) : (
+    <div className="text-white ">
+      <h2 className="text-center text-[#A187FF] text-[28px] font-bold mb-2">
         Badges
       </h2>
-       <div className="flex flex-wrap gap-6 justify-center">
+      <div className="flex flex-wrap gap-6 justify-center">
         {badges.length > 0 ? (
           badges.map((badge, index) => (
             <div
@@ -43,7 +41,7 @@ const DashBoardMenuThree = () => {
         )}
       </div>
     </div>
-  )
+  );
 };
 
 export default DashBoardMenuThree;

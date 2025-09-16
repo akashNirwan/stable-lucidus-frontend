@@ -74,7 +74,9 @@ const CareerCard = ({
 
       <div className="border-0 border-t  rounded-t-3xl bg-white absolute flex flex-col gap-2 bottom-0 w-full h-[280px] p-4">
         <div className="flex justify-between items-center ">
-          <h4 className="text-[#042119] text-[20px] line-clamp-1">{title}</h4>
+          <h4 className="text-[#042119] text-[20px] line-clamp-1 font-semibold">
+            {title}
+          </h4>
 
           <button onClick={handleSaveClick} className="cursor-pointer">
             {saved ? (

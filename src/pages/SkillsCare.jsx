@@ -91,7 +91,7 @@ const SkillsCare = ({ setStep, stepsData }) => {
       </h3>
       <StatusTitle text={"I care about:"} />
 
-      <div className="flex-1 overflow-y-auto grid grid-cols-3 ">
+      <div className="flex-1 overflow-y-auto grid grid-cols-3 mx-auto gap-x-3 ">
         {Array.isArray(sdgs) &&
           sdgs.map((sdg, i) => {
             const isSelected = selected.some((s) => s._id === sdg._id);
@@ -138,11 +138,11 @@ const SkillsCare = ({ setStep, stepsData }) => {
 
         <Button
           type="button"
-          isActive={selected.length > 0}
+          isActive={selected.length > 2}
           onClick={handleNext}
           disabled={SdgsLoading || loading}
         >
-          {SdgsLoading ? <LoadingSpinner size="20px" /> : "Show Me Careers"}
+          {SdgsLoading ? <LoadingSpinner size="20px" /> : "Next"}
         </Button>
       </div>
     </div>

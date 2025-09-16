@@ -3,7 +3,7 @@ import React from "react";
 const LoadingAstrnout = () => {
   return (
     <div className="w-[260px] h-[300px]">
-      <img src="/assets/loading-astrounout.svg" alt="" />
+      <img src="/question-load.png" alt="" />
     </div>
   );
 };
