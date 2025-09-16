@@ -104,7 +104,7 @@ const Skills = ({ setStep, stepsData }) => {
       </h3>
       <StatusTitle text={"I am good at:"} />
 
-      <div className="flex-1 overflow-y-auto flex flex-col gap-2">
+      <div className="h-[32vh] overflow-y-auto flex flex-col gap-2">
         {Array.isArray(skills) &&
           skills.map((skill) => (
             <TwoLineOption
