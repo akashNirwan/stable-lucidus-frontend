@@ -109,9 +109,50 @@ const RoadmapData = ({ roadmapData }) => {
                   }`}
                 >
                   {openIndex === index ? (
-                    <ChevronUp className="w-4 h-4 text-white" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <g clip-path="url(#clip0_925_4412)">
+                        <path
+                          d="M8.70956 12.29L11.2996 9.7C11.6896 9.31 12.3196 9.31 12.7096 9.7L15.2996 12.29C15.9296 12.92 15.4796 14 14.5896 14H9.40956C8.51956 14 8.07956 12.92 8.70956 12.29Z"
+                          fill="white"
+                        />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_925_4412">
+                          <rect
+                            width="24"
+                            height="24"
+                            fill="white"
+                            transform="matrix(1 0 0 -1 0 24)"
+                          />
+                        </clipPath>
+                      </defs>
+                    </svg>
                   ) : (
-                    <ChevronDown className="w-4 h-4 text-white" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <g clipPath="url(#clip0_925_4412)">
+                        <path
+                          d="M15.29 11.71L12.7 14.3C12.31 14.69 11.68 14.69 11.29 14.3L8.7 11.71C8.07 11.08 8.52 10 9.41 10H14.59C15.48 10 15.93 11.08 15.29 11.71Z"
+                          fill="white"
+                        />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_925_4412">
+                          <rect width="24" height="24" fill="white" />
+                        </clipPath>
+                      </defs>
+                    </svg>
                   )}
                 </button>
               </div>
