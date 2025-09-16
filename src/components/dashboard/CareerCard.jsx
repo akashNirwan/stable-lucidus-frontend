@@ -47,10 +47,14 @@ const CareerCard = ({
     { bg: "bg-lime-200", text: "text-lime-700" },
   ];
 
-  const getRandomColor = () =>
-    colors[Math.floor(Math.random() * colors.length)];
+  const getColorForTag = (tag) => {
+    const hash = [...tag].reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+    return colors[hash % colors.length];
+  };
 
-  const tagColors = useMemo(() => tags.map(() => getRandomColor()), [tags]);
+  const tagColors = useMemo(() => {
+    return tags.map((tag) => getColorForTag(tag));
+  }, [tags]);
   const handleExperienceClick = () => {
     navigate(`/micro-intro?careerId=${careerId}`);
   };
@@ -107,7 +111,7 @@ const CareerCard = ({
         </div>
 
         {/* Tags */}
-        <div className="flex gap-4 my-2">
+        <div className="flex gap-2 my-2">
           {tags.map((tag, i) => {
             const color = tagColors[i];
             return (
