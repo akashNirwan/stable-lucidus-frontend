@@ -36,7 +36,7 @@ export const stepsData = [
     highlight: "I want to:",
     options: [
       "🔎 Explore Careers",
-      "🌎 Excel in Subjects",
+      "🌎 Create An Impact",
       "🛠️ Solve Problems",
       "🧠 Understand Myself Better",
     ],
