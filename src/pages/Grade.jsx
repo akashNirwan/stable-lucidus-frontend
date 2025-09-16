@@ -72,8 +72,7 @@ const Grade = ({ setStep, stepsData }) => {
       <LoadingSpinner size={64} />
     </div>
   ) : (
-    <div className="text-center flex flex-col gap-3  h-[72vh]">
-      {/* Title & Subtitle */}
+    <div className="text-center flex flex-col gap-3 ">
       <h2 className="font-bold text-[20px]">
         What <span className="text-[#5f35f1]">grade</span> are you in?
       </h2>
@@ -83,8 +82,7 @@ const Grade = ({ setStep, stepsData }) => {
       </h3>
       <h4 className="text-[#24A57F] font-bold">I am in:</h4>
 
-      {/* Options */}
-      <div className="flex-1 overflow-y-auto flex flex-col gap-2">
+      <div className=" h-[37vh] overflow-y-auto flex flex-col gap-2">
         {Array.isArray(grades) &&
           grades.map((grade) => (
             <OptionButton
@@ -97,7 +95,6 @@ const Grade = ({ setStep, stepsData }) => {
           ))}
       </div>
 
-      {/* Next Button */}
       <Button
         type="button"
         isActive={!!selectedGrade}
