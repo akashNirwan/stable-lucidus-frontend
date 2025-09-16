@@ -91,7 +91,7 @@ const SkillsCare = ({ setStep, stepsData }) => {
       </h3>
       <StatusTitle text={"I care about:"} />
 
-      <div className="flex-1 overflow-y-auto grid grid-cols-3 mx-auto gap-x-3 ">
+      <div className="flex-1 overflow-y-auto grid grid-cols-3 mx-auto gap-3 ">
         {Array.isArray(sdgs) &&
           sdgs.map((sdg, i) => {
             const isSelected = selected.some((s) => s._id === sdg._id);
