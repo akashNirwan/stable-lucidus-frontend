@@ -21,7 +21,7 @@ const DragAndDrop = () => {
   const [selectedId, setSelectedId] = useState(null);
   const [showResearch, setShowResearch] = useState(false);
   const [currentDecisionOutcome, setCurrentDecisionOutcome] = useState("");
- const { microexperience, loading, saveStepsLoading } = useSelector(
+ const { microexperience, loading, saveStepsLoading, saveOrderLoading, saveAnswerLoading } = useSelector(
     (state) => state.microexperience
   );
  
@@ -213,7 +213,7 @@ const handleMakeRecommendation = async () => {
                         </div>
                         <div className="flex-1">
                           <div className="flex justify-between items-start">
-                           <h2 className=" text-purple-800">
+                           <h2 className="text-black">
                 <div dangerouslySetInnerHTML={{ __html: item.title }}></div>
               </h2>
                             {selectedId === item.id && (
@@ -246,7 +246,7 @@ const handleMakeRecommendation = async () => {
           disabled={!selectedId || saveStepsLoading}
           onClick={handleMakeRecommendation}
         >
-         {saveStepsLoading ? (
+         {saveStepsLoading || saveAnswerLoading|| saveOrderLoading? (
     <LoadingSpinner size={20} />
   ) : (
     "Make Recommendation"
@@ -281,10 +281,10 @@ const handleMakeRecommendation = async () => {
                 YOUR RESEARCH
               </div>
             </div>
-            <p
-  className="text-sm text-gray-800 mb-2"
+            <div
+  className="text-center"
   dangerouslySetInnerHTML={{ __html: currentDecisionOutcome }}
-></p>
+></div>
           </motion.div>
         </>
       )}

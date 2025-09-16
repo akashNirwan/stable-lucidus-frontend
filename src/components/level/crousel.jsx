@@ -117,11 +117,11 @@ useEffect(() => {
                     className="rounded-xl object-cover w-full h-full"
                   />
                 </div>
-                <h3 className="text-sm font-bold text-gray-800 mt-4">
+                <h3 className="text-sm font-bold text-purple-800 mt-4">
                   {item.title}
                 </h3>
                 <p className="text-[12px] font-bold text-purple-600 uppercase mt-1">
-                  {item.subtitle}
+                  {item.Keyword}
                 </p>
                 <p className="text-sm text-gray-600 mt-2">{item.description}</p>
 
@@ -167,7 +167,7 @@ useEffect(() => {
         {saveAnswerLoading || saveStepsLoading ? (
           <LoadingSpinner size={20}></LoadingSpinner>
         ) : (
-          data?.questions?.[0]?.buttonName
+          data?.questions?.[selected ?? 0]?.buttonName
         )}
       </Button>
     </div>

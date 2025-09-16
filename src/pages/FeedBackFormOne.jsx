@@ -105,7 +105,7 @@ const FeedBackFormOne = () => {
         {saveStepsLoading ? (
           <LoadingSpinner size={20}> </LoadingSpinner>
         ) : (
-          "Continue"
+          "Next"
         )}
       </Button>
     </div>
