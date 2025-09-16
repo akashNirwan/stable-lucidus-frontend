@@ -8,7 +8,7 @@ import { saveInsight } from "../redux/actions/microexperience-action";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { saveSteps } from "../redux/actions/microexperience-action";
-const FeedBackFormTwo = ({ microexperience, careerLevelId }) => {
+const FeedBackFormTwo = ({ microexperience, careerLevelId, levelNumber }) => {
   const dispatch = useDispatch();
 
   const { saveInsightLoading, saveStepsLoading } = useSelector(
@@ -69,7 +69,7 @@ const FeedBackFormTwo = ({ microexperience, careerLevelId }) => {
 
       const saveStepsPayload = {
         careerLevelId: careerLevelId,
-        route: `/student-choice?careerLevelId=${careerLevelId}`,
+        route: `/student-choice?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`,
         levelPercent: "5",
       };
 
@@ -86,7 +86,7 @@ const FeedBackFormTwo = ({ microexperience, careerLevelId }) => {
 
       if (isSaveStepsSuccess && isSaveInsightSuccess) {
         navigate(
-          `/survey-page?careerLevelId=${microexperience[0]?.studentinsights[0]?.careerLevelId}`
+          `/survey-page?careerLevelId=${microexperience[0]?.studentinsights[0]?.careerLevelId}&levelNumber=${levelNumber}`
         );
       }
     }

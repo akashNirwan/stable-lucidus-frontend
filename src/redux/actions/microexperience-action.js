@@ -224,3 +224,30 @@ export const fetchLevelBadges = createAsyncThunk(
     }
   }
 );
+
+
+
+export const saveOrder = createAsyncThunk(
+  "microexperience/saveOrder",
+  async (payload, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage();
+
+    try {
+      const response = await client.post(
+        `user/micro-interaction/save-order`,   
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // toast.success(response.data.message || "Step Saved Successfully");
+      return response.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Failed to save Order");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);

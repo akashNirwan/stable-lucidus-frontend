@@ -15,6 +15,7 @@ const { microexperience, loading, error } = useSelector(
     (state) => state.microexperience
   );
   const careerLevelId = searchParams.get("careerLevelId");
+  const levelNumber = searchParams.get("levelNumber");
 console.log(careerLevelId, "careerLevelId in level");
 
 
@@ -34,7 +35,7 @@ console.log(careerLevelId, "careerLevelId in level");
        <div className="bg-[#130934] min-h-screen overflow-x-hidden">
       <Header data={experienceData}/>
       <Question data={experienceData} />
-      <LevelCarousel data={experienceData} careerLevelId={careerLevelId}/>
+      <LevelCarousel levelNumber={levelNumber} data={experienceData} careerLevelId={careerLevelId}/>
     </div>
   )
 };

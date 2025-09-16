@@ -5,7 +5,7 @@ import { saveSteps } from "../redux/actions/microexperience-action";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 
-const MicroIntoScreenTwo = ({ data }) => {
+const MicroIntoScreenTwo = ({ data, levelNumber }) => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const MicroIntoScreenTwo = ({ data }) => {
   const handleNext = () => {
     const payload = {
       careerLevelId: careerLevelId,
-      route: `/micro-intro?careerLevelId=${careerLevelId}`,
+      route: `/micro-intro?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`,
       levelPercent: "5",
     };
 
@@ -26,7 +26,9 @@ const MicroIntoScreenTwo = ({ data }) => {
         (res.payload && res.payload.code === 200) ||
         res.payload.code === 201
       ) {
-        navigate(`/level?careerLevelId=${careerLevelId}`);
+        navigate(
+          `/level?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`
+        );
       }
     });
   };

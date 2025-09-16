@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
@@ -6,33 +6,48 @@ import { motion } from "framer-motion";
 import Button from "../components/common/Button";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { saveSteps } from "../redux/actions/microexperience-action";
+import { fetchMicroexperience } from "../redux/actions/microexperience-action";
+import { useSearchParams } from "react-router-dom";
 
-const L2S5 = () => {
+const MicroIntroLevelSecond = () => {
+  const [searchParams] = useSearchParams();
+
+  const careerLevelId = searchParams.get("careerLevelId");
+  const levelNumber = searchParams.get("levelNumber");
+  const questionId = searchParams.get("questionId")
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { saveStepsLoading } = useSelector((state) => state.microexperience);
+  const { microexperience, loading, saveStepsLoading } = useSelector(
+    (state) => state.microexperience
+  );
 
-  // Static content
-  const careerLevelId = "1234567890";
-  const titleOne = "Choose the right path for your future";
-  const titleTwo = "Think wisely and make your decision count.";
-  const buttonName = "Continue";
+  const Data = microexperience?.[0]?.questionintrostwo?.[0];
+
+  useEffect(() => {
+    if (careerLevelId) {
+      dispatch(fetchMicroexperience({ careerLevelId }));
+    }
+  }, [dispatch, careerLevelId]);
 
   const handleNext = () => {
     const payload = {
       careerLevelId,
-      route: `/micro-intro?careerLevelId=${careerLevelId}`,
-      levelPercent: "5",
+      route: `/micro-intro-Level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`,
+      levelPercent: "25",
     };
 
     dispatch(saveSteps(payload)).then((res) => {
       if (res?.payload?.code === 200 || res?.payload?.code === 201) {
-        navigate(`/level?careerLevelId=${careerLevelId}`);
+        navigate(`/drag-and-drop?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`);
       }
     });
   };
 
-  return (
+  return loading ? (
+    <div className="flex items-center justify-center min-h-[400px]">
+      <LoadingSpinner size={64} />
+    </div>
+  ) : (
     <div className="relative w-full min-h-screen overflow-hidden bg-[url(/assets/badge-bg.svg)] bg-no-repeat bg-center bg-cover">
       {/* Background video */}
       <video
@@ -42,7 +57,7 @@ const L2S5 = () => {
         playsInline
         className="absolute inset-0 w-full h-full object-cover z-0"
       >
-        <source src="/assets/Video.mp4" type="video/mp4" />
+        <source src={Data?.image} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
@@ -60,17 +75,20 @@ const L2S5 = () => {
         }}
       >
         <div className="text-center grid gap-4 relative">
-          <h3 className="font-bold text-[20px]">{titleOne}</h3>
+          <h3 className="font-bold text-[20px]">{Data?.titleOne}</h3>
 
           <p className="text-center text-white absolute -top-[125px] left-0 w-full p-4 leading-[140%] bg-black/40 backdrop-blur-md rounded-2xl">
             "I love your research! Now we need to decide how to start helping
             these 200 families."
           </p>
 
-          <p className="text-center text-[#042119]">{titleTwo}</p>
+          <div
+            className="text-center text-[#042119]"
+            dangerouslySetInnerHTML={{ __html: Data?.titleTwo }}
+          ></div>
 
           <Button onClick={handleNext} disabled={saveStepsLoading}>
-            {saveStepsLoading ? <LoadingSpinner size={20} /> : buttonName}
+            {saveStepsLoading ? <LoadingSpinner size={20} /> : Data?.buttonName}
           </Button>
         </div>
       </motion.div>
@@ -78,4 +96,4 @@ const L2S5 = () => {
   );
 };
 
-export default L2S5;
+export default MicroIntroLevelSecond;

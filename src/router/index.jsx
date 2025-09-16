@@ -37,8 +37,9 @@ import DashBoardMenuThree from "../pages/Dashboard-MenuThree";
 import SavedCareer from "../pages/SavedCareer";
 import DashBoardMicro from "../pages/DashBoardMicro";
 import { Navigate } from "react-router-dom";
-import L2S5 from "../pages/L2S5";
-import L2S6 from "../pages/L2S6";
+import MicroIntroLevelSecond from "../pages/MicroIntroLevelSecond";
+import DragAndDrop from "../pages/DragAndDrop";
+import FeedBackFormLevelTwo from "../pages/FeedbackFormLevelTwo";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -155,7 +156,15 @@ const router = createBrowserRouter([
     ),
     children: [{ index: true, element: <FeedBackFormOne /> }],
   },
-
+{
+    path: "/feedbackform-level-two",
+    element: (
+      <ProtectedRoute>
+        <FeedBackLayout />
+      </ProtectedRoute>
+    ),
+    children: [{ index: true, element: <FeedBackFormLevelTwo /> }],
+  },
   {
     path: "/badge-earned",
     element: (
@@ -251,12 +260,12 @@ const router = createBrowserRouter([
     children: [{ index: true, element: <RoadMap /> }],
   },
   {
-    path: "/l2s5",
-    element: <L2S5 />,
+    path: "/micro-intro-Level-two",
+    element: <MicroIntroLevelSecond />,
   },
   {
-    path: "/l2s6",
-    element: <L2S6 />,
+    path: "/drag-and-drop",
+    element: <DragAndDrop />,
   },
   {
     path: "*",
