@@ -25,7 +25,6 @@ const FeedBackFormLevelTwo = () => {
   console.log(microexperience?.[0]?.completedCareerLevelCount, "count");
   const completedCareerLevelCount =
     microexperience?.[0]?.completedCareerLevelCount;
- 
 
   useEffect(() => {
     if (careerLevelId) {
@@ -34,7 +33,9 @@ const FeedBackFormLevelTwo = () => {
   }, [dispatch, searchParams]);
 
   const selectedQuestion = useMemo(() => {
-    return microexperience?.[0]?.recommendations?.find((q) => q._id === questionId);
+    return microexperience?.[0]?.recommendations?.find(
+      (q) => q._id === questionId
+    );
   }, [microexperience, questionId]);
 
   const handleClick = () => {
@@ -49,11 +50,9 @@ const FeedBackFormLevelTwo = () => {
         res.payload &&
         (res.payload.code === 200 || res.payload.code === 201)
       ) {
-        
-          navigate(
-            `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`
-          );
-       
+        navigate(
+          `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`
+        );
       }
     });
   };
@@ -69,9 +68,11 @@ const FeedBackFormLevelTwo = () => {
     </div>
   ) : (
     <div className="">
-      <h2 className="text-center font-bold text-xl">{selectedQuestion?.heading}</h2>
+      <h2 className="text-center font-bold text-xl">
+        {selectedQuestion?.heading}
+      </h2>
       <div className="text-center space-y-4 border border-[#4ED0AA] rounded-2xl p-4 mt-4 bg-[#e0ffef]">
-        <div className="text-[12px] text-[#034230] px-2 py-1  rounded-2xl w-fit mx-auto bg-[#4ED0AA]">
+        <div className="text-[12px] text-[#034230] px-2 py-1 font-semibold  rounded-2xl w-fit mx-auto bg-[#4ED0AA]">
           DECISION OUTCOME
         </div>
         <div
@@ -82,10 +83,10 @@ const FeedBackFormLevelTwo = () => {
         />
       </div>
       <div className="text-center space-y-4 border border-[#5E35F1] rounded-2xl p-4 mt-4 bg-[#EFEAFF]">
-        <div className="text-[12px] text-[#034230] px-2 py-1  rounded-2xl w-fit mx-auto bg-[#C2B1FF]">
+        <div className="text-[12px] text-[#034230] px-2 py-1 font-semibold rounded-2xl w-fit mx-auto bg-[#C2B1FF]">
           FOOD FOR THOUGHT
         </div>
-       <div
+        <div
           className="text-[14px]"
           dangerouslySetInnerHTML={{
             __html: selectedQuestion?.foodForThought || "",

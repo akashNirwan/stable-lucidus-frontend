@@ -38,16 +38,18 @@ const MicroIntoScreenTwo = ({ data, levelNumber }) => {
       {/* <h3 className="font-bold text-[20px] text-center">
         {data?.questionintros?.[1]?.titleOne}
       </h3> */}
-      <p className="text-center text-white absolute -top-[125px] left-0 leading-[140%]">
+      <p className="text-center text-white absolute -top-[135px] left-0 leading-[140%] bg-[#13093466] opacity-40 p-3">
         "I really need your help. There are three things my family needs... I
         need your help in making the right choice on how to utilise the $33
         loan."
       </p>
 
       <p
-  className="text-center "
-  dangerouslySetInnerHTML={{ __html: data?.questionintros?.[1]?.titleTwo }}
-></p>
+        className="text-center text-[20px]"
+        dangerouslySetInnerHTML={{
+          __html: data?.questionintros?.[1]?.titleTwo,
+        }}
+      ></p>
 
       <Button onClick={handleNext} disabled={saveStepsLoading}>
         {saveStepsLoading ? (

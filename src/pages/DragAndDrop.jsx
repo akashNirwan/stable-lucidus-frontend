@@ -236,10 +236,9 @@ const DragAndDrop = () => {
                                 dangerouslySetInnerHTML={{ __html: item.title }}
                               ></div>
                             </h2>
-                            {selectedId === item.id && (
+                            {/* {selectedId === item.id && (
                               <CheckCircle className="text-purple-600 w-5 h-5" />
-                            )}{" "}
-                            */}
+                            )}  */}
                           </div>
                         </div>
                       </div>
@@ -289,7 +288,7 @@ const DragAndDrop = () => {
           )}
         </button>
         <button
-          className="w-full bg-[#00A074] text-white py-3 rounded-xl font-semibold disabled:opacity-60"
+          className="w-full bg-[#0F8864] text-white py-3 rounded-xl font-semibold disabled:opacity-60"
           disabled={!selectedId || saveStepsLoading}
           onClick={handleMakeRecommendation}
         >
@@ -321,10 +320,10 @@ const DragAndDrop = () => {
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
             transition={{ type: "spring", stiffness: 100, damping: 20 }}
-            className="fixed bottom-36 left-4 right-4 bg-[#DFF8EF] rounded-3xl p-6 shadow-2xl text-black z-40"
+            className="fixed bottom-36 left-4 right-4 bg-[#E0FFEF] rounded-3xl p-6 shadow-2xl text-black z-40"
           >
             <div className="flex justify-between items-center mb-4 mx-auto">
-              <div className="bg-[#00A074] text-black font-semibold text-xs px-3 py-1 rounded-full mx-auto">
+              <div className="bg-[#4ED0AA] text-black font-semibold text-xs px-3 py-1 rounded-full mx-auto">
                 YOUR RESEARCH
               </div>
             </div>
