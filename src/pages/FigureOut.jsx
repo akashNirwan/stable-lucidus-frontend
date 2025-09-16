@@ -81,7 +81,7 @@ const FigureOut = ({ setStep, stepsData }) => {
       </h3>
       <StatusTitle text={"I want to:"} />
 
-      <div className="flex-1 overflow-y-auto flex flex-col gap-2">
+      <div className="h-[32vh] overflow-y-auto flex flex-col gap-2">
         {stepsData.options.map((option, ind) => (
           <OptionButton
             key={ind}
