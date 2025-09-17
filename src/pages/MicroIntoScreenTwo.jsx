@@ -13,9 +13,10 @@ const MicroIntoScreenTwo = ({ data, levelNumber }) => {
   const careerLevelId = data?._id;
   console.log(careerLevelId, "careerLevelId");
   console.log(data?.career[0]._id, "data");
-  const levelPercent = levelNumber === "1 "? "5" : levelNumber === "2" ? "30" : "0";
+  const levelPercent =
+    levelNumber === "1 " ? "5" : levelNumber === "2" ? "30" : "0";
 
-console.log(typeof levelNumber, "type")
+  console.log(typeof levelNumber, "type");
 
   const handleNext = () => {
     const payload = {
@@ -48,7 +49,7 @@ console.log(typeof levelNumber, "type")
       </p>
 
       <p
-        className="text-center text-[20px]"
+        className="text-center "
         dangerouslySetInnerHTML={{
           __html: data?.questionintros?.[1]?.titleTwo,
         }}
