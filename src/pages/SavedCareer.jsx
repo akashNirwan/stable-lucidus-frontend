@@ -42,7 +42,6 @@ const SavedCareer = () => {
       </div>
     );
   }
-
   return (
     <div
       className="h-full overflow-y-auto"
