@@ -11,7 +11,7 @@ export default function Button({
       type={type}
       disabled={disabled || !isActive}
       onClick={onClick}
-      className={`w-full rounded-lg font-semibold cursor-pointer text-base py-4 shadow transition-all
+      className={`w-full rounded-[12px] font-semibold cursor-pointer text-base py-4 shadow transition-all
         ${
           isActive && !disabled
             ? "bg-[#0F8864] text-white hover:scale-[1.02] active:scale-[0.98]"

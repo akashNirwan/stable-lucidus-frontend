@@ -3,28 +3,28 @@ import { useNavigate } from "react-router-dom";
 const LoadingBar = () => {
   const [progress, setProgress] = useState(0);
   const navigate = useNavigate();
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((old) => {
-        if (old >= 100) {
-          clearInterval(interval);
-          return 100;
-        }
-        return old + 5;
-      });
-    }, 300);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setProgress((old) => {
+  //       if (old >= 100) {
+  //         clearInterval(interval);
+  //         return 100;
+  //       }
+  //       return old + 5;
+  //     });
+  //   }, 300);
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
-  useEffect(() => {
-    if (progress === 100) {
-      const timeout = setTimeout(() => {
-        navigate("/dashboard/explorecareers");
-      }, 500);
-      return () => clearTimeout(timeout);
-    }
-  }, [progress, navigate]);
+  // useEffect(() => {
+  //   if (progress === 100) {
+  //     const timeout = setTimeout(() => {
+  //       navigate("/dashboard/explorecareers");
+  //     }, 500);
+  //     return () => clearTimeout(timeout);
+  //   }
+  // }, [progress, navigate]);
 
   useEffect(() => {
     if (progress === 100) {

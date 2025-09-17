@@ -76,12 +76,12 @@ const FigureOut = ({ setStep, stepsData }) => {
       </h2>
 
       {/* <h3 className="text-[#066146] text-sm">{stepsData.subtitle}</h3> */}
-      <h3 className="text-[#066146]">
+      <h3 className="text-[#066146] text-[14px]">
         Select <span className="font-bold">all</span> that apply.
       </h3>
       <StatusTitle text={"I want to:"} />
 
-      <div className="h-[32vh] lg:h-[40vh] overflow-y-auto flex flex-col gap-2">
+      <div className="h-[32vh] lg:h-[40vh] overflow-y-auto flex flex-col gap-2.5">
         {stepsData.options.map((option, ind) => (
           <OptionButton
             key={ind}
