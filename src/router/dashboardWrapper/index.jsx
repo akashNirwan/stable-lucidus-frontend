@@ -6,7 +6,7 @@ import { useState } from "react";
 const DashBoardWrapper = () => {
   const [menu, setMenu] = useState(2);
   return (
-    <div className="flex flex-col h-screen bg-[#130934]">
+    <div className="flex flex-col h-[100dvh] bg-[#130934]">
       <Header />
       <main className="flex-grow overflow-y-auto bg-[#130934]">
         <Outlet context={{ menu, setMenu }} />
