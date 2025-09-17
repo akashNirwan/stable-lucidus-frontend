@@ -38,7 +38,7 @@ export default function Welcome() {
 
     // Case 7: All complete - go to dashboard
     if (hasGrades && hasFigureout && hasSkills && hasSubjects && hasSdg && hasAmbitions) {
-      navigate('/dashboard');
+      navigate('/dashboard/explorecareers');
       return;
     }
 
