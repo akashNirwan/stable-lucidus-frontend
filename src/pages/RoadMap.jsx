@@ -13,7 +13,7 @@ const navigate = useNavigate()
   const { roadmap, roadmapLoading, error } = useSelector((state) => state.encyclopedia);
 
   const career = roadmap?.[0]?.career?.[0]?.career
-  console.log(career, "career");
+  
     const careerId = searchParams.get("careerId")
     useEffect(() => {
 

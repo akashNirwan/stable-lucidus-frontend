@@ -16,7 +16,7 @@ const { microexperience, loading, error } = useSelector(
   );
   const careerLevelId = searchParams.get("careerLevelId");
   const levelNumber = searchParams.get("levelNumber");
-console.log(careerLevelId, "careerLevelId in level");
+
 
 
   useEffect(() => {

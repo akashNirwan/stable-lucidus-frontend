@@ -34,7 +34,7 @@ const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loginLoading = false;
         state.user = action?.payload?.data[0];
-        console.log(state.user, "login Api user id ");
+        
         
       })
       .addCase(loginUser.rejected, (state, action) => {
@@ -52,7 +52,7 @@ const authSlice = createSlice({
         state.signuploading = false;
 
         state.user = action?.payload?.data[0];
-        console.log(state.user, "user details 1234567");
+        
         
       })
       .addCase(signupUser.rejected, (state, action) => {
@@ -68,14 +68,9 @@ const authSlice = createSlice({
       .addCase(verifyOtp.fulfilled, (state, action) => {
         state.verifyOtpLoading = false;
         state.verifyOtpData = action.payload;
-           console.log(action.payload, "vhgfgfgfgfgfgfgfhfh");
            
-        // const token = action.payload?.data?.token;
-        //         console.log(token, "token in th log");
-                
-        // if (token) {
-        //   localStorage.setItem("token", token);
-        // }
+           
+       
       })
       .addCase(verifyOtp.rejected, (state, action) => {
         state.verifyOtpLoading = false;

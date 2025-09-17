@@ -11,12 +11,11 @@ const MicroIntoScreenTwo = ({ data, levelNumber }) => {
   const dispatch = useDispatch();
   const { saveStepsLoading } = useSelector((state) => state.microexperience);
   const careerLevelId = data?._id;
-  console.log(careerLevelId, "careerLevelId");
-  console.log(data?.career[0]._id, "data");
+ 
   const levelPercent =
     levelNumber === "1 " ? "5" : levelNumber === "2" ? "30" : "0";
 
-  console.log(typeof levelNumber, "type");
+ 
 
   const handleNext = () => {
     const payload = {
@@ -57,7 +56,7 @@ const MicroIntoScreenTwo = ({ data, levelNumber }) => {
 
       <Button onClick={handleNext} disabled={saveStepsLoading}>
         {saveStepsLoading ? (
-          <LoadingSpinner size={20}></LoadingSpinner>
+          <LoadingSpinner size={20} color="green"></LoadingSpinner>
         ) : (
           data?.questionintros?.[1]?.buttonName
         )}

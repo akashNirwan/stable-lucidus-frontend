@@ -90,7 +90,7 @@ const MicroIntroLevelSecond = () => {
           ></div>
 
           <Button onClick={handleNext} disabled={saveStepsLoading}>
-            {saveStepsLoading ? <LoadingSpinner size={20} /> : Data?.buttonName}
+            {saveStepsLoading ? <LoadingSpinner size={20} color="green"/> : Data?.buttonName}
           </Button>
         </div>
       </motion.div>

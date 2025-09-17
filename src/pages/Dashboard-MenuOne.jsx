@@ -28,7 +28,7 @@ const DashBoardMenuOne = () => {
 
   return (
     <div>
-      <div className="flex justify-between bg-[#120C2A] p-4 w-[375px] mx-auto">
+      <div className="flex justify-between  p-4 w-[375px] mx-auto">
         <button
           // onClick={() => setActiveTab("micro")}
           onClick={() => handleTabClick("micro")}

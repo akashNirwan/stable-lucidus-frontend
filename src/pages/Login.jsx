@@ -21,7 +21,7 @@ export default function Login() {
 
   const recaptcha_token = import.meta.env.VITE_reCAPTCHA_KEY;
 
-  console.log(recaptcha_token, "recaptcha_token");
+ 
 
   const {
     control,
@@ -202,8 +202,8 @@ export default function Login() {
         type="submit"
         disabled={loginLoading || !isValid || signuploading}
       >
-        {loginLoading ? (
-          <LoadingSpinner size={20}></LoadingSpinner>
+        {loginLoading || signuploading ? (
+          <LoadingSpinner variant="ring" size={20} color="green" ></LoadingSpinner>
         ) : isLogin ? (
           "Send OTP"
         ) : (

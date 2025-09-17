@@ -107,7 +107,7 @@ const FigureOut = ({ setStep, stepsData }) => {
           disabled={loading}
           onClick={handleClick}
         >
-          {loading ? <LoadingSpinner size="20px" /> : "Next"}
+          {loading ? <LoadingSpinner size="20px" color="green" /> : "Next"}
         </Button>
       </div>
     </div>

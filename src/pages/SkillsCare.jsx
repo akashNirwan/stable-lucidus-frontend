@@ -142,7 +142,7 @@ const SkillsCare = ({ setStep, stepsData }) => {
           onClick={handleNext}
           disabled={SdgsLoading || loading}
         >
-          {SdgsLoading ? <LoadingSpinner size="20px" /> : "Next"}
+          {SdgsLoading ? <LoadingSpinner size="20px" color="green" /> : "Next"}
         </Button>
       </div>
     </div>

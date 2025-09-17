@@ -7,7 +7,7 @@ const Header = ({data}) => {
    const handleBack = () => {
     navigate(`/micro-intro?careerLevelId=${careerLevelId}`);
   };
-     console.log(data, "data in level ");
+     
      
 const handleCross = ()=>{
    navigate(`/dashboard/explorecareers`);

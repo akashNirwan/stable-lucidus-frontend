@@ -15,7 +15,7 @@ export default function CareerSurvey() {
   const [searchParams] = useSearchParams();
   const careerLevelId = searchParams.get("careerLevelId");
   const levelNumber = searchParams.get("levelNumber");
-  console.log(careerLevelId, "careerLevelId");
+  
 
   const [islike, setIsLike] = useState("");
   const navigate = useNavigate();

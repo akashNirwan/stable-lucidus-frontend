@@ -13,14 +13,15 @@ import { saveAnswer } from "../../redux/actions/microexperience-action";
 import LoadingSpinner from "../common/LoadingSpinner";
 import { saveSteps } from "../../redux/actions/microexperience-action";
 export default function LevelCarousel({ data, careerLevelId, levelNumber }) {
-  console.log(data, "level data");
+ 
   const { saveAnswerLoading, saveStepsLoading } = useSelector(
     (state) => state.microexperience
   );
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+ 
+  
   //  const careerId = data?.careerId.
 
   const [api, setApi] = useState(null);
@@ -160,14 +161,14 @@ useEffect(() => {
           />
         ))}
       </div>
-
+       
       <Button
         onClick={handleSaveAnswer}
         disabled={selected === null || saveAnswerLoading || saveStepsLoading}
         className="mt-2 max-w-[320px] flex justify-center mx-auto mb-2"
       >
         {saveAnswerLoading || saveStepsLoading ? (
-          <LoadingSpinner size={20}></LoadingSpinner>
+          <LoadingSpinner size={20} color="green"></LoadingSpinner>
         ) : (
           data?.questions?.[selected ?? 0]?.buttonName
         )}

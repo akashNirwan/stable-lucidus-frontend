@@ -31,7 +31,7 @@ const DashBoardMicro = () => {
       !dashboardMicroexperienceLoading
     ) {
       const nextPage = currentPage + 1;
-      console.log(`Loading page ${nextPage}`);
+      
       dispatch(fetchDashboardMicroexperience({ page: nextPage }));
     }
   };

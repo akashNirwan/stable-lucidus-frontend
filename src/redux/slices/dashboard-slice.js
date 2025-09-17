@@ -42,7 +42,7 @@ const dashboardSlice = createSlice({
       .addCase(fetchCareers.fulfilled, (state, action) => {
         state.loading = false;
         state.dashboard = action.payload.data;
-        console.log(state.dashboard, "state careers");
+  
         
         
       })
@@ -78,7 +78,7 @@ const dashboardSlice = createSlice({
       .addCase(fetchBadges.fulfilled, (state, action) => {
         state.badgesLoading = false;
         state.badges = action.payload.data;
-        console.log(state.badges, "state badges");
+        
         
         
       })
@@ -111,8 +111,7 @@ const dashboardSlice = createSlice({
         state.totalCareers = total;
         state.hasMoreCareers = state.fetchsavedCareer.length < total;
 
-        // state.fetchsavedCareer = action.payload.data;
-        // console.log(action.payload.data, "savedcareers");
+
         
         
       })
@@ -147,8 +146,7 @@ const dashboardSlice = createSlice({
         state.hasMoreCareers = state.dashboardMicroexperience.length < total;
 
 
-        // state.dashboardMicroexperience = action.payload.data;
-        // console.log(action.payload.data, "dashboardsavedcareers");
+
         
         
       })
@@ -167,7 +165,7 @@ const dashboardSlice = createSlice({
       .addCase(fetchProfile.fulfilled, (state, action) => {
         state.profileLoading = false;
         state.profile = action.payload.data;
-        console.log(action.payload.data, "profile data state");
+
         
         
       })
@@ -185,7 +183,7 @@ const dashboardSlice = createSlice({
       .addCase(updateName.fulfilled, (state, action) => {
         state.userLoading = false;
         state.username = action.payload.data;
-        console.log(action.payload.data, "username state");
+
         
         
       })

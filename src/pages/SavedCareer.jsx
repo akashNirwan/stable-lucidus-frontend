@@ -18,8 +18,6 @@ const SavedCareer = () => {
     error,
   } = useSelector((state) => state.dashboard);
 
-  console.log(fetchsavedCareer, "fetch save data");
-
   useEffect(() => {
     dispatch(fetchSavedCareers({ page: 1 }));
   }, [dispatch]);
@@ -30,7 +28,7 @@ const SavedCareer = () => {
 
     if (bottom && hasMoreCareers && !loadMoreLoading && !savedCareerLoading) {
       const nextPage = currentPage + 1;
-      console.log(`Loading page ${nextPage}`);
+
       dispatch(fetchSavedCareers({ page: nextPage }));
     }
   };
@@ -49,7 +47,7 @@ const SavedCareer = () => {
       onScroll={handleScroll}
       style={{ maxHeight: "calc(100vh - 100px)" }}
     >
-      <div className="grid gap-4 p-4 ">
+      <div className="grid gap-4 p-4 mb-[100px]">
         {fetchsavedCareer && fetchsavedCareer.length > 0 ? (
           fetchsavedCareer.map((savedCareer) => (
             <CareerExperienceCard

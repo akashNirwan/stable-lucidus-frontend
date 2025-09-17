@@ -4,6 +4,7 @@ import { stepsData } from "../assets/question";
 import FigureOut from "./FigureOut";
 import Grade from "./Grade";
 import Subject from "./Subject";
+
 import Skills from "./Skills";
 import SkillsCare from "./SkillsCare";
 import Ambition from "./Ambition";

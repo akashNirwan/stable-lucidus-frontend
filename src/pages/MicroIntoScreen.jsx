@@ -40,7 +40,7 @@ const MicroIntoScreen = () => {
   const experienceData = microexperience?.[0];
     const levelString = microexperience?.[0]?.careerLevel;  // e.g., "Level - 2"
 const levelNumber2 = levelString ? levelString.split('-')[1].trim() : null;  // "2"
-      console.log(levelString, levelNumber2, "level name");
+    
       
     
 

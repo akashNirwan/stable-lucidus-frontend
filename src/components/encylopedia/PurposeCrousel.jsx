@@ -10,7 +10,7 @@ export default function PurposeCrousel() {
   const dispatch = useDispatch();
   const [searchparams] = useSearchParams();
   const careerId = searchparams.get("careerId");
-  console.log(careerId, "careerid");
+ 
 
   const { predictionandPurpose, loading } = useSelector(
     (state) => state.encyclopedia

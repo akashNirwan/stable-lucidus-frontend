@@ -116,7 +116,7 @@ const FeedBackFormTwo = ({ microexperience, careerLevelId, levelNumber }) => {
         onClick={handleContinue}
       >
         {saveInsightLoading || saveStepsLoading ? (
-          <LoadingSpinner size={20}></LoadingSpinner>
+          <LoadingSpinner size={20} color="green"></LoadingSpinner>
         ) : (
           "Continue"
         )}

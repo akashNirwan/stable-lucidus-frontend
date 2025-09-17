@@ -20,13 +20,9 @@ const FeedBackFormOne = () => {
   const questionId = searchParams.get("questionId");
   const careerLevelId = searchParams.get("careerLevelId");
   const levelNumber = searchParams.get("levelNumber");
-  console.log(careerLevelId, "careerLevelId in feedback form ");
-  console.log(questionId, "questionid");
-  console.log(microexperience?.[0]?.questions, "microexperience");
-  console.log(microexperience?.[0]?.completedCareerLevelCount, "count");
+ 
   const userBadgeCount = microexperience?.[0]?.userBadgeCount
-  console.log("usebadge count", userBadgeCount);
-  console.log(typeof userBadgeCount, "type");
+ 
   
   const completedCareerLevelCount = microexperience?.[0]?.completedCareerLevelCount;
   
@@ -144,7 +140,7 @@ const FeedBackFormOne = () => {
         className="mt-4"
       >
         {saveStepsLoading ? (
-          <LoadingSpinner size={20}> </LoadingSpinner>
+          <LoadingSpinner size={20} color="green"> </LoadingSpinner>
         ) : (
           "Next"
         )}

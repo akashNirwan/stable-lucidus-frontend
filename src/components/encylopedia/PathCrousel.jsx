@@ -38,7 +38,7 @@ export default function PathCrousel() {
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const careerId = searchParams.get("careerId");
-  console.log(careerId, "careerid");
+ 
 
   const { path, pathLoading } = useSelector((state) => state.encyclopedia);
 
