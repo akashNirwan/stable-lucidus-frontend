@@ -144,7 +144,11 @@ const Subject = ({ setStep, stepsData }) => {
           onClick={handleNext}
           disabled={SubjectsLoading || loading}
         >
-          {SubjectsLoading ? <LoadingSpinner size="20px" color="green"/> : "Next"}
+          {SubjectsLoading ? (
+            <LoadingSpinner size="20px" color="green" />
+          ) : (
+            "Next"
+          )}
         </Button>
       </div>
     </div>
