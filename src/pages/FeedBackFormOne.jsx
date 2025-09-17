@@ -14,6 +14,7 @@ const FeedBackFormOne = () => {
   const { microexperience, loading, saveStepsLoading } = useSelector(
     (state) => state.microexperience
   );
+  
 
   const navigate = useNavigate();
   const questionId = searchParams.get("questionId");
@@ -23,12 +24,15 @@ const FeedBackFormOne = () => {
   console.log(questionId, "questionid");
   console.log(microexperience?.[0]?.questions, "microexperience");
   console.log(microexperience?.[0]?.completedCareerLevelCount, "count");
-  const completedCareerLevelCount =
-    microexperience?.[0]?.completedCareerLevelCount;
+  const userBadgeCount = microexperience?.[0]?.userBadgeCount
+  console.log("usebadge count", userBadgeCount);
+  console.log(typeof userBadgeCount, "type");
+  
+  const completedCareerLevelCount = microexperience?.[0]?.completedCareerLevelCount;
   
 
 
-    const levelPercent = levelNumber === "1 "? "5" : levelNumber === "2" ? "30" : "0";
+    const levelPercent = levelNumber === "1"? "5" : levelNumber === "2" ? "30" : "0";
   useEffect(() => {
     if (careerLevelId) {
       dispatch(fetchMicroexperience({ careerLevelId }));
@@ -39,10 +43,44 @@ const FeedBackFormOne = () => {
     return microexperience?.[0]?.questions?.find((q) => q._id === questionId);
   }, [microexperience, questionId]);
 
+  // const handleClick = () => {
+  //   const payload = {
+  //     careerLevelId: careerLevelId,
+  //     route: `/feedbackform?careerLevelId=${careerLevelId}&questionId=${questionId}&completedCareerLevelCount=${completedCareerLevelCount}&levelNumber=${levelNumber}`,
+  //     levelPercent: levelPercent,
+  //   };
+
+  //   dispatch(saveSteps(payload)).then((res) => {
+  //     if (
+  //       res.payload &&
+  //       (res.payload.code === 200 || res.payload.code === 201)
+  //     ) {
+  //       if (levelNumber === "2") {
+  //       // Special route when levelNumber is 2
+  //       navigate(`/micro-intro-Level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`);
+  //     }else if ([0, 2, 4].includes(completedCareerLevelCount)) {
+  //         navigate(
+  //           `/badge-earned?careerLevelId=${careerLevelId}&questionId=${questionId}&completedCareerLevelCount=${completedCareerLevelCount}&levelNumber=${levelNumber}`
+  //         );
+  //       } else {
+  //         navigate(
+  //           `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`
+  //         );
+  //       }
+        
+  //     }
+  //   });
+  // };
+
+  // const    handleClick = ()=>{
+
+  //   navigate(`/badge-earned?careerLevelId=${careerLevelId}&questionId=${questionId}`)
+  // }
+
   const handleClick = () => {
     const payload = {
       careerLevelId: careerLevelId,
-      route: `/feedbackform?careerLevelId=${careerLevelId}&questionId=${questionId}&completedCareerLevelCount=${completedCareerLevelCount}&levelNumber=${levelNumber}`,
+      route: `/feedbackform?careerLevelId=${careerLevelId}&questionId=${questionId}&completedCareerLevelCount=${userBadgeCount}&levelNumber=${levelNumber}`,
       levelPercent: levelPercent,
     };
 
@@ -51,27 +89,24 @@ const FeedBackFormOne = () => {
         res.payload &&
         (res.payload.code === 200 || res.payload.code === 201)
       ) {
-        if (levelNumber === "2") {
-        // Special route when levelNumber is 2
-        navigate(`/micro-intro-Level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`);
-      }else if ([0, 2, 4].includes(completedCareerLevelCount)) {
+        // Updated navigation logic based on your requirements
+        if (levelNumber === "2" && userBadgeCount === 0) {
+          // If levelNumber is 2 and userBadgeCount is 0, go to badge-earned
           navigate(
-            `/badge-earned?careerLevelId=${careerLevelId}&questionId=${questionId}&completedCareerLevelCount=${completedCareerLevelCount}&levelNumber=${levelNumber}`
+            `/badge-earned?careerLevelId=${careerLevelId}&questionId=${questionId}&completedCareerLevelCount=${userBadgeCount}&levelNumber=${levelNumber}`
           );
+        } else if (levelNumber === "2") {
+          // If levelNumber is 2 and userBadgeCount is anything else, go to micro-intro-Level-two
+          navigate(`/micro-intro-Level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`);
         } else {
+          // Default case - go to student-choice
           navigate(
             `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`
           );
         }
-        
       }
     });
   };
-
-  // const    handleClick = ()=>{
-
-  //   navigate(`/badge-earned?careerLevelId=${careerLevelId}&questionId=${questionId}`)
-  // }
 
   return loading ? (
     <div className="flex items-center justify-center min-h-[400px]">

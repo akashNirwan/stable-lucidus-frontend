@@ -21,7 +21,7 @@ const DashBoardMenuTwo = () => {
 
   const careers = [
     ...(dashboard[0]?.top4 || []),
-    ...(dashboard[0]?.wildcard ? [dashboard[0].wildcard] : []),
+    ...(dashboard[0]?.wildcard?.length ? [dashboard[0].wildcard] : []),
   ];
 
   return loading ? (

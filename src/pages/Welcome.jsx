@@ -30,7 +30,7 @@ const dispatch = useDispatch()
       const gradeId = student.selected_grades?.[0]?.gradeId;
       
       
-      // Case 1: All keys are empty - stay on welcome page, let user click Get Started
+      
       if (!student.selected_grades?.length && 
           !student.figureout && 
           !student.selected_skill?.length && 
@@ -40,18 +40,18 @@ const dispatch = useDispatch()
         return; // Stay on welcome page
       }
 
-      // Case 7: All keys have data - go to dashboard
+      
       if (student.selected_grades?.length && 
           student.figureout && 
           student.selected_skill?.length && 
           student.selected_subject?.length && 
           student.selected_sdg?.length && 
           student.ambitions) {
-        navigate('/dashboard');
+        navigate('/dashboard/explorecareers');
         return;
       }
 
-      // Case 2: Only selected_grades has data
+     
       if (student.selected_grades?.length && 
           !student.figureout && 
           !student.selected_skill?.length && 
@@ -62,7 +62,7 @@ const dispatch = useDispatch()
         return;
       }
 
-      // Case 3: selected_grades + figureout have data
+      
       if (student.selected_grades?.length && 
           student.figureout && 
           !student.selected_subject?.length && 
@@ -73,7 +73,7 @@ const dispatch = useDispatch()
         return;
       }
 
-      // Case 4: selected_grades + figureout + selected_subject have data
+      
       if (student.selected_grades?.length && 
           student.figureout && 
           student.selected_subject?.length && 
@@ -84,7 +84,7 @@ const dispatch = useDispatch()
         return;
       }
 
-      // Case 5: selected_grades + figureout + selected_subject + selected_skill have data
+     
       if (student.selected_grades?.length && 
           student.figureout && 
           student.selected_subject?.length && 
@@ -95,7 +95,7 @@ const dispatch = useDispatch()
         return;
       }
 
-      // Case 6: All except ambitions have data
+     
       if (student.selected_grades?.length && 
           student.figureout && 
           student.selected_subject?.length && 

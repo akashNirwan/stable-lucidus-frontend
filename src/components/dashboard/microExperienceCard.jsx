@@ -36,13 +36,14 @@ const CareerCard = ({ data }) => {
   // Case 3: /feedbackform -> conditional routing
   else if (currentRoute.startsWith("/feedbackform") && !currentRoute.includes("level-two")) {
     // Special case for levelNumber = 2
-    if (levelNumber === "2") {
-      return `/micro-intro-Level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`;
-    }
-    // Check completedCareerLevelCount for badge or student choice
-    else if ([0, 2, 4].includes(parseInt(completedCareerLevelCount))) {
+   if (levelNumber === "2" && userBadgeCount === 0) {
+      // If levelNumber is 2 and userBadgeCount is 0, go to badge-earned
       return `/badge-earned?careerLevelId=${careerLevelId}&questionId=${questionId}&completedCareerLevelCount=${completedCareerLevelCount}&levelNumber=${levelNumber}`;
+    } else if (levelNumber === "2") {
+      // If levelNumber is 2 and userBadgeCount is anything else, go to micro-intro-Level-two
+      return `/micro-intro-Level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`;
     } else {
+      // Default case - go to student-choice
       return `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`;
     }
   }
@@ -72,6 +73,10 @@ const CareerCard = ({ data }) => {
   // Case 8: /feedbackform-level-two -> /student-choice
   else if (currentRoute.startsWith("/feedbackform-level-two")) {
     return `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`;
+  }
+
+  else if (currentRoute.startsWith("/survey-page")){
+    return `/dashboard/explorecareers?careerLevelId=${careerLevelId}&Modal=true&levelNumber=${levelNumber}`
   }
 
   // Default fallback
