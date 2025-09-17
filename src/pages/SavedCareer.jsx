@@ -43,11 +43,7 @@ const SavedCareer = () => {
     );
   }
   return (
-    <div
-      className="h-full overflow-y-auto"
-      onScroll={handleScroll}
-      style={{ maxHeight: "calc(100vh - 100px)" }}
-    >
+    <div className="h-full overflow-y-auto" onScroll={handleScroll}>
       <div className="grid gap-4 p-4  mb-24">
         {fetchsavedCareer && fetchsavedCareer.length > 0 ? (
           fetchsavedCareer.map((savedCareer) => (
