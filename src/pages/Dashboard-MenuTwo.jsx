@@ -29,7 +29,7 @@ const DashBoardMenuTwo = () => {
       <LoadingSpinner size={64} />
     </div>
   ) : (
-    <div className="p-4 max-w-[375px] md:max-w-[1024px] mx-auto">
+    <div className="p-4 max-w-[375px] md:max-w-[1024px] mx-auto  ">
       <h3 className="text-[#A187FF] text-[28px] font-bold">Explore Careers</h3>
       <p className="text-[#EFEAFF] leading-[150%] mb-2 text-sm">
         Try micro-experiences to unlock more{" "}
@@ -39,7 +39,7 @@ const DashBoardMenuTwo = () => {
           No data available
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-6  mb-[100px]">
+        <div className="grid grid-cols-1 gap-6  mb-[100px] h-[450px] lg:h-[600px]  overflow-y-auto">
           {careers.map((career, index) => (
             <CareerCard
               key={career.careerId || index}
