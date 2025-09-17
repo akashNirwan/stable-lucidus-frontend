@@ -2,10 +2,14 @@ import React, { Suspense, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { motion } from "framer-motion";
 
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 export default function MicroExperienceLayout() {
   const steps = ["grade", "figure-out"];
   const [screen, setScreen] = useState(1);
    const [videoUrl, setVideoUrl] = useState(null);
+   const [videoLoading, setVideoLoading] = useState(true);
+
+
 
   return (
     <div className="w-full min-h-screen bg-[url(/assets/badge-bg.svg)] bg-no-repeat bg-center bg-cover relative overflow-hidden">
@@ -21,7 +25,11 @@ export default function MicroExperienceLayout() {
           ))}
         </div>
       </div>
-      {videoUrl ? (
+     {videoLoading ? (
+  <div className="flex items-center justify-center min-h-[400px]">
+        <LoadingSpinner size={64} />
+      </div>
+) : videoUrl ? (
   videoUrl.endsWith('.gif') ? (
     <img
       key={videoUrl}
@@ -44,12 +52,12 @@ export default function MicroExperienceLayout() {
     </video>
   )
 ) : (
-        <div className="absolute inset-0 w-[600px] h-full flex items-center justify-center z-10 mx-auto">
-          <div className="bg-black/50 text-white px-4 py-2 rounded-lg">
-            No visuals available
-          </div>
-        </div>
-      )}
+  <div className="absolute inset-0 w-[600px] h-full flex items-center justify-center z-10 mx-auto">
+    <div className="bg-black/50 text-white px-4 py-2 rounded-lg">
+      
+    </div>
+  </div>
+)}
       {/* <video
         autoPlay
         loop
@@ -74,7 +82,7 @@ export default function MicroExperienceLayout() {
         }}
       >
         <Suspense fallback={<p>Loading form...</p>}>
-          <Outlet context={{ screen, setScreen ,setVideoUrl}} />
+          <Outlet context={{ screen, setScreen ,setVideoUrl, videoLoading, setVideoLoading}} />
         </Suspense>
       </motion.div>
     </div>

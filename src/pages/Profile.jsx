@@ -43,7 +43,7 @@ const Profile = () => {
   };
 
   const handleRetake = () => {
-    navigate("/dashboard");
+    navigate("/questions/grade");
   };
 
   const isValidName = () => {

@@ -13,6 +13,7 @@ import { useSearchParams } from "react-router-dom";
 const Ambition = ({ stepsData }) => {
   const [text, setText] = useState("");
   const [isDataLoaded, setIsDataLoaded] = useState(false);
+    const [isInitialSelectionDone, setIsInitialSelectionDone] = useState(false);
   const [searchParams] = useSearchParams();
   const gradeId = searchParams.get("gradeId");
   const dispatch = useDispatch();
@@ -28,13 +29,13 @@ const Ambition = ({ stepsData }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (isDataLoaded && StudentData && !text) {
+    if (isDataLoaded && StudentData &&!isInitialSelectionDone) {
       const { ambitions } = getSelectedIds(StudentData);
       if (ambitions) {
         setText(ambitions);
       }
     }
-  }, [isDataLoaded, StudentData, text]);
+  }, [isDataLoaded, StudentData, isInitialSelectionDone]);
 
   const handleChange = (e) => {
     setText(e.target.value);
@@ -49,7 +50,7 @@ const Ambition = ({ stepsData }) => {
 
     dispatch(updateAmbition(payload)).then((res) => {
       if (res.payload && res.payload.code === 200) {
-        navigate("/question-load");
+        navigate("/loading-careers");
       }
     });
   };
@@ -85,9 +86,9 @@ const Ambition = ({ stepsData }) => {
         />
 
         {/* Character count */}
-        <div className="text-right text-sm text-gray-500">
+        {/* <div className="text-right text-sm text-gray-500">
           {text.length} characters
-        </div>
+        </div> */}
       </div>
       <div className="flex gap-3 ">
         <Button

@@ -97,7 +97,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/question-load",
+    path: "/loading-careers",
     element: (
       <ProtectedRoute>
         <QuestionFinalLoad />
