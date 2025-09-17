@@ -5,7 +5,7 @@ const MicroIntoScreenOne = ({ setScreen, data }) => {
   return (
     <div className="grid gap-2">
       <div
-        className="text-center text-[20px]"
+        className="text-center "
         dangerouslySetInnerHTML={{
           __html: data?.questionintros?.[0]?.titleTwo,
         }}

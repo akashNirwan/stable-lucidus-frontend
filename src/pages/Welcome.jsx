@@ -8,25 +8,20 @@ import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 
 export default function Welcome() {
-  const navigate = useNavigate()
-const dispatch = useDispatch()
-   const { StudentDataLoading, StudentData, loading } = useSelector(
-      (state) => state.student
-    );
-     useEffect(() => {
-        dispatch(fetchStudentData())
-          
-      }, [dispatch]);
-       console.log(StudentData,"data");
-       console.log(StudentData?.length, "length");
-       
- 
-   useEffect(() => {
-   
-    
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { StudentDataLoading, StudentData, loading } = useSelector(
+    (state) => state.student
+  );
+  useEffect(() => {
+    dispatch(fetchStudentData());
+  }, [dispatch]);
+  console.log(StudentData, "data");
+  console.log(StudentData?.length, "length");
+
+  useEffect(() => {
     if (StudentData && StudentData.data && StudentData.data.length > 0) {
-    
-     const student = StudentData.data[0];
+      const student = StudentData.data[0];
       const gradeId = student.selected_grades?.[0]?.gradeId;
       
       
@@ -107,7 +102,6 @@ const dispatch = useDispatch()
       }
     }
   }, [StudentData, navigate]);
-         
 
   const [animationStep, setAnimationStep] = useState(0);
   const MotionLink = motion(Link);
@@ -125,14 +119,11 @@ const dispatch = useDispatch()
   }, []);
 
   return StudentDataLoading ? (
-
     <div className="flex items-center justify-center min-h-[400px]">
-          <LoadingSpinner size={64} />
-        </div>
-    
+      <LoadingSpinner size={64} />
+    </div>
   ) : (
-
-     <div className="min-h-screen relative overflow-hidden ">
+    <div className="min-h-screen relative overflow-hidden ">
       <div className="absolute right-0 z-20 top-[40%]">
         <img src="/welcome-rob.svg" alt="" className="" />
       </div>
@@ -181,7 +172,7 @@ const dispatch = useDispatch()
                 className="text-3xl font-bold"
                 style={{ color: "#4ED0AA" }}
               >
-                <TypewriterText text={`Welcome ${user?.name}`} />
+                <TypewriterText text={`Welcome, ${user?.name}`} />
               </motion.h1>
             )}
           </AnimatePresence>
@@ -289,8 +280,7 @@ const dispatch = useDispatch()
         {/* <InteractiveAstronaut /> */}
       </div>
     </div>
-
-  )
+  );
 }
 
 function TypewriterText({ text }) {
