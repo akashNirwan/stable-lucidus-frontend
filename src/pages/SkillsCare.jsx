@@ -102,26 +102,21 @@ const SkillsCare = ({ setStep, stepsData }) => {
                 key={sdg._id}
                 onClick={() => canSelect && handleSelect(sdg)}
                 className={`relative w-[92px] h-[92px] rounded-lg cursor-pointer overflow-hidden
-            ${!canSelect ? "opacity-50 cursor-not-allowed" : ""}
-          `}
+    ${!canSelect ? "opacity-50 cursor-not-allowed" : ""}
+  `}
               >
                 {/* Image */}
                 <img
                   src={sdg.image}
                   alt={sdg.sdg}
-                  className="w-full h-full object-cover"
+                  className={`w-full h-full object-cover transition duration-300 
+      ${!isSelected ? "grayscale" : ""}
+    `}
                 />
 
-                {/* Visible Highlight overlay */}
                 {isSelected && (
                   <div className="absolute inset-0 rounded-lg bg-[#4823CF]/40 border-2 border-[#4823CF] shadow-[0_0_10px_rgba(72,35,207,0.7)]" />
                 )}
-
-                {/* Label */}
-                {/* <span className="font-medium flex items-center truncate gap-2 px-2 absolute top-0 left-0 z-10 text-white rounded">
-                  <span className="text-[24px]">{i + 1}</span>
-                  <span>{sdg.sdg}</span>
-                </span> */}
               </div>
             );
           })}
