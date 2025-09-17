@@ -39,7 +39,7 @@ const DashBoardMenuTwo = () => {
           No data available
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-6 mb-16">
+        <div className="grid grid-cols-1 gap-6 max-h-[584px]">
           {careers.map((career, index) => (
             <CareerCard
               key={career.careerId || index}

@@ -48,7 +48,7 @@ const SavedCareer = () => {
       onScroll={handleScroll}
       style={{ maxHeight: "calc(100vh - 100px)" }}
     >
-      <div className="grid gap-4 p-4  mb-18">
+      <div className="grid gap-4 p-4  max-h-[584px] ">
         {fetchsavedCareer && fetchsavedCareer.length > 0 ? (
           fetchsavedCareer.map((savedCareer) => (
             <CareerExperienceCard
