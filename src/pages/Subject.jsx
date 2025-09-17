@@ -114,8 +114,8 @@ const Subject = ({ setStep, stepsData }) => {
         You don’t have to be great at it. Select up to five
       </h3>
 
-      <StatusTitle text={"I want to:"} />
-      <div className="flex-1 overflow-y-auto flex flex-col gap-2">
+      <StatusTitle text={"I enjoy:"} />
+      <div className="h-[32vh] overflow-y-auto flex flex-col gap-2">
         {Array.isArray(subjects) &&
           subjects.map((subject) => (
             <TwoLineOption
