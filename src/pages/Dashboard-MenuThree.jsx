@@ -18,11 +18,11 @@ const DashBoardMenuThree = () => {
       <LoadingSpinner size={64} />
     </div>
   ) : (
-    <div className="text-white ">
+    <div className="text-white h-[calc(100vh - 100px)]">
       <h2 className="text-center text-[#A187FF] text-[28px] font-bold mb-2">
         Badges
       </h2>
-      <div className="flex flex-wrap gap-6 justify-center">
+      <div className="grid gap-6 justify-center h-[450px] lg:h-[600px]  overflow-y-auto ">
         {badges.length > 0 ? (
           badges.map((badge, index) => (
             <div
