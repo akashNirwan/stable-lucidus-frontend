@@ -8,7 +8,7 @@ const DashBoardWrapper = () => {
   return (
     <div className="flex flex-col h-[100dvh] bg-[#130934]">
       <Header />
-      <main className="flex-grow overflow-y-auto bg-[#130934]">
+      <main className="flex-grow overflow-hidden bg-[#130934]">
         <Outlet context={{ menu, setMenu }} />
       </main>
       <Footer setMenu={setMenu} menu={menu} />

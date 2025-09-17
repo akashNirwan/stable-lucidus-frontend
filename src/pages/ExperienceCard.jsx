@@ -45,7 +45,7 @@ const CareerExperienceCard = ({ careerData, savedCareer, careerId }) => {
         />
       </div>
 
-      <div className="absolute bottom-0 left-0 h-[120px] w-full bg-white rounded-2xl">
+      <div className="absolute bottom-0 left-0 h-[120px] w-full bg-white rounded-3xl">
         <div className="flex m-4 justify-between items-center">
           <div className="text-xl text-[#042119] font-semibold">
             {careerData?.career || "Career"}
