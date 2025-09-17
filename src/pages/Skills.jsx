@@ -104,7 +104,7 @@ const Skills = ({ setStep, stepsData }) => {
       </h3>
       <StatusTitle text={"I am good at:"} />
 
-      <div className="h-[32vh] overflow-y-auto flex flex-col gap-2">
+      <div className="h-[32vh] lg:h-[40vh] overflow-y-auto flex flex-col gap-2">
         {Array.isArray(skills) &&
           skills.map((skill) => (
             <TwoLineOption
@@ -132,7 +132,11 @@ const Skills = ({ setStep, stepsData }) => {
           onClick={handleNext}
           disabled={skillsLoading}
         >
-          {skillsLoading ? <LoadingSpinner size="20px" color="green"/> : "Next"}
+          {skillsLoading ? (
+            <LoadingSpinner size="20px" color="green" />
+          ) : (
+            "Next"
+          )}
         </Button>
       </div>
     </div>
