@@ -114,9 +114,9 @@ const SkillsCare = ({ setStep, stepsData }) => {
     `}
                 />
 
-                {isSelected && (
-                  <div className="absolute inset-0 rounded-lg bg-[#4823CF]/40 border-2 border-[#4823CF] shadow-[0_0_10px_rgba(72,35,207,0.7)]" />
-                )}
+                {/* {isSelected && (
+                  <div className="absolute inset-0 rounded-lg shadow-[0_0_10px_rgba(72,35,207,0.7)]" />
+                )} */}
               </div>
             );
           })}
