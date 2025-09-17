@@ -31,7 +31,7 @@ const DashBoardMicro = () => {
       !dashboardMicroexperienceLoading
     ) {
       const nextPage = currentPage + 1;
-      
+
       dispatch(fetchDashboardMicroexperience({ page: nextPage }));
     }
   };
@@ -53,7 +53,7 @@ const DashBoardMicro = () => {
       onScroll={handleScroll}
       style={{ maxHeight: "calc(100vh - 100px)" }}
     >
-      <div className="grid gap-4 p-4">
+      <div className="grid gap-4 p-4  mb-[100px">
         {dashboardMicroexperience && dashboardMicroexperience.length > 0 ? (
           dashboardMicroexperience.map((item) => (
             <CareerCard key={item._id} data={item} />
