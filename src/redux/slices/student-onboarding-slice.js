@@ -40,7 +40,7 @@ const studentSlice = createSlice({
       .addCase(fetchSchools.fulfilled, (state, action) => {
         state.loading = false;
         state.schools = action.payload.data;
-        console.log(state.schools, "state schools");
+        
         
         state.totalPages = action.payload.data.totalPages;
         state.totalCount = action?.payload?.data?.totalCount;

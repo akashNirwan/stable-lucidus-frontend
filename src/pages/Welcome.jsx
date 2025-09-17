@@ -16,93 +16,63 @@ export default function Welcome() {
   useEffect(() => {
     dispatch(fetchStudentData());
   }, [dispatch]);
-  console.log(StudentData, "data");
-  console.log(StudentData?.length, "length");
 
+
+ 
   useEffect(() => {
-    if (StudentData && StudentData.data && StudentData.data.length > 0) {
-      const student = StudentData.data[0];
-      const gradeId = student.selected_grades?.[0]?.gradeId;
-      
-      
-      
-      if (!student.selected_grades?.length && 
-          !student.figureout && 
-          !student.selected_skill?.length && 
-          !student.selected_subject?.length && 
-          !student.selected_sdg?.length && 
-          !student.ambitions) {
-        return; // Stay on welcome page
-      }
+  if (StudentData && StudentData.data && StudentData.data.length > 0) {
+    const student = StudentData.data[0];
+    const gradeId = student.selected_grades?.[0]?.gradeId;
+    
+    const hasGrades = student.selected_grades && student.selected_grades.length > 0;
+    const hasFigureout = student.figureout && student.figureout.trim() !== "";
+    const hasSkills = student.selected_skill && student.selected_skill.length > 0;
+    const hasSubjects = student.selected_subject && student.selected_subject.length > 0;
+    const hasSdg = student.selected_sdg && student.selected_sdg.length > 0;
+    const hasAmbitions = student.ambitions && student.ambitions.trim() !== "";
 
-      
-      if (student.selected_grades?.length && 
-          student.figureout && 
-          student.selected_skill?.length && 
-          student.selected_subject?.length && 
-          student.selected_sdg?.length && 
-          student.ambitions) {
-        navigate('/dashboard/explorecareers');
-        return;
-      }
-
-     
-      if (student.selected_grades?.length && 
-          !student.figureout && 
-          !student.selected_skill?.length && 
-          !student.selected_subject?.length && 
-          !student.selected_sdg?.length && 
-          !student.ambitions) {
-        navigate(`/questions/figure-out?gradeId=${gradeId}`);
-        return;
-      }
-
-      
-      if (student.selected_grades?.length && 
-          student.figureout && 
-          !student.selected_subject?.length && 
-          !student.selected_skill?.length && 
-          !student.selected_sdg?.length && 
-          !student.ambitions) {
-        navigate(`/questions/subject?gradeId=${gradeId}`);
-        return;
-      }
-
-      
-      if (student.selected_grades?.length && 
-          student.figureout && 
-          student.selected_subject?.length && 
-          !student.selected_skill?.length && 
-          !student.selected_sdg?.length && 
-          !student.ambitions) {
-        navigate(`/questions/skills/gradeId=${gradeId}`);
-        return;
-      }
-
-     
-      if (student.selected_grades?.length && 
-          student.figureout && 
-          student.selected_subject?.length && 
-          student.selected_skill?.length && 
-          !student.selected_sdg?.length && 
-          !student.ambitions) {
-        navigate(`/questions/skill-care/gradeId=${gradeId}`);
-        return;
-      }
-
-     
-      if (student.selected_grades?.length && 
-          student.figureout && 
-          student.selected_subject?.length && 
-          student.selected_skill?.length && 
-          student.selected_sdg?.length && 
-          !student.ambitions) {
-        navigate(`/questions/ambitions/gradeId=${gradeId}`);
-        return;
-      }
+    // Case 1: All empty - stay on welcome
+    if (!hasGrades && !hasFigureout && !hasSkills && !hasSubjects && !hasSdg && !hasAmbitions) {
+      return;
     }
-  }, [StudentData, navigate]);
 
+    // Case 7: All complete - go to dashboard
+    if (hasGrades && hasFigureout && hasSkills && hasSubjects && hasSdg && hasAmbitions) {
+      navigate('/dashboard');
+      return;
+    }
+
+    // Case 2: Only grades
+    if (hasGrades && !hasFigureout && !hasSkills && !hasSubjects && !hasSdg && !hasAmbitions) {
+      navigate(`/questions/figure-out?gradeId=${gradeId}`);
+      return;
+    }
+
+    // Case 3: Grades + figureout
+    if (hasGrades && hasFigureout && !hasSubjects && !hasSkills && !hasSdg && !hasAmbitions) {
+      navigate(`/questions/subject?gradeId=${gradeId}`);
+      return;
+    }
+
+    // Case 4: Grades + figureout + subjects
+    if (hasGrades && hasFigureout && hasSubjects && !hasSkills && !hasSdg && !hasAmbitions) {
+      navigate(`/questions/skills?gradeId=${gradeId}`);
+      return;
+    }
+
+    // Case 5: Grades + figureout + subjects + skills
+    if (hasGrades && hasFigureout && hasSubjects && hasSkills && !hasSdg && !hasAmbitions) {
+      navigate(`/questions/skills-care?gradeId=${gradeId}`);
+      return;
+    }
+
+    // Case 6: All except ambitions
+    if (hasGrades && hasFigureout && hasSubjects && hasSkills && hasSdg && !hasAmbitions) {
+      navigate(`/questions/ambition?gradeId=${gradeId}`);
+      return;
+    }
+  }
+}, [StudentData, navigate]);
   const [animationStep, setAnimationStep] = useState(0);
   const MotionLink = motion(Link);
   const { user } = useSelector((state) => state.auth);

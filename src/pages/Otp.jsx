@@ -10,6 +10,7 @@ import Button from "../components/common/Button";
 import toast from "react-hot-toast";
 import { otpSchema } from "../validation/auth-validaion";
 import { ArrowLeft } from "lucide-react";
+import LoadingSpinner from "../components/common/LoadingSpinner";
 export default function Otp() {
   const [otp, setOtp] = useState(Array(6).fill(""));
   const inputRefs = useRef([]);
@@ -25,12 +26,11 @@ export default function Otp() {
     otpRequestId,
   } = useSelector((state) => state.auth);
 
-  console.log(user, "user login account user details ");
-  console.log(otpRequestId, "otp request id");
+
 
   const useremail = localStorage.getItem("email");
 
-  console.log(useremail, " useremail");
+ 
 
   const RESEND_KEY = "otpResendExpiry";
   const RESEND_DURATION = 30; // seconds
@@ -115,14 +115,14 @@ export default function Otp() {
       otp: parseInt(data.otp),
       id: user?.id,
     };
-    console.log(payload, "payload in 1231313");
+    
 
     try {
       const result = await dispatch(verifyOtp(payload)).unwrap();
 
       if (result?.data?.[0]) {
         const userData = result.data[0];
-        console.log(userData, "otp user data");
+        
         if (userData?.token) {
           localStorage.setItem("token", userData.token);
         }
@@ -133,7 +133,7 @@ export default function Otp() {
         navigate("/welcome");
       }
     } catch (error) {
-      console.log();
+      
 
       setOtp(Array(6).fill(""));
       reset();
@@ -267,7 +267,7 @@ export default function Otp() {
         isActive={otp.join("").length === 6 && !verifyOtpLoading}
         disabled={verifyOtpLoading || resendOtpLoading}
       >
-        {verifyOtpLoading || resendOtpLoading ? "Verifying..." : "Verify OTP"}
+        {verifyOtpLoading || resendOtpLoading ? <LoadingSpinner size={20} color="green" variant="ring"></LoadingSpinner>: "Verify OTP"}
       </Button>
     </motion.form>
   );

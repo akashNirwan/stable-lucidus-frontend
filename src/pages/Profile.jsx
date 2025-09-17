@@ -13,12 +13,12 @@ const Profile = () => {
 
   const UserName = profile?.[0]?.name;
   const UserEmail = profile?.[0]?.email;
-  console.log(UserEmail, UserName, "username profiles ");
+ 
 
   useEffect(() => {
     dispatch(fetchProfile());
   }, [dispatch]);
-  console.log(profile, "profile user ");
+
 
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(UserName || "");
@@ -52,7 +52,7 @@ const Profile = () => {
   };
 
   return profileLoading ? (
-    <div className="flex items-center justify-center min-h-[400px]">
+    <div  className="flex items-center justify-center min-h-[400px]">
       <LoadingSpinner size={64} />
     </div>
   ) : (

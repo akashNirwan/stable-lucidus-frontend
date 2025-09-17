@@ -13,7 +13,7 @@ const School = ({ setStep, stepsData }) => {
 
   const dispatch = useDispatch();
   const { schools, loading, error } = useSelector((state) => state.student);
-  console.log("schools", schools);
+
   
   const [isOpen, setIsOpen] = useState(false);
   const [selectedSchool, setSelectedSchool] = useState("");
@@ -31,7 +31,7 @@ const handleNext = () => {
       schoolId: [selectedSchool._id],
     })
   ).then((response) => {
-     console.log(response, "response");
+    
      
     if (response.payload && response.payload.code === 201) {
       navigate("/questions/grade")

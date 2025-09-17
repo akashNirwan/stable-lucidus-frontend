@@ -16,7 +16,7 @@ const SavedCareer = () => {
     (state) => state.dashboard
   );
     
-  console.log(fetchsavedCareer,"fetch save data");
+ 
   
   
   useEffect(() => {
@@ -28,7 +28,7 @@ const handleScroll = (e) => {
     
     if (bottom && hasMoreCareers && !loadMoreLoading && !savedCareerLoading) {
       const nextPage = currentPage + 1;
-      console.log(`Loading page ${nextPage}`);
+      
       dispatch(fetchSavedCareers({ page: nextPage }));
     }
   };

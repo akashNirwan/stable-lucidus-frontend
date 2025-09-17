@@ -29,7 +29,7 @@ const handleScroll = (e) => {
     
     if (bottom && hasMoreCareers && !loadMoreLoading && !dashboardMicroexperienceLoading) {
       const nextPage = currentPage + 1;
-      console.log(`Loading page ${nextPage}`);
+      
       dispatch(fetchDashboardMicroexperience({ page: nextPage }));
     }
   };

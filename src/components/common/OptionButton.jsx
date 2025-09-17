@@ -1,7 +1,7 @@
 import React from "react";
 
 const OptionButton = ({ option, selected, optionId, onSelect, img = "" }) => {
-  console.log(optionId, "optionID");
+  
   const isSelected = optionId ? selected === optionId : selected === option;
   return (
     <button

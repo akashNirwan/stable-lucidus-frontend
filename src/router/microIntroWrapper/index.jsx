@@ -27,7 +27,7 @@ export default function MicroExperienceLayout() {
       </div>
      {videoLoading ? (
   <div className="flex items-center justify-center min-h-[400px]">
-        <LoadingSpinner size={64} />
+        <LoadingSpinner size={64} variant = "ring" color="purple" />
       </div>
 ) : videoUrl ? (
   videoUrl.endsWith('.gif') ? (

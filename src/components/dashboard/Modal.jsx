@@ -21,7 +21,7 @@ export default function NextLevelModal({ open, onClose, careerLevelId }) {
     }
   }, [dispatch]);
 
-  // console.log(microexperience?.[0]?.career?.[0]?._id,"career id");
+
 
   const nextLevelNumber = NextLevel?.buttonName?.match(/\d+/)?.[0] || "";
 

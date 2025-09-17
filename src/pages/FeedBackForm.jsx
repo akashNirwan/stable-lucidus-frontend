@@ -24,8 +24,7 @@ const FeedBackForm = () => {
 const questionId = searchParams.get("questionId");
 const careerLevelId = searchParams.get("careerLevelId");
 const levelNumber = searchParams.get("levelNumber");
-console.log(questionId, "questionid");
-console.log(microexperience?.[0]?.questions, "microexperience");
+
 
 useEffect(() => {
     if (careerLevelId) {
@@ -39,11 +38,11 @@ const selectedQuestion = useMemo(() => {
     );
   }, [microexperience, questionId]);
 
-  console.log(selectedQuestion, "selectedQuestion");
+ 
 
 
   const { currentStepIndex, setCurrentStepIndex } = useOutletContext();
-  console.log(currentStepIndex);
+  
   const formObj = {
     // 0: <FeedBackFormOne setCurrentStepIndex={setCurrentStepIndex}  selectedQuestion={selectedQuestion}/>,
     0: <FeedBackFormTwo levelNumber={levelNumber} microexperience={microexperience} careerLevelId={careerLevelId} />,

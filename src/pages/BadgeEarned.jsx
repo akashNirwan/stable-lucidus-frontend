@@ -17,7 +17,7 @@ const BadgeEarned = () => {
     useSelector((state) => state.microexperience);
   const navigate = useNavigate();
 
-  console.log(levelBadge, "level badge ");
+ 
 
   const careerLevelId = searchParams.get("careerLevelId");
   const questionId = searchParams.get("questionId");

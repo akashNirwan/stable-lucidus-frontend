@@ -35,7 +35,7 @@ const encyclopediaSlice = createSlice({
       .addCase(fetchPredictionandPurpose.fulfilled, (state, action) => {
         state.loading = false;
         state.predictionandPurpose = action.payload.data;
-        console.log(state.predictionandPurpose, "state encyclopedia ");
+  
         
         
       })
@@ -53,7 +53,7 @@ const encyclopediaSlice = createSlice({
       .addCase(fetchPath.fulfilled, (state, action) => {
         state.pathLoading = false;
         state.path = action.payload.data;
-        console.log(state.path, "state path ");
+  
         
         
       })
@@ -71,7 +71,7 @@ const encyclopediaSlice = createSlice({
       .addCase(fetchProcess.fulfilled, (state, action) => {
         state.processLoading = false;
         state.process = action.payload.data;
-        console.log(state.process, "state process ");
+        
         
         
       })
@@ -89,7 +89,7 @@ const encyclopediaSlice = createSlice({
       .addCase(fetchRoadmap.fulfilled, (state, action) => {
         state.roadmapLoading = false;
         state.roadmap = action.payload.data;
-        console.log(state.roadmap, "state roadmap ");
+       
         
         
       })
@@ -107,7 +107,7 @@ const encyclopediaSlice = createSlice({
       .addCase(fetchLesson.fulfilled, (state, action) => {
         state.lessonLoading = false;
         state.lesson = action.payload.data;
-        console.log(state.lesson, "state lesson ");
+      
         
         
       })

@@ -69,7 +69,7 @@ const Grade = ({ setStep, stepsData }) => {
 
   return loading && !isDataLoaded ? (
     <div className="flex items-center justify-center min-h-[400px]">
-      <LoadingSpinner size={64} />
+      <LoadingSpinner size={64}  />
     </div>
   ) : (
     <div className="text-center flex flex-col gap-3 ">
@@ -101,7 +101,7 @@ const Grade = ({ setStep, stepsData }) => {
         onClick={handleNext}
         disabled={loading || gradeLoading}
       >
-        {gradeLoading ? <LoadingSpinner size="20px" /> : "Next"}
+        {gradeLoading ? <LoadingSpinner size="20px" color="green" /> : "Next"}
       </Button>
     </div>
   );

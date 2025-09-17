@@ -9,7 +9,7 @@ export default function ProcessCarousel() {
   const dispatch = useDispatch();
   const [searchparams] = useSearchParams();
   const careerId = searchparams.get("careerId");
-  console.log(careerId, "careerid");
+ 
 
   const { process, processLoading } = useSelector(
     (state) => state.encyclopedia

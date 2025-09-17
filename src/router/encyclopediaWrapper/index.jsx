@@ -13,14 +13,14 @@ const EncycloPediaWrapper = () => {
   );
 
   const careername = predictionandPurpose?.[0]?.career?.[0]?.career;
-  console.log(careername, "career name ");
+
 
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const careerId = searchParams.get("careerId");
 
-  console.log(careerId, "careerId in wrapper");
+
 
   const getActiveTabFromRoute = () => {
     const path = location.pathname;
@@ -88,7 +88,7 @@ const EncycloPediaWrapper = () => {
 
       <div className="flex gap-6 text-white w-full overflow-x-auto p-4 max-w-[600px] mx-auto md:justify-center">
         {tabs.map((tab) => {
-          console.log(tab, activeTab, "tabs");
+       
           return (
             <button
               key={tab}

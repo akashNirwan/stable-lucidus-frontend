@@ -9,7 +9,7 @@ const Purpose = () => {
     (state) => state.encyclopedia
   );
 
-  console.log(predictionandPurpose?.[0]?.encyclolessons, "prediction purpose");
+
 
   const steps =
     predictionandPurpose?.[0]?.encyclolessons.map((item, index) => ({

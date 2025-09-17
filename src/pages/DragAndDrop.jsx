@@ -33,10 +33,10 @@ const DragAndDrop = () => {
   } = useSelector((state) => state.microexperience);
 
   const DragandDropData = microexperience?.[0]?.recommendations;
-  console.log(DragandDropData, "DragandDropData");
+ 
 
   const questions = microexperience?.[0]?.questions;
-  console.log(questions, "questions");
+
 
   useEffect(() => {
     if (DragandDropData && DragandDropData.length > 0) {
@@ -292,11 +292,11 @@ const handleMakeRecommendation = async () => {
           </button>
           <button
             className="w-full bg-[#0F8864] text-white py-3 rounded-xl font-semibold disabled:opacity-60"
-            disabled={!selectedId || saveStepsLoading}
+            disabled={!selectedId || saveStepsLoading || saveAnswerLoading || saveOrderLoading}
             onClick={handleMakeRecommendation}
           >
             {saveStepsLoading || saveAnswerLoading || saveOrderLoading ? (
-              <LoadingSpinner size={20} />
+              <LoadingSpinner size={20} color="green" />
             ) : (
               "Make Recommendation"
             )}

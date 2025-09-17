@@ -40,7 +40,7 @@ const microexperienceSlice = createSlice({
       .addCase(fetchMicroexperience.fulfilled, (state, action) => {
         state.loading = false;
         state.microexperience = action.payload.data;
-        console.log(state.microexperience, "state microexperience");
+       
         
         
       })
