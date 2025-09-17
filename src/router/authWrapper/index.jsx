@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 export default function AuthLayout() {
   return (
-    <div className=" relative overflow-hidden ">
+    <div className="h-[100dvh] relative overflow-hidden ">
       <div
         className="fixed inset-0"
         style={{
