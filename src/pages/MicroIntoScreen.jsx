@@ -7,7 +7,7 @@ import { fetchMicroexperience } from "../redux/actions/microexperience-action";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { useOutletContext } from "react-router-dom";
 const MicroIntoScreen = () => {
-  const { screen, setScreen, setVideoUrl } = useOutletContext();
+  const { screen, setScreen, setVideoUrl,setVideoLoading } = useOutletContext();
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
   const { microexperience, loading, error } = useSelector(
@@ -18,12 +18,7 @@ const MicroIntoScreen = () => {
   const careerLevelId = searchParams.get("careerLevelId");
   const levelNumber = searchParams.get("levelNumber")|| 1;
 
-  // useEffect(() => {
 
-  //     if (careerId) {
-  //       dispatch(fetchMicroexperience(careerId));
-  //     }
-  //   }, [dispatch, searchParams]);
 
   useEffect(() => {
     if (careerId) {
@@ -48,50 +43,32 @@ const levelNumber2 = levelString ? levelString.split('-')[1].trim() : null;  // 
       console.log(levelString, levelNumber2, "level name");
       
     
-  useEffect(() => {
-    if (experienceData?.questionintros && setVideoUrl) {
-      const currentVideoUrl = experienceData?.questionintros[screen - 1]?.image;
-      {console.log(experienceData?.questionintros[screen - 1]?.image, "experiencedata");
-      }
-      if (currentVideoUrl) {
-        setVideoUrl(currentVideoUrl);
-        {console.log(setVideoUrl, "video. url");
-        }
-      }
-    }
-  }, [screen, experienceData, setVideoUrl]);
 
+
+  useEffect(() => {
+  
+  if (loading && setVideoUrl && setVideoLoading) {
+    setVideoUrl(null);
+    setVideoLoading(true);
+  }
+}, [loading, setVideoUrl, setVideoLoading]);
+
+useEffect(() => {
+  if (experienceData?.questionintros && setVideoUrl && setVideoLoading && !loading) {
+    const currentVideoUrl = experienceData?.questionintros[screen - 1]?.image;
+    
+    if (currentVideoUrl) {
+      setVideoUrl(currentVideoUrl);
+      setTimeout(() => setVideoLoading(false), 300);
+    } else {
+      setVideoLoading(false);
+    }
+  }
+}, [screen, experienceData, setVideoUrl, setVideoLoading, loading]);
  
   
 
-// useEffect(() => {
-//     console.log("🔥 useEffect TRIGGERED");
-//     console.log("=== VIDEO URL DEBUG ===");
-//     console.log("setVideoUrl function:", setVideoUrl);
-//     console.log("experienceData:", experienceData);
-//     console.log("experienceData?.questionintros:", experienceData?.questionintros);
-//     console.log("current screen:", screen);
-//     console.log("screen - 1 (array index):", screen - 1);
-    
-//     if (experienceData?.questionintros && setVideoUrl) {
-//       const currentVideoUrl = experienceData.questionintros[screen - 1]?.image;
-//       console.log("currentVideoUrl:", currentVideoUrl);
-//       console.log("questionintros[0]:", experienceData.questionintros[0]);
-//       console.log("questionintros[1]:", experienceData.questionintros[1]);
-      
-//       if (currentVideoUrl) {
-//         console.log("✅ Setting video URL to:", currentVideoUrl);
-//         setVideoUrl(currentVideoUrl);
-//       } else {
-//         console.log("❌ No video URL found for current screen");
-//       }
-//     } else {
-//       console.log("⚠️ Missing data or setVideoUrl function");
-//       console.log("experienceData?.questionintros exists:", !!experienceData?.questionintros);
-//       console.log("setVideoUrl exists:", !!setVideoUrl);
-//     }
-//     console.log("=== END DEBUG ===");
-//   }, [screen, experienceData, setVideoUrl]);
+
   
 
 

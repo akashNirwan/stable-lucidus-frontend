@@ -2,8 +2,113 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import InteractiveAstronaut from "../components/welcome/InteractiveAstronaut";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchStudentData } from "../redux/actions/student-onboarding-action";
+import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../components/common/LoadingSpinner";
+
 export default function Welcome() {
+  const navigate = useNavigate()
+const dispatch = useDispatch()
+   const { StudentDataLoading, StudentData, loading } = useSelector(
+      (state) => state.student
+    );
+     useEffect(() => {
+        dispatch(fetchStudentData())
+          
+      }, [dispatch]);
+       console.log(StudentData,"data");
+       console.log(StudentData?.length, "length");
+       
+ 
+   useEffect(() => {
+   
+    
+    if (StudentData && StudentData.data && StudentData.data.length > 0) {
+    
+     const student = StudentData.data[0];
+      const gradeId = student.selected_grades?.[0]?.gradeId;
+      
+      
+      // Case 1: All keys are empty - stay on welcome page, let user click Get Started
+      if (!student.selected_grades?.length && 
+          !student.figureout && 
+          !student.selected_skill?.length && 
+          !student.selected_subject?.length && 
+          !student.selected_sdg?.length && 
+          !student.ambitions) {
+        return; // Stay on welcome page
+      }
+
+      // Case 7: All keys have data - go to dashboard
+      if (student.selected_grades?.length && 
+          student.figureout && 
+          student.selected_skill?.length && 
+          student.selected_subject?.length && 
+          student.selected_sdg?.length && 
+          student.ambitions) {
+        navigate('/dashboard');
+        return;
+      }
+
+      // Case 2: Only selected_grades has data
+      if (student.selected_grades?.length && 
+          !student.figureout && 
+          !student.selected_skill?.length && 
+          !student.selected_subject?.length && 
+          !student.selected_sdg?.length && 
+          !student.ambitions) {
+        navigate(`/questions/figure-out?gradeId=${gradeId}`);
+        return;
+      }
+
+      // Case 3: selected_grades + figureout have data
+      if (student.selected_grades?.length && 
+          student.figureout && 
+          !student.selected_subject?.length && 
+          !student.selected_skill?.length && 
+          !student.selected_sdg?.length && 
+          !student.ambitions) {
+        navigate(`/questions/subject?gradeId=${gradeId}`);
+        return;
+      }
+
+      // Case 4: selected_grades + figureout + selected_subject have data
+      if (student.selected_grades?.length && 
+          student.figureout && 
+          student.selected_subject?.length && 
+          !student.selected_skill?.length && 
+          !student.selected_sdg?.length && 
+          !student.ambitions) {
+        navigate(`/questions/skills/gradeId=${gradeId}`);
+        return;
+      }
+
+      // Case 5: selected_grades + figureout + selected_subject + selected_skill have data
+      if (student.selected_grades?.length && 
+          student.figureout && 
+          student.selected_subject?.length && 
+          student.selected_skill?.length && 
+          !student.selected_sdg?.length && 
+          !student.ambitions) {
+        navigate(`/questions/skill-care/gradeId=${gradeId}`);
+        return;
+      }
+
+      // Case 6: All except ambitions have data
+      if (student.selected_grades?.length && 
+          student.figureout && 
+          student.selected_subject?.length && 
+          student.selected_skill?.length && 
+          student.selected_sdg?.length && 
+          !student.ambitions) {
+        navigate(`/questions/ambitions/gradeId=${gradeId}`);
+        return;
+      }
+    }
+  }, [StudentData, navigate]);
+         
+
   const [animationStep, setAnimationStep] = useState(0);
   const MotionLink = motion(Link);
   const { user } = useSelector((state) => state.auth);
@@ -19,8 +124,15 @@ export default function Welcome() {
     return () => timeouts.forEach(clearTimeout);
   }, []);
 
-  return (
-    <div className="min-h-screen relative overflow-hidden ">
+  return StudentDataLoading ? (
+
+    <div className="flex items-center justify-center min-h-[400px]">
+          <LoadingSpinner size={64} />
+        </div>
+    
+  ) : (
+
+     <div className="min-h-screen relative overflow-hidden ">
       <div className="absolute right-0 z-20 top-[40%]">
         <img src="/welcome-rob.svg" alt="" className="" />
       </div>
@@ -177,7 +289,8 @@ export default function Welcome() {
         {/* <InteractiveAstronaut /> */}
       </div>
     </div>
-  );
+
+  )
 }
 
 function TypewriterText({ text }) {
