@@ -19,7 +19,8 @@ export default function CareerSurvey() {
 
   const [islike, setIsLike] = useState("");
   const navigate = useNavigate();
-const levelPercent = levelNumber === "1 "? "20" : levelNumber === "2" ? "50" : "0";
+  const levelPercent =
+    levelNumber === "1 " ? "20" : levelNumber === "2" ? "50" : "0";
   // const handleChoice = (choice) => {
 
   //   const payload = {
@@ -43,7 +44,6 @@ const levelPercent = levelNumber === "1 "? "20" : levelNumber === "2" ? "50" : "
   //     });
 
   // };
-
 
   const handleChoice = async (choice) => {
     const payload = {
@@ -134,11 +134,7 @@ const levelPercent = levelNumber === "1 "? "20" : levelNumber === "2" ? "50" : "
       </div>
 
       <div className="absolute -bottom-10 left-0">
-        <img
-          src="/survey-robot.svg"
-          alt="Astronaut"
-          className="mx-auto w-[300px] h-[300px]"
-        />
+        <img src="/survey-robot.png" alt="Astronaut" className="mx-auto " />
       </div>
     </div>
   );

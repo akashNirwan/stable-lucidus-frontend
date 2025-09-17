@@ -15,7 +15,7 @@ export default function OnBoardWrapper() {
   const currentStepIndex = steps.indexOf(currentStepName);
   return (
     <div className="h-[100dvh] relative overflow-hidden">
-      <div className="bg-[url(/onBoard-bg.jpeg)] h-full w-full bg-cover bg-center">
+      <div className="bg-[url(/on-boarding.svg)] h-full w-full bg-cover bg-center">
         <div className="fixed inset-0">
           {[...Array(30)].map((_, i) => (
             <div
@@ -46,12 +46,7 @@ export default function OnBoardWrapper() {
         </div>
 
         <div className="relative z-10 flex flex-col items-center justify-start h-screen px-4 pt-12">
-          <img
-            src="/onBoard-rob2.png"
-            alt="Astronaut"
-            width={300}
-            height={300}
-          />
+          <img src="/onBoard-rob2.png" alt="Astronaut" />
         </div>
 
         <div className="absolute top-4 left-1/2 -translate-x-1/2 w-full max-w-[375px] px-4">
