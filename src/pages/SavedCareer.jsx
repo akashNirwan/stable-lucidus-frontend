@@ -44,7 +44,7 @@ const SavedCareer = () => {
   }
   return (
     <div
-      className="h-[100dvh] overflow-y-auto  mb-20"
+      className=" overflow-y-auto  mb-20 border h-[550px]"
       onScroll={handleScroll}
       style={{ maxHeight: "calc(100vh - 100px)" }}
     >
