@@ -67,15 +67,6 @@ export default function OnBoardWrapper() {
           </div>
         </div>
 
-        {/* <div className="absolute top-[50px] left-1/2 -translate-x-1/2 z-10">
-          <img
-            src="/assets/grade/grade-emoji.svg"
-            alt="Grade Emoji"
-            width={250}
-            height={240}
-          />
-        </div> */}
-
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
