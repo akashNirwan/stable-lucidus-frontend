@@ -141,7 +141,7 @@ export default function Login() {
                   type="text"
                   placeholder="Enter Your User Name"
                   onInput={(e) => {
-                    e.target.value = e.target.value.replace(/[^a-zA-Z]/g, "");
+                    e.target.value = e.target.value.replace(/[^a-zA-Z ]/g, "");
                   }}
                   minLength={2}
                   maxLength={50}
