@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Outlet } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 export default function OnChoiceFeedBack() {
+  const navigate = useNavigate()
   const steps = ["grade", "figure-out"];
+   const handleLogo = ()=>{
+     navigate('/dashboard/microexperience')
 
+   }
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   return (
     <div className="h-screen relative overflow-hidden">
@@ -40,7 +44,7 @@ export default function OnChoiceFeedBack() {
       </div>
 
       <div className="relative z-10 flex flex-col items-center justify-start h-screen px-4 pt-12">
-        <div className="mb-12">
+        <div onClick={handleLogo} className="mb-12">
           <img
             src="/assets/logo.svg"
             alt="Lucidus Logo"

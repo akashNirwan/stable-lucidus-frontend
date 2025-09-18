@@ -23,7 +23,14 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+
+     clearOtpErrors: (state) => {
+      state.verifyOtpError = null;
+      state.resendOtpError = null;
+    },
+
+  },
   extraReducers: (builder) => {
     // Login User
     builder
@@ -34,7 +41,10 @@ const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loginLoading = false;
         state.user = action?.payload?.data[0];
-        
+        if (state.user?.name) {
+    localStorage.setItem("username", state.user?.name);
+    localStorage.setItem("userId", state.user?.id);
+       }
         
       })
       .addCase(loginUser.rejected, (state, action) => {
@@ -52,7 +62,10 @@ const authSlice = createSlice({
         state.signuploading = false;
 
         state.user = action?.payload?.data[0];
-        
+        if (state.user?.name) {
+    localStorage.setItem("username", state.user?.name);
+    localStorage.setItem("userId", state.user?.id);
+       }
         
       })
       .addCase(signupUser.rejected, (state, action) => {
@@ -93,5 +106,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { resetAuthState } = authSlice.actions;
+export const { resetAuthState , clearOtpErrors} = authSlice.actions;
 export default authSlice.reducer;
