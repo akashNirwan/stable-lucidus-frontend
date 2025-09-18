@@ -203,7 +203,7 @@ export default function Welcome() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1 }}
-                className="text-white text-lg max-w-sm mx-auto leading-relaxed"
+                className="text-white  max-w-sm mx-auto leading-relaxed"
               >
                 Lucidus is here to support and prepare you for the real world.
               </motion.p>
@@ -227,7 +227,7 @@ export default function Welcome() {
                 >
                   🔍
                 </div>
-                <span className="!text-[#C2B1FF] text-xl ">
+                <span className="!text-[#C2B1FF] text-lg ">
                   Explore Careers.
                 </span>
               </motion.div>
@@ -248,7 +248,7 @@ export default function Welcome() {
                 >
                   🙌
                 </div>
-                <span className="text-[#C2B1FF] text-xl ">
+                <span className="text-[#C2B1FF] text-lg ">
                   Try Micro-experiences.
                 </span>
               </motion.div>
@@ -269,7 +269,7 @@ export default function Welcome() {
                 >
                   💎
                 </div>
-                <span className="text-[#C2B1FF] text-xl text-center">
+                <span className="text-[#C2B1FF] text-lg text-center">
                   Get Custom Plans for School,
                   <br />
                   University, & Beyond.
@@ -290,7 +290,7 @@ export default function Welcome() {
               transition={{ duration: 0.6, ease: "easeInOut" }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-[312px] h-12 flex items-center justify-center gap-[10px] rounded-[12px] bg-[#0F8864] shadow-[0_0_4px_0_rgba(0,0,0,0.25)] text-white font-semibold text-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] px-14 py-3 cursor-pointer"
+              className="w-[312px] h-12 flex items-center justify-center gap-[10px] rounded-[12px] bg-[#0F8864] shadow-[0_0_4px_0_rgba(0,0,0,0.25)] text-white font-semibold  transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] px-14 py-3 cursor-pointer"
             >
               Get Started
             </MotionLink>
