@@ -63,7 +63,7 @@ const CareerCard = ({
     navigate(`/encyclopedia/purpose?careerId=${careerId}`);
   };
   return (
-    <div className="text-white h-[510px] grid  rounded-2xl overflow-hidden relative min-w-[325px] mx-auto">
+    <div className="text-white h-[510px] grid  rounded-2xl overflow-hidden relative min-w-[315px] mx-auto">
       <div className=" flex items-center justify-center relative">
         {image ? (
           <img
