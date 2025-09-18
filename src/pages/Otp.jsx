@@ -176,6 +176,10 @@ export default function Otp() {
     navigate("/auth/login");
   };
 
+  useEffect(() => {
+  inputRefs.current[0]?.focus();
+}, []);
+
   return (
     <motion.form
       onSubmit={handleSubmit(onSubmit)}
@@ -224,7 +228,8 @@ export default function Otp() {
                   value={digit}
                   onChange={(e) => handleChange(e.target.value, i)}
                   onKeyDown={(e) => handleKeyDown(e, i)}
-                  disabled={verifyOtpLoading}
+                  disabled={verifyOtpLoading || resendOtpLoading}
+                  autoFocus={i === 0}
                   className={`w-full max-w-10 h-12 text-center text-[#7B56FF] text-lg font-semibold rounded-full border transition-all duration-200 ${
                     digit
                       ? "border-[#7B56FF] shadow-md shadow-[#7B56FF]/40 bg-[#EFEAFF]"

@@ -24,11 +24,17 @@ export default function NextLevelModal({ open, onClose, careerLevelId }) {
 
 
   const nextLevelNumber = NextLevel?.buttonName?.match(/\d+/)?.[0] || "";
-
+   
+   
   const handleClick = () => {
-    navigate(
+    if(nextLevelNumber === "3" ){
+     alert("Level 3 Coming Soon...")
+    }else{
+       navigate(
       `/micro-intro?careerId=${careerId}&levelNumber=${nextLevelNumber}`
     );
+    }
+   
   };
 
   if (!open) return null;

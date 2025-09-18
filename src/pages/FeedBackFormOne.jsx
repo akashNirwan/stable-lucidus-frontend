@@ -110,10 +110,10 @@ const FeedBackFormOne = () => {
     </div>
   ) : (
     <div className="">
-      <h2 className="text-center font-bold text-xl">A Net That Protects</h2>
+      <h2 className="text-center font-bold text-xl">{selectedQuestion?.heading}</h2>
       <div className="text-center space-y-4 border border-[#4ED0AA] rounded-2xl p-4 mt-4 bg-[#e0ffef]">
         <div className="text-[12px] text-[#034230] px-2 py-1 font-semibold rounded-2xl w-fit mx-auto bg-[#4ED0AA]">
-          DECISION OUTCOME
+          {levelNumber === "2" ? "YOUR RESEARCH" : "DECISION OUTCOME"}
         </div>
         <div
           className="text-[14px]"
