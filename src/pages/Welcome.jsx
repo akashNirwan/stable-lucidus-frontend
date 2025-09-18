@@ -1,52 +1,71 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
-import InteractiveAstronaut from "../components/welcome/InteractiveAstronaut";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchStudentData } from "../redux/actions/student-onboarding-action";
-import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../components/common/LoadingSpinner";
+import { motion } from "framer-motion";
 
 export default function Welcome() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { StudentDataLoading, StudentData, loading } = useSelector(
+  const { StudentDataLoading, StudentData } = useSelector(
     (state) => state.student
   );
+
+  const [typedUsername, setTypedUsername] = useState("");
+
+  const username = localStorage.getItem("username") || "";
+
+  const featureItems = [
+    { icon: "🔍", text: "Explore Careers.", anim: { rotate: [0, 10, -10, 0] } },
+    {
+      icon: "🙌",
+      text: "Try Micro-experiences.",
+      anim: { scale: [0.8, 1.2, 1] },
+    },
+    {
+      icon: "💎",
+      text: (
+        <>
+          Get Custom Plans for School,
+          <br />
+          University, & Beyond.
+        </>
+      ),
+      anim: { rotate: [-90, 0] },
+    },
+  ];
+
   useEffect(() => {
     dispatch(fetchStudentData());
   }, [dispatch]);
 
- const username = localStorage.getItem("username");
- 
+  // Username typewriter animation
+  useEffect(() => {
+    let i = 0;
+    const interval = setInterval(() => {
+      if (i < username.length) {
+        setTypedUsername((prev) => prev + username[i]);
+        i++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 100);
+    return () => clearInterval(interval);
+  }, [username]);
+
   useEffect(() => {
     if (StudentData && StudentData.data && StudentData.data.length > 0) {
       const student = StudentData.data[0];
       const gradeId = student.selected_grades?.[0]?.gradeId;
 
-      const hasGrades =
-        student.selected_grades && student.selected_grades.length > 0;
-      const hasFigureout = student.figureout && student.figureout.trim() !== "";
-      const hasSkills =
-        student.selected_skill && student.selected_skill.length > 0;
-      const hasSubjects =
-        student.selected_subject && student.selected_subject.length > 0;
-      const hasSdg = student.selected_sdg && student.selected_sdg.length > 0;
-      const hasAmbitions = student.ambitions && student.ambitions.trim() !== "";
+      const hasGrades = student.selected_grades?.length > 0;
+      const hasFigureout = student.figureout?.trim() !== "";
+      const hasSkills = student.selected_skill?.length > 0;
+      const hasSubjects = student.selected_subject?.length > 0;
+      const hasSdg = student.selected_sdg?.length > 0;
+      const hasAmbitions = student.ambitions?.trim() !== "";
 
-      // Case 1: All empty - stay on welcome
-      if (
-        !hasGrades &&
-        !hasFigureout &&
-        !hasSkills &&
-        !hasSubjects &&
-        !hasSdg &&
-        !hasAmbitions
-      ) {
-        return;
-      }
-
-      // Case 7: All complete - go to dashboard
       if (
         hasGrades &&
         hasFigureout &&
@@ -58,60 +77,14 @@ export default function Welcome() {
         navigate("/dashboard/explorecareers");
         return;
       }
-
-      // Case 2: Only grades
-      if (
-        hasGrades &&
-        !hasFigureout &&
-        !hasSkills &&
-        !hasSubjects &&
-        !hasSdg &&
-        !hasAmbitions
-      ) {
-        navigate(`/questions/figure-out?gradeId=${gradeId}`);
-        return;
-      }
-
-      // Case 3: Grades + figureout
-      if (
-        hasGrades &&
-        hasFigureout &&
-        !hasSubjects &&
-        !hasSkills &&
-        !hasSdg &&
-        !hasAmbitions
-      ) {
-        navigate(`/questions/subject?gradeId=${gradeId}`);
-        return;
-      }
-
-      // Case 4: Grades + figureout + subjects
-      if (
-        hasGrades &&
-        hasFigureout &&
-        hasSubjects &&
-        !hasSkills &&
-        !hasSdg &&
-        !hasAmbitions
-      ) {
-        navigate(`/questions/skills?gradeId=${gradeId}`);
-        return;
-      }
-
-      // Case 5: Grades + figureout + subjects + skills
-      if (
-        hasGrades &&
-        hasFigureout &&
-        hasSubjects &&
-        hasSkills &&
-        !hasSdg &&
-        !hasAmbitions
-      ) {
-        navigate(`/questions/skills-care?gradeId=${gradeId}`);
-        return;
-      }
-
-      // Case 6: All except ambitions
+      if (hasGrades && !hasFigureout)
+        return navigate(`/questions/figure-out?gradeId=${gradeId}`);
+      if (hasGrades && hasFigureout && !hasSubjects)
+        return navigate(`/questions/subject?gradeId=${gradeId}`);
+      if (hasGrades && hasFigureout && hasSubjects && !hasSkills)
+        return navigate(`/questions/skills?gradeId=${gradeId}`);
+      if (hasGrades && hasFigureout && hasSubjects && hasSkills && !hasSdg)
+        return navigate(`/questions/skills-care?gradeId=${gradeId}`);
       if (
         hasGrades &&
         hasFigureout &&
@@ -119,40 +92,26 @@ export default function Welcome() {
         hasSkills &&
         hasSdg &&
         !hasAmbitions
-      ) {
-        navigate(`/questions/ambition?gradeId=${gradeId}`);
-        return;
-      }
+      )
+        return navigate(`/questions/ambition?gradeId=${gradeId}`);
     }
   }, [StudentData, navigate]);
-  const [animationStep, setAnimationStep] = useState(0);
-  const MotionLink = motion(Link);
-  const { user } = useSelector((state) => state.auth);
-  useEffect(() => {
-    const timeouts = [
-      setTimeout(() => setAnimationStep(1), 500),
-      setTimeout(() => setAnimationStep(2), 2000),
-      setTimeout(() => setAnimationStep(3), 2500),
-      setTimeout(() => setAnimationStep(5), 3000),
-      setTimeout(() => setAnimationStep(6), 4000),
-    ];
 
-    return () => timeouts.forEach(clearTimeout);
-  }, []);
-
-  const handleClick= ()=>{
+  const handleClick = () => {
     localStorage.removeItem("username");
-  }
+  };
 
   return StudentDataLoading ? (
     <div className="flex items-center justify-center min-h-[400px]">
       <LoadingSpinner size={64} />
     </div>
   ) : (
-    <div className="min-h-screen relative overflow-hidden ">
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Robot */}
       <div className="absolute right-0 z-20 top-[35%]">
-        <img src="/welcome-rob3.png" alt="" className="" />
+        <img src="/welcome-rob3.png" alt="" />
       </div>
+
       {/* Background */}
       <div className="fixed inset-0 bg-[url('/assets/welcome/welcome-bg.svg')] bg-no-repeat bg-center bg-cover" />
 
@@ -170,7 +129,6 @@ export default function Welcome() {
             }}
           />
         ))}
-
         {[...Array(20)].map((_, i) => (
           <div
             key={`plus-${i}`}
@@ -189,143 +147,72 @@ export default function Welcome() {
 
       {/* Content */}
       <div className="relative flex flex-col items-center justify-center min-h-screen px-6 text-center">
-        <div className="mb-8 space-y-6">
-          <AnimatePresence>
-            {animationStep >= 1 && (
-              <motion.h1
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-[28px] font-bold"
-                style={{ color: "#4ED0AA" }}
-              >
-                <TypewriterText text={`Welcome, ${username}`} />
-              </motion.h1>
-            )}
-          </AnimatePresence>
-
-          <AnimatePresence>
-            {animationStep >= 2 && (
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1 }}
-                className="text-white  max-w-sm mx-auto leading-relaxed"
-              >
-                Lucidus is here to support and prepare you for the real world.
-              </motion.p>
-            )}
-          </AnimatePresence>
-        </div>
+        {/* Heading */}
+        <motion.div
+          className="mb-8 space-y-6"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <h1 className="text-[28px] font-bold" style={{ color: "#4ED0AA" }}>
+            Welcome, <span>{typedUsername}</span>
+          </h1>
+          <motion.p
+            className="text-white max-w-sm mx-auto leading-relaxed"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
+          >
+            Lucidus is here to support and prepare you for the real world.
+          </motion.p>
+        </motion.div>
 
         {/* Features */}
         <div className="space-y-8 mb-12 z-20">
-          <AnimatePresence>
-            {animationStep >= 3 && (
+          {featureItems.map((item, index) => (
+            <motion.div
+              key={index}
+              className="flex flex-col items-center space-y-3"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1, ...item.anim }}
+              transition={{
+                delay: 1.6 + index * 0.6,
+                duration: 0.8,
+                ease: "easeOut",
+              }}
+            >
               <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: [0, 1.1, 1] }}
-                transition={{ duration: 0.5 }}
-                className="flex flex-col items-center space-y-3"
+                className="w-16 h-16 rounded-full flex items-center justify-center text-2xl"
+                style={{ background: "#4823CF" }}
+                whileHover={{ scale: 1.1, rotate: 3 }}
               >
-                <div
-                  className="w-16 h-16 rounded-full flex items-center justify-center text-2xl rotate-90"
-                  style={{ background: "#4823CF" }}
-                >
-                  🔍
-                </div>
-                <span className="!text-[#C2B1FF] text-lg ">
-                  Explore Careers.
-                </span>
+                {item.icon}
               </motion.div>
-            )}
-          </AnimatePresence>
-
-          <AnimatePresence>
-            {animationStep >= 4 && (
-              <motion.div
-                initial={{ opacity: 0, rotate: -15 }}
-                animate={{ opacity: 1, rotate: 0 }}
-                transition={{ duration: 0.5 }}
-                className="flex flex-col items-center space-y-3"
-              >
-                <div
-                  className="w-16 h-16 rounded-full flex items-center justify-center text-2xl"
-                  style={{ background: "#4823CF" }}
-                >
-                  🙌
-                </div>
-                <span className="text-[#C2B1FF] text-lg ">
-                  Try Micro-experiences.
-                </span>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          <AnimatePresence>
-            {animationStep >= 5 && (
-              <motion.div
-                initial={{ opacity: 0, y: -30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 100, delay: 0.5 }}
-                className="flex flex-col items-center space-y-3"
-              >
-                <div
-                  className="w-16 h-16 rounded-full flex items-center justify-center text-2xl"
-                  style={{ background: "#4823CF" }}
-                >
-                  💎
-                </div>
-                <span className="text-[#C2B1FF] text-lg text-center">
-                  Get Custom Plans for School,
-                  <br />
-                  University, & Beyond.
-                </span>
-              </motion.div>
-            )}
-          </AnimatePresence>
+              <span className="text-[#C2B1FF] text-lg text-center">
+                {item.text}
+              </span>
+            </motion.div>
+          ))}
         </div>
 
         {/* CTA */}
-        <AnimatePresence>
-          {animationStep >= 6 && (
-            <MotionLink
-              to="/questions/grade"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-[312px] h-12 flex items-center justify-center gap-[10px] rounded-[12px] bg-[#0F8864] shadow-[0_0_4px_0_rgba(0,0,0,0.25)] text-white font-semibold  transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] px-14 py-3 cursor-pointer"
-            >
-              <button onClick={handleClick}>Get Started</button>
-              
-            </MotionLink>
-          )}
-        </AnimatePresence>
-
-        {/* <InteractiveAstronaut /> */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            delay: 1.6 + featureItems.length * 0.6,
+            duration: 0.6,
+            ease: "easeOut",
+          }}
+        >
+          <Link
+            to="/questions/grade"
+            className="w-[312px] h-12 flex items-center justify-center gap-[10px] rounded-[12px] bg-[#0F8864] shadow-[0_0_4px_0_rgba(0,0,0,0.25)] text-white font-semibold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] px-14 py-3 cursor-pointer"
+          >
+            <button onClick={handleClick}>Get Started</button>
+          </Link>
+        </motion.div>
       </div>
     </div>
   );
-}
-
-function TypewriterText({ text }) {
-  const [displayText, setDisplayText] = useState("");
-
-  useEffect(() => {
-    let i = 0;
-    const timer = setInterval(() => {
-      if (i < text.length) {
-        setDisplayText(text.slice(0, i + 1));
-        i++;
-      } else {
-        clearInterval(timer);
-      }
-    }, 100);
-
-    return () => clearInterval(timer);
-  }, [text]);
-
-  return <span>{displayText}</span>;
 }

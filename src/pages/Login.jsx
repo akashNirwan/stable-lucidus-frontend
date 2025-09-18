@@ -21,8 +21,6 @@ export default function Login() {
 
   const recaptcha_token = import.meta.env.VITE_reCAPTCHA_KEY;
 
- 
-
   const {
     control,
     handleSubmit,
@@ -73,7 +71,7 @@ export default function Login() {
             name: data.username,
           })
         ).unwrap();
-            toast.success(`OTP sent to ${data.email}`);
+        toast.success(`OTP sent to ${data.email}`);
         localStorage.setItem("email", data.email);
         navigate("/auth/otp");
       }
@@ -140,7 +138,7 @@ export default function Login() {
                 <TextInput
                   {...field}
                   type="text"
-                  placeholder="Enter Your User Name"
+                  placeholder="Enter Your First Name"
                   onInput={(e) => {
                     e.target.value = e.target.value.replace(/[^a-zA-Z ]/g, "");
                   }}
@@ -204,7 +202,11 @@ export default function Login() {
         disabled={loginLoading || !isValid || signuploading}
       >
         {loginLoading || signuploading ? (
-          <LoadingSpinner variant="ring" size={20} color="green" ></LoadingSpinner>
+          <LoadingSpinner
+            variant="ring"
+            size={20}
+            color="green"
+          ></LoadingSpinner>
         ) : isLogin ? (
           "Send OTP"
         ) : (
