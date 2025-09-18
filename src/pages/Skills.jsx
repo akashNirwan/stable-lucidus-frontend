@@ -94,7 +94,7 @@ const Skills = ({ setStep, stepsData }) => {
         {/* <h2 className="font-bold text-[20px]">{stepsData.title}</h2> */}
         <h2 className="font-bold text-[20px]">
           What are your top super{" "}
-          <span className="text-[#5f35f1]">skills?</span>
+          <span className="text-[#5E35F1]">skills?</span>
         </h2>
       </div>
 
@@ -104,7 +104,7 @@ const Skills = ({ setStep, stepsData }) => {
       </h3>
       <StatusTitle text={"I am good at:"} />
 
-      <div className="h-[32vh] overflow-y-auto flex flex-col gap-2">
+      <div className="h-[32vh] lg:h-[40vh] overflow-y-auto flex flex-col gap-2.5">
         {Array.isArray(skills) &&
           skills.map((skill) => (
             <TwoLineOption
@@ -132,7 +132,11 @@ const Skills = ({ setStep, stepsData }) => {
           onClick={handleNext}
           disabled={skillsLoading}
         >
-          {skillsLoading ? <LoadingSpinner size="20px" color="green"/> : "Next"}
+          {skillsLoading ? (
+            <LoadingSpinner size="20px" color="green" />
+          ) : (
+            "Next"
+          )}
         </Button>
       </div>
     </div>

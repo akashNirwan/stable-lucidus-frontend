@@ -20,59 +20,111 @@ export default function Welcome() {
  const username = localStorage.getItem("username");
  
   useEffect(() => {
-  if (StudentData && StudentData.data && StudentData.data.length > 0) {
-    const student = StudentData.data[0];
-    const gradeId = student.selected_grades?.[0]?.gradeId;
-    
-    const hasGrades = student.selected_grades && student.selected_grades.length > 0;
-    const hasFigureout = student.figureout && student.figureout.trim() !== "";
-    const hasSkills = student.selected_skill && student.selected_skill.length > 0;
-    const hasSubjects = student.selected_subject && student.selected_subject.length > 0;
-    const hasSdg = student.selected_sdg && student.selected_sdg.length > 0;
-    const hasAmbitions = student.ambitions && student.ambitions.trim() !== "";
+    if (StudentData && StudentData.data && StudentData.data.length > 0) {
+      const student = StudentData.data[0];
+      const gradeId = student.selected_grades?.[0]?.gradeId;
 
-    // Case 1: All empty - stay on welcome
-    if (!hasGrades && !hasFigureout && !hasSkills && !hasSubjects && !hasSdg && !hasAmbitions) {
-      return;
-    }
+      const hasGrades =
+        student.selected_grades && student.selected_grades.length > 0;
+      const hasFigureout = student.figureout && student.figureout.trim() !== "";
+      const hasSkills =
+        student.selected_skill && student.selected_skill.length > 0;
+      const hasSubjects =
+        student.selected_subject && student.selected_subject.length > 0;
+      const hasSdg = student.selected_sdg && student.selected_sdg.length > 0;
+      const hasAmbitions = student.ambitions && student.ambitions.trim() !== "";
 
-    // Case 7: All complete - go to dashboard
-    if (hasGrades && hasFigureout && hasSkills && hasSubjects && hasSdg && hasAmbitions) {
-      navigate('/dashboard/explorecareers');
-      return;
-    }
+      // Case 1: All empty - stay on welcome
+      if (
+        !hasGrades &&
+        !hasFigureout &&
+        !hasSkills &&
+        !hasSubjects &&
+        !hasSdg &&
+        !hasAmbitions
+      ) {
+        return;
+      }
 
-    // Case 2: Only grades
-    if (hasGrades && !hasFigureout && !hasSkills && !hasSubjects && !hasSdg && !hasAmbitions) {
-      navigate(`/questions/figure-out?gradeId=${gradeId}`);
-      return;
-    }
+      // Case 7: All complete - go to dashboard
+      if (
+        hasGrades &&
+        hasFigureout &&
+        hasSkills &&
+        hasSubjects &&
+        hasSdg &&
+        hasAmbitions
+      ) {
+        navigate("/dashboard/explorecareers");
+        return;
+      }
 
-    // Case 3: Grades + figureout
-    if (hasGrades && hasFigureout && !hasSubjects && !hasSkills && !hasSdg && !hasAmbitions) {
-      navigate(`/questions/subject?gradeId=${gradeId}`);
-      return;
-    }
+      // Case 2: Only grades
+      if (
+        hasGrades &&
+        !hasFigureout &&
+        !hasSkills &&
+        !hasSubjects &&
+        !hasSdg &&
+        !hasAmbitions
+      ) {
+        navigate(`/questions/figure-out?gradeId=${gradeId}`);
+        return;
+      }
 
-    // Case 4: Grades + figureout + subjects
-    if (hasGrades && hasFigureout && hasSubjects && !hasSkills && !hasSdg && !hasAmbitions) {
-      navigate(`/questions/skills?gradeId=${gradeId}`);
-      return;
-    }
+      // Case 3: Grades + figureout
+      if (
+        hasGrades &&
+        hasFigureout &&
+        !hasSubjects &&
+        !hasSkills &&
+        !hasSdg &&
+        !hasAmbitions
+      ) {
+        navigate(`/questions/subject?gradeId=${gradeId}`);
+        return;
+      }
 
-    // Case 5: Grades + figureout + subjects + skills
-    if (hasGrades && hasFigureout && hasSubjects && hasSkills && !hasSdg && !hasAmbitions) {
-      navigate(`/questions/skills-care?gradeId=${gradeId}`);
-      return;
-    }
+      // Case 4: Grades + figureout + subjects
+      if (
+        hasGrades &&
+        hasFigureout &&
+        hasSubjects &&
+        !hasSkills &&
+        !hasSdg &&
+        !hasAmbitions
+      ) {
+        navigate(`/questions/skills?gradeId=${gradeId}`);
+        return;
+      }
 
-    // Case 6: All except ambitions
-    if (hasGrades && hasFigureout && hasSubjects && hasSkills && hasSdg && !hasAmbitions) {
-      navigate(`/questions/ambition?gradeId=${gradeId}`);
-      return;
+      // Case 5: Grades + figureout + subjects + skills
+      if (
+        hasGrades &&
+        hasFigureout &&
+        hasSubjects &&
+        hasSkills &&
+        !hasSdg &&
+        !hasAmbitions
+      ) {
+        navigate(`/questions/skills-care?gradeId=${gradeId}`);
+        return;
+      }
+
+      // Case 6: All except ambitions
+      if (
+        hasGrades &&
+        hasFigureout &&
+        hasSubjects &&
+        hasSkills &&
+        hasSdg &&
+        !hasAmbitions
+      ) {
+        navigate(`/questions/ambition?gradeId=${gradeId}`);
+        return;
+      }
     }
-  }
-}, [StudentData, navigate]);
+  }, [StudentData, navigate]);
   const [animationStep, setAnimationStep] = useState(0);
   const MotionLink = motion(Link);
   const { user } = useSelector((state) => state.auth);
@@ -143,7 +195,7 @@ export default function Welcome() {
               <motion.h1
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="text-3xl font-bold"
+                className="text-[28px] font-bold"
                 style={{ color: "#4ED0AA" }}
               >
                 <TypewriterText text={`Welcome, ${username}`} />
@@ -157,7 +209,7 @@ export default function Welcome() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1 }}
-                className="text-white text-lg max-w-sm mx-auto leading-relaxed"
+                className="text-white  max-w-sm mx-auto leading-relaxed"
               >
                 Lucidus is here to support and prepare you for the real world.
               </motion.p>
@@ -181,7 +233,7 @@ export default function Welcome() {
                 >
                   🔍
                 </div>
-                <span className="!text-[#C2B1FF] text-xl ">
+                <span className="!text-[#C2B1FF] text-lg ">
                   Explore Careers.
                 </span>
               </motion.div>
@@ -202,7 +254,7 @@ export default function Welcome() {
                 >
                   🙌
                 </div>
-                <span className="text-[#C2B1FF] text-xl ">
+                <span className="text-[#C2B1FF] text-lg ">
                   Try Micro-experiences.
                 </span>
               </motion.div>
@@ -223,7 +275,7 @@ export default function Welcome() {
                 >
                   💎
                 </div>
-                <span className="text-[#C2B1FF] text-xl text-center">
+                <span className="text-[#C2B1FF] text-lg text-center">
                   Get Custom Plans for School,
                   <br />
                   University, & Beyond.
@@ -244,7 +296,7 @@ export default function Welcome() {
               transition={{ duration: 0.6, ease: "easeInOut" }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-[312px] h-12 flex items-center justify-center gap-[10px] rounded-[12px] bg-[#0F8864] shadow-[0_0_4px_0_rgba(0,0,0,0.25)] text-white font-semibold text-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] px-14 py-3 cursor-pointer"
+              className="w-[312px] h-12 flex items-center justify-center gap-[10px] rounded-[12px] bg-[#0F8864] shadow-[0_0_4px_0_rgba(0,0,0,0.25)] text-white font-semibold  transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] px-14 py-3 cursor-pointer"
             >
               <button onClick={handleClick}>Get Started</button>
               

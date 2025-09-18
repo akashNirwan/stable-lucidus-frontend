@@ -72,16 +72,16 @@ const FigureOut = ({ setStep, stepsData }) => {
   ) : (
     <div className="text-center flex flex-col gap-3  h-[72vh]">
       <h2 className="font-bold text-[20px]">
-        What are you here to <span className="text-[#5f35f1]">figure</span> out?{" "}
+        What are you here to <span className="text-[#5E35F1]">figure</span> out?{" "}
       </h2>
 
       {/* <h3 className="text-[#066146] text-sm">{stepsData.subtitle}</h3> */}
-      <h3 className="text-[#066146]">
+      <h3 className="text-[#066146] text-[14px]">
         Select <span className="font-bold">all</span> that apply.
       </h3>
       <StatusTitle text={"I want to:"} />
 
-      <div className="h-[32vh] overflow-y-auto flex flex-col gap-2">
+      <div className="h-[32vh] lg:h-[40vh] overflow-y-auto flex flex-col gap-2.5">
         {stepsData.options.map((option, ind) => (
           <OptionButton
             key={ind}
@@ -94,7 +94,6 @@ const FigureOut = ({ setStep, stepsData }) => {
       <div className="flex gap-4 ">
         <Button
           type="button"
-          isActive={!!selected}
           onClick={handleBack}
           className="bg-white !text-[#0F8864] border !border-[#0F8864] !w-[60%]"
         >

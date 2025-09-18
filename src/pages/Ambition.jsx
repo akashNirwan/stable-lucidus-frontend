@@ -13,7 +13,7 @@ import { useSearchParams } from "react-router-dom";
 const Ambition = ({ stepsData }) => {
   const [text, setText] = useState("");
   const [isDataLoaded, setIsDataLoaded] = useState(false);
-    const [isInitialSelectionDone, setIsInitialSelectionDone] = useState(false);
+  const [isInitialSelectionDone, setIsInitialSelectionDone] = useState(false);
   const [searchParams] = useSearchParams();
   const gradeId = searchParams.get("gradeId");
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const Ambition = ({ stepsData }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (isDataLoaded && StudentData &&!isInitialSelectionDone) {
+    if (isDataLoaded && StudentData && !isInitialSelectionDone) {
       const { ambitions } = getSelectedIds(StudentData);
       if (ambitions) {
         setText(ambitions);
@@ -69,7 +69,7 @@ const Ambition = ({ stepsData }) => {
       <div className="flex items-center justify-start ">
         <div className="flex-row space-y-4">
           <h2 className="font-bold text-[20px]">
-            What are your <span className="text-[#5f35f1]">ambitions?</span>
+            What are your <span className="text-[#5E35F1]">ambitions?</span>
           </h2>
           <h3 className="text-[#066146] text-[14px] leading-[120%] mb-4">
             {stepsData.subtitle}
@@ -80,7 +80,7 @@ const Ambition = ({ stepsData }) => {
       <div className="h-[32vh] overflow-y-auto flex flex-col gap-2">
         <textarea
           placeholder={stepsData.highlight}
-          className="placeholder:text-center w-full h-full border bg-[#EFEAFF] border-[#7B56FF] placeholder:text-[#7B56FF] text-[#7B56FF] rounded-md p-4 resize-none"
+          className="placeholder:text-center w-full h-full border bg-[#EFEAFF] border-[#7B56FF] placeholder:text-[#7B56FF] text-[#7B56FF] rounded-md p-3 resize-none"
           value={text}
           onChange={handleChange}
         />
@@ -105,7 +105,11 @@ const Ambition = ({ stepsData }) => {
           onClick={handleNext}
           disabled={loading || text.trim().length === 0}
         >
-          {loading ? <LoadingSpinner size="20px" color="green" /> : "Show Me Careers"}
+          {loading ? (
+            <LoadingSpinner size="20px" color="green" />
+          ) : (
+            "Show Me Careers"
+          )}
         </Button>
       </div>
     </div>

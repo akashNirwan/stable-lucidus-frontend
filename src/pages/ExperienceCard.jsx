@@ -36,7 +36,7 @@ const CareerExperienceCard = ({ careerData, savedCareer, careerId }) => {
   };
 
   return (
-    <div className="h-[350px] w-[320px] mx-auto rounded-2xl relative shadow-lg overflow-hidden">
+    <div className="h-[350px] min-w-[312px] max-w-[425px] mx-auto rounded-2xl relative shadow-lg overflow-hidden">
       <div className="h-[250px] w-full">
         <img
           src={getImageSrc()}
@@ -45,7 +45,7 @@ const CareerExperienceCard = ({ careerData, savedCareer, careerId }) => {
         />
       </div>
 
-      <div className="absolute bottom-0 left-0 h-[120px] w-full bg-white rounded-2xl">
+      <div className="absolute bottom-0 left-0 h-[120px] w-full bg-white rounded-3xl">
         <div className="flex m-4 justify-between items-center">
           <div className="text-xl text-[#042119] font-semibold">
             {careerData?.career || "Career"}

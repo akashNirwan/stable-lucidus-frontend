@@ -4,7 +4,7 @@ import InteractiveAstronautLoad from "../components/loadingAst";
 import LoadingBar from "../components/loadingComp";
 const QuestionFinalLoad = () => {
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="h-[100dvh] relative overflow-hidden">
       <div className="fixed inset-0 bg-[url('/welcome-loading.svg')] bg-no-repeat bg-center bg-cover" />
 
       <div className="w-full max-w-[375px] flex mx-auto">
@@ -54,7 +54,7 @@ const QuestionFinalLoad = () => {
 
         <div className="relative flex flex-col items-center justify-center min-h-screen px-6 text-center">
           <motion.h2
-            className="font-bold text-3xl text-[#4ED0AA]"
+            className="font-bold text-[28px] text-[#4ED0AA]"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}

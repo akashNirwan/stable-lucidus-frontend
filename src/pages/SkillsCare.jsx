@@ -81,7 +81,7 @@ const SkillsCare = ({ setStep, stepsData }) => {
     <div className="text-center flex flex-col gap-3  h-[72vh]">
       <div className=" justify-start mb-2">
         <h2 className="font-bold text-[20px]">
-          What <span className="text-[#5f35f1]">issues</span> do you care about?
+          What <span className="text-[#5E35F1]">issues</span> do you care about?
         </h2>
       </div>
 
@@ -91,7 +91,7 @@ const SkillsCare = ({ setStep, stepsData }) => {
       </h3>
       <StatusTitle text={"I care about:"} />
 
-      <div className="h-[32vh] overflow-y-auto grid grid-cols-3 mx-auto gap-3 ">
+      <div className="h-[32vh] lg:h-[40vh] overflow-y-auto grid grid-cols-3 mx-auto gap-3 ">
         {Array.isArray(sdgs) &&
           sdgs.map((sdg, i) => {
             const isSelected = selected.some((s) => s._id === sdg._id);
@@ -102,26 +102,21 @@ const SkillsCare = ({ setStep, stepsData }) => {
                 key={sdg._id}
                 onClick={() => canSelect && handleSelect(sdg)}
                 className={`relative w-[92px] h-[92px] rounded-lg cursor-pointer overflow-hidden
-            ${!canSelect ? "opacity-50 cursor-not-allowed" : ""}
-          `}
+    ${!canSelect ? "opacity-50 cursor-not-allowed" : ""}
+  `}
               >
                 {/* Image */}
                 <img
                   src={sdg.image}
                   alt={sdg.sdg}
-                  className="w-full h-full object-cover"
+                  className={`w-full h-full object-cover transition duration-300 
+      ${!isSelected ? "grayscale" : ""}
+    `}
                 />
 
-                {/* Visible Highlight overlay */}
-                {isSelected && (
-                  <div className="absolute inset-0 rounded-lg bg-[#4823CF]/40 border-2 border-[#4823CF] shadow-[0_0_10px_rgba(72,35,207,0.7)]" />
-                )}
-
-                {/* Label */}
-                {/* <span className="font-medium flex items-center truncate gap-2 px-2 absolute top-0 left-0 z-10 text-white rounded">
-                  <span className="text-[24px]">{i + 1}</span>
-                  <span>{sdg.sdg}</span>
-                </span> */}
+                {/* {isSelected && (
+                  <div className="absolute inset-0 rounded-lg shadow-[0_0_10px_rgba(72,35,207,0.7)]" />
+                )} */}
               </div>
             );
           })}

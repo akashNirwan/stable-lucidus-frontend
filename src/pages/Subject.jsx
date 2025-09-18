@@ -105,7 +105,7 @@ const Subject = ({ setStep, stepsData }) => {
   ) : (
     <div className="text-center flex flex-col gap-3  h-[72vh]">
       <h2 className="font-bold text-[20px] w-full">
-        Pick the <span className="text-[#5f35f1]">subjects</span> that excite
+        Pick the <span className="text-[#5E35F1]">subjects</span> that excite
         you{" "}
       </h2>
 
@@ -115,7 +115,7 @@ const Subject = ({ setStep, stepsData }) => {
       </h3>
 
       <StatusTitle text={"I enjoy:"} />
-      <div className="h-[32vh] overflow-y-auto flex flex-col gap-2">
+      <div className="h-[32vh] lg:h-[40vh] overflow-y-auto flex flex-col gap-2.5">
         {Array.isArray(subjects) &&
           subjects.map((subject) => (
             <TwoLineOption
@@ -144,7 +144,11 @@ const Subject = ({ setStep, stepsData }) => {
           onClick={handleNext}
           disabled={SubjectsLoading || loading}
         >
-          {SubjectsLoading ? <LoadingSpinner size="20px" color="green"/> : "Next"}
+          {SubjectsLoading ? (
+            <LoadingSpinner size="20px" color="green" />
+          ) : (
+            "Next"
+          )}
         </Button>
       </div>
     </div>

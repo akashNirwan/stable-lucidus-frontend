@@ -46,12 +46,7 @@ export default function OnBoardWrapper() {
         </div>
 
         <div className="relative z-10 flex flex-col items-center justify-start h-screen px-4 pt-12">
-          <img
-            src="/onBoard-rob2.png"
-            alt="Astronaut"
-            width={300}
-            height={300}
-          />
+          <img src="/Astronaut2.svg" alt="Astronaut" />
         </div>
 
         <div className="absolute top-4 left-1/2 -translate-x-1/2 w-full max-w-[375px] px-4">
@@ -71,7 +66,7 @@ export default function OnBoardWrapper() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="fixed bottom-0 left-0 right-0 mx-auto w-full max-w-[425px] flex flex-col gap-5 p-6 h-[62vh] z-20 "
+          className="fixed bottom-0 left-0 right-0 mx-auto w-full max-w-[425px] flex flex-col gap-5 p-6 h-[62vh] lg:h-[70vh] z-20 "
           style={{
             borderRadius: "24px 24px 0 0",
             background:
