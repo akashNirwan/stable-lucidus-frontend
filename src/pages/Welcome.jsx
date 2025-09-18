@@ -3,9 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchStudentData } from "../redux/actions/student-onboarding-action";
 import LoadingSpinner from "../components/common/LoadingSpinner";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Welcome() {
+  const MotionLink = motion(Link);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { StudentDataLoading, StudentData } = useSelector(
@@ -77,7 +78,6 @@ export default function Welcome() {
         student.ambitions &&
         student.ambitions.trim() !== "";
 
-      // Case 1: All empty - stay on welcome
       if (
         !hasSchool &&
         !hasGrades &&
@@ -285,20 +285,18 @@ export default function Welcome() {
 
         {/* CTA */}
         <AnimatePresence>
-          {animationStep >= 6 && (
-            <MotionLink
-              to="/questions/school"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-[312px] h-12 flex items-center justify-center gap-[10px] rounded-[12px] bg-[#0F8864] shadow-[0_0_4px_0_rgba(0,0,0,0.25)] text-white font-semibold  transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] px-14 py-3 cursor-pointer"
-            >
-              <button onClick={handleClick}>Get Started</button>
-            </MotionLink>
-          )}
+          <MotionLink
+            to="/questions/school"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-[312px] h-12 flex items-center justify-center gap-[10px] rounded-[12px] bg-[#0F8864] shadow-[0_0_4px_0_rgba(0,0,0,0.25)] text-white font-semibold  transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] px-14 py-3 cursor-pointer"
+          >
+            <button onClick={handleClick}>Get Started</button>
+          </MotionLink>
         </AnimatePresence>
 
         {/* <InteractiveAstronaut /> */}
