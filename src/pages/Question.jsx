@@ -9,7 +9,7 @@ import Skills from "./Skills";
 import SkillsCare from "./SkillsCare";
 import Ambition from "./Ambition";
 import QuestionFinalLoad from "./QuestionFinalLoad";
-
+import School from "./School";
 
 const Question = ({ stepName }) => {
   const stepDataIndex = {
@@ -27,6 +27,7 @@ const Question = ({ stepName }) => {
   };
 
   const stepComponents = {
+    school: <School stepsData={getCurrentStepData("school")} />,
     grade: <Grade stepsData={getCurrentStepData("grade")} />,
     "figure-out": <FigureOut stepsData={getCurrentStepData("figure-out")} />,
     subject: <Subject stepsData={getCurrentStepData("subject")} />,

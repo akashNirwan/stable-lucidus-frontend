@@ -26,16 +26,18 @@ export default function Welcome() {
 
       const hasGrades =
         student.selected_grades && student.selected_grades.length > 0;
-      const hasFigureout = student.figureout && student.figureout.trim() !== "";
+      const hasFigureout = ('figureout' in student) && student.figureout && student.figureout.trim() !== "";
       const hasSkills =
         student.selected_skill && student.selected_skill.length > 0;
       const hasSubjects =
         student.selected_subject && student.selected_subject.length > 0;
       const hasSdg = student.selected_sdg && student.selected_sdg.length > 0;
-      const hasAmbitions = student.ambitions && student.ambitions.trim() !== "";
+      const hasSchool = student.selected_school && student.selected_school.length >0;
+      const hasAmbitions = ('ambitions' in student) && student.ambitions && student.ambitions.trim() !== "";
 
       // Case 1: All empty - stay on welcome
-      if (
+      if ( 
+        !hasSchool &&
         !hasGrades &&
         !hasFigureout &&
         !hasSkills &&
@@ -48,6 +50,7 @@ export default function Welcome() {
 
       // Case 7: All complete - go to dashboard
       if (
+        hasSchool &&
         hasGrades &&
         hasFigureout &&
         hasSkills &&
@@ -58,9 +61,21 @@ export default function Welcome() {
         navigate("/dashboard/explorecareers");
         return;
       }
-
+        if (
+        hasSchool&&
+         !hasGrades &&
+        !hasFigureout &&
+        !hasSkills &&
+        !hasSubjects &&
+        !hasSdg &&
+        !hasAmbitions
+      ) {
+        navigate(`/questions/grade`);
+        return;
+      }
       // Case 2: Only grades
       if (
+        hasSchool&&
         hasGrades &&
         !hasFigureout &&
         !hasSkills &&
@@ -74,6 +89,7 @@ export default function Welcome() {
 
       // Case 3: Grades + figureout
       if (
+        hasSchool&&
         hasGrades &&
         hasFigureout &&
         !hasSubjects &&
@@ -87,6 +103,7 @@ export default function Welcome() {
 
       // Case 4: Grades + figureout + subjects
       if (
+        hasSchool&&
         hasGrades &&
         hasFigureout &&
         hasSubjects &&
@@ -100,6 +117,7 @@ export default function Welcome() {
 
       // Case 5: Grades + figureout + subjects + skills
       if (
+        hasSchool&&
         hasGrades &&
         hasFigureout &&
         hasSubjects &&
@@ -113,6 +131,7 @@ export default function Welcome() {
 
       // Case 6: All except ambitions
       if (
+        hasSchool&&
         hasGrades &&
         hasFigureout &&
         hasSubjects &&
@@ -289,7 +308,7 @@ export default function Welcome() {
         <AnimatePresence>
           {animationStep >= 6 && (
             <MotionLink
-              to="/questions/grade"
+              to="/questions/school"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
