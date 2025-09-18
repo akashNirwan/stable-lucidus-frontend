@@ -6,6 +6,7 @@ const initialState = {
  loading: false,
   error: null,
   updatedSchool: null,
+  SchoolLoading : false,
   grades: null,
   updatedGrade: null,
   gradeLoading : false,
@@ -42,8 +43,8 @@ const studentSlice = createSlice({
         state.schools = action.payload.data;
         
         
-        state.totalPages = action.payload.data.totalPages;
-        state.totalCount = action?.payload?.data?.totalCount;
+        // state.totalPages = action.payload.data.totalPages;
+        // state.totalCount = action?.payload?.data?.totalCount;
       })
       .addCase(fetchSchools.rejected, (state, action) => {
         state.loading = false;
@@ -52,15 +53,15 @@ const studentSlice = createSlice({
 
       builder
       .addCase(updateSchool.pending, (state) => {
-        state.loading = true;
+        state.SchoolLoading = true;
         state.error = null;
       })
       .addCase(updateSchool.fulfilled, (state, action) => {
-        state.loading = false;
-        state.updatedSchool = action.payload; // 👈 store updated response
+        state.SchoolLoading = false;
+        state.updatedSchool = action.payload; 
       })
       .addCase(updateSchool.rejected, (state, action) => {
-        state.loading = false;
+        state.SchoolLoading = false;
         state.error = action.payload || "Failed to update school";
       });
 

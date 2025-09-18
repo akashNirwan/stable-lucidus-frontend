@@ -59,14 +59,40 @@ export default function Welcome() {
       const student = StudentData.data[0];
       const gradeId = student.selected_grades?.[0]?.gradeId;
 
-      const hasGrades = student.selected_grades?.length > 0;
-      const hasFigureout = student.figureout?.trim() !== "";
-      const hasSkills = student.selected_skill?.length > 0;
-      const hasSubjects = student.selected_subject?.length > 0;
-      const hasSdg = student.selected_sdg?.length > 0;
-      const hasAmbitions = student.ambitions?.trim() !== "";
+      const hasGrades =
+        student.selected_grades && student.selected_grades.length > 0;
+      const hasFigureout =
+        "figureout" in student &&
+        student.figureout &&
+        student.figureout.trim() !== "";
+      const hasSkills =
+        student.selected_skill && student.selected_skill.length > 0;
+      const hasSubjects =
+        student.selected_subject && student.selected_subject.length > 0;
+      const hasSdg = student.selected_sdg && student.selected_sdg.length > 0;
+      const hasSchool =
+        student.selected_school && student.selected_school.length > 0;
+      const hasAmbitions =
+        "ambitions" in student &&
+        student.ambitions &&
+        student.ambitions.trim() !== "";
 
+      // Case 1: All empty - stay on welcome
       if (
+        !hasSchool &&
+        !hasGrades &&
+        !hasFigureout &&
+        !hasSkills &&
+        !hasSubjects &&
+        !hasSdg &&
+        !hasAmbitions
+      ) {
+        return;
+      }
+
+      // Case 7: All complete - go to dashboard
+      if (
+        hasSchool &&
         hasGrades &&
         hasFigureout &&
         hasSkills &&
@@ -77,15 +103,77 @@ export default function Welcome() {
         navigate("/dashboard/explorecareers");
         return;
       }
-      if (hasGrades && !hasFigureout)
-        return navigate(`/questions/figure-out?gradeId=${gradeId}`);
-      if (hasGrades && hasFigureout && !hasSubjects)
-        return navigate(`/questions/subject?gradeId=${gradeId}`);
-      if (hasGrades && hasFigureout && hasSubjects && !hasSkills)
-        return navigate(`/questions/skills?gradeId=${gradeId}`);
-      if (hasGrades && hasFigureout && hasSubjects && hasSkills && !hasSdg)
-        return navigate(`/questions/skills-care?gradeId=${gradeId}`);
       if (
+        hasSchool &&
+        !hasGrades &&
+        !hasFigureout &&
+        !hasSkills &&
+        !hasSubjects &&
+        !hasSdg &&
+        !hasAmbitions
+      ) {
+        navigate(`/questions/grade`);
+        return;
+      }
+      // Case 2: Only grades
+      if (
+        hasSchool &&
+        hasGrades &&
+        !hasFigureout &&
+        !hasSkills &&
+        !hasSubjects &&
+        !hasSdg &&
+        !hasAmbitions
+      ) {
+        navigate(`/questions/figure-out?gradeId=${gradeId}`);
+        return;
+      }
+
+      // Case 3: Grades + figureout
+      if (
+        hasSchool &&
+        hasGrades &&
+        hasFigureout &&
+        !hasSubjects &&
+        !hasSkills &&
+        !hasSdg &&
+        !hasAmbitions
+      ) {
+        navigate(`/questions/subject?gradeId=${gradeId}`);
+        return;
+      }
+
+      // Case 4: Grades + figureout + subjects
+      if (
+        hasSchool &&
+        hasGrades &&
+        hasFigureout &&
+        hasSubjects &&
+        !hasSkills &&
+        !hasSdg &&
+        !hasAmbitions
+      ) {
+        navigate(`/questions/skills?gradeId=${gradeId}`);
+        return;
+      }
+
+      // Case 5: Grades + figureout + subjects + skills
+      if (
+        hasSchool &&
+        hasGrades &&
+        hasFigureout &&
+        hasSubjects &&
+        hasSkills &&
+        !hasSdg &&
+        !hasAmbitions
+      ) {
+        navigate(`/questions/skills-care?gradeId=${gradeId}`);
+        return;
+      }
+
+      // Case 6: All except ambitions
+      if (
+        hasSchool &&
         hasGrades &&
         hasFigureout &&
         hasSubjects &&
@@ -196,22 +284,24 @@ export default function Welcome() {
         </div>
 
         {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{
-            delay: 1.6 + featureItems.length * 0.6,
-            duration: 0.6,
-            ease: "easeOut",
-          }}
-        >
-          <Link
-            to="/questions/grade"
-            className="w-[312px] h-12 flex items-center justify-center gap-[10px] rounded-[12px] bg-[#0F8864] shadow-[0_0_4px_0_rgba(0,0,0,0.25)] text-white font-semibold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] px-14 py-3 cursor-pointer"
-          >
-            <button onClick={handleClick}>Get Started</button>
-          </Link>
-        </motion.div>
+        <AnimatePresence>
+          {animationStep >= 6 && (
+            <MotionLink
+              to="/questions/school"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-[312px] h-12 flex items-center justify-center gap-[10px] rounded-[12px] bg-[#0F8864] shadow-[0_0_4px_0_rgba(0,0,0,0.25)] text-white font-semibold  transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] px-14 py-3 cursor-pointer"
+            >
+              <button onClick={handleClick}>Get Started</button>
+            </MotionLink>
+          )}
+        </AnimatePresence>
+
+        {/* <InteractiveAstronaut /> */}
       </div>
     </div>
   );

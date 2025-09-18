@@ -3,25 +3,63 @@ import React, { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import Dropdown from "../components/common/DropDown";
 import Button from "../components/common/Button";
-import { fetchSchools , updateSchool} from "../redux/actions/student-onboarding-action";
+import { fetchSchools , updateSchool, fetchStudentData} from "../redux/actions/student-onboarding-action";
 import { useSelector, useDispatch } from "react-redux";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { useNavigate } from "react-router-dom";
-
+import { getSelectedIds, getPreSelectedItems } from "../utils/getSelectedIds";
 
 const School = ({ setStep, stepsData }) => {
 
   const dispatch = useDispatch();
-  const { schools, loading, error } = useSelector((state) => state.student);
+  const { schools, loading, error, SchoolLoading , StudentData } = useSelector((state) => state.student);
 
-  
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedSchool, setSelectedSchool] = useState("");
+  const [selectedSchool, setSelectedSchool] = useState(null);
   const navigate = useNavigate()
 
-    useEffect(() => {
-    dispatch(fetchSchools());
-  }, [dispatch]);
+  //   useEffect(() => {
+  //   dispatch(fetchSchools());
+  // }, [dispatch]);
+  useEffect(() => {
+  const fetchData = async () => {
+    await Promise.all([
+      dispatch(fetchSchools()),
+      dispatch(fetchStudentData()),
+    ]);
+    setIsDataLoaded(true);
+  };
+
+  fetchData();
+}, [dispatch]);
+
+
+// useEffect(() => {
+//   if (isDataLoaded && schools && StudentData && !selectedSchool) {
+//     const { selectedSchoolIds } = getSelectedIds(StudentData);
+//     const preSelectedSchools = getPreSelectedItems(schools, selectedSchoolIds);
+
+//     if (preSelectedSchools.length > 0) {
+//       setSelectedSchool(preSelectedSchools[0]);
+//     }
+//   }
+// }, [isDataLoaded, schools, StudentData, selectedSchool]);
+
+// Second useEffect mein ye add karo debugging ke liye
+useEffect(() => {
+  if (isDataLoaded && schools && StudentData && !selectedSchool) {
+    console.log("StudentData:", StudentData); // ye check karo
+    const { selectedSchoolIds } = getSelectedIds(StudentData);
+    console.log("selectedSchoolIds:", selectedSchoolIds); // ye check karo
+    const preSelectedSchools = getPreSelectedItems(schools, selectedSchoolIds);
+    console.log("preSelectedSchools:", preSelectedSchools); // ye check karo
+
+    if (preSelectedSchools.length > 0) {
+      setSelectedSchool(preSelectedSchools[0]);
+    }
+  }
+}, [isDataLoaded, schools, StudentData, selectedSchool]);
 
 const handleNext = () => {
   if (!selectedSchool) return;
@@ -41,20 +79,21 @@ const handleNext = () => {
 
  
 
-  return loading ?  (
+  return loading || !isDataLoaded ?  (
     
     <div className="flex items-center justify-center min-h-[400px]">
       <LoadingSpinner size={64} />
     </div>
     ) : (
-      <div className="text-center flex flex-col gap-3 ">
-      <h2 className="font-bold text-[20px]">{stepsData.title}</h2>
-      <h3 className="text-gray-600">{stepsData.subtitle}</h3>
+      <div className="text-center flex flex-col gap-3 h-[55vh]">
+      <h2 className="font-bold text-[20px]">Which school are you in ?</h2>
+      <h3 className="text-gray-600">Select any one</h3>
       <h4 className="text-[#24A57F] font-medium">I am in:</h4>
 
       <div className="h-[320px] overflow-y-auto">
   <Dropdown
   label="Select Your School"
+  selectedValue={selectedSchool?._id}
   options={
     Array.isArray(schools)
       ? schools.map((s) => ({
@@ -74,9 +113,9 @@ const handleNext = () => {
         type="submit"
         isActive={!!selectedSchool}
         onClick={handleNext}
-        disabled = {loading}
+        disabled = {loading || SchoolLoading}
       >
-        Next
+       {SchoolLoading ? <LoadingSpinner size={20} color="green"></LoadingSpinner> : "Next"}
       </Button>
     </div>
     )

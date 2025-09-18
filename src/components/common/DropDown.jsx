@@ -2,12 +2,23 @@ import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import OptionButton from "./OptionButton";
 
-const Dropdown = ({ label = "Select Your School", options = [], onSelect }) => {
+const Dropdown = ({ label = "Select Your School", options = [], onSelect, selectedValue }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(null);
   const dropdownRef = useRef(null);
 
   // close dropdown if clicked outside
+
+  useEffect(() => {
+  if (selectedValue) {
+    const selectedOption = options.find(option => option.value === selectedValue);
+    if (selectedOption) {
+      setSelected(selectedOption);
+    }
+  }
+}, [selectedValue, options]);
+
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
