@@ -155,7 +155,7 @@ export default function Welcome() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <h1 className="text-[28px] font-bold" style={{ color: "#4ED0AA" }}>
-            Welcome, <span>{typedUsername}</span>
+            Welcome, <span>{username}</span>
           </h1>
           <motion.p
             className="text-white max-w-sm mx-auto leading-relaxed"
