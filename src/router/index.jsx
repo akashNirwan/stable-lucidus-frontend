@@ -72,9 +72,9 @@ const router = createBrowserRouter([
   {
     path: "/welcome",
     element: (
-      <ProtectedRoute>
-        <Welcome />
-      </ProtectedRoute>
+      // <ProtectedRoute>
+      <Welcome />
+      // </ProtectedRoute>
     ),
   },
   {
@@ -156,7 +156,7 @@ const router = createBrowserRouter([
     ),
     children: [{ index: true, element: <FeedBackFormOne /> }],
   },
-{
+  {
     path: "/feedbackform-level-two",
     element: (
       <ProtectedRoute>
