@@ -1,9 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 const Header = () => {
+
+const navigate = useNavigate()
+  const handleClick = ()=>{
+  navigate('/dashboard/microexperience')
+}
   return (
     <div className="flex justify-between items-center text-white p-4">
-      <div>
+      <div onClick={handleClick}>
         <img
           src="/assets/logo.svg"
           alt="Lucidus Logo"

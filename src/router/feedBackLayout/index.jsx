@@ -1,8 +1,16 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Outlet } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 export default function FeedBackLayout() {
+
+  const navigate = useNavigate()
+   
+  const handleLogo = ()=>{
+    navigate('/dashboard/microexperience')
+  }
+
+  
   return (
     <div className="h-screen relative overflow-hidden">
       <div className="bg-[url(/onBoard-bg.jpeg)] h-screen w-full bg-cover bg-center" />
@@ -37,7 +45,7 @@ export default function FeedBackLayout() {
       </div>
 
       <div className="relative z-10 flex flex-col items-center justify-start h-screen px-4 pt-12">
-        <div className="mb-12">
+        <div onClick={handleLogo} className="mb-12">
           <img
             src="/assets/logo.svg"
             alt="Lucidus Logo"

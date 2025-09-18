@@ -99,6 +99,11 @@ const DragAndDrop = () => {
   //     }
   //   });
   // };
+const handleLogo = () =>{
+  navigate('/dashboard/microexperience')
+}
+
+
 
 const handleMakeRecommendation = async () => {
   const payload = {
@@ -146,7 +151,7 @@ const handleMakeRecommendation = async () => {
   ) : (
     <div className="bg-[#1A104F]">
       <div className="min-h-screen  text-white p-5 flex flex-col relative overflow-hidden max-w-[425px] mx-auto">
-        <div className="mb-4">
+        <div onClick={handleLogo} className="mb-4">
           <img
             src="/assets/logo.svg"
             alt="Lucidus Logo"

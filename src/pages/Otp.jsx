@@ -5,12 +5,13 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useDispatch, useSelector } from "react-redux";
-import { verifyOtp, resendOtp } from "../redux/actions/auth-action";
+import { verifyOtp, resendOtp  } from "../redux/actions/auth-action";
 import Button from "../components/common/Button";
 import toast from "react-hot-toast";
 import { otpSchema } from "../validation/auth-validaion";
 import { ArrowLeft } from "lucide-react";
 import LoadingSpinner from "../components/common/LoadingSpinner";
+import { clearOtpErrors } from "../redux/slices/auth-slice";
 export default function Otp() {
   const [otp, setOtp] = useState(Array(6).fill(""));
   const inputRefs = useRef([]);
@@ -29,8 +30,8 @@ export default function Otp() {
 
 
   const useremail = localStorage.getItem("email");
-
- 
+  const username = localStorage.getItem("username");
+  const userId = localStorage.getItem("userId");
 
   const RESEND_KEY = "otpResendExpiry";
   const RESEND_DURATION = 30; // seconds
@@ -113,7 +114,7 @@ export default function Otp() {
   const onSubmit = async (data) => {
     const payload = {
       otp: parseInt(data.otp),
-      id: user?.id,
+      id: userId,
     };
     
 
@@ -130,6 +131,7 @@ export default function Otp() {
         toast.success(`OTP Verified Welcome ${userData.name} `);
         localStorage.removeItem("email");
         localStorage.removeItem("deviceId");
+        localStorage.removeItem("userId");
         navigate("/welcome");
       }
     } catch (error) {
@@ -145,7 +147,7 @@ export default function Otp() {
     if (!canResend || resendOtpLoading) return;
 
     const payload = {
-      email: user?.email || useremail,
+      email: useremail,
     };
 
     try {
@@ -167,8 +169,10 @@ export default function Otp() {
   const handleBack = () => {
     localStorage.removeItem(RESEND_KEY);
     localStorage.removeItem("email");
+    localStorage.removeItem("userId");
     setTimer(0);
     setCanResend(true);
+    dispatch(clearOtpErrors());
     navigate("/auth/login");
   };
 
@@ -198,7 +202,7 @@ export default function Otp() {
       </div>
 
       <h2 className="text-center text-[20px] font-bold text-[#7B56FF]">
-        Hello, {user?.name || "username"}
+        Hello, {username}
       </h2>
       <h2 className="text-center text-[20px] font-semibold">
         OTP Verification
@@ -267,7 +271,7 @@ export default function Otp() {
         isActive={otp.join("").length === 6 && !verifyOtpLoading}
         disabled={verifyOtpLoading || resendOtpLoading}
       >
-        {verifyOtpLoading || resendOtpLoading ? <LoadingSpinner size={20} color="green" variant="ring"></LoadingSpinner>: "Verify OTP"}
+        {verifyOtpLoading ? <LoadingSpinner size={20} color="green" variant="ring"></LoadingSpinner>: "Verify OTP"}
       </Button>
     </motion.form>
   );

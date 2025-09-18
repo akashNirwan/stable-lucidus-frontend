@@ -64,6 +64,7 @@ export default function Login() {
         ).unwrap();
 
         toast.success(`OTP sent to ${data.email}`);
+        localStorage.setItem("email", data.email);
         navigate("/auth/otp");
       } else {
         await dispatch(
@@ -72,7 +73,7 @@ export default function Login() {
             name: data.username,
           })
         ).unwrap();
-
+            toast.success(`OTP sent to ${data.email}`);
         localStorage.setItem("email", data.email);
         navigate("/auth/otp");
       }

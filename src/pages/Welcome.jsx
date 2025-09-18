@@ -17,6 +17,8 @@ export default function Welcome() {
     dispatch(fetchStudentData());
   }, [dispatch]);
 
+ const username = localStorage.getItem("username");
+ 
   useEffect(() => {
     if (StudentData && StudentData.data && StudentData.data.length > 0) {
       const student = StudentData.data[0];
@@ -138,6 +140,10 @@ export default function Welcome() {
     return () => timeouts.forEach(clearTimeout);
   }, []);
 
+  const handleClick= ()=>{
+    localStorage.removeItem("username");
+  }
+
   return StudentDataLoading ? (
     <div className="flex items-center justify-center min-h-[400px]">
       <LoadingSpinner size={64} />
@@ -192,7 +198,7 @@ export default function Welcome() {
                 className="text-[28px] font-bold"
                 style={{ color: "#4ED0AA" }}
               >
-                <TypewriterText text={`Welcome, ${user?.name}`} />
+                <TypewriterText text={`Welcome, ${username}`} />
               </motion.h1>
             )}
           </AnimatePresence>
@@ -292,7 +298,8 @@ export default function Welcome() {
               whileTap={{ scale: 0.95 }}
               className="w-[312px] h-12 flex items-center justify-center gap-[10px] rounded-[12px] bg-[#0F8864] shadow-[0_0_4px_0_rgba(0,0,0,0.25)] text-white font-semibold  transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] px-14 py-3 cursor-pointer"
             >
-              Get Started
+              <button onClick={handleClick}>Get Started</button>
+              
             </MotionLink>
           )}
         </AnimatePresence>
