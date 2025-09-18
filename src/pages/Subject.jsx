@@ -105,7 +105,7 @@ const Subject = ({ setStep, stepsData }) => {
   ) : (
     <div className="text-center flex flex-col gap-3  h-[72vh]">
       <h2 className="font-bold text-[20px] w-full">
-        Pick the <span className="text-[#5f35f1]">subjects</span> that excite
+        Pick the <span className="text-[#5E35F1]">subjects</span> that excite
         you{" "}
       </h2>
 

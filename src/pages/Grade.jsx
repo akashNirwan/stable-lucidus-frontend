@@ -74,7 +74,7 @@ const Grade = ({ setStep, stepsData }) => {
   ) : (
     <div className="text-center flex flex-col gap-3 ">
       <h2 className="font-bold text-[20px]">
-        What <span className="text-[#5f35f1]">grade</span> are you in?
+        What <span className="text-[#5E35F1]">grade</span> are you in?
       </h2>
       {/* <h3 className="text-gray-600">{stepsData.subtitle}</h3> */}
       <h3 className="text-[#066146] text-sm">

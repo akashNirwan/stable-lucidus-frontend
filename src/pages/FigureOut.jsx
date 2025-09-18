@@ -72,7 +72,7 @@ const FigureOut = ({ setStep, stepsData }) => {
   ) : (
     <div className="text-center flex flex-col gap-3  h-[72vh]">
       <h2 className="font-bold text-[20px]">
-        What are you here to <span className="text-[#5f35f1]">figure</span> out?{" "}
+        What are you here to <span className="text-[#5E35F1]">figure</span> out?{" "}
       </h2>
 
       {/* <h3 className="text-[#066146] text-sm">{stepsData.subtitle}</h3> */}

@@ -94,7 +94,7 @@ const Skills = ({ setStep, stepsData }) => {
         {/* <h2 className="font-bold text-[20px]">{stepsData.title}</h2> */}
         <h2 className="font-bold text-[20px]">
           What are your top super{" "}
-          <span className="text-[#5f35f1]">skills?</span>
+          <span className="text-[#5E35F1]">skills?</span>
         </h2>
       </div>
 

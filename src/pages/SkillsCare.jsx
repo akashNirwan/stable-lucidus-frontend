@@ -81,7 +81,7 @@ const SkillsCare = ({ setStep, stepsData }) => {
     <div className="text-center flex flex-col gap-3  h-[72vh]">
       <div className=" justify-start mb-2">
         <h2 className="font-bold text-[20px]">
-          What <span className="text-[#5f35f1]">issues</span> do you care about?
+          What <span className="text-[#5E35F1]">issues</span> do you care about?
         </h2>
       </div>
 
