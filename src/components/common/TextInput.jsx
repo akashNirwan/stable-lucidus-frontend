@@ -28,7 +28,7 @@ export default function TextInput(
         minLength={minLength}
         maxLength={maxLength}
         disabled={disabled}
-        className="w-full h-12 placeholder:text-[#7B56FF] rounded-full border border-[#7B56FF] bg-[#EFEAFF] px-6  text-[rgba(123,86,255,1)] outline-none focus:placeholder-transparent"
+        className="w-full h-12 placeholder:text-[#7B56FF] rounded-full border border-[#7B56FF] bg-[#EFEAFF] px-6  text-[rgba(123,86,255,1)] outline-none focus:placeholder-transparent placeholder:text-center"
       />
       {error && (
         <p className="text-red-500 text-xs mt-1 text-center">{error.message}</p>
