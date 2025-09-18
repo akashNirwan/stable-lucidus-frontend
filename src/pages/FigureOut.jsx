@@ -43,7 +43,6 @@ const FigureOut = ({ setStep, stepsData }) => {
   const handleSelect = (option) => {
     setSelected(option);
   };
-
   const handleBack = () => {
     navigate("/questions/grade");
   };
