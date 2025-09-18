@@ -46,7 +46,7 @@ export default function OnBoardWrapper() {
         </div>
 
         <div className="relative z-10 flex flex-col items-center justify-start h-screen px-4 pt-12">
-          <img src="/Astronaut2.svg" alt="Astronaut" />
+          <img src="/Astronaut4.svg" alt="Astronaut" />
         </div>
 
         <div className="absolute top-4 left-1/2 -translate-x-1/2 w-full max-w-[375px] px-4">

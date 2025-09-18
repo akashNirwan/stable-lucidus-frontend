@@ -77,10 +77,10 @@ const Ambition = ({ stepsData }) => {
         </div>
       </div>
 
-      <div className="h-[32vh] overflow-y-auto flex flex-col gap-2">
+      <div className="h-[32vh] lg:h-[40vh] overflow-y-auto flex flex-col gap-2">
         <textarea
           placeholder={stepsData.highlight}
-          className="placeholder:text-center w-full h-full border bg-[#EFEAFF] border-[#7B56FF] placeholder:text-[#7B56FF] text-[#7B56FF] rounded-md p-3 resize-none"
+          className="placeholder:text-center w-full h-full border bg-[#EFEAFF] border-[#7B56FF] placeholder:text-[#7B56FF] text-[#7B56FF] rounded-md p-3 resize-none focus:placeholder-transparent"
           value={text}
           onChange={handleChange}
         />
