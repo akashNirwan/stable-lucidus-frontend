@@ -102,7 +102,7 @@ const SkillsCare = ({ setStep, stepsData }) => {
                 key={sdg._id}
                 onClick={() => canSelect && handleSelect(sdg)}
                 className={`relative w-[92px] h-[92px] rounded-lg cursor-pointer overflow-hidden
-    ${!canSelect ? "opacity-50 cursor-not-allowed" : ""}
+    ${!canSelect ? "cursor-not-allowed" : ""}
   `}
               >
                 {/* Image */}
