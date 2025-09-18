@@ -50,7 +50,7 @@ const CareerCard = ({ data }) => {
 
   // Case 4: /badge-earned -> /student-choice
   else if (currentRoute.startsWith("/badge-earned")) {
-    return `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`;
+    return `/micro-intro-Level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`;
   }
 
   // Case 5: /student-choice -> /survey-page

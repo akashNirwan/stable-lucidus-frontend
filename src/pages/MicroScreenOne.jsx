@@ -4,6 +4,11 @@ import { useOutletContext } from "react-router-dom";
 const MicroIntoScreenOne = ({ setScreen, data }) => {
   return (
     <div className="grid gap-2">
+
+      <p className="text-center text-white absolute -top-[135px] left-0 leading-[140%] bg-[#13093466] opacity-60 p-3 rounded-lg">
+        {data?.questionintros?.[0]?.titleOne}
+      </p>
+
       <div
         className="text-center "
         dangerouslySetInnerHTML={{

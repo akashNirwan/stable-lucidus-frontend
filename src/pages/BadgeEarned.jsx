@@ -65,9 +65,8 @@ const BadgeEarned = () => {
       saveBadgeRes.payload?.code === 200 || saveBadgeRes.payload?.code === 201;
 
     if (isSaveStepsSuccess && isSaveBadgeSuccess) {
-      navigate(
-        `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`
-      );
+      
+    navigate(`/micro-intro-Level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`);
     }
   };
 

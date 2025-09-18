@@ -80,8 +80,7 @@ const MicroIntroLevelSecond = () => {
           {/* <h3 className="font-bold text-[20px]">{Data?.titleOne}</h3> */}
 
           <p className="text-center text-white absolute -top-[125px] left-0 w-full p-4 leading-[140%] bg-black/40 backdrop-blur-md rounded-2xl">
-            "I love your research! Now we need to decide how to start helping
-            these 200 families."
+            {Data?.titleOne}
           </p>
 
           <div
