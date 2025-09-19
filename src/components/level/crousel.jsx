@@ -162,19 +162,17 @@ export default function LevelCarousel({ data, careerLevelId, levelNumber }) {
         ))}
       </div>
 
-      <div className="fixed bottom-4 w-full">
-        <Button
-          onClick={handleSaveAnswer}
-          disabled={selected === null || saveAnswerLoading || saveStepsLoading}
-          className="mt-2 max-w-[320px] flex justify-center mx-auto mb-2"
-        >
-          {saveAnswerLoading || saveStepsLoading ? (
-            <LoadingSpinner size={20} color="green"></LoadingSpinner>
-          ) : (
-            data?.questions?.[selected ?? 0]?.buttonName
-          )}
-        </Button>
-      </div>
+      <Button
+        onClick={handleSaveAnswer}
+        disabled={selected === null || saveAnswerLoading || saveStepsLoading}
+        className="mt-2 max-w-[320px] flex justify-center mx-auto mb-2"
+      >
+        {saveAnswerLoading || saveStepsLoading ? (
+          <LoadingSpinner size={20} color="green"></LoadingSpinner>
+        ) : (
+          data?.questions?.[selected ?? 0]?.buttonName
+        )}
+      </Button>
     </div>
   );
 }
