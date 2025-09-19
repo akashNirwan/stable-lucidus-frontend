@@ -118,18 +118,20 @@ export default function LevelCarousel({ data, careerLevelId, levelNumber }) {
                     className="rounded-xl object-cover w-full h-full"
                   />
                 </div>
-                <h3 className="text-sm font-bold text-purple-800 mt-4">
+                <h3 className="text-sm font-bold text-[#4823CF] mt-4">
                   {item.title}
                 </h3>
-                <p className="text-[12px] font-bold text-purple-600 uppercase mt-1">
+                <p className="text-[10px] font-bold text-[#7B56FF] uppercase mt-1">
                   {item.Keyword}
                 </p>
-                <p className="text-sm text-gray-600 mt-2">{item.description}</p>
+                <p className="text-sm text-[#042119] mt-2">
+                  {item.description}
+                </p>
 
                 {/* ✅ Circle: outlined by default, filled only when clicked */}
                 <div
-                  className={`w-6 h-6 rounded-full flex items-center justify-center mt-4 border-2 border-green-600 ${
-                    selected === i ? "bg-green-600" : "bg-transparent"
+                  className={`w-6 h-6 rounded-full flex items-center justify-center mt-4 border-2 border-[#0F8864] ${
+                    selected === i ? "bg-[#0F8864]" : "bg-transparent"
                   }`}
                 />
               </div>

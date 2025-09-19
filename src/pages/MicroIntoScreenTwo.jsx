@@ -11,11 +11,9 @@ const MicroIntoScreenTwo = ({ data, levelNumber }) => {
   const dispatch = useDispatch();
   const { saveStepsLoading } = useSelector((state) => state.microexperience);
   const careerLevelId = data?._id;
- 
+
   const levelPercent =
     levelNumber === "1 " ? "5" : levelNumber === "2" ? "30" : "0";
-
- 
 
   const handleNext = () => {
     const payload = {
@@ -41,7 +39,7 @@ const MicroIntoScreenTwo = ({ data, levelNumber }) => {
       {/* <h3 className="font-bold text-[20px] text-center">
         {data?.questionintros?.[1]?.titleOne}
       </h3> */}
-      <p className="text-center text-white absolute -top-[135px] left-0 leading-[140%] bg-[#13093466] opacity-40 p-3">
+      <p className="text-center text-white absolute -top-[170px] left-0 leading-[140%] bg-[#13093466] opacity-40 p-3">
         {data?.questionintros?.[1]?.titleOne}
       </p>
 
