@@ -2,9 +2,25 @@ import React from "react";
 import Header from "../../components/dashboard/Header";
 import Footer from "../../components/dashboard/Footer";
 import { Outlet } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const DashBoardWrapper = () => {
+  console.log("hello");
   const [menu, setMenu] = useState(2);
+  useEffect(() => {
+    // Example: /dashboard/badges -> "badges"
+    const currentTab = location.pathname.split("/")[2];
+
+    switch (currentTab) {
+      case "badges":
+        setMenu(3);
+        break;
+      case "explorecareers":
+        setMenu(2);
+        break;
+      default:
+        setMenu(2); // fallback
+    }
+  }, [location.pathname]);
   return (
     <div className="flex flex-col h-[100dvh] bg-[#130934]">
       <Header />
