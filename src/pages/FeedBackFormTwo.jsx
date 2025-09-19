@@ -19,7 +19,8 @@ const FeedBackFormTwo = ({ microexperience, careerLevelId, levelNumber }) => {
 
   const stepsData = microexperience[0]?.studentinsights || [];
   const [selected, setSelected] = useState([]);
-  const levelPercent = levelNumber === "1" ? "5" : levelNumber === "2" ? "30" : "0";
+  const levelPercent =
+    levelNumber === "1" ? "5" : levelNumber === "2" ? "30" : "0";
   const handleSelect = (insight) => {
     setSelected((prev) => {
       const isSelected = prev.some((item) => item._id === insight._id);
@@ -99,7 +100,7 @@ const FeedBackFormTwo = ({ microexperience, careerLevelId, levelNumber }) => {
         Select <span className="font-bold">all</span> that apply.
       </p>
       <h3 className="text-lg font-bold text-[#24A57F]">I focused on:</h3>
-      <div className="h-[260px] overflow-y-auto flex flex-col gap-2">
+      <div className=" h-[300px] overflow-y-auto flex flex-col gap-2">
         {stepsData.map((insight, ind) => (
           <TwoLineOption
             key={insight._id}
