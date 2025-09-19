@@ -3,12 +3,11 @@ import { motion } from "framer-motion";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 export default function OnChoiceFeedBack() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const steps = ["grade", "figure-out"];
-   const handleLogo = ()=>{
-     navigate('/dashboard/microexperience')
-
-   }
+  const handleLogo = () => {
+    navigate("/dashboard/microexperience");
+  };
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   return (
     <div className="h-screen relative overflow-hidden">

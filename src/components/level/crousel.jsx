@@ -13,29 +13,27 @@ import { saveAnswer } from "../../redux/actions/microexperience-action";
 import LoadingSpinner from "../common/LoadingSpinner";
 import { saveSteps } from "../../redux/actions/microexperience-action";
 export default function LevelCarousel({ data, careerLevelId, levelNumber }) {
- 
   const { saveAnswerLoading, saveStepsLoading } = useSelector(
     (state) => state.microexperience
   );
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
- 
-  
+
   //  const careerId = data?.careerId.
 
   const [api, setApi] = useState(null);
   const [selected, setSelected] = useState(null);
-  const [currentSlide, setCurrentSlide] = useState(0)
-const levelPercent = levelNumber === "1" ? "5" : levelNumber === "2" ? "30" : "0";
-useEffect(() => {
-  if (!api) return;
-  
-  api.on("select", () => {
-    setCurrentSlide(api.selectedScrollSnap()); 
-    
-  });
-}, [api]);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const levelPercent =
+    levelNumber === "1" ? "5" : levelNumber === "2" ? "30" : "0";
+  useEffect(() => {
+    if (!api) return;
+
+    api.on("select", () => {
+      setCurrentSlide(api.selectedScrollSnap());
+    });
+  }, [api]);
   // const handleSaveAnswer = async () => {
   //   if (selected === null) return;
 
@@ -107,7 +105,7 @@ useEffect(() => {
                   api?.scrollTo(i);
                   setSelected(i);
                 }}
-                className={`bg-white rounded-2xl my-4 shadow-md overflow-hidden p-4 flex flex-col items-center text-center transition-all duration-300 cursor-pointer ${
+                className={`bg-white rounded-2xl my-4 shadow-md overflow-hidden p-4 flex flex-col items-center text-center transition-all duration-300 h-[440px] cursor-pointer ${
                   selected === i
                     ? "opacity-100 scale-100"
                     : "opacity-50 scale-95"
@@ -161,18 +159,20 @@ useEffect(() => {
           />
         ))}
       </div>
-       
-      <Button
-        onClick={handleSaveAnswer}
-        disabled={selected === null || saveAnswerLoading || saveStepsLoading}
-        className="mt-2 max-w-[320px] flex justify-center mx-auto mb-2"
-      >
-        {saveAnswerLoading || saveStepsLoading ? (
-          <LoadingSpinner size={20} color="green"></LoadingSpinner>
-        ) : (
-          data?.questions?.[selected ?? 0]?.buttonName
-        )}
-      </Button>
+
+      <div className="fixed bottom-4 w-full">
+        <Button
+          onClick={handleSaveAnswer}
+          disabled={selected === null || saveAnswerLoading || saveStepsLoading}
+          className="mt-2 max-w-[320px] flex justify-center mx-auto mb-2"
+        >
+          {saveAnswerLoading || saveStepsLoading ? (
+            <LoadingSpinner size={20} color="green"></LoadingSpinner>
+          ) : (
+            data?.questions?.[selected ?? 0]?.buttonName
+          )}
+        </Button>
+      </div>
     </div>
   );
 }
