@@ -113,7 +113,9 @@ const FeedBackFormTwo = ({ microexperience, careerLevelId, levelNumber }) => {
         ))}
       </div>
       <Button
-        disabled={saveInsightLoading || saveStepsLoading}
+        disabled={
+          saveInsightLoading || saveStepsLoading || selected.length === 0
+        }
         onClick={handleContinue}
       >
         {saveInsightLoading || saveStepsLoading ? (
