@@ -8,8 +8,6 @@ const DashBoardWrapper = () => {
   const [menu, setMenu] = useState("");
   const location = useLocation();
   useEffect(() => {
-    // Example: /dashboard/badges -> "badges"
-
     const currentTab = location.pathname.split("/")[2];
 
     switch (currentTab) {
@@ -20,7 +18,7 @@ const DashBoardWrapper = () => {
         setMenu(2);
         break;
       default:
-        setMenu(1); // fallback
+        setMenu(1);
     }
   }, [location.pathname]);
   return (

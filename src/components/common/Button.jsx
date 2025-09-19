@@ -15,7 +15,7 @@ export default function Button({
         ${
           isActive && !disabled
             ? "bg-[#0F8864] text-white hover:scale-[1.02] active:scale-[0.98]"
-            : "bg-[#0F8864]/[0.8] text-white cursor-not-allowed"
+            : "bg-[#CDD6D1] text-[#7D8580]  cursor-not-allowed"
         }
         ${className}`}
     >
