@@ -14,21 +14,19 @@ const FeedBackFormOne = () => {
   const { microexperience, loading, saveStepsLoading } = useSelector(
     (state) => state.microexperience
   );
-  
 
   const navigate = useNavigate();
   const questionId = searchParams.get("questionId");
   const careerLevelId = searchParams.get("careerLevelId");
   const levelNumber = searchParams.get("levelNumber");
- 
-  const userBadgeCount = microexperience?.[0]?.userBadgeCount
- 
-  
-  const completedCareerLevelCount = microexperience?.[0]?.completedCareerLevelCount;
-  
 
+  const userBadgeCount = microexperience?.[0]?.userBadgeCount;
 
-    const levelPercent = levelNumber === "1"? "5" : levelNumber === "2" ? "30" : "0";
+  const completedCareerLevelCount =
+    microexperience?.[0]?.completedCareerLevelCount;
+
+  const levelPercent =
+    levelNumber === "1" ? "5" : levelNumber === "2" ? "30" : "0";
   useEffect(() => {
     if (careerLevelId) {
       dispatch(fetchMicroexperience({ careerLevelId }));
@@ -63,7 +61,7 @@ const FeedBackFormOne = () => {
   //           `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`
   //         );
   //       }
-        
+
   //     }
   //   });
   // };
@@ -93,7 +91,9 @@ const FeedBackFormOne = () => {
           );
         } else if (levelNumber === "2") {
           // If levelNumber is 2 and userBadgeCount is anything else, go to micro-intro-Level-two
-          navigate(`/micro-intro-Level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`);
+          navigate(
+            `/micro-intro-Level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`
+          );
         } else {
           // Default case - go to student-choice
           navigate(
@@ -110,7 +110,9 @@ const FeedBackFormOne = () => {
     </div>
   ) : (
     <div className="">
-      <h2 className="text-center font-bold text-xl">{selectedQuestion?.heading}</h2>
+      <h2 className="text-center font-bold text-xl">
+        {selectedQuestion?.heading}
+      </h2>
       <div className="text-center space-y-4 border border-[#4ED0AA] rounded-2xl p-4 mt-4 bg-[#e0ffef]">
         <div className="text-[12px] text-[#034230] px-2 py-1 font-semibold rounded-2xl w-fit mx-auto bg-[#4ED0AA]">
           {levelNumber === "2" ? "YOUR RESEARCH" : "DECISION OUTCOME"}
@@ -126,21 +128,23 @@ const FeedBackFormOne = () => {
         <div className="text-[12px] text-[#034230] px-2 py-1 font-semibold rounded-2xl w-fit mx-auto bg-[#C2B1FF]">
           FOOD FOR THOUGHT
         </div>
-       <div
+        <div
           className="text-[14px]"
           dangerouslySetInnerHTML={{
             __html: selectedQuestion?.foodForThought || "",
           }}
         />
       </div>
-      
+
       <Button
         onClick={handleClick}
         disabled={saveStepsLoading}
-        className="mt-4"
+        className="my-2"
       >
         {saveStepsLoading ? (
-          <LoadingSpinner size={20} color="green"> </LoadingSpinner>
+          <LoadingSpinner size={20} color="green">
+            {" "}
+          </LoadingSpinner>
         ) : (
           "Next"
         )}

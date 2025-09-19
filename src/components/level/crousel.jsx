@@ -115,7 +115,7 @@ export default function LevelCarousel({ data, careerLevelId, levelNumber }) {
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="rounded-xl object-cover w-full h-full"
+                    className="rounded-[16px] object-cover w-full h-full"
                   />
                 </div>
                 <h3 className="text-sm font-bold text-[#4823CF] mt-4">
@@ -130,7 +130,7 @@ export default function LevelCarousel({ data, careerLevelId, levelNumber }) {
 
                 {/* ✅ Circle: outlined by default, filled only when clicked */}
                 <div
-                  className={`w-6 h-6 rounded-full flex items-center justify-center mt-4 border-2 border-[#0F8864] ${
+                  className={`w-6 h-6 rounded-full flex items-center justify-center mt-7 border-2 border-[#0F8864] ${
                     selected === i ? "bg-[#0F8864]" : "bg-transparent"
                   }`}
                 />
