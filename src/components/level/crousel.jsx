@@ -165,7 +165,7 @@ export default function LevelCarousel({ data, careerLevelId, levelNumber }) {
       <Button
         onClick={handleSaveAnswer}
         disabled={selected === null || saveAnswerLoading || saveStepsLoading}
-        className="mt-2 max-w-[320px] flex justify-center mx-auto mb-2"
+        className="mt-4 max-w-[320px] flex justify-center mx-auto mb-2"
       >
         {saveAnswerLoading || saveStepsLoading ? (
           <LoadingSpinner size={20} color="green"></LoadingSpinner>
