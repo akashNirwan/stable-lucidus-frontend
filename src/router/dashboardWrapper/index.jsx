@@ -1,13 +1,15 @@
 import React from "react";
 import Header from "../../components/dashboard/Header";
 import Footer from "../../components/dashboard/Footer";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 const DashBoardWrapper = () => {
   console.log("hello");
-  const [menu, setMenu] = useState(2);
+  const [menu, setMenu] = useState("");
+  const location = useLocation();
   useEffect(() => {
     // Example: /dashboard/badges -> "badges"
+
     const currentTab = location.pathname.split("/")[2];
 
     switch (currentTab) {
@@ -18,7 +20,7 @@ const DashBoardWrapper = () => {
         setMenu(2);
         break;
       default:
-        setMenu(2); // fallback
+        setMenu(1); // fallback
     }
   }, [location.pathname]);
   return (

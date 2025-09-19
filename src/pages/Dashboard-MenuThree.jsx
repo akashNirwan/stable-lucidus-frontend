@@ -19,7 +19,7 @@ const DashBoardMenuThree = () => {
     </div>
   ) : (
     <div className="text-white h-[calc(100vh - 100px)]">
-      <h2 className="text-center text-[#A187FF] text-[28px] font-bold mb-2">
+      <h2 className="text-center text-[#A187FF] text-[28px] font-bold mb-4">
         Badges
       </h2>
       <div className="grid gap-6 justify-center h-[450px] lg:h-[600px]  overflow-y-auto ">
