@@ -2,6 +2,9 @@
 @import "tw-animate-css";
 
 /* @custom-variant dark (&:is(.dark *)); */
+body {
+  background-color: #130934;
+}
 :root {
   color-scheme: light;
 }
