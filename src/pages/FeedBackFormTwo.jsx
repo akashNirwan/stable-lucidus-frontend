@@ -32,32 +32,6 @@ const FeedBackFormTwo = ({ microexperience, careerLevelId, levelNumber }) => {
     });
   };
 
-  // const handleContinue = () => {
-  //   if (selected.length > 0) {
-  //     const payload = {
-  //       selectedInsight: selected.map(insight => ({
-  //         studentInsightId: insight._id,
-  //         icon: insight.icon,
-  //         studentInsight: insight.studentInsight
-  //       })),
-  //       careerLevelId: microexperience[0]?.studentinsights[0]?.careerLevelId
-  //     };
-  //      const saveStepsPayload = {
-  //       careerLevelId : careerLevelId,
-  //       route: "/student-choice",
-  //       levelPercent : "42",
-  //      }
-  //      dispatch(saveSteps(saveStepsPayload))
-  //     dispatch(saveInsight(payload)).then((res) => {
-
-  //       if (res.payload && res.payload.code === 201 || res.payload.statusCode === 200) {
-  //               navigate(`/survey-page?careerLevelId=${microexperience[0]?.studentinsights[0]?.careerLevelId}`);
-  //       }
-  //       });
-  //   }
-
-  // };
-
   const handleContinue = async () => {
     if (selected.length > 0) {
       const payload = {
