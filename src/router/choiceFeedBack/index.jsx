@@ -10,8 +10,8 @@ export default function OnChoiceFeedBack() {
   };
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   return (
-    <div className="h-screen relative overflow-hidden">
-      <div className="bg-[url(/onBoard-bg.jpeg)] h-screen w-full bg-cover bg-center" />
+    <div className="h-[100dvh] relative overflow-hidden">
+      <div className="bg-[url(/onBoard-bg.jpeg)] h-full w-full bg-cover bg-center" />
 
       <div className="fixed inset-0">
         {[...Array(30)].map((_, i) => (
@@ -88,7 +88,7 @@ export default function OnChoiceFeedBack() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
-        className="fixed bottom-0 left-0 right-0 mx-auto w-full max-w-[425px] flex flex-col  gap-5 p-6 h-[500px] z-20"
+        className="fixed bottom-0 left-0 right-0 mx-auto w-full max-w-[425px] flex flex-col  gap-5 p-6 h-[62vh] lg:h-[70vh] z-20"
         style={{
           borderRadius: "24px 24px 0 0",
           background:
