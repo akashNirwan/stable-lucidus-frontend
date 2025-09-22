@@ -10,7 +10,6 @@ export default function PurposeCrousel() {
   const dispatch = useDispatch();
   const [searchparams] = useSearchParams();
   const careerId = searchparams.get("careerId");
- 
 
   const { predictionandPurpose, loading } = useSelector(
     (state) => state.encyclopedia
@@ -83,7 +82,7 @@ export default function PurposeCrousel() {
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: -100, opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="bg-[#2a1760] text-white p-6 rounded-2xl shadow-lg h-[275px]"
+                className="bg-[#2a1760] text-white p-6 rounded-2xl shadow-lg h-[275px] w-[320px]"
               >
                 <h2 className="font-semibold text-lg mb-3">
                   {slides[current].title}

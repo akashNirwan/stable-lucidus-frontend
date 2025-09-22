@@ -28,9 +28,8 @@ const DashBoardMenuOne = () => {
 
   return (
     <div>
-      <div className="flex justify-between  p-4 w-[375px] mx-auto">
+      <div className="flex justify-between  p-4 max-w-[375px] mx-4 md:mx-auto ">
         <button
-          // onClick={() => setActiveTab("micro")}
           onClick={() => handleTabClick("micro")}
           className={`relative  font-semibold  transition-colors cursor-pointer ${
             activeTab === "micro" ? "text-[#24A57F]" : "text-purple-300"
@@ -43,7 +42,6 @@ const DashBoardMenuOne = () => {
         </button>
 
         <button
-          // onClick={() => setActiveTab("saved")}
           onClick={() => handleTabClick("saved")}
           className={`relative  font-semibold transition-colors cursor-pointer ${
             activeTab === "saved" ? "text-[#24A57F]" : "text-purple-300"

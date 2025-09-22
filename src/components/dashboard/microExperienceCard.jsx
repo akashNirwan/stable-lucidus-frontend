@@ -96,9 +96,9 @@ const CareerCard = ({ data }) => {
   };
 
   return (
-    <div className="flex items-center justify-between bg-white rounded-3xl shadow-md p-2 w-full max-w-[345px] mx-auto gap-6">
+    <div className="flex items-center justify-between bg-white rounded-3xl shadow-md p-3 w-[312px] max-w-[345px] mx-auto gap-6">
       <div className="flex items-start gap-2">
-        {/* Image Wrapper */}
+       
 
         <div className="w-20 h-20 rounded-[16px] overflow-hidden ">
           {careerImage && careerImage !== "tests.com" ? (
@@ -121,7 +121,7 @@ const CareerCard = ({ data }) => {
             {careerName}
           </h3>
 
-          <div className="mt-2 w-[160px]">
+          <div className="mt-2 w-[124px]">
             <div className="h-2 bg-purple-200 rounded-full">
               <div
                 className="h-2 bg-[#24A57F] rounded-full shrink-0"
@@ -140,7 +140,7 @@ const CareerCard = ({ data }) => {
       {/* Arrow Button */}
       <button
         onClick={handleArrowClick}
-        className="h-12 w-12 flex items-center justify-center rounded-full bg-[#24A57F] text-white shadow"
+        className="h-12 w-12 flex items-center shrink-0 justify-center rounded-full bg-[#24A57F] text-white shadow"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

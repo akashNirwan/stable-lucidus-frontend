@@ -45,7 +45,9 @@ const Footer = ({ setMenu, menu }) => {
             fill={menu === 1 ? "#24A57F" : "#A187FF"}
           />
         </svg>
-        <h4 className={menu === 1 ? "font-bold" : null}>Dashboard</h4>
+        <h4 className={menu === 1 ? "font-bold text-[#034230]" : null}>
+          Dashboard
+        </h4>
       </div>
       <div
         className="flex flex-1 flex-col items-center cursor-pointer gap-2"
@@ -71,7 +73,9 @@ const Footer = ({ setMenu, menu }) => {
             </clipPath>
           </defs>
         </svg>
-        <h4 className={menu === 2 ? "font-bold" : null}>Explore</h4>
+        <h4 className={menu === 2 ? "font-bold text-[#034230]" : null}>
+          Explore
+        </h4>
       </div>
       <div
         className="flex flex-1 flex-col items-center cursor-pointer gap-2"
@@ -102,7 +106,7 @@ const Footer = ({ setMenu, menu }) => {
             </clipPath>
           </defs>
         </svg>
-        <h4 className={menu === 3 ? "font-bold" : null}>Wins</h4>
+        <h4 className={menu === 3 ? "font-bold text-[#034230]" : null}>Wins</h4>
       </div>
     </div>
   );

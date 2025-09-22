@@ -36,8 +36,8 @@ const CareerExperienceCard = ({ careerData, savedCareer, careerId }) => {
   };
 
   return (
-    <div className="h-[350px] min-w-[312px] max-w-[425px] mx-auto rounded-2xl relative shadow-lg overflow-hidden">
-      <div className="h-[250px] w-full">
+    <div className="h-[370px] min-w-[312px] max-w-[425px] mx-auto rounded-2xl relative shadow-lg overflow-hidden">
+      <div className="h-[270px] w-full">
         <img
           src={getImageSrc()}
           alt={careerData?.career || "career"}
@@ -45,8 +45,8 @@ const CareerExperienceCard = ({ careerData, savedCareer, careerId }) => {
         />
       </div>
 
-      <div className="absolute bottom-0 left-0 h-[120px] w-full bg-white rounded-3xl">
-        <div className="flex m-4 justify-between items-center">
+      <div className="absolute bottom-0 left-0 h-[140px] w-full bg-white rounded-3xl ">
+        <div className="flex m-6 justify-between items-center">
           <div className="text-xl text-[#042119] font-semibold">
             {careerData?.career || "Career"}
           </div>
@@ -80,7 +80,7 @@ const CareerExperienceCard = ({ careerData, savedCareer, careerId }) => {
           </div>
         </div>
 
-        <div className="flex justify-between mt-2 px-4">
+        <div className="flex justify-between mt-2 px-6">
           <button
             onClick={handlemore}
             className={`py-[10px] px-[28px] rounded-xl cursor-pointer flex items-center justify-center font-medium transition ${
