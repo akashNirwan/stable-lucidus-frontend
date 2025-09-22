@@ -69,7 +69,9 @@ const FeedBackFormTwo = ({ microexperience, careerLevelId, levelNumber }) => {
   };
   return (
     <div className="text-center space-y-4 ">
-      <h2 className="font-bold text-[20px]">What guided your choice most?</h2>
+      <h2 className="font-bold text-[20px]">
+        What influenced your recommendation most?
+      </h2>
       <p className="text-[#066146]">
         Select <span className="font-bold">all</span> that apply.
       </p>
@@ -95,7 +97,7 @@ const FeedBackFormTwo = ({ microexperience, careerLevelId, levelNumber }) => {
         {saveInsightLoading || saveStepsLoading ? (
           <LoadingSpinner size={20} color="green"></LoadingSpinner>
         ) : (
-          "Continue"
+          "Next"
         )}
       </Button>
     </div>

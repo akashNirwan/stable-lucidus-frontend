@@ -29,7 +29,7 @@ const Footer = ({ setMenu, menu }) => {
     w-full max-w-[425px] mx-auto"
     >
       <div
-        className="flex flex-1 flex-col items-center cursor-pointer"
+        className="flex flex-1 flex-col items-center cursor-pointer gap-2"
         // onClick={() => setMenu(1)}
         onClick={() => handleMenuClick(1)}
       >
@@ -45,10 +45,10 @@ const Footer = ({ setMenu, menu }) => {
             fill={menu === 1 ? "#24A57F" : "#A187FF"}
           />
         </svg>
-        <h4>Dashboard</h4>
+        <h4 className={menu === 1 ? "font-bold" : null}>Dashboard</h4>
       </div>
       <div
-        className="flex flex-1 flex-col items-center cursor-pointer"
+        className="flex flex-1 flex-col items-center cursor-pointer gap-2"
         // onClick={() => setMenu(2)}
         onClick={() => handleMenuClick(2)}
       >
@@ -71,10 +71,10 @@ const Footer = ({ setMenu, menu }) => {
             </clipPath>
           </defs>
         </svg>
-        <h4>Explore</h4>
+        <h4 className={menu === 2 ? "font-bold" : null}>Explore</h4>
       </div>
       <div
-        className="flex flex-1 flex-col items-center cursor-pointer"
+        className="flex flex-1 flex-col items-center cursor-pointer gap-2"
         // onClick={() => setMenu(3)}
         onClick={() => handleMenuClick(3)}
       >
@@ -102,7 +102,7 @@ const Footer = ({ setMenu, menu }) => {
             </clipPath>
           </defs>
         </svg>
-        <h4>Wins</h4>
+        <h4 className={menu === 3 ? "font-bold" : null}>Wins</h4>
       </div>
     </div>
   );
