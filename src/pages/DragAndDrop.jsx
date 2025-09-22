@@ -144,6 +144,15 @@ const handleMakeRecommendation = async () => {
       );
     }
   };
+
+  const handleCross = () =>{
+    navigate("/dashboard")
+  }
+
+const handleBack = () =>{
+   navigate(`/micro-intro-Level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`)
+}
+
   return loading ? (
     <div className="flex items-center justify-center min-h-[400px]">
       <LoadingSpinner size={64} />
@@ -159,8 +168,9 @@ const handleMakeRecommendation = async () => {
             height={24}
           />
         </div>
+      {/* cross */}
         <div className="flex items-center justify-between mb-6">
-          <button className="text-white">
+          <button onClick={handleBack} className="text-white">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -188,7 +198,7 @@ const handleMakeRecommendation = async () => {
             LEVEL 2
           </span>
           <button>
-            <X className="text-white" />
+            <X  onClick= {handleCross}className="text-white" />
           </button>
         </div>
 

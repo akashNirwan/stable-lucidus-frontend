@@ -36,12 +36,14 @@ const MicroIntoScreenTwo = ({ data, levelNumber }) => {
 
   return (
     <div className="text-center flex flex-col gap-4 relative min-w-[325px] mx-auto">
-      <div
-        dangerouslySetInnerHTML={{
-          __html: data?.questionintros?.[1]?.titleOne,
-        }}
-        className="text-center text-white w-[325px] mx-auto absolute -top-[140px] left-1/2 -translate-x-1/2 leading-[140%] bg-[#13093466] opacity-80 p-3 rounded-lg"
-      ></div>
+      {data?.questionintros?.[1]?.titleOne && (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: data?.questionintros?.[1]?.titleOne,
+          }}
+          className="text-center text-white w-[325px] mx-auto absolute -top-[140px] left-1/2 -translate-x-1/2 leading-[140%] bg-[#13093466] opacity-80 p-3 rounded-lg"
+        ></div>
+      )}
       <div
         className="text-center "
         dangerouslySetInnerHTML={{
