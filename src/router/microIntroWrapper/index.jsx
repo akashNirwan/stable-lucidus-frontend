@@ -42,7 +42,7 @@ export default function MicroExperienceLayout() {
             loop
             muted
             playsInline
-            className="absolute inset-0 w-[600px] h-[600px] object-cover z-10 mx-auto"
+            className="absolute inset-0 max-w-[425px] h-[650px] object-cover z-10 mx-auto"
           >
             <source src={videoUrl} type="video/mp4" />
             <source src={videoUrl} type="video/webm" />
