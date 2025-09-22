@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Button from "../components/common/Button";
-import { fetchMicroexperience } from "../redux/actions/microexperience-action";
+import {
+  fetchMicroexperience,
+  saveSteps,
+} from "../redux/actions/microexperience-action";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../components/common/LoadingSpinner";
-import { useSearchParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useMemo, useEffect } from "react";
-import { saveSteps } from "../redux/actions/microexperience-action";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const FeedBackFormLevelTwo = () => {
   const [searchParams] = useSearchParams();
@@ -19,9 +20,6 @@ const FeedBackFormLevelTwo = () => {
   const questionId = searchParams.get("questionLeveltwoId");
   const careerLevelId = searchParams.get("careerLevelId");
   const levelNumber = searchParams.get("levelNumber");
-
-  const completedCareerLevelCount =
-    microexperience?.[0]?.completedCareerLevelCount;
 
   useEffect(() => {
     if (careerLevelId) {
@@ -54,10 +52,18 @@ const FeedBackFormLevelTwo = () => {
     });
   };
 
-  // const    handleClick = ()=>{
+  // ✨ Animation Variants
+  const fadeUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
 
-  //   navigate(`/badge-earned?careerLevelId=${careerLevelId}&questionId=${questionId}`)
-  // }
+  // ⏳ Delay appearance of Food For Thought by 4 seconds
+  const [showFood, setShowFood] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => setShowFood(true), 4000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return loading ? (
     <div className="flex items-center justify-center min-h-[400px]">
@@ -65,11 +71,26 @@ const FeedBackFormLevelTwo = () => {
     </div>
   ) : (
     <div className="">
-      <h2 className="text-center font-bold text-xl">
+      {/* 1️⃣ Title */}
+      <motion.h2
+        className="text-center font-bold text-xl"
+        variants={fadeUp}
+        initial="hidden"
+        animate="visible"
+        transition={{ duration: 0.5 }}
+      >
         {selectedQuestion?.heading}
-      </h2>
-      <div className="text-center space-y-4 border border-[#4ED0AA] rounded-2xl p-4 mt-4 bg-[#e0ffef]">
-        <div className="text-[12px] text-[#034230] px-2 py-1 font-semibold  rounded-2xl w-fit mx-auto bg-[#4ED0AA]">
+      </motion.h2>
+
+      {/* 2️⃣ Decision Outcome */}
+      <motion.div
+        className="text-center space-y-4 border border-[#4ED0AA] rounded-2xl p-4 mt-4 bg-[#e0ffef]"
+        variants={fadeUp}
+        initial="hidden"
+        animate="visible"
+        transition={{ delay: 0.2, duration: 0.6 }}
+      >
+        <div className="text-[12px] text-[#034230] px-2 py-1 font-semibold rounded-2xl w-fit mx-auto bg-[#4ED0AA]">
           DECISION OUTCOME
         </div>
         <div
@@ -78,29 +99,50 @@ const FeedBackFormLevelTwo = () => {
             __html: selectedQuestion?.decisionOutCome || "",
           }}
         />
-      </div>
-      <div className="text-center space-y-4 border border-[#5E35F1] rounded-2xl p-4 mt-4 bg-[#EFEAFF]">
-        <div className="text-[12px] text-[#034230] px-2 py-1 font-semibold rounded-2xl w-fit mx-auto bg-[#C2B1FF]">
-          FOOD FOR THOUGHT
-        </div>
-        <div
-          className="text-[14px]"
-          dangerouslySetInnerHTML={{
-            __html: selectedQuestion?.foodForThought || "",
-          }}
-        />
-      </div>
-      <Button
-        onClick={handleClick}
-        disabled={saveStepsLoading}
-        className="mt-4"
-      >
-        {saveStepsLoading ? (
-          <LoadingSpinner size={20} color="green"> </LoadingSpinner>
-        ) : (
-          "Continue"
-        )}
-      </Button>
+      </motion.div>
+
+      {/* 3️⃣ Food For Thought — delayed */}
+      {showFood && (
+        <motion.div
+          className="text-center space-y-4 border border-[#5E35F1] rounded-2xl p-4 mt-4 bg-[#EFEAFF]"
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          transition={{ duration: 0.6 }}
+        >
+          <div className="text-[12px] text-[#034230] px-2 py-1 font-semibold rounded-2xl w-fit mx-auto bg-[#C2B1FF]">
+            FOOD FOR THOUGHT
+          </div>
+          <div
+            className="text-[14px]"
+            dangerouslySetInnerHTML={{
+              __html: selectedQuestion?.foodForThought || "",
+            }}
+          />
+        </motion.div>
+      )}
+
+      {/* 4️⃣ CTA Button — shown only after Food For Thought */}
+      {showFood && (
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.4, duration: 0.6 }}
+        >
+          <Button
+            onClick={handleClick}
+            disabled={saveStepsLoading}
+            className="mt-4"
+          >
+            {saveStepsLoading ? (
+              <LoadingSpinner size={20} color="green" />
+            ) : (
+              "Continue"
+            )}
+          </Button>
+        </motion.div>
+      )}
     </div>
   );
 };
