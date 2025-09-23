@@ -2,7 +2,12 @@ import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import OptionButton from "./OptionButton";
 
-const Dropdown = ({ label = "Select Your School", options = [], onSelect, selectedValue }) => {
+const Dropdown = ({
+  label = "Select Your School",
+  options = [],
+  onSelect,
+  selectedValue,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(null);
   const dropdownRef = useRef(null);
@@ -10,14 +15,15 @@ const Dropdown = ({ label = "Select Your School", options = [], onSelect, select
   // close dropdown if clicked outside
 
   useEffect(() => {
-  if (selectedValue) {
-    const selectedOption = options.find(option => option.value === selectedValue);
-    if (selectedOption) {
-      setSelected(selectedOption);
+    if (selectedValue) {
+      const selectedOption = options.find(
+        (option) => option.value === selectedValue
+      );
+      if (selectedOption) {
+        setSelected(selectedOption);
+      }
     }
-  }
-}, [selectedValue, options]);
-
+  }, [selectedValue, options]);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -39,7 +45,7 @@ const Dropdown = ({ label = "Select Your School", options = [], onSelect, select
     <div className="relative w-full max-w-md" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="w-full border border-[#7B56FF] rounded-xl px-4 py-2 flex justify-center text-[#7B56FF]   relative"
+        className="w-full border border-[#7B56FF] bg-[#EFEAFF] rounded-xl px-4 py-3 flex justify-center text-[#7B56FF]   relative"
       >
         {selected ? selected.label : label}
 

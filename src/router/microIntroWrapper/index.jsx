@@ -6,10 +6,8 @@ import LoadingSpinner from "../../components/common/LoadingSpinner";
 export default function MicroExperienceLayout() {
   const steps = ["grade", "figure-out"];
   const [screen, setScreen] = useState(1);
-   const [videoUrl, setVideoUrl] = useState(null);
-   const [videoLoading, setVideoLoading] = useState(true);
-
-
+  const [videoUrl, setVideoUrl] = useState(null);
+  const [videoLoading, setVideoLoading] = useState(true);
 
   return (
     <div className="w-full min-h-screen bg-[url(/assets/badge-bg.svg)] bg-no-repeat bg-center bg-cover relative overflow-hidden">
@@ -25,39 +23,37 @@ export default function MicroExperienceLayout() {
           ))}
         </div>
       </div>
-     {videoLoading ? (
-  <div className="flex items-center justify-center min-h-[400px]">
-        <LoadingSpinner size={64} variant = "ring" color="purple" />
-      </div>
-) : videoUrl ? (
-  videoUrl.endsWith('.gif') ? (
-    <img
-      key={videoUrl}
-      src={videoUrl}
-      alt="Visual content"
-      className="absolute inset-0 w-[600px] h-full object-cover z-10 mx-auto"
-    />
-  ) : (
-    <video
-      key={videoUrl}
-      autoPlay
-      loop
-      muted
-      playsInline
-      className="absolute inset-0 w-[600px] h-full object-cover z-10 mx-auto"
-    >
-      <source src={videoUrl} type="video/mp4" />
-      <source src={videoUrl} type="video/webm" />
-      Your browser does not support the video tag.
-    </video>
-  )
-) : (
-  <div className="absolute inset-0 w-[600px] h-full flex items-center justify-center z-10 mx-auto">
-    <div className="bg-black/50 text-white px-4 py-2 rounded-lg">
-      
-    </div>
-  </div>
-)}
+      {videoLoading ? (
+        <div className="flex items-center justify-center min-h-[400px]">
+          <LoadingSpinner size={64} variant="ring" color="purple" />
+        </div>
+      ) : videoUrl ? (
+        videoUrl.endsWith(".gif") ? (
+          <img
+            key={videoUrl}
+            src={videoUrl}
+            alt="Visual content"
+            className="absolute inset-0 w-[600px] h-full object-cover z-10 mx-auto"
+          />
+        ) : (
+          <video
+            key={videoUrl}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-[600px] h-full object-cover z-10 mx-auto"
+          >
+            <source src={videoUrl} type="video/mp4" />
+            <source src={videoUrl} type="video/webm" />
+            Your browser does not support the video tag.
+          </video>
+        )
+      ) : (
+        <div className="absolute inset-0 w-[600px] h-full flex items-center justify-center z-10 mx-auto">
+          <div className="bg-black/50 text-white px-4 py-2 rounded-lg"></div>
+        </div>
+      )}
       {/* <video
         autoPlay
         loop
@@ -73,7 +69,7 @@ export default function MicroExperienceLayout() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
-        className="fixed bottom-0 left-0 right-0 mx-auto w-full max-w-[360px] flex flex-col gap-5 p-6 min-h-[150px] z-20 border"
+        className="fixed bottom-0 left-0 right-0 mx-auto w-full max-w-[425px] flex flex-col gap-5 p-6 min-h-[150px] z-20 border"
         style={{
           borderRadius: "24px 24px 0 0",
           background:
@@ -82,7 +78,15 @@ export default function MicroExperienceLayout() {
         }}
       >
         <Suspense fallback={<p>Loading form...</p>}>
-          <Outlet context={{ screen, setScreen ,setVideoUrl, videoLoading, setVideoLoading}} />
+          <Outlet
+            context={{
+              screen,
+              setScreen,
+              setVideoUrl,
+              videoLoading,
+              setVideoLoading,
+            }}
+          />
         </Suspense>
       </motion.div>
     </div>

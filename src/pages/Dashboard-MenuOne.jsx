@@ -32,8 +32,8 @@ const DashBoardMenuOne = () => {
         <button
           // onClick={() => setActiveTab("micro")}
           onClick={() => handleTabClick("micro")}
-          className={`relative text-lg font-medium transition-colors cursor-pointer ${
-            activeTab === "micro" ? "text-teal-400" : "text-purple-300"
+          className={`relative  font-semibold  transition-colors cursor-pointer ${
+            activeTab === "micro" ? "text-[#24A57F]" : "text-purple-300"
           }`}
         >
           Micro-experiences
@@ -45,8 +45,8 @@ const DashBoardMenuOne = () => {
         <button
           // onClick={() => setActiveTab("saved")}
           onClick={() => handleTabClick("saved")}
-          className={`relative text-lg font-medium transition-colors cursor-pointer ${
-            activeTab === "saved" ? "text-teal-400" : "text-purple-300"
+          className={`relative  font-semibold transition-colors cursor-pointer ${
+            activeTab === "saved" ? "text-[#24A57F]" : "text-purple-300"
           }`}
         >
           Saved Careers

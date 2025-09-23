@@ -13,29 +13,27 @@ import { saveAnswer } from "../../redux/actions/microexperience-action";
 import LoadingSpinner from "../common/LoadingSpinner";
 import { saveSteps } from "../../redux/actions/microexperience-action";
 export default function LevelCarousel({ data, careerLevelId, levelNumber }) {
- 
   const { saveAnswerLoading, saveStepsLoading } = useSelector(
     (state) => state.microexperience
   );
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
- 
-  
+
   //  const careerId = data?.careerId.
 
   const [api, setApi] = useState(null);
   const [selected, setSelected] = useState(null);
-  const [currentSlide, setCurrentSlide] = useState(0)
-const levelPercent = levelNumber === "1" ? "5" : levelNumber === "2" ? "30" : "0";
-useEffect(() => {
-  if (!api) return;
-  
-  api.on("select", () => {
-    setCurrentSlide(api.selectedScrollSnap()); 
-    
-  });
-}, [api]);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const levelPercent =
+    levelNumber === "1" ? "5" : levelNumber === "2" ? "30" : "0";
+  useEffect(() => {
+    if (!api) return;
+
+    api.on("select", () => {
+      setCurrentSlide(api.selectedScrollSnap());
+    });
+  }, [api]);
   // const handleSaveAnswer = async () => {
   //   if (selected === null) return;
 
@@ -107,7 +105,7 @@ useEffect(() => {
                   api?.scrollTo(i);
                   setSelected(i);
                 }}
-                className={`bg-white rounded-2xl my-4 shadow-md overflow-hidden p-4 flex flex-col items-center text-center transition-all duration-300 cursor-pointer ${
+                className={`bg-white rounded-2xl my-4 shadow-md overflow-hidden p-4 flex flex-col items-center text-center transition-all duration-300 h-[440px] cursor-pointer ${
                   selected === i
                     ? "opacity-100 scale-100"
                     : "opacity-50 scale-95"
@@ -117,21 +115,23 @@ useEffect(() => {
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="rounded-xl object-cover w-full h-full"
+                    className="rounded-[16px] object-cover w-full h-full"
                   />
                 </div>
-                <h3 className="text-sm font-bold text-purple-800 mt-4">
+                <h3 className="text-sm font-bold text-[#4823CF] mt-4">
                   {item.title}
                 </h3>
-                <p className="text-[12px] font-bold text-purple-600 uppercase mt-1">
+                <p className="text-[10px] font-bold text-[#7B56FF] uppercase mt-1">
                   {item.Keyword}
                 </p>
-                <p className="text-sm text-gray-600 mt-2">{item.description}</p>
+                <p className="text-sm text-[#042119] mt-2">
+                  {item.description}
+                </p>
 
                 {/* ✅ Circle: outlined by default, filled only when clicked */}
                 <div
-                  className={`w-6 h-6 rounded-full flex items-center justify-center mt-4 border-2 border-green-600 ${
-                    selected === i ? "bg-green-600" : "bg-transparent"
+                  className={`w-6 h-6 rounded-full flex items-center justify-center mt-7 border-2 border-[#0F8864] ${
+                    selected === i ? "bg-[#0F8864]" : "bg-transparent"
                   }`}
                 />
               </div>
@@ -161,11 +161,11 @@ useEffect(() => {
           />
         ))}
       </div>
-       
+
       <Button
         onClick={handleSaveAnswer}
         disabled={selected === null || saveAnswerLoading || saveStepsLoading}
-        className="mt-2 max-w-[320px] flex justify-center mx-auto mb-2"
+        className="mt-4 max-w-[320px] flex justify-center mx-auto mb-2"
       >
         {saveAnswerLoading || saveStepsLoading ? (
           <LoadingSpinner size={20} color="green"></LoadingSpinner>

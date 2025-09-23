@@ -15,11 +15,11 @@ export default function CareerSurvey() {
   const [searchParams] = useSearchParams();
   const careerLevelId = searchParams.get("careerLevelId");
   const levelNumber = searchParams.get("levelNumber");
-  
 
   const [islike, setIsLike] = useState("");
   const navigate = useNavigate();
-const levelPercent = levelNumber === "1" ? "20" : levelNumber === "2" ? "50" : "0";
+  const levelPercent =
+    levelNumber === "1" ? "20" : levelNumber === "2" ? "50" : "0";
   // const handleChoice = (choice) => {
 
   //   const payload = {
@@ -80,7 +80,7 @@ const levelPercent = levelNumber === "1" ? "20" : levelNumber === "2" ? "50" : "
       <LoadingSpinner size={64} />
     </div>
   ) : (
-    <div className="relative min-h-screen flex flex-col items-center  text-center overflow-hidden">
+    <div className="relative h-[100dvh] flex flex-col items-center  text-center overflow-hidden">
       <div className="absolute inset-0 bg-[url('/how-feel-bg.svg')] bg-cover bg-center h-screen w-full">
         <div className="fixed inset-0">
           {[...Array(30)].map((_, i) => (
@@ -119,20 +119,20 @@ const levelPercent = levelNumber === "1" ? "20" : levelNumber === "2" ? "50" : "
 
       <div className="relative z-10 flex flex-col items-center gap-8 px-6 mt-24">
         <h2 className="text-white text-xl font-semibold leading-snug">
-          How do you feel about learning <br /> more about this career?
+          Did this experience help you <br /> understand this career better?
         </h2>
 
         <div className="flex flex-col gap-6">
           <div onClick={() => handleChoice("like")}>
-            <img src="/love-it.svg" alt="love it" />
+            <img src="/survey-yes.svg" alt="love it" />
           </div>
           <div onClick={() => handleChoice("dislike")}>
-            <img src="/not-like.svg" alt="not like" />
+            <img src="/survey-no.svg" alt="not like" />
           </div>
         </div>
       </div>
 
-      <div className="absolute -bottom-10 left-0">
+      <div className="absolute -bottom-0 left-0">
         <img src="/survey-robot.png" alt="Astronaut" className="mx-auto " />
       </div>
     </div>

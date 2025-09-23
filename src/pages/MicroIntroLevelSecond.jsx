@@ -79,7 +79,7 @@ const MicroIntroLevelSecond = () => {
         <div className="text-center grid gap-4 relative">
           {/* <h3 className="font-bold text-[20px]">{Data?.titleOne}</h3> */}
 
-          <p className="text-center text-white absolute -top-[125px] left-0 w-full p-4 leading-[140%] bg-black/40 backdrop-blur-md rounded-2xl">
+          <p className="text-center text-white absolute -top-[130px] left-0 w-full p-4 leading-[140%] bg-black/40 backdrop-blur-md rounded-2xl">
             {Data?.titleOne}
           </p>
 
@@ -89,7 +89,11 @@ const MicroIntroLevelSecond = () => {
           ></div>
 
           <Button onClick={handleNext} disabled={saveStepsLoading}>
-            {saveStepsLoading ? <LoadingSpinner size={20} color="green"/> : Data?.buttonName}
+            {saveStepsLoading ? (
+              <LoadingSpinner size={20} color="green" />
+            ) : (
+              Data?.buttonName
+            )}
           </Button>
         </div>
       </motion.div>

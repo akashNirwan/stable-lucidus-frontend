@@ -3,6 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 export default function OnBoardWrapper() {
   const steps = [
+    "school",
     "grade",
     "figure-out",
     "subject",

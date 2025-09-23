@@ -19,7 +19,8 @@ const FeedBackFormTwo = ({ microexperience, careerLevelId, levelNumber }) => {
 
   const stepsData = microexperience[0]?.studentinsights || [];
   const [selected, setSelected] = useState([]);
-  const levelPercent = levelNumber === "1" ? "5" : levelNumber === "2" ? "30" : "0";
+  const levelPercent =
+    levelNumber === "1" ? "5" : levelNumber === "2" ? "30" : "0";
   const handleSelect = (insight) => {
     setSelected((prev) => {
       const isSelected = prev.some((item) => item._id === insight._id);
@@ -30,32 +31,6 @@ const FeedBackFormTwo = ({ microexperience, careerLevelId, levelNumber }) => {
       }
     });
   };
-
-  // const handleContinue = () => {
-  //   if (selected.length > 0) {
-  //     const payload = {
-  //       selectedInsight: selected.map(insight => ({
-  //         studentInsightId: insight._id,
-  //         icon: insight.icon,
-  //         studentInsight: insight.studentInsight
-  //       })),
-  //       careerLevelId: microexperience[0]?.studentinsights[0]?.careerLevelId
-  //     };
-  //      const saveStepsPayload = {
-  //       careerLevelId : careerLevelId,
-  //       route: "/student-choice",
-  //       levelPercent : "42",
-  //      }
-  //      dispatch(saveSteps(saveStepsPayload))
-  //     dispatch(saveInsight(payload)).then((res) => {
-
-  //       if (res.payload && res.payload.code === 201 || res.payload.statusCode === 200) {
-  //               navigate(`/survey-page?careerLevelId=${microexperience[0]?.studentinsights[0]?.careerLevelId}`);
-  //       }
-  //       });
-  //   }
-
-  // };
 
   const handleContinue = async () => {
     if (selected.length > 0) {
@@ -94,12 +69,14 @@ const FeedBackFormTwo = ({ microexperience, careerLevelId, levelNumber }) => {
   };
   return (
     <div className="text-center space-y-4 ">
-      <h2 className="font-bold text-[20px]">What guided your choice most?</h2>
+      <h2 className="font-bold text-[20px]">
+        What influenced your recommendation most?
+      </h2>
       <p className="text-[#066146]">
         Select <span className="font-bold">all</span> that apply.
       </p>
       <h3 className="text-lg font-bold text-[#24A57F]">I focused on:</h3>
-      <div className="h-[260px] overflow-y-auto flex flex-col gap-2">
+      <div className=" h-[310px] overflow-y-auto flex flex-col gap-2">
         {stepsData.map((insight, ind) => (
           <TwoLineOption
             key={insight._id}
@@ -112,13 +89,15 @@ const FeedBackFormTwo = ({ microexperience, careerLevelId, levelNumber }) => {
         ))}
       </div>
       <Button
-        disabled={saveInsightLoading || saveStepsLoading}
+        disabled={
+          saveInsightLoading || saveStepsLoading || selected.length === 0
+        }
         onClick={handleContinue}
       >
         {saveInsightLoading || saveStepsLoading ? (
           <LoadingSpinner size={20} color="green"></LoadingSpinner>
         ) : (
-          "Continue"
+          "Next"
         )}
       </Button>
     </div>

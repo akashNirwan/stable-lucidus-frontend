@@ -33,10 +33,8 @@ const DragAndDrop = () => {
   } = useSelector((state) => state.microexperience);
 
   const DragandDropData = microexperience?.[0]?.recommendations;
- 
 
   const questions = microexperience?.[0]?.questions;
-
 
   useEffect(() => {
     if (DragandDropData && DragandDropData.length > 0) {
@@ -99,18 +97,16 @@ const DragAndDrop = () => {
   //     }
   //   });
   // };
-const handleLogo = () =>{
-  navigate('/dashboard/microexperience')
-}
-
-
-
-const handleMakeRecommendation = async () => {
-  const payload = {
-    careerLevelId,
-    route: `/drag-and-drop?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}&questionLeveltwoId=${selectedId}`,
-    levelPercent: "30",
+  const handleLogo = () => {
+    navigate("/dashboard/microexperience");
   };
+
+  const handleMakeRecommendation = async () => {
+    const payload = {
+      careerLevelId,
+      route: `/drag-and-drop?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}&questionLeveltwoId=${selectedId}`,
+      levelPercent: "30",
+    };
 
     const saveAnswerPayload = {
       careerLevelId,
@@ -144,6 +140,17 @@ const handleMakeRecommendation = async () => {
       );
     }
   };
+
+  const handleCross = () => {
+    navigate("/dashboard");
+  };
+
+  const handleBack = () => {
+    navigate(
+      `/micro-intro-Level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`
+    );
+  };
+
   return loading ? (
     <div className="flex items-center justify-center min-h-[400px]">
       <LoadingSpinner size={64} />
@@ -159,8 +166,9 @@ const handleMakeRecommendation = async () => {
             height={24}
           />
         </div>
+        {/* cross */}
         <div className="flex items-center justify-between mb-6">
-          <button className="text-white">
+          <button onClick={handleBack} className="text-white">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -188,7 +196,7 @@ const handleMakeRecommendation = async () => {
             LEVEL 2
           </span>
           <button>
-            <X className="text-white" />
+            <X onClick={handleCross} className="text-white" />
           </button>
         </div>
 
@@ -231,7 +239,7 @@ const handleMakeRecommendation = async () => {
                               className={`${
                                 selectedId === item.id
                                   ? "text-purple-600"
-                                  : "text-green-600"
+                                  : "text-[#0F8864]"
                               }`}
                             />
                           </div>
@@ -297,7 +305,12 @@ const handleMakeRecommendation = async () => {
           </button>
           <button
             className="w-full bg-[#0F8864] text-white py-3 rounded-xl font-semibold disabled:opacity-60"
-            disabled={!selectedId || saveStepsLoading || saveAnswerLoading || saveOrderLoading}
+            disabled={
+              !selectedId ||
+              saveStepsLoading ||
+              saveAnswerLoading ||
+              saveOrderLoading
+            }
             onClick={handleMakeRecommendation}
           >
             {saveStepsLoading || saveAnswerLoading || saveOrderLoading ? (

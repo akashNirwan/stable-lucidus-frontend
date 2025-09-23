@@ -11,11 +11,9 @@ const MicroIntoScreenTwo = ({ data, levelNumber }) => {
   const dispatch = useDispatch();
   const { saveStepsLoading } = useSelector((state) => state.microexperience);
   const careerLevelId = data?._id;
- 
+
   const levelPercent =
     levelNumber === "1 " ? "5" : levelNumber === "2" ? "30" : "0";
-
- 
 
   const handleNext = () => {
     const payload = {
@@ -37,14 +35,15 @@ const MicroIntoScreenTwo = ({ data, levelNumber }) => {
   };
 
   return (
-    <div className="text-center grid gap-4 relative">
-      {/* <h3 className="font-bold text-[20px] text-center">
-        {data?.questionintros?.[1]?.titleOne}
-      </h3> */}
-      <p className="text-center text-white absolute -top-[135px] left-0 leading-[140%] bg-[#13093466] opacity-40 p-3">
-        {data?.questionintros?.[1]?.titleOne}
-      </p>
-
+    <div className="text-center flex flex-col gap-4 relative min-w-[325px] mx-auto">
+      {data?.questionintros?.[1]?.titleOne && (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: data?.questionintros?.[1]?.titleOne,
+          }}
+          className="text-center text-white w-[325px] mx-auto absolute -top-[140px] left-1/2 -translate-x-1/2 leading-[140%] bg-[#13093466] opacity-80 p-3 rounded-lg"
+        ></div>
+      )}
       <div
         className="text-center "
         dangerouslySetInnerHTML={{
