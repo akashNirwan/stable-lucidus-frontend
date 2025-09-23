@@ -42,9 +42,9 @@ const RoadMap = () => {
         </div>
 
         <div className="bg-[#261172] rounded-2xl px-4 flex items-center gap-4 w-fit">
-          <div className="w-[100px] h-[80px]">
+          <div className="w-[100px] h-[70px]">
             <img
-              src="/road-map-robot.svg"
+              src="/Astronaut1-cropped.svg"
               alt="astronaut"
               className="w-full h-full "
             />
