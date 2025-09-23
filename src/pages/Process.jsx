@@ -16,7 +16,7 @@ const Process = () => {
   return (
     <div className="text-white">
       <ProcessCrousel />
-      <h2>Lessons</h2>
+      <h2 className="text-[#C2B1FF]">Lessons</h2>
 
       <div className=" overflow-hidden overflow-y-auto grid mt-2 gap-4">
         {steps.map((step, i) => (
@@ -33,7 +33,7 @@ const Process = () => {
                   </div>
                 </div>
               ) : (
-                <div className="h-6 w-6 rounded-full bg-purple-600"></div>
+                <div className="h-6 w-6 rounded-full bg-[#5E35F1]"></div>
               )}
               <span className="text-white font-medium ">{step.title}</span>
             </div>

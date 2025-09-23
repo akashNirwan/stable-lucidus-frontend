@@ -9,8 +9,6 @@ const Purpose = () => {
     (state) => state.encyclopedia
   );
 
-
-
   const steps =
     predictionandPurpose?.[0]?.encyclolessons.map((item, index) => ({
       title: item.lesson[0]?.lesson,
@@ -21,7 +19,6 @@ const Purpose = () => {
   return (
     <div className="text-white">
       <PurposeCrousel />
-      
 
       <div className=" overflow-hidden overflow-y-auto grid mt-2 gap-4">
         {steps.map((step, i) => (
@@ -38,7 +35,7 @@ const Purpose = () => {
                   </div>
                 </div>
               ) : (
-                <div className="h-6 w-6 rounded-full bg-purple-600"></div>
+                <div className="h-6 w-6 rounded-full bg-[#5E35F1]"></div>
               )}
               <span className="text-white font-medium ">{step.title}</span>
             </div>

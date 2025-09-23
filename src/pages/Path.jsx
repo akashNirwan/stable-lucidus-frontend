@@ -8,15 +8,15 @@ import LoadingSpinner from "../components/common/LoadingSpinner";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
-
 const Path = () => {
-
-  const [searchParams] = useSearchParams()
-  const dispatch = useDispatch()
-  const { loading, recommendedCareer } = useSelector((state) => state.encyclopedia);
+  const [searchParams] = useSearchParams();
+  const dispatch = useDispatch();
+  const { loading, recommendedCareer } = useSelector(
+    (state) => state.encyclopedia
+  );
 
   console.log(recommendedCareer, "recommended career ");
-  
+
   const steps = [
     {
       title: "Where Do They Work?",
@@ -24,27 +24,19 @@ const Path = () => {
     },
   ];
 
+  useEffect(() => {
+    const careerId = searchParams.get("careerId");
+    if (careerId) {
+      dispatch(fetchRecommendedCareer(careerId));
+    }
+  }, [dispatch, searchParams]);
 
-   useEffect(() => {
-      const careerId = searchParams.get("careerId");
-      if (careerId) {
-        dispatch(fetchRecommendedCareer(careerId));
-      }
-    }, [dispatch, searchParams]);
-
-
-
-
- 
-  return  loading ? (
-
-     <div className="flex items-center justify-center min-h-[400px]">
-          <LoadingSpinner size={64} />
-        </div>
-    
+  return loading ? (
+    <div className="flex items-center justify-center min-h-[400px]">
+      <LoadingSpinner size={64} />
+    </div>
   ) : (
-
-<div className="text-white grid gap-2">
+    <div className="text-white grid gap-2">
       <PathCrousel />
       <h2>Lesson</h2>
 
@@ -63,7 +55,7 @@ const Path = () => {
                   </div>
                 </div>
               ) : (
-                <div className="h-6 w-6 rounded-full bg-purple-600"></div>
+                <div className="h-6 w-6 rounded-full bg-[#5E35F1]"></div>
               )}
               <span className="text-white font-medium ">{step.title}</span>
             </div>
@@ -89,16 +81,12 @@ const Path = () => {
       <div className="flex gap-2 overflow-x-auto w-full max-w-[355px]">
         {recommendedCareer?.map((career) => (
           <div key={career._id} className="shrink-0">
-            <RelatedCareerCard 
-              career={career.career} 
-              image={career.image}
-            />
+            <RelatedCareerCard career={career.career} image={career.image} />
           </div>
         ))}
       </div>
     </div>
-
-  )
+  );
 };
 
 export default Path;
