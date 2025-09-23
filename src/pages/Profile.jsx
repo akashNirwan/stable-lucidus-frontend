@@ -105,22 +105,38 @@ const Profile = () => {
         <div className="flex flex-col gap-6 px-6 mt-6">
           {/* Name */}
           <div>
-            <label className="block text-sm mb-1">Name</label>
+            <label className="block text-sm mb-1 text-center">Name</label>
             <div className="flex items-center bg-[#E8DFFB] rounded-lg px-4 py-3 text-black justify-between">
               <span className="text-[#5C2DB3] font-medium">{UserName}</span>
-              <Pencil
+              {/* <Pencil
                 className="w-4 h-4 text-[#5C2DB3] cursor-pointer"
+               
+              /> */}
+              <div
                 onClick={() => {
                   setTempName(name);
                   setIsEditing(true);
                 }}
-              />
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 18 18"
+                  fill="none"
+                >
+                  <path
+                    d="M0 14.4601V17.5001C0 17.7801 0.22 18.0001 0.5 18.0001H3.54C3.67 18.0001 3.8 17.9501 3.89 17.8501L14.81 6.94006L11.06 3.19006L0.15 14.1001C0.0500001 14.2001 0 14.3201 0 14.4601ZM17.71 4.04006C18.1 3.65006 18.1 3.02006 17.71 2.63006L15.37 0.290059C14.98 -0.0999414 14.35 -0.0999414 13.96 0.290059L12.13 2.12006L15.88 5.87006L17.71 4.04006Z"
+                    fill="#0F8864"
+                  />
+                </svg>
+              </div>
             </div>
           </div>
 
           {/* Email */}
           <div>
-            <label className="block text-sm mb-1">Email</label>
+            <label className="block text-sm mb-1 text-center">Email</label>
             <div className="bg-[#E8DFFB] rounded-lg px-4 py-3 text-[#5C2DB3]">
               {UserEmail}
             </div>
@@ -163,7 +179,7 @@ const Profile = () => {
                 value={tempName}
                 onChange={(e) => setTempName(e.target.value)}
                 placeholder="Type here..."
-                className="w-full border bg-[#EFEAFF] border-purple-400 rounded-full px-4 py-3 text-center text-purple-600 mb-6 outline-none"
+                className="w-full border bg-[#EFEAFF] border-[#7B56FF] rounded-full px-4 py-3 text-center text-[#7B56FF] mb-6 outline-none placeholder:text-[#7B56FF]"
               />
 
               {/* Save Button */}
