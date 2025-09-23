@@ -5,7 +5,7 @@ import LoadingSpinner from "../components/common/LoadingSpinner";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { saveSteps } from "../redux/actions/microexperience-action";
-
+import { motion } from "framer-motion";
 export default function CareerSurvey() {
   const dispatch = useDispatch();
   const { saveFeedbackLoading, saveStepsLoading } = useSelector(
@@ -132,8 +132,20 @@ export default function CareerSurvey() {
         </div>
       </div>
 
-      <div className="absolute -bottom-0 left-0">
-        <img src="/survey-robot.png" alt="Astronaut" className="mx-auto " />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2">
+        <motion.img
+          src="/Astronaut6.svg"
+          alt="Astronaut"
+          className="mx-auto"
+          animate={{
+            y: [0, -20, 0], // float up and down
+          }}
+          transition={{
+            duration: 4, // smooth timing
+            repeat: Infinity, // loop forever
+            ease: "easeInOut",
+          }}
+        />
       </div>
     </div>
   );
