@@ -106,7 +106,7 @@ export default function LevelCarousel({ data, careerLevelId, levelNumber }) {
                   setSelected(i);
                 }}
                 className={`bg-white rounded-2xl my-4 shadow-md overflow-hidden p-4 flex flex-col items-center text-center transition-all duration-300 h-[440px] cursor-pointer ${
-                  selected === i
+                  currentSlide === i
                     ? "opacity-100 scale-100"
                     : "opacity-50 scale-95"
                 }`}

@@ -40,9 +40,9 @@ const LoadingBar = () => {
         Loading Potential Careers...
       </h2>
 
-      <div className="w-full bg-blue-900 rounded-full overflow-hidden border border-blue-400">
+      <div className="w-full bg-[#261172] rounded-full overflow-hidden  ">
         <div
-          className="bg-green-500 h-3 rounded-full transition-all duration-500"
+          className="bg-[#24A57F] h-4 rounded-full transition-all duration-500"
           style={{ width: `${progress}%` }}
         />
       </div>
