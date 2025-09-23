@@ -18,7 +18,7 @@ export default function Welcome() {
   const username = localStorage.getItem("username") || "";
 
   const featureItems = [
-    { icon: "🔍", text: "Explore Careers.", anim: { rotate: [0, 10, -10, 0] } },
+    { icon: "🔍", text: "Explore Careers.", anim: { scale: [0.8, 1.2, 1] } },
     {
       icon: "🙌",
       text: "Try Micro-experiences.",
@@ -33,7 +33,7 @@ export default function Welcome() {
           University, & Beyond.
         </>
       ),
-      anim: { rotate: [-90, 0] },
+      anim: { scale: [0.8, 1.2, 1] },
     },
   ];
 
@@ -196,8 +196,8 @@ export default function Welcome() {
   ) : (
     <div className="min-h-screen relative overflow-hidden">
       {/* Robot */}
-      <div className="absolute right-0 z-20 top-[35%]">
-        <img src="/welcome-rob3.png" alt="" />
+      <div className="absolute -right-18 z-20 top-[35%] -rotate-[40deg] w-[200px] h-[200px]">
+        <img src="/Astronaut2.svg" alt="" />
       </div>
 
       {/* Background */}
@@ -287,10 +287,14 @@ export default function Welcome() {
         <AnimatePresence>
           <MotionLink
             to="/questions/school"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, scale: 1 }}
+            animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
+            transition={{
+              delay: 1.6 + featureItems.length * 0.6 + 0.3,
+              duration: 0.6,
+              ease: "easeOut",
+            }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="w-[312px] h-12 flex items-center justify-center gap-[10px] rounded-[12px] bg-[#0F8864] shadow-[0_0_4px_0_rgba(0,0,0,0.25)] text-white font-semibold  transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] px-14 py-3 cursor-pointer"
@@ -298,8 +302,6 @@ export default function Welcome() {
             <button onClick={handleClick}>Get Started</button>
           </MotionLink>
         </AnimatePresence>
-
-        {/* <InteractiveAstronaut /> */}
       </div>
     </div>
   );

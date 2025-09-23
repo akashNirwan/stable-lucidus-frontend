@@ -268,6 +268,14 @@ const router = createBrowserRouter([
     element: <DragAndDrop />,
   },
   {
+    path: "/welcome",
+    element: (
+      <ProtectedRoute>
+        <Welcome />
+      </ProtectedRoute>
+    ),
+  },
+  {
     path: "*",
     element: (
       <ProtectedRoute>
