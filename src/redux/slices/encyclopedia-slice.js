@@ -15,7 +15,7 @@ const initialState = {
    roadmapLoading : false,
    lesson : null,
    lessonLoading : false,
-   recommendedCareer: false,
+   recommendedCareer: [],
 
 
 };

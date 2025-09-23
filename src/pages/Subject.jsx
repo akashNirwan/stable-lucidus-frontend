@@ -13,6 +13,7 @@ import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { getSelectedIds, getPreSelectedItems } from "../utils/getSelectedIds";
 import StatusTitle from "../components/common/SubTitle";
+import toast from "react-hot-toast";
 const Subject = ({ setStep, stepsData }) => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -75,6 +76,17 @@ const Subject = ({ setStep, stepsData }) => {
       } else if (prev.length < 5) {
         return [...prev, subject];
       } else {
+        toast("You can select only 5 subjects!", {
+        icon: '⚠️',
+        style: {
+          borderRadius: '8px',
+          background: '#FEF3C7',
+          color: '#92400E',
+          border: '1px solid #F59E0B',
+        },
+        className: 'font-medium',
+        duration: 3000, 
+      });
         return prev;
       }
     });

@@ -1,7 +1,18 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
-
+import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 const RelatedCareerCard = ({career, image}) => {
+
+
+  const [searchParams] = useSearchParams();
+  const careerId = searchParams.get("careerId")
+  const navigate = useNavigate()
+
+  const handleNavigate = ()=>{
+    navigate(`/micro-intro?careerId=${careerId}`)
+  }
+
   return (
     <div className="flex items-center justify-between bg-white rounded-2xl shadow-md p-3 w-full max-w-[360px] mx-auto">
       <div className="flex items-start gap-3">
@@ -23,7 +34,7 @@ const RelatedCareerCard = ({career, image}) => {
       </div>
 
       <button className="h-8 w-8 flex items-center justify-center rounded-full bg-green-500 text-white shadow">
-        <ArrowRight size={16} />
+        <ArrowRight onClick={handleNavigate} size={16} />
       </button>
     </div>
   );

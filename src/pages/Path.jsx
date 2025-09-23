@@ -15,6 +15,8 @@ const Path = () => {
   const dispatch = useDispatch()
   const { loading, recommendedCareer } = useSelector((state) => state.encyclopedia);
 
+  console.log(recommendedCareer, "recommended career ");
+  
   const steps = [
     {
       title: "Where Do They Work?",
@@ -85,7 +87,7 @@ const Path = () => {
       </div>
       <h2>Related Career Path</h2>
       <div className="flex gap-2 overflow-x-auto w-full max-w-[355px]">
-        {recommendedCareer.map((career) => (
+        {recommendedCareer?.map((career) => (
           <div key={career._id} className="shrink-0">
             <RelatedCareerCard 
               career={career.career} 

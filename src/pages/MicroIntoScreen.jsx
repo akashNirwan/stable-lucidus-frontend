@@ -38,9 +38,11 @@ const MicroIntoScreen = () => {
   }, [dispatch, careerId, careerLevelId, levelNumber]);
 
   const experienceData = microexperience?.[0];
-    const levelString = microexperience?.[0]?.careerLevel;  // e.g., "Level - 2"
-const levelNumber2 = levelString ? levelString.split('-')[1].trim() : null;  // "2"
-    
+    const levelString = microexperience?.[0]?.careerLevel;  
+// const levelNumber2 = levelString ? levelString.split('-')[1].trim() : null;  // "2"
+    const levelNumber2 = levelString 
+  ? parseInt(levelString.match(/\d+/)?.[0], 10) 
+  : null;
       
     
 

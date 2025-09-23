@@ -2,7 +2,15 @@ import React from "react";
 
 const OptionButton = ({ option, selected, optionId, onSelect, img = "" }) => {
   
-  const isSelected = optionId ? selected === optionId : selected === option;
+  // const isSelected = optionId ? selected === optionId : selected === option;
+
+
+  const isSelected = Array.isArray(selected) 
+    ? selected.includes(optionId || option)
+    : (optionId ? selected === optionId : selected === option);
+
+
+    
   return (
     <button
       onClick={() => onSelect(optionId || option)}
