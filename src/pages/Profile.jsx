@@ -105,7 +105,9 @@ const Profile = () => {
         <div className="flex flex-col gap-6 px-6 mt-6">
           {/* Name */}
           <div>
-            <label className="block text-sm mb-1 text-center">Name</label>
+            <label className="block  mb-1 text-center text-[#C2B1FF]">
+              Name
+            </label>
             <div className="flex items-center bg-[#E8DFFB] rounded-lg px-4 py-3 text-black justify-between">
               <span className="text-[#5C2DB3] font-medium">{UserName}</span>
               {/* <Pencil
@@ -136,7 +138,9 @@ const Profile = () => {
 
           {/* Email */}
           <div>
-            <label className="block text-sm mb-1 text-center">Email</label>
+            <label className="block  mb-1 text-center text-[#C2B1FF]">
+              Email
+            </label>
             <div className="bg-[#E8DFFB] rounded-lg px-4 py-3 text-[#5C2DB3]">
               {UserEmail}
             </div>
