@@ -14,13 +14,10 @@ const EncycloPediaWrapper = () => {
 
   const careername = predictionandPurpose?.[0]?.career?.[0]?.career;
 
-
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const careerId = searchParams.get("careerId");
-
-
 
   const getActiveTabFromRoute = () => {
     const path = location.pathname;
@@ -86,9 +83,8 @@ const EncycloPediaWrapper = () => {
         <div className="text-white font-semibold text-xl">{careername}</div>
       </div>
 
-      <div className="flex gap-6 text-white w-full overflow-x-auto p-4 max-w-[600px] mx-auto md:justify-center">
+      <div className="flex gap-6 text-white w-full text-lg overflow-x-auto p-4 max-w-[600px] mx-auto md:justify-center">
         {tabs.map((tab) => {
-       
           return (
             <button
               key={tab}
@@ -96,7 +92,7 @@ const EncycloPediaWrapper = () => {
               className={`px-4 py-2 rounded-full transition cursor-pointer ${
                 activeTab === tab
                   ? "bg-[#24A57F] text-white font-semibold"
-                  : "bg-transparent text-gray-300 hover:text-white"
+                  : "bg-transparent text-[#C2B1FF] hover:text-white"
               }`}
             >
               {tab}
