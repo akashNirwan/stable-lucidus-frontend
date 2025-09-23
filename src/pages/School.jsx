@@ -46,20 +46,23 @@ const School = ({ setStep, stepsData }) => {
 //   }
 // }, [isDataLoaded, schools, StudentData, selectedSchool]);
 
-// Second useEffect mein ye add karo debugging ke liye
 useEffect(() => {
-  if (isDataLoaded && schools && StudentData && !selectedSchool) {
-    console.log("StudentData:", StudentData); // ye check karo
-    const { selectedSchoolIds } = getSelectedIds(StudentData);
-    console.log("selectedSchoolIds:", selectedSchoolIds); // ye check karo
-    const preSelectedSchools = getPreSelectedItems(schools, selectedSchoolIds);
-    console.log("preSelectedSchools:", preSelectedSchools); // ye check karo
-
-    if (preSelectedSchools.length > 0) {
-      setSelectedSchool(preSelectedSchools[0]);
+  // Only run pre-selection if user has previously selected schools
+  if (schools && StudentData?.data?.[0]?.selected_school?.length > 0) {
+    try {
+      const selectedSchoolData = StudentData.data[0].selected_school[0];
+      const schoolId = selectedSchoolData.schoolId || selectedSchoolData._id;
+      
+      const preSelected = schools.find(school => school._id === schoolId);
+      if (preSelected && !selectedSchool) {
+        setSelectedSchool(preSelected);
+      }
+    } catch (error) {
+      console.error("Pre-selection error:", error);
     }
   }
-}, [isDataLoaded, schools, StudentData, selectedSchool]);
+}, [schools, StudentData]);
+
 
 const handleNext = () => {
   if (!selectedSchool) return;

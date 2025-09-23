@@ -2,15 +2,47 @@ import PathCrousel from "../components/encylopedia/PathCrousel";
 import CareerCard from "../components/dashboard/microExperienceCard";
 import RelatedCareerCard from "../components/dashboard/RelatedCareerCard";
 import { ArrowRight, Lock } from "lucide-react";
+import { fetchRecommendedCareer } from "../redux/actions/encyclopedia-action";
+import { useSearchParams } from "react-router-dom";
+import LoadingSpinner from "../components/common/LoadingSpinner";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+
+
 const Path = () => {
+
+  const [searchParams] = useSearchParams()
+  const dispatch = useDispatch()
+  const { loading, recommendedCareer } = useSelector((state) => state.encyclopedia);
+
   const steps = [
     {
       title: "Where Do They Work?",
       status: "locked",
     },
   ];
-  return (
-    <div className="text-white grid gap-2">
+
+
+   useEffect(() => {
+      const careerId = searchParams.get("careerId");
+      if (careerId) {
+        dispatch(fetchRecommendedCareer(careerId));
+      }
+    }, [dispatch, searchParams]);
+
+
+
+
+ 
+  return  loading ? (
+
+     <div className="flex items-center justify-center min-h-[400px]">
+          <LoadingSpinner size={64} />
+        </div>
+    
+  ) : (
+
+<div className="text-white grid gap-2">
       <PathCrousel />
       <h2>Lesson</h2>
 
@@ -53,21 +85,18 @@ const Path = () => {
       </div>
       <h2>Related Career Path</h2>
       <div className="flex gap-2 overflow-x-auto w-full max-w-[355px]">
-        <div className="shrink-0">
-          <RelatedCareerCard />
-        </div>
-        <div className="shrink-0">
-          <RelatedCareerCard />
-        </div>
-        <div className="shrink-0">
-          <RelatedCareerCard />
-        </div>
-        <div className="shrink-0">
-          <RelatedCareerCard />
-        </div>
+        {recommendedCareer.map((career) => (
+          <div key={career._id} className="shrink-0">
+            <RelatedCareerCard 
+              career={career.career} 
+              image={career.image}
+            />
+          </div>
+        ))}
       </div>
     </div>
-  );
+
+  )
 };
 
 export default Path;

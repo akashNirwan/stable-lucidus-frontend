@@ -69,7 +69,7 @@ const CareerCard = ({
           <img
             src={image}
             alt={title}
-            className="w-full h-[52%] absolute top-0 left-0"
+            className="w-full h-[52%] absolute top-0 left-0 object-cover"
           />
         ) : (
           "1"

@@ -1,15 +1,15 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
 
-const RelatedCareerCard = () => {
+const RelatedCareerCard = ({career, image}) => {
   return (
     <div className="flex items-center justify-between bg-white rounded-2xl shadow-md p-3 w-full max-w-[360px] mx-auto">
       <div className="flex items-start gap-3">
         <div className="h-12 w-12 rounded-xl bg-gradient-to-tr from-green-400 to-teal-500 flex items-center justify-center">
           <div className="w-[80px] h-[80px]">
             <img
-              src="/assets/sdg/image-1.svg"
-              alt="img"
+              src={image}
+              alt={career}
               className="w-full h-full"
             />
           </div>
@@ -17,7 +17,7 @@ const RelatedCareerCard = () => {
 
         <div>
           <h3 className="text-sm font-semibold text-gray-800">
-            Microfinance Specialist
+            {career}
           </h3>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchPredictionandPurpose , fetchPath, fetchProcess, fetchRoadmap, fetchLesson} from "../actions/encyclopedia-action";
+import { fetchPredictionandPurpose , fetchPath, fetchProcess, fetchRoadmap, fetchLesson, fetchRecommendedCareer} from "../actions/encyclopedia-action";
 
 
 const initialState = {
@@ -15,6 +15,8 @@ const initialState = {
    roadmapLoading : false,
    lesson : null,
    lessonLoading : false,
+   recommendedCareer: false,
+
 
 };
 
@@ -114,6 +116,26 @@ const encyclopediaSlice = createSlice({
       .addCase(fetchLesson.rejected, (state, action) => {
         state.lessonLoading = false;
         state.error = action.payload?.message || "Failed to fetch Lesson";
+      });
+
+
+
+      //fetchrecommendedCareer
+       builder
+      .addCase(fetchRecommendedCareer.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchRecommendedCareer.fulfilled, (state, action) => {
+        state.loading = false;
+        state.recommendedCareer = action.payload.data;
+      
+        
+        
+      })
+      .addCase(fetchRecommendedCareer.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload?.message || "Failed to fetch reommended careers";
       });
 
       
