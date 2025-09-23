@@ -138,3 +138,29 @@ export const fetchLesson = createAsyncThunk(
     }
   }
 );
+
+
+
+export const fetchRecommendedCareer = createAsyncThunk(
+  "encyclopedia/fetchRecommendedCareer",
+  async (relatedCareerId ,{ rejectWithValue }) => {
+    const token = getTokenFromLocalStorage()
+
+    try {
+      const response = await client.get(
+        `user/related-career?relatedCareerId=${relatedCareerId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      
+
+      return response.data;
+    } catch (error) {
+      
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);
