@@ -7,8 +7,9 @@ import { useSearchParams } from "react-router-dom";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-
+import { useNavigate } from "react-router-dom";
 const Path = () => {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
   const { loading, recommendedCareer } = useSelector(
