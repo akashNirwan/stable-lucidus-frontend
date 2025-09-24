@@ -89,7 +89,7 @@ const Profile = () => {
           </svg>
         </Link>
       </div>
-      <div className="min-h-screen  bg-[#0B0132] text-white flex flex-col relative max-w-[400px] mx-auto">
+      <div className=" bg-[#0B0132] text-white flex flex-col relative max-w-[400px] mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-3">
           <button onClick={handleBack}>
@@ -148,7 +148,7 @@ const Profile = () => {
         </div>
 
         {/* Buttons */}
-        <div className="mt-auto flex flex-col gap-4 px-6 pb-8">
+        <div className=" fixed bottom-2 w-full flex flex-col gap-4 px-6 pb-8">
           <button
             onClick={handleRetake}
             className="border border-[#0F8864] cursor-pointer text-[#0F8864] py-3 rounded-lg font-medium"
