@@ -148,7 +148,7 @@ const Profile = () => {
         </div>
 
         {/* Buttons */}
-        <div className=" fixed bottom-2 w-full flex flex-col gap-4 px-6 pb-8">
+        <div className=" fixed bottom-2 w-full md:max-w-[400px] md:mx-auto flex flex-col gap-4 px-6 pb-8">
           <button
             onClick={handleRetake}
             className="border border-[#0F8864] cursor-pointer text-[#0F8864] py-3 rounded-lg font-medium"
