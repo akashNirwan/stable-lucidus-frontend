@@ -44,7 +44,7 @@ const CareerCard = ({ data }) => {
       !currentRoute.includes("level-two")
     ) {
       // Special case for levelNumber = 2
-      if (levelNumber === "2" && userBadgeCount === 0) {
+      if (levelNumber === "2" && completedCareerLevelCount === 0) {
         // If levelNumber is 2 and userBadgeCount is 0, go to badge-earned
         return `/badge-earned?careerLevelId=${careerLevelId}&questionId=${questionId}&completedCareerLevelCount=${completedCareerLevelCount}&levelNumber=${levelNumber}`;
       } else if (levelNumber === "2") {
@@ -98,8 +98,6 @@ const CareerCard = ({ data }) => {
   return (
     <div className="flex items-center justify-between bg-white rounded-3xl shadow-md p-3 w-[312px] max-w-[345px] mx-auto gap-6">
       <div className="flex items-start gap-2">
-       
-
         <div className="w-20 h-20 rounded-[16px] overflow-hidden ">
           {careerImage && careerImage !== "tests.com" ? (
             <img
