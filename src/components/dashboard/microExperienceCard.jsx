@@ -44,12 +44,12 @@ const CareerCard = ({ data }) => {
       !currentRoute.includes("level-two")
     ) {
       // Special case for levelNumber = 2
-      if (levelNumber === "2" && userBadgeCount === 0) {
+      if (levelNumber === "2" && completedCareerLevelCount === 0) {
         // If levelNumber is 2 and userBadgeCount is 0, go to badge-earned
         return `/badge-earned?careerLevelId=${careerLevelId}&questionId=${questionId}&completedCareerLevelCount=${completedCareerLevelCount}&levelNumber=${levelNumber}`;
       } else if (levelNumber === "2") {
-        // If levelNumber is 2 and userBadgeCount is anything else, go to micro-intro-Level-two
-        return `/micro-intro-Level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`;
+        // If levelNumber is 2 and userBadgeCount is anything else, go to micro-intro-level-two
+        return `/micro-intro-level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`;
       } else {
         // Default case - go to student-choice
         return `/student-choice?questionId=${questionId}&careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`;
@@ -58,7 +58,7 @@ const CareerCard = ({ data }) => {
 
     // Case 4: /badge-earned -> /student-choice
     else if (currentRoute.startsWith("/badge-earned")) {
-      return `/micro-intro-Level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`;
+      return `/micro-intro-level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`;
     }
 
     // Case 5: /student-choice -> /survey-page
@@ -68,8 +68,8 @@ const CareerCard = ({ data }) => {
       return `/survey-page?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}`;
     }
 
-    // Case 6: /micro-intro-Level-two -> /drag-and-drop
-    else if (currentRoute.startsWith("/micro-intro-Level-two")) {
+    // Case 6: /micro-intro-level-two -> /drag-and-drop
+    else if (currentRoute.startsWith("/micro-intro-level-two")) {
       return `/drag-and-drop?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`;
     }
 

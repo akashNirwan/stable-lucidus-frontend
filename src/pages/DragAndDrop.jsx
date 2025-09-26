@@ -147,7 +147,7 @@ const DragAndDrop = () => {
 
   const handleBack = () => {
     navigate(
-      `/micro-intro-Level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`
+      `/micro-intro-level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`
     );
   };
 

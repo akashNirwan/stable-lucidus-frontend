@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchSchools , updateSchool, fetchGrades, updateGrades, fetchSkills, updateSkills, fetchSubjects, updateSubjects, fetchSdg, updateSdg, updateAmbition, fetchStudentData, updateFigureout} from "../actions/student-onboarding-action";
+import { fetchSchools , updateSchool, fetchGrades, updateGrades, fetchSkills, updateSkills, fetchSubjects, updateSubjects, fetchSdg, updateSdg, updateAmbition, fetchStudentData, updateFigureout, updateWelcome} from "../actions/student-onboarding-action";
 
 const initialState = {
   schools : null,
@@ -23,6 +23,8 @@ const initialState = {
   StudentData:null,
   StudentDataLoading:false,
   updateFigureout: null,
+  Welcome : null, 
+  welocomeLoading : false,
 };
 
 const studentSlice = createSlice({
@@ -227,6 +229,21 @@ const studentSlice = createSlice({
       .addCase(updateFigureout.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "Failed to update Sdgs";
+      });
+
+
+      builder
+      .addCase(updateWelcome.pending, (state) => {
+        state.welocomeLoading = true;
+        state.error = null;
+      })
+      .addCase(updateWelcome.fulfilled, (state, action) => {
+        state.welocomeLoading = false;
+        state.updateFigureout = action.payload;  
+      })
+      .addCase(updateWelcome.rejected, (state, action) => {
+        state.welocomeLoading = false;
+        state.error = action.payload || "Failed to Load welcome page";
       });
     
   },
