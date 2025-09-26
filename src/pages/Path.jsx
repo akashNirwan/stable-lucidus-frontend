@@ -7,16 +7,17 @@ import { useSearchParams } from "react-router-dom";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-
-
+import { useNavigate } from "react-router-dom";
 const Path = () => {
-
-  const [searchParams] = useSearchParams()
-  const dispatch = useDispatch()
-  const { loading, recommendedCareer } = useSelector((state) => state.encyclopedia);
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const dispatch = useDispatch();
+  const { loading, recommendedCareer } = useSelector(
+    (state) => state.encyclopedia
+  );
 
   console.log(recommendedCareer, "recommended career ");
-  
+
   const steps = [
     {
       title: "Where Do They Work?",
@@ -24,29 +25,21 @@ const Path = () => {
     },
   ];
 
+  useEffect(() => {
+    const careerId = searchParams.get("careerId");
+    if (careerId) {
+      dispatch(fetchRecommendedCareer(careerId));
+    }
+  }, [dispatch, searchParams]);
 
-   useEffect(() => {
-      const careerId = searchParams.get("careerId");
-      if (careerId) {
-        dispatch(fetchRecommendedCareer(careerId));
-      }
-    }, [dispatch, searchParams]);
-
-
-
-
- 
-  return  loading ? (
-
-     <div className="flex items-center justify-center min-h-[400px]">
-          <LoadingSpinner size={64} />
-        </div>
-    
+  return loading ? (
+    <div className="flex items-center justify-center min-h-[400px]">
+      <LoadingSpinner size={64} />
+    </div>
   ) : (
-
-<div className="text-white grid gap-2">
+    <div className="text-white grid gap-2">
       <PathCrousel />
-      <h2>Lesson</h2>
+      <h2 className="text-[#C2B1FF]">Lessons</h2>
 
       <div className=" overflow-hidden overflow-y-auto grid mt-2 gap-4">
         {steps.map((step, i) => (
@@ -63,14 +56,14 @@ const Path = () => {
                   </div>
                 </div>
               ) : (
-                <div className="h-6 w-6 rounded-full bg-purple-600"></div>
+                <div className="h-6 w-6 rounded-full bg-[#5E35F1]"></div>
               )}
               <span className="text-white font-medium ">{step.title}</span>
             </div>
 
             {step.status === "active" ? (
               <div
-                className="h-8 w-8 flex items-center justify-center rounded-full shrink-0 bg-[#0F8864] text-white"
+                className="h-10 w-10 flex items-center justify-center rounded-full shrink-0 bg-[#0F8864] text-white"
                 onClick={() =>
                   navigate(`/encylopedia-todo?LessonId=${step.lessonId}`)
                 }
@@ -78,27 +71,34 @@ const Path = () => {
                 <ArrowRight size={18} />
               </div>
             ) : (
-              <div className="h-8 w-8 flex items-center justify-center rounded-full shrink-0 bg-purple-800 text-white">
-                <Lock size={18} />
+              <div className="h-10 w-10 flex items-center justify-center rounded-full shrink-0 bg-[#261172] text-white">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="21"
+                  viewBox="0 0 16 21"
+                  fill="none"
+                >
+                  <path
+                    d="M14 7H13V5C13 2.24 10.76 0 8 0C5.24 0 3 2.24 3 5V7H2C0.9 7 0 7.9 0 9V19C0 20.1 0.9 21 2 21H14C15.1 21 16 20.1 16 19V9C16 7.9 15.1 7 14 7ZM8 16C6.9 16 6 15.1 6 14C6 12.9 6.9 12 8 12C9.1 12 10 12.9 10 14C10 15.1 9.1 16 8 16ZM5 7V5C5 3.34 6.34 2 8 2C9.66 2 11 3.34 11 5V7H5Z"
+                    fill="#5E35F1"
+                  />
+                </svg>
               </div>
             )}
           </div>
         ))}
       </div>
-      <h2>Related Career Path</h2>
-      <div className="flex gap-2 overflow-x-auto w-full max-w-[355px]">
+      <h2 className="text-[#C2B1FF]">Related Career Path</h2>
+      <div className="flex gap-2 overflow-x-auto w-full">
         {recommendedCareer?.map((career) => (
           <div key={career._id} className="shrink-0">
-            <RelatedCareerCard 
-              career={career.career} 
-              image={career.image}
-            />
+            <RelatedCareerCard career={career.career} image={career.image} />
           </div>
         ))}
       </div>
     </div>
-
-  )
+  );
 };
 
 export default Path;

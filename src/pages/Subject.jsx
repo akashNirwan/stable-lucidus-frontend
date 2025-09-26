@@ -77,21 +77,21 @@ const Subject = ({ setStep, stepsData }) => {
         return [...prev, subject];
       } else {
         toast("You can select only 5 subjects!", {
-        icon: '⚠️',
-        style: {
-          borderRadius: '8px',
-          background: '#FEF3C7',
-          color: '#92400E',
-          border: '1px solid #F59E0B',
-        },
-        className: 'font-medium',
-        duration: 3000, 
-      });
+          icon: "⚠️",
+          style: {
+            borderRadius: "8px",
+            background: "#FEF3C7",
+            color: "#92400E",
+            border: "1px solid #F59E0B",
+          },
+          className: "font-medium",
+          duration: 3000,
+        });
         return prev;
       }
     });
   };
-//commit
+  //commit
   const handleNext = () => {
     if (selectedSubjects.length === 0) return;
 
@@ -126,7 +126,6 @@ const Subject = ({ setStep, stepsData }) => {
         You don’t have to be great at it. Select up to five
       </h3>
 
-      <StatusTitle text={"I enjoy:"} />
       <div className="h-[32vh] lg:h-[40vh] overflow-y-auto flex flex-col gap-2.5">
         {Array.isArray(subjects) &&
           subjects.map((subject) => (

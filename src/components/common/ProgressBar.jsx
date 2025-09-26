@@ -85,13 +85,13 @@ const RoadmapData = ({ roadmapData }) => {
           <div key={section._id || index} className="relative  ">
             {/* vertical line */}
             {index !== transformedData.length - 1 && (
-              <div className="absolute left-7 top-0 h-full w-0.5 bg-purple-700"></div>
+              <div className="absolute left-7 top-0 h-full w-0.5 bg-[#261172] "></div>
             )}
 
             <div className="relative pb-6">
               <div className="flex items-center gap-2 relative z-10">
                 <div className="flex items-center w-full bg-[#261172] p-2 rounded-full">
-                  <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[#7B56FF] relative">
+                  <div className="w-6 h-6 flex items-center justify-center rounded-full p-5 bg-[#7B56FF] relative">
                     {section.icon}
                   </div>
 

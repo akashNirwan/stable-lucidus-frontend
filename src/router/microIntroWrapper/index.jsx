@@ -42,7 +42,7 @@ export default function MicroExperienceLayout() {
             loop
             muted
             playsInline
-            className="absolute inset-0 max-w-[425px] h-[650px] object-cover z-10 mx-auto"
+            className="absolute inset-0 max-w-[425px] h-full object-cover z-10 mx-auto"
           >
             <source src={videoUrl} type="video/mp4" />
             <source src={videoUrl} type="video/webm" />
@@ -54,16 +54,6 @@ export default function MicroExperienceLayout() {
           <div className="bg-black/50 text-white px-4 py-2 rounded-lg"></div>
         </div>
       )}
-      {/* <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-[600px] h-full object-cover z-10 mx-auto"
-      >
-        <source src="/assets/Video.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video> */}
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}

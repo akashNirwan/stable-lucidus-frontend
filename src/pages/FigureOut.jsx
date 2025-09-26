@@ -40,13 +40,13 @@ const FigureOut = ({ setStep, stepsData }) => {
   //   }
   // }, [isDataLoaded, StudentData, selected]);
 
-   useEffect(() => {
+  useEffect(() => {
     if (isDataLoaded && StudentData && selected.length === 0) {
       const { figureout } = getSelectedIds(StudentData);
       if (figureout) {
         // If figureout contains comma-separated values, split them
-        const selectedOptions = figureout.includes(',') 
-          ? figureout.split(',').map(item => item.trim())
+        const selectedOptions = figureout.includes(",")
+          ? figureout.split(",").map((item) => item.trim())
           : [figureout];
         setSelected(selectedOptions);
       }
@@ -56,19 +56,18 @@ const FigureOut = ({ setStep, stepsData }) => {
   // const handleSelect = (option) => {
   //   setSelected(option);
   // };
-const handleSelect = (option) => {
-    setSelected(prevSelected => {
+  const handleSelect = (option) => {
+    setSelected((prevSelected) => {
       // Check if option is already selected
       if (prevSelected.includes(option)) {
         // Remove if already selected
-        return prevSelected.filter(item => item !== option);
+        return prevSelected.filter((item) => item !== option);
       } else {
         // Add if not selected
         return [...prevSelected, option];
       }
     });
   };
-
 
   const handleBack = () => {
     navigate("/questions/grade");
@@ -96,7 +95,7 @@ const handleSelect = (option) => {
 
     // Convert array to comma-separated string
     const payload = {
-      figureout: selected.join(', '),
+      figureout: selected.join(", "),
     };
 
     dispatch(updateFigureout(payload)).then((res) => {
@@ -121,7 +120,6 @@ const handleSelect = (option) => {
       <h3 className="text-[#066146] text-[14px]">
         Select <span className="font-bold">all</span> that apply.
       </h3>
-      <StatusTitle text={"I want to:"} />
 
       <div className="h-[32vh] lg:h-[40vh] overflow-y-auto flex flex-col gap-2.5">
         {stepsData.options.map((option, ind) => (
@@ -144,7 +142,7 @@ const handleSelect = (option) => {
 
         <Button
           type="button"
-          isActive={selected.length> 0}
+          isActive={selected.length > 0}
           disabled={loading}
           onClick={handleClick}
         >
