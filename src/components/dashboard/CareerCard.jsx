@@ -126,9 +126,16 @@ const CareerCard = ({
         </div>
 
         {/* Description */}
-        <p className="text-[#042119] text-sm  h-[150px] line-clamp-4">
+
+        <div
+        dangerouslySetInnerHTML={{
+          __html: description,
+        }}
+        className="text-[#042119] text-sm  h-[150px] line-clamp-4"
+      ></div>
+        {/* <p className="text-[#042119] text-sm  h-[150px] line-clamp-4">
           {description}
-        </p>
+        </p> */}
 
         {/* Buttons */}
         <div className="flex justify-between mt-4">

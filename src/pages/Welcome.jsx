@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchStudentData } from "../redux/actions/student-onboarding-action";
+import { fetchStudentData , updateWelcome} from "../redux/actions/student-onboarding-action";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -9,7 +9,7 @@ export default function Welcome() {
   const MotionLink = motion(Link);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { StudentDataLoading, StudentData } = useSelector(
+  const { StudentDataLoading, StudentData , welocomeLoading} = useSelector(
     (state) => state.student
   );
 
@@ -55,138 +55,271 @@ export default function Welcome() {
     return () => clearInterval(interval);
   }, [username]);
 
+  // useEffect(() => {
+  //   if (StudentData && StudentData.data && StudentData.data.length > 0) {
+  //     const student = StudentData.data[0];
+  //     const gradeId = student.selected_grades?.[0]?.gradeId;
+
+  //     const hasGrades =
+  //       student.selected_grades && student.selected_grades.length > 0;
+  //     const hasFigureout =
+  //       "figureout" in student &&
+  //       student.figureout &&
+  //       student.figureout.trim() !== "";
+  //     const hasSkills =
+  //       student.selected_skill && student.selected_skill.length > 0;
+  //     const hasSubjects =
+  //       student.selected_subject && student.selected_subject.length > 0;
+  //     const hasSdg = student.selected_sdg && student.selected_sdg.length > 0;
+  //     const hasSchool =
+  //       student.selected_school && student.selected_school.length > 0;
+  //     const hasAmbitions =
+  //       "ambitions" in student &&
+  //       student.ambitions &&
+  //       student.ambitions.trim() !== "";
+  //       const hasWelcome = "welcome" in student && student.welcome  && student.welcome.trim() !== "";
+
+
+  //       console.log('🎯 BOOLEAN CONDITIONS:');
+  //   console.log('hasSchool:', hasSchool);
+  //   console.log('hasGrades:', hasGrades);
+  //   console.log('hasFigureout:', hasFigureout);
+  //   console.log('hasSkills:', hasSkills);
+  //   console.log('hasSubjects:', hasSubjects);
+  //   console.log('hasSdg:', hasSdg);
+  //   console.log('hasAmbitions:', hasAmbitions);
+
+  //     if (
+        
+  //       !hasSchool &&
+  //       !hasGrades &&
+  //       !hasFigureout &&
+  //       !hasSkills &&
+  //       !hasSubjects &&
+  //       !hasSdg &&
+  //       !hasAmbitions
+  //     ) {
+  //       return;
+  //     }
+
+  //     // Case 7: All complete - go to dashboard
+  //     if (
+  //       hasSchool &&
+  //       hasGrades &&
+  //       hasFigureout &&
+  //       hasSkills &&
+  //       hasSubjects &&
+  //       hasSdg &&
+  //       hasAmbitions
+  //     ) {
+  //       navigate("/dashboard/explorecareers");
+  //       return;
+  //     }
+
+  //     if (
+  //        hasWelcome &&
+  //       !hasSchool &&
+  //       !hasGrades &&
+  //       !hasFigureout &&
+  //       !hasSkills &&
+  //       !hasSubjects &&
+  //       !hasSdg &&
+  //       !hasAmbitions
+  //     ) {
+  //       navigate(`/questions/school`);
+  //       return;
+  //     }
+  //     if (
+  //       hasSchool &&
+  //       !hasGrades &&
+  //       !hasFigureout &&
+  //       !hasSkills &&
+  //       !hasSubjects &&
+  //       !hasSdg &&
+  //       !hasAmbitions
+  //     ) {
+  //       navigate(`/questions/grade`);
+  //       return;
+  //     }
+  //     // Case 2: Only grades
+  //     if (
+  //       hasSchool &&
+  //       hasGrades &&
+  //       !hasFigureout &&
+  //       !hasSkills &&
+  //       !hasSubjects &&
+  //       !hasSdg &&
+  //       !hasAmbitions
+  //     ) {
+  //       navigate(`/questions/figure-out?gradeId=${gradeId}`);
+  //       return;
+  //     }
+
+  //     // Case 3: Grades + figureout
+  //     if (
+  //       hasSchool &&
+  //       hasGrades &&
+  //       hasFigureout &&
+  //       !hasSubjects &&
+  //       !hasSkills &&
+  //       !hasSdg &&
+  //       !hasAmbitions
+  //     ) {
+  //       navigate(`/questions/subject?gradeId=${gradeId}`);
+  //       return;
+  //     }
+
+  //     // Case 4: Grades + figureout + subjects
+  //     if (
+  //       hasSchool &&
+  //       hasGrades &&
+  //       hasFigureout &&
+  //       hasSubjects &&
+  //       !hasSkills &&
+  //       !hasSdg &&
+  //       !hasAmbitions
+  //     ) {
+  //       navigate(`/questions/skills?gradeId=${gradeId}`);
+  //       return;
+  //     }
+
+  //     // Case 5: Grades + figureout + subjects + skills
+  //     if (
+  //       hasSchool &&
+  //       hasGrades &&
+  //       hasFigureout &&
+  //       hasSubjects &&
+  //       hasSkills &&
+  //       !hasSdg &&
+  //       !hasAmbitions
+  //     ) {
+  //       navigate(`/questions/skills-care?gradeId=${gradeId}`);
+  //       return;
+  //     }
+
+  //     // Case 6: All except ambitions
+  //     if (
+  //       hasSchool &&
+  //       hasGrades &&
+  //       hasFigureout &&
+  //       hasSubjects &&
+  //       hasSkills &&
+  //       hasSdg &&
+  //       !hasAmbitions
+  //     )
+  //       return navigate(`/questions/ambition?gradeId=${gradeId}`);
+  //   }
+  // }, [StudentData, navigate]);
+
+
   useEffect(() => {
-    if (StudentData && StudentData.data && StudentData.data.length > 0) {
-      const student = StudentData.data[0];
-      const gradeId = student.selected_grades?.[0]?.gradeId;
+  if (!StudentData?.data?.length || StudentDataLoading) return;
 
-      const hasGrades =
-        student.selected_grades && student.selected_grades.length > 0;
-      const hasFigureout =
-        "figureout" in student &&
-        student.figureout &&
-        student.figureout.trim() !== "";
-      const hasSkills =
-        student.selected_skill && student.selected_skill.length > 0;
-      const hasSubjects =
-        student.selected_subject && student.selected_subject.length > 0;
-      const hasSdg = student.selected_sdg && student.selected_sdg.length > 0;
-      const hasSchool =
-        student.selected_school && student.selected_school.length > 0;
-      const hasAmbitions =
-        "ambitions" in student &&
-        student.ambitions &&
-        student.ambitions.trim() !== "";
+  const student = StudentData.data[0];
+  const gradeId = student.selected_grades?.[0]?.gradeId;
 
-      if (
-        !hasSchool &&
-        !hasGrades &&
-        !hasFigureout &&
-        !hasSkills &&
-        !hasSubjects &&
-        !hasSdg &&
-        !hasAmbitions
-      ) {
-        return;
-      }
+  // Define what's completed (more readable)
+  const completed = {
+    welcome: Boolean(student.welcome?.trim()),
+    school: student.selected_school?.length > 0,
+    grades: student.selected_grades?.length > 0,
+    figureout: Boolean(student.figureout?.trim()),
+    subjects: student.selected_subject?.length > 0,
+    skills: student.selected_skill?.length > 0,
+    sdg: student.selected_sdg?.length > 0,
+    ambitions: Boolean(student.ambitions?.trim())
+  };
 
-      // Case 7: All complete - go to dashboard
-      if (
-        hasSchool &&
-        hasGrades &&
-        hasFigureout &&
-        hasSkills &&
-        hasSubjects &&
-        hasSdg &&
-        hasAmbitions
-      ) {
-        navigate("/dashboard/explorecareers");
-        return;
-      }
-      if (
-        hasSchool &&
-        !hasGrades &&
-        !hasFigureout &&
-        !hasSkills &&
-        !hasSubjects &&
-        !hasSdg &&
-        !hasAmbitions
-      ) {
-        navigate(`/questions/grade`);
-        return;
-      }
-      // Case 2: Only grades
-      if (
-        hasSchool &&
-        hasGrades &&
-        !hasFigureout &&
-        !hasSkills &&
-        !hasSubjects &&
-        !hasSdg &&
-        !hasAmbitions
-      ) {
-        navigate(`/questions/figure-out?gradeId=${gradeId}`);
-        return;
-      }
+  console.log('✅ Completion Status:', completed);
 
-      // Case 3: Grades + figureout
-      if (
-        hasSchool &&
-        hasGrades &&
-        hasFigureout &&
-        !hasSubjects &&
-        !hasSkills &&
-        !hasSdg &&
-        !hasAmbitions
-      ) {
-        navigate(`/questions/subject?gradeId=${gradeId}`);
-        return;
-      }
+  // Sequential routing logic - RETURN EARLY on first match
+  
+  // Fresh user - stay on welcome
+  if (!Object.values(completed).some(v => v)) {
+    console.log('Fresh user - staying on welcome');
+    return;
+  }
 
-      // Case 4: Grades + figureout + subjects
-      if (
-        hasSchool &&
-        hasGrades &&
-        hasFigureout &&
-        hasSubjects &&
-        !hasSkills &&
-        !hasSdg &&
-        !hasAmbitions
-      ) {
-        navigate(`/questions/skills?gradeId=${gradeId}`);
-        return;
-      }
+  // All complete - go to dashboard
+  if (completed.school && completed.grades && completed.figureout && 
+      completed.subjects && completed.skills && completed.sdg && completed.ambitions) {
+    console.log('All complete → dashboard');
+    navigate('/dashboard/explorecareers');
+    return;
+  }
 
-      // Case 5: Grades + figureout + subjects + skills
-      if (
-        hasSchool &&
-        hasGrades &&
-        hasFigureout &&
-        hasSubjects &&
-        hasSkills &&
-        !hasSdg &&
-        !hasAmbitions
-      ) {
-        navigate(`/questions/skills-care?gradeId=${gradeId}`);
-        return;
-      }
+  // SDG done, ambitions pending
+  if (completed.school && completed.grades && completed.figureout && 
+      completed.subjects && completed.skills && completed.sdg && !completed.ambitions) {
+    console.log('SDG done → ambitions');
+    navigate(`/questions/ambition?gradeId=${gradeId}`);
+    return;
+  }
 
-      // Case 6: All except ambitions
-      if (
-        hasSchool &&
-        hasGrades &&
-        hasFigureout &&
-        hasSubjects &&
-        hasSkills &&
-        hasSdg &&
-        !hasAmbitions
-      )
-        return navigate(`/questions/ambition?gradeId=${gradeId}`);
-    }
-  }, [StudentData, navigate]);
+  // Skills done, SDG pending
+  if (completed.school && completed.grades && completed.figureout && 
+      completed.subjects && completed.skills && !completed.sdg) {
+    console.log('Skills done → SDG');
+    navigate(`/questions/skills-care?gradeId=${gradeId}`);
+    return;
+  }
+
+  // Subjects done, skills pending
+  if (completed.school && completed.grades && completed.figureout && 
+      completed.subjects && !completed.skills) {
+    console.log('Subjects done → skills');
+    navigate(`/questions/skills?gradeId=${gradeId}`);
+    return;
+  }
+
+  // Figureout done, subjects pending
+  if (completed.school && completed.grades && completed.figureout && !completed.subjects) {
+    console.log('Figureout done → subjects');
+    navigate(`/questions/subject?gradeId=${gradeId}`);
+    return;
+  }
+
+  // Grades done, figureout pending
+  if (completed.school && completed.grades && !completed.figureout) {
+    console.log('Grades done → figureout');
+    navigate(`/questions/figure-out?gradeId=${gradeId}`);
+    return;
+  }
+
+  // School done, grades pending
+  if (completed.school && !completed.grades) {
+    console.log('School done → grades');
+    navigate(`/questions/grade`);
+    return;
+  }
+
+  // Welcome done, school pending
+  if (completed.welcome && !completed.school) {
+    console.log('Welcome done → school');
+    navigate('/questions/school');
+    return;
+  }
+
+}, [StudentData, StudentDataLoading, navigate]);
+
+
 
   const handleClick = () => {
-    localStorage.removeItem("username");
+    const payload = {
+      welcome: "true",
+    };
+
+    dispatch(updateWelcome(payload)).then((res) => {
+          if (
+            res.payload &&
+            (res.payload.code === 200 || res.payload.code === 201)
+          ) {
+            navigate(`/questions/school`);
+            localStorage.removeItem("username");
+          }
+        });
+    
+    
   };
 
   return StudentDataLoading ? (
@@ -286,9 +419,9 @@ export default function Welcome() {
         {/* CTA */}
         <AnimatePresence>
           <MotionLink
-            to="/questions/school"
-            initial={{ opacity: 0, scale: 1 }}
-            animate={{ opacity: 1, scale: 1 }}
+            // to="/questions/school"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{
               delay: 1.6 + featureItems.length * 0.6 + 0.3,
@@ -298,8 +431,11 @@ export default function Welcome() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="w-[312px] h-12 flex items-center justify-center gap-[10px] rounded-[12px] bg-[#0F8864] shadow-[0_0_4px_0_rgba(0,0,0,0.25)] text-white font-semibold  transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] px-14 py-3 cursor-pointer"
+
           >
-            <button onClick={handleClick}>Get Started</button>
+            <button onClick={handleClick}>
+              { welocomeLoading ? <LoadingSpinner size={20} color="green"></LoadingSpinner> : "Get Started"}
+              </button>
           </MotionLink>
         </AnimatePresence>
       </div>

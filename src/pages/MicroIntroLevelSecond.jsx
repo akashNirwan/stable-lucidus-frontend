@@ -32,7 +32,7 @@ const MicroIntroLevelSecond = () => {
   const handleNext = () => {
     const payload = {
       careerLevelId,
-      route: `/micro-intro-Level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`,
+      route: `/micro-intro-level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`,
       levelPercent: "30",
     };
 

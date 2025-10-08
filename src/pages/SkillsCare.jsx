@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { getSelectedIds, getPreSelectedItems } from "../utils/getSelectedIds";
 import { useSearchParams } from "react-router-dom";
 import StatusTitle from "../components/common/SubTitle";
+import toast from "react-hot-toast";
 const SkillsCare = ({ setStep, stepsData }) => {
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
@@ -45,16 +46,37 @@ const SkillsCare = ({ setStep, stepsData }) => {
     }
   }, [isDataLoaded, sdgs, StudentData, isInitialSelectionDone]);
 
-  const handleSelect = (sdg) => {
-    if (selected.some((s) => s._id === sdg._id)) {
-      setSelected(selected.filter((item) => item._id !== sdg._id));
-    } else {
-      if (selected.length < 3) {
-        setSelected([...selected, sdg]);
-      }
-    }
-  };
+  // const handleSelect = (sdg) => {
+  //   if (selected.some((s) => s._id === sdg._id)) {
+  //     setSelected(selected.filter((item) => item._id !== sdg._id));
+  //   } else {
+  //     if (selected.length < 3) {
+  //       setSelected([...selected, sdg]);
+  //     }
+  //   }
+  // };
 
+  const handleSelect = (sdg) => {
+  const isSelected = selected.some((s) => s._id === sdg._id);
+  
+  if (isSelected) {
+    setSelected(selected.filter((item) => item._id !== sdg._id));
+  } else if (selected.length < 3) {
+    setSelected([...selected, sdg]);
+  } else {
+    toast("You can select only 3 SDGs!", {
+      icon: "⚠️",
+      style: {
+        borderRadius: "8px",
+        background: "#FEF3C7",
+        color: "#92400E",
+        border: "1px solid #F59E0B",
+      },
+      className: "font-medium",
+      duration: 3000,
+    });
+  }
+};
   const handleNext = () => {
     if (selected.length === 0) return;
 
@@ -100,7 +122,7 @@ const SkillsCare = ({ setStep, stepsData }) => {
             return (
               <div
                 key={sdg._id}
-                onClick={() => canSelect && handleSelect(sdg)}
+                onClick={() => handleSelect(sdg)}
                 className={`relative w-[92px] h-[92px] rounded-lg cursor-pointer overflow-hidden
     ${!canSelect ? "cursor-not-allowed" : ""}
   `}

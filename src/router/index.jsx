@@ -260,7 +260,7 @@ const router = createBrowserRouter([
     children: [{ index: true, element: <RoadMap /> }],
   },
   {
-    path: "/micro-intro-Level-two",
+    path: "/micro-intro-level-two",
     element: <MicroIntroLevelSecond />,
   },
   {

@@ -70,9 +70,9 @@ const FeedBackFormOne = () => {
             `/badge-earned?careerLevelId=${careerLevelId}&questionId=${questionId}&completedCareerLevelCount=${userBadgeCount}&levelNumber=${levelNumber}`
           );
         } else if (levelNumber === "2") {
-          // If levelNumber is 2 and userBadgeCount is anything else, go to micro-intro-Level-two
+          // If levelNumber is 2 and userBadgeCount is anything else, go to micro-intro-level-two
           navigate(
-            `/micro-intro-Level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`
+            `/micro-intro-level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`
           );
         } else {
           // Default case - go to student-choice

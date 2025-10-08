@@ -66,7 +66,7 @@ const BadgeEarned = () => {
 
     if (isSaveStepsSuccess && isSaveBadgeSuccess) {
       
-    navigate(`/micro-intro-Level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`);
+    navigate(`/micro-intro-level-two?careerLevelId=${careerLevelId}&levelNumber=${levelNumber}&questionId=${questionId}`);
     }
   };
 

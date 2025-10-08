@@ -37,9 +37,9 @@ const Ambition = ({ stepsData }) => {
     }
   }, [isDataLoaded, StudentData, isInitialSelectionDone]);
 
-  const handleChange = (e) => {
-    setText(e.target.value);
-  };
+  // const handleChange = (e) => {
+  //   setText(e.target.value);
+  // };
 
   const handleNext = () => {
     if (!text.trim()) return;
@@ -82,7 +82,19 @@ const Ambition = ({ stepsData }) => {
           placeholder={stepsData.highlight}
           className="placeholder:text-center w-full h-full border bg-[#EFEAFF] border-[#7B56FF] placeholder:text-[#7B56FF] text-[#7B56FF] rounded-md p-3 resize-none focus:placeholder-transparent"
           value={text}
-          onChange={handleChange}
+          onChange={(e) => {
+    
+    let value = e.target.value.slice(0, 500);
+
+    
+    value = value.replace(/\s+/g, " ");
+
+   
+    value = value.replace(/^\s/, "");
+
+    setText(value);
+  }}
+  maxLength={500}
         />
 
         {/* Character count */}

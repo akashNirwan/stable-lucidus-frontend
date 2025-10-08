@@ -8,9 +8,10 @@ import { fetchLesson } from "../redux/actions/encyclopedia-action";
 import { useSelector, useDispatch } from "react-redux";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { useSearchParams } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 const EncylopediaTab = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const [searchparams] = useSearchParams();
   const { lessonLoading, lesson } = useSelector(
     (state) => state.encyclopedia
@@ -48,7 +49,14 @@ const EncylopediaTab = () => {
         </div>
       ) : !lesson || lesson.length === 0 ? (
         <div className="h-screen flex justify-center items-center cursor-pointer"
-             onClick={() => setState((prev) => (prev + 1) % (stepsCount || 5))}>
+             onClick={() => {
+            if (state + 1 < totalSteps) {
+              setState((prev) => prev + 1);
+            } else {
+              navigate(-1); 
+            }
+          }}
+             >
           <div className="text-white font-semibold text-[32px] text-center">
             No lesson data available
           </div>
@@ -56,7 +64,13 @@ const EncylopediaTab = () => {
       ) : (
         <div
           className="h-screen flex justify-center items-center cursor-pointer"
-          onClick={() => setState((prev) => (prev + 1) % totalSteps)}
+          onClick={() => {
+            if (state + 1 < totalSteps) {
+              setState((prev) => prev + 1);
+            } else {
+              navigate(-1);
+            }
+          }}
         >
           <div className="text-white font-semibold text-[32px] text-center px-4">
             {currentLesson ? currentLesson.detail : "No data"}

@@ -44,7 +44,7 @@ const DashBoardMenuTwo = () => {
             <CareerCard
               key={career.careerId || index}
               careerId={career.careerId}
-              title={career.careerName}
+              title={career.career}
               tags={
                 career.subjects?.map((sub) => sub.subjectName) || ["General"]
               }
