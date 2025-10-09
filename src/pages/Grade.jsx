@@ -86,7 +86,11 @@ const Grade = ({ setStep, stepsData }) => {
           grades.map((grade) => (
             <OptionButton
               key={grade._id}
-              option={`${grade.grade}th Grade`}
+              option={
+        grade.grade === "Other"
+          ? grade.grade
+          : `${grade.grade}th Grade`
+      }
               selected={selectedGrade?._id}
               onSelect={handleSelect}
               optionId={grade._id}
