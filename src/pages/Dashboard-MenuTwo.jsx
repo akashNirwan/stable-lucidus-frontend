@@ -46,8 +46,10 @@ const DashBoardMenuTwo = () => {
               careerId={career._id}
               title={career.career}
               tags={
-                career.subjects?.map((sub) => sub.subjectName) || ["General"]
-              }
+  career.subjects?.flatMap((s) =>
+    s.subject?.map((item) => item.subject) || []
+  ) || ["General"]
+}
               description={career.description}
               image={career.image}
               savedCareerCount={career.savedCareerCount}
