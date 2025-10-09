@@ -57,26 +57,26 @@ const SkillsCare = ({ setStep, stepsData }) => {
   // };
 
   const handleSelect = (sdg) => {
-  const isSelected = selected.some((s) => s._id === sdg._id);
-  
-  if (isSelected) {
-    setSelected(selected.filter((item) => item._id !== sdg._id));
-  } else if (selected.length < 3) {
-    setSelected([...selected, sdg]);
-  } else {
-    toast("You can select only 3 SDGs!", {
-      icon: "⚠️",
-      style: {
-        borderRadius: "8px",
-        background: "#FEF3C7",
-        color: "#92400E",
-        border: "1px solid #F59E0B",
-      },
-      className: "font-medium",
-      duration: 3000,
-    });
-  }
-};
+    const isSelected = selected.some((s) => s._id === sdg._id);
+
+    if (isSelected) {
+      setSelected(selected.filter((item) => item._id !== sdg._id));
+    } else if (selected.length < 3) {
+      setSelected([...selected, sdg]);
+    } else {
+      toast("You can select only 3 SDGs!", {
+        icon: "⚠️",
+        style: {
+          borderRadius: "8px",
+          background: "#FEF3C7",
+          color: "#92400E",
+          border: "1px solid #F59E0B",
+        },
+        className: "font-medium",
+        duration: 3000,
+      });
+    }
+  };
   const handleNext = () => {
     if (selected.length === 0) return;
 
@@ -111,7 +111,7 @@ const SkillsCare = ({ setStep, stepsData }) => {
         {/* {stepsData.subtitle} */}
         Select any <span className="font-bold">three.</span>
       </h3>
-      <StatusTitle text={"I care about:"} />
+      {/* <StatusTitle text={"I care about:"} /> */}
 
       <div className="h-[32vh] lg:h-[40vh] overflow-y-auto grid grid-cols-3 mx-auto gap-3 ">
         {Array.isArray(sdgs) &&
