@@ -76,11 +76,10 @@ const Grade = ({ setStep, stepsData }) => {
       <h2 className="font-bold text-[20px]">
         What <span className="text-[#5E35F1]">grade</span> are you in?
       </h2>
-      {/* <h3 className="text-gray-600">{stepsData.subtitle}</h3> */}
+
       <h3 className="text-[#066146] text-sm">
         Select any <span className="font-bold">one.</span>{" "}
       </h3>
-      <h4 className="text-[#24A57F] font-bold text-lg">I am in:</h4>
 
       <div className=" h-[32vh] lg:h-[40vh] overflow-y-auto flex flex-col gap-2.5">
         {Array.isArray(grades) &&

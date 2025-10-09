@@ -83,18 +83,15 @@ const Ambition = ({ stepsData }) => {
           className="placeholder:text-center w-full h-full border bg-[#EFEAFF] border-[#7B56FF] placeholder:text-[#7B56FF] text-[#7B56FF] rounded-md p-3 resize-none focus:placeholder-transparent"
           value={text}
           onChange={(e) => {
-    
-    let value = e.target.value.slice(0, 500);
+            let value = e.target.value.slice(0, 500);
 
-    
-    value = value.replace(/\s+/g, " ");
+            value = value.replace(/\s+/g, " ");
 
-   
-    value = value.replace(/^\s/, "");
+            value = value.replace(/^\s/, "");
 
-    setText(value);
-  }}
-  maxLength={500}
+            setText(value);
+          }}
+          maxLength={500}
         />
 
         {/* Character count */}

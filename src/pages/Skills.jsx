@@ -102,7 +102,6 @@ const Skills = ({ setStep, stepsData }) => {
         {/* {stepsData.subtitle} */}
         Select any that apply.
       </h3>
-       
 
       <div className="h-[32vh] lg:h-[40vh] overflow-y-auto flex flex-col gap-2.5">
         {Array.isArray(skills) &&

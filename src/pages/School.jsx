@@ -79,7 +79,7 @@ const School = ({ setStep, stepsData }) => {
       <h3 className="text-[#066146] text-sm">
         Select any <span className="font-bold">one.</span>{" "}
       </h3>
-      <h4 className="text-[#24A57F] font-bold text-lg">I am in:</h4>
+      {/* <h4 className="text-[#24A57F] font-bold text-lg">I am in:</h4> */}
       <div className="h-[320px] overflow-y-auto">
         <Dropdown
           label="Select Your School"
