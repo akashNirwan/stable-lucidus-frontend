@@ -40,6 +40,7 @@ import { Navigate } from "react-router-dom";
 import MicroIntroLevelSecond from "../pages/MicroIntroLevelSecond";
 import DragAndDrop from "../pages/DragAndDrop";
 import FeedBackFormLevelTwo from "../pages/FeedbackFormLevelTwo";
+import ErrorComponent from "../pages/ErrorBoundary";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -122,6 +123,7 @@ const router = createBrowserRouter([
         <DashBoardLayout />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorComponent/>,
     children: [
       { index: true, element: <Navigate to="/dashboard/microexperience" /> },
       { path: "microexperience", element: <DashBoardMenuOne /> },
