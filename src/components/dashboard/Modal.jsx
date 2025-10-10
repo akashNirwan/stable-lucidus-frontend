@@ -21,20 +21,16 @@ export default function NextLevelModal({ open, onClose, careerLevelId }) {
     }
   }, [dispatch]);
 
-
-
   const nextLevelNumber = NextLevel?.buttonName?.match(/\d+/)?.[0] || "";
-   
-   
+
   const handleClick = () => {
-    if(nextLevelNumber === "3" ){
-     alert("Level 3 Coming Soon...")
-    }else{
-       navigate(
-      `/micro-intro?careerId=${careerId}&levelNumber=${nextLevelNumber}`
-    );
+    if (nextLevelNumber === "3") {
+      alert("Level 3 Coming Soon...");
+    } else {
+      navigate(
+        `/micro-intro?careerId=${careerId}&levelNumber=${nextLevelNumber}`
+      );
     }
-   
   };
 
   if (!open) return null;
@@ -60,17 +56,25 @@ export default function NextLevelModal({ open, onClose, careerLevelId }) {
         </h2>
 
         {/* Subtitle */}
-        <p className="text-[#042119] mb-6 font-bold text-[20px]">
+        <p className="text-[#042119]  font-bold text-[20px]">
           {NextLevel?.description}
         </p>
+        <p className="text-[#042119] my-3">Send a request to unlock Level 3.</p>
+        <div className="flex items-center justify-between gap-2 ">
+          <button
+            onClick={handleClick}
+            className="w-full py-3 text-[#0F8864] border border-[#0F8864]  font-semibold rounded-lg hover:bg-[#1e896a] transition"
+          >
+            Retry Level
+          </button>
 
-        {/* CTA Button */}
-        <button
-          onClick={handleClick}
-          className="w-full py-3 bg-[#0F8864] text-white font-semibold rounded-lg hover:bg-[#1e896a] transition"
-        >
-          {NextLevel?.buttonName}
-        </button>
+          <button
+            onClick={handleClick}
+            className="w-full py-3 bg-[#0F8864] text-white font-semibold rounded-lg hover:bg-[#1e896a] transition"
+          >
+            {NextLevel?.buttonName}
+          </button>
+        </div>
       </div>
     </div>
   );
