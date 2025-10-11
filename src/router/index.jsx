@@ -40,30 +40,37 @@ import { Navigate } from "react-router-dom";
 import MicroIntroLevelSecond from "../pages/MicroIntroLevelSecond";
 import DragAndDrop from "../pages/DragAndDrop";
 import FeedBackFormLevelTwo from "../pages/FeedbackFormLevelTwo";
+import ErrorComponent from "../pages/ErrorBoundary";
 const router = createBrowserRouter([
   {
     path: "/",
+    
     element: (
       <PublicRoute>
         <App />
       </PublicRoute>
     ),
+    errorElement: <ErrorComponent/>,
   },
   {
     path: "/about",
+    
     element: (
       <PublicRoute>
         <div>About</div>
       </PublicRoute>
     ),
+    errorElement: <ErrorComponent/>,
   },
   {
     path: "/auth",
+    
     element: (
       <PublicRoute>
         <AuthLayout />
       </PublicRoute>
     ),
+    errorElement: <ErrorComponent/>,
     children: [
       { path: "login", element: <Login /> },
       { path: "otp", element: <Otp /> },
@@ -76,6 +83,7 @@ const router = createBrowserRouter([
         <Welcome />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorComponent/>,
   },
   {
     path: "/questions",
@@ -84,6 +92,7 @@ const router = createBrowserRouter([
         <OnBoardWrapper />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorComponent/>,
     // children: [{ index: true, element: <Question /> }],
 
     children: [
@@ -103,6 +112,7 @@ const router = createBrowserRouter([
         <QuestionFinalLoad />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorComponent/>,
   },
   // {
   //   path: "/dashboard",
@@ -122,6 +132,7 @@ const router = createBrowserRouter([
         <DashBoardLayout />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorComponent/>,
     children: [
       { index: true, element: <Navigate to="/dashboard/microexperience" /> },
       { path: "microexperience", element: <DashBoardMenuOne /> },
@@ -137,6 +148,7 @@ const router = createBrowserRouter([
         <Level />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorComponent/>,
   },
   {
     path: "/micro-intro",
@@ -145,8 +157,10 @@ const router = createBrowserRouter([
         <MicroExperienceLayout />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorComponent/>,
     children: [{ index: true, element: <MicroIntoScreen /> }],
   },
+  
   {
     path: "/feedbackform",
     element: (
@@ -154,6 +168,7 @@ const router = createBrowserRouter([
         <FeedBackLayout />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorComponent/>,
     children: [{ index: true, element: <FeedBackFormOne /> }],
   },
   {
@@ -163,6 +178,7 @@ const router = createBrowserRouter([
         <FeedBackLayout />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorComponent/>,
     children: [{ index: true, element: <FeedBackFormLevelTwo /> }],
   },
   {
@@ -172,6 +188,7 @@ const router = createBrowserRouter([
         <BadgeEarned />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorComponent/>,
   },
   {
     path: "/survey-page",
@@ -180,6 +197,7 @@ const router = createBrowserRouter([
         <ServeyPage />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorComponent/>,
   },
   {
     path: "/profile",
@@ -188,6 +206,7 @@ const router = createBrowserRouter([
         <Profile />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorComponent/>,
   },
 
   {
@@ -197,6 +216,7 @@ const router = createBrowserRouter([
         <OnChoiceFeedBack />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorComponent/>,
     children: [{ index: true, element: <FeedBackForm /> }],
   },
 
@@ -207,6 +227,7 @@ const router = createBrowserRouter([
         <EncycloPediaWrapper />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorComponent/>,
     children: [{ index: true, element: <Purpose /> }],
   },
   {
@@ -216,6 +237,7 @@ const router = createBrowserRouter([
         <EncycloPediaWrapper />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorComponent/>,
     children: [{ index: true, element: <Process /> }],
   },
   {
@@ -225,6 +247,7 @@ const router = createBrowserRouter([
         <EncycloPediaWrapper />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorComponent/>,
     children: [{ index: true, element: <Path /> }],
   },
   {
@@ -234,6 +257,7 @@ const router = createBrowserRouter([
         <EncycloPediaWrapper />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorComponent/>,
     children: [{ index: true, element: <Prediction /> }],
   },
   {
@@ -243,6 +267,7 @@ const router = createBrowserRouter([
         <EncylopediaWrapperTodo />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorComponent/>,
     children: [
       {
         index: true,
@@ -257,6 +282,7 @@ const router = createBrowserRouter([
         <RoadMapWrapper />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorComponent/>,
     children: [{ index: true, element: <RoadMap /> }],
   },
   {

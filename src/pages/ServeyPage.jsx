@@ -52,13 +52,13 @@ export default function CareerSurvey() {
     };
 
     setIsLike(choice);
-    const endTime = Date.now();
+    
     const saveStepsRes = await dispatch(saveSteps(payload));
     const saveFeedbackRes = await dispatch(
       saveFeedback({
         likeDislike: choice === "like" ? "Like" : "Dislike",
         careerLevelId: careerLevelId,
-        endTime: endTime,
+        
       })
     );
 
