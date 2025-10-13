@@ -87,25 +87,24 @@ const Grade = ({ setStep, stepsData }) => {
             <OptionButton
               key={grade._id}
               option={
-        grade.grade === "Other"
-          ? grade.grade
-          : `${grade.grade}th Grade`
-      }
+                grade.grade === "Other" ? grade.grade : `${grade.grade}th Grade`
+              }
               selected={selectedGrade?._id}
               onSelect={handleSelect}
               optionId={grade._id}
             />
           ))}
       </div>
-
-      <Button
-        type="button"
-        isActive={!!selectedGrade}
-        onClick={handleNext}
-        disabled={loading || gradeLoading}
-      >
-        {gradeLoading ? <LoadingSpinner size="20px" color="green" /> : "Next"}
-      </Button>
+      <div className="fixed bottom-0 left-0 w-full px-4 pb-6">
+        <Button
+          type="button"
+          isActive={!!selectedGrade}
+          onClick={handleNext}
+          disabled={loading || gradeLoading}
+        >
+          {gradeLoading ? <LoadingSpinner size="20px" color="green" /> : "Next"}
+        </Button>
+      </div>
     </div>
   );
 };
