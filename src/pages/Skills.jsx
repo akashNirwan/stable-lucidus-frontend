@@ -116,27 +116,29 @@ const Skills = ({ setStep, stepsData }) => {
             />
           ))}
       </div>
-      <div className="flex gap-3 ">
-        <Button
-          type="button"
-          onClick={handleBack}
-          className="bg-white !text-[#0F8864] border !border-[#0F8864] !w-[60%]"
-        >
-          {"Previous"}
-        </Button>
+      <div className="fixed bottom-0 left-0 w-full px-4 pb-6">
+        <div className="flex gap-3 ">
+          <Button
+            type="button"
+            onClick={handleBack}
+            className="bg-white !text-[#0F8864] border !border-[#0F8864] !w-[60%]"
+          >
+            {"Previous"}
+          </Button>
 
-        <Button
-          type="button"
-          isActive={selectedSkills.length > 0}
-          onClick={handleNext}
-          disabled={skillsLoading}
-        >
-          {skillsLoading ? (
-            <LoadingSpinner size="20px" color="green" />
-          ) : (
-            "Next"
-          )}
-        </Button>
+          <Button
+            type="button"
+            isActive={selectedSkills.length > 0}
+            onClick={handleNext}
+            disabled={skillsLoading}
+          >
+            {skillsLoading ? (
+              <LoadingSpinner size="20px" color="green" />
+            ) : (
+              "Next"
+            )}
+          </Button>
+        </div>
       </div>
     </div>
   );

@@ -14,7 +14,6 @@ export default function NextLevelModal({ open, onClose, careerLevelId }) {
   );
   const NextLevel = microexperience?.[0]?.nextlevels?.[0];
   const careerId = microexperience?.[0]?.career?.[0]?._id;
-  
 
   useEffect(() => {
     if (careerLevelId) {
@@ -26,21 +25,20 @@ export default function NextLevelModal({ open, onClose, careerLevelId }) {
 
   const handleClick = () => {
     if (nextLevelNumber === "3") {
-      
       toast("Level 3 is Coming Soon..", {
-                icon: "⌛",
-                style: {
-                  borderRadius: "8px",
-                  background: "#FEF3C7",
-                  color: "#92400E",
-                  border: "1px solid #F59E0B",
-                },
-                className: "font-medium",
-                duration: 3000,
-              });
-             setTimeout(() => {
-      navigate(`/dashboard/microexperience`);
-    }, 1500); 
+        icon: "⌛",
+        style: {
+          borderRadius: "8px",
+          background: "#FEF3C7",
+          color: "#92400E",
+          border: "1px solid #F59E0B",
+        },
+        className: "font-medium",
+        duration: 3000,
+      });
+      setTimeout(() => {
+        navigate(`/dashboard/microexperience`);
+      }, 1500);
     } else {
       navigate(
         `/micro-intro?careerId=${careerId}&levelNumber=${nextLevelNumber}`
@@ -49,11 +47,7 @@ export default function NextLevelModal({ open, onClose, careerLevelId }) {
   };
 
   const handleRetryClick = () => {
-    
-      navigate(
-        `/micro-intro?careerLevelId=${careerLevelId}`
-      );
-    
+    navigate(`/micro-intro?careerLevelId=${careerLevelId}`);
   };
 
   if (!open) return null;
@@ -82,12 +76,18 @@ export default function NextLevelModal({ open, onClose, careerLevelId }) {
         <p className="text-[#042119]  font-bold text-[20px]">
           {NextLevel?.description}
         </p>
-        {nextLevelNumber === "3" ? <p className="text-[#042119] my-3">Send a request to unlock Level 3.</p> : ""}
-        
+        {nextLevelNumber === "3" ? (
+          <p className="text-[#042119] my-3">
+            Send a request to unlock Level 3.
+          </p>
+        ) : (
+          ""
+        )}
+
         <div className="flex items-center justify-between gap-2 ">
           <button
             onClick={handleRetryClick}
-            className="w-full py-3 text-[#0F8864] border border-[#0F8864]  font-semibold rounded-lg hover:bg-[#1e896a] transition"
+            className="w-full py-3 text-[#0F8864] border border-[#0F8864]  font-semibold rounded-lg  "
           >
             Retry Level
           </button>

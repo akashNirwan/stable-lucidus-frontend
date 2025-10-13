@@ -26,7 +26,7 @@ const Footer = ({ setMenu, menu }) => {
       className="py-4 fixed bottom-0 left-0 right-0
     rounded-t-3xl bg-white border border-b-0
     flex justify-between items-center
-    w-full max-w-[425px] mx-auto"
+    w-full md:max-w-[420px] mx-auto"
     >
       <div
         className="flex flex-1 flex-col items-center cursor-pointer gap-2"

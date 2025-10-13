@@ -57,7 +57,7 @@ const MicroIntroLevelSecond = () => {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover z-0"
+        className="absolute inset-0 w-full md:max-w-[420px] md:mx-auto h-full object-cover z-0"
       >
         <source src={Data?.image} type="video/mp4" />
         Your browser does not support the video tag.
@@ -68,7 +68,7 @@ const MicroIntroLevelSecond = () => {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
-        className="fixed bottom-0 left-0 right-0 mx-auto w-full max-w-[425px] flex flex-col gap-5 p-6 z-20"
+        className="fixed bottom-0 left-0 right-0 w-full md:max-w-[420px] md:mx-auto flex flex-col gap-5 p-6 z-20"
         style={{
           borderRadius: "24px 24px 0 0",
           background:

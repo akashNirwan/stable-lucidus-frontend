@@ -98,18 +98,17 @@ const School = ({ setStep, stepsData }) => {
           }}
         />
       </div>
-      <Button
-        type="submit"
-        isActive={!!selectedSchool}
-        onClick={handleNext}
-        disabled={loading || SchoolLoading}
-      >
-        {SchoolLoading ? (
-          <LoadingSpinner size={20} color="green"></LoadingSpinner>
-        ) : (
-          "Next"
-        )}
-      </Button>
+      <div className="fixed bottom-0 left-0 w-full px-4 pb-6">
+        <Button
+          type="submit"
+          isActive={!!selectedSchool}
+          onClick={handleNext}
+          disabled={loading || SchoolLoading}
+          className="w-full"
+        >
+          {SchoolLoading ? <LoadingSpinner size={20} color="green" /> : "Next"}
+        </Button>
+      </div>
     </div>
   );
 };
