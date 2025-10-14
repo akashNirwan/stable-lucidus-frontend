@@ -36,7 +36,7 @@ const CareerExperienceCard = ({ careerData, savedCareer, careerId }) => {
   };
 
   return (
-    <div className="h-[370px] min-w-[312px] max-w-[425px] mx-auto rounded-2xl relative shadow-lg overflow-hidden">
+    <div className="h-[370px] w-[312px] mx-auto rounded-2xl relative shadow-lg overflow-hidden">
       <div className="h-[270px] w-full">
         <img
           src={getImageSrc()}

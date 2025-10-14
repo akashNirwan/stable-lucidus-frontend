@@ -99,7 +99,7 @@ export default function Login() {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.4 }}
-      className="fixed bottom-0 left-0 right-0 mx-auto w-full max-w-[400px] flex flex-col items-center gap-5 p-6"
+      className="fixed bottom-0 left-0 right-0 w-full md:max-w-[420px] md:mx-auto flex flex-col items-center gap-5 p-6"
       style={{
         borderRadius: "24px 24px 0 0",
         background:

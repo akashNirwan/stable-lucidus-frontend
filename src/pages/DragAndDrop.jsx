@@ -296,7 +296,7 @@ const DragAndDrop = () => {
             className="w-full bg-[#261172] text-white py-3 rounded-xl font-medium flex items-center gap-2 justify-center "
           >
             Your Research{" "}
-            {showResearch ? (
+            {!showResearch ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="8"
