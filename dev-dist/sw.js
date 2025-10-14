@@ -15,7 +15,7 @@
 if (!self.define) {
   let registry = {};
 
-  // Used for `eval` and `importScripts
+  // Used for `eval` and `importScripts` where we can't get script URL by other means.
   // In both cases, it's safe to use a global var because those functions are synchronous.
   let nextDefineUri;
 
@@ -85,7 +85,7 @@ define(['./workbox-99d8380f'], (function (workbox) { 'use strict';
     "revision": "3ca0b8505b4bec776b69afdba2768812"
   }, {
     "url": "index.html",
-    "revision": "0.on9uu2jci"
+    "revision": "0.oc91bqql7a"
   }], {});
   workbox.cleanupOutdatedCaches();
   workbox.registerRoute(new workbox.NavigationRoute(workbox.createHandlerBoundToURL("index.html"), {
