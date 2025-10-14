@@ -148,3 +148,6 @@ li {
 body {
   font-family: "Albert Sans", sans-serif;
 }
+@custom-variants {
+  dark: ".dark &";
+}
