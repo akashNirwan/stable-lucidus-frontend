@@ -130,7 +130,7 @@ export default function LevelCarousel({ data, careerLevelId, levelNumber }) {
 
                 {/* ✅ Circle: outlined by default, filled only when clicked */}
                 <div
-                  className={`w-6 h-6 rounded-full flex items-center justify-center mt-7 border-2 border-[#0F8864] ${
+                  className={`w-6 h-6 rounded-full flex  shrink-0 items-center justify-center mt-7 border-2 border-[#0F8864] ${
                     selected === i ? "bg-[#0F8864]" : "bg-transparent"
                   }`}
                 />

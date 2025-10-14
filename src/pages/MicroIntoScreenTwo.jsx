@@ -41,7 +41,7 @@ const MicroIntoScreenTwo = ({ data, levelNumber }) => {
           dangerouslySetInnerHTML={{
             __html: data?.questionintros?.[1]?.titleOne,
           }}
-          className="text-center text-white w-[325px] mx-auto absolute -top-[140px] left-1/2 -translate-x-1/2 leading-[140%] bg-[#13093466] opacity-80 p-3 rounded-lg"
+          className="text-center bg-glass text-white absolute -top-[135px] left-0 mx-6 leading-[140%] bg-[#13093466] opacity-60 p-3 rounded-lg"
         ></div>
       )}
       <div
