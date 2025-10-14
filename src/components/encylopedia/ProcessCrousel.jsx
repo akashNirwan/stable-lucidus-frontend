@@ -57,7 +57,7 @@ export default function ProcessCarousel() {
       ) {
         slide.salaries = item.salaryData.map((salary) => ({
           level: salary.level,
-          salary: `$${salary.min}k to $${salary.max}k`,
+          salary: `$${salary.min.toLocaleString("en-US")} to $${salary.max.toLocaleString("en-US")}`,
         }));
       }
 

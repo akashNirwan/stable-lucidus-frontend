@@ -11,9 +11,9 @@ const Purpose = () => {
 
   const steps =
     predictionandPurpose?.[0]?.encyclolessons.map((item, index) => ({
-      title: item.lesson[0]?.lesson,
+      title: item.lesson,
       status: index === 0 ? "active" : "locked",
-      lessonId: item.lesson[0]?._id,
+      lessonId: item._id,
     })) || [];
 
   return (

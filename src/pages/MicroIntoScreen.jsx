@@ -43,6 +43,8 @@ const MicroIntoScreen = () => {
     const levelNumber2 = levelString 
   ? parseInt(levelString.match(/\d+/)?.[0], 10) 
   : null;
+  console.log(levelNumber2, "level");
+  
       
     
 

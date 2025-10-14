@@ -41,7 +41,9 @@ const DragAndDrop = () => {
       setStrategies(
         DragandDropData.map((item) => ({
           id: item._id,
-          title: item.recommendation,
+          title: item.title,              
+        keyword: item.keyword, 
+          recommendation: item.recommendation,
         }))
       );
     }
@@ -63,6 +65,12 @@ const DragAndDrop = () => {
     }
   }, [questions, questionId]);
 
+  useEffect(() => {
+  if (strategies.length > 0) {
+    setSelectedId(strategies[0].id);  
+  }
+}, [strategies]);
+
   const handleDragEnd = (result) => {
     if (!result.destination) return;
 
@@ -72,10 +80,13 @@ const DragAndDrop = () => {
       copy.splice(result.destination.index, 0, moved);
       return copy;
     });
+    setSelectedId(result.destination.index === 0 ? result.draggableId : strategies[0]?.id);
   };
 
   const handleSelect = (id) => {
+    if (strategies[0]?.id === id) {
     setSelectedId(id);
+  }
   };
 
   //   const handleMakeRecommendation = () => {
@@ -244,19 +255,29 @@ const DragAndDrop = () => {
                             />
                           </div>
                           <div className="flex-1">
-                            <div className="flex justify-between items-start">
-                              <h2 className="text-black">
-                                <div
-                                  dangerouslySetInnerHTML={{
-                                    __html: item.title,
-                                  }}
-                                ></div>
-                              </h2>
-                              {/* {selectedId === item.id && (
-                              <CheckCircle className="text-purple-600 w-5 h-5" />
-                            )}  */}
-                            </div>
-                          </div>
+    {/* Title */}
+    <h3 className=" mb-1" style={{
+    fontSize: "14px",
+    color: "var(--Purple-50, #4823CF)",
+    fontWeight: 700,
+  }}>
+      {  item.title }
+    </h3>
+    
+    {/* Keyword */}
+    <p className="mb-1" style={{
+    color: "var(--Purple-30, #7B56FF)",
+    fontFamily: "Albert Sans",
+    fontSize: "10px",
+  }}>
+      {  item.keyword }
+    </p>
+    
+    {/* Recommendation */}
+    <p className=" text-gray-800" style={{ fontSize: "14px" }}>
+      {  item.recommendation }
+    </p>
+  </div>
                         </div>
                       </div>
                     )}

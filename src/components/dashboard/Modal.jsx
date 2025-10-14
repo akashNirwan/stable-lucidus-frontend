@@ -26,7 +26,7 @@ export default function NextLevelModal({ open, onClose, careerLevelId }) {
 
   const handleClick = () => {
     if (nextLevelNumber === "3") {
-      
+         onClose();
       toast("Level 3 is Coming Soon..", {
                 icon: "⌛",
                 style: {
@@ -36,11 +36,10 @@ export default function NextLevelModal({ open, onClose, careerLevelId }) {
                   border: "1px solid #F59E0B",
                 },
                 className: "font-medium",
-                duration: 3000,
+                duration: 2000,
               });
-             setTimeout(() => {
-      navigate(`/dashboard/microexperience`);
-    }, 1500); 
+            
+     
     } else {
       navigate(
         `/micro-intro?careerId=${careerId}&levelNumber=${nextLevelNumber}`
