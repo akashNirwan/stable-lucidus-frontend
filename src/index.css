@@ -148,6 +148,4 @@ li {
 body {
   font-family: "Albert Sans", sans-serif;
 }
-@custom-variants {
-  dark: ".dark &";
-}
+@custom-variant dark (&:where(.dark, .dark *));
