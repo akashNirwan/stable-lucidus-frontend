@@ -204,4 +204,26 @@ export const updateName = createAsyncThunk(
   }
 );
 
+export const fetchSingleCareers = createAsyncThunk(
+  "dashboard/fetchSingleCareers",
+  async (careerId, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage()
 
+    try {
+      const response = await client.get(
+        `user/career?careerId=${careerId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      
+
+      return response.data;
+    } catch (error) {
+      
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);

@@ -26,6 +26,7 @@ export default function NextLevelModal({ open, onClose, careerLevelId }) {
   const handleClick = () => {
     if (nextLevelNumber === "3") {
          onClose();
+         navigate("/dashboard/explorecareers")
       toast("Level 3 is Coming Soon..", {
                 icon: "⌛",
                 style: {
@@ -61,7 +62,10 @@ export default function NextLevelModal({ open, onClose, careerLevelId }) {
       <div className="relative bg-white rounded-2xl shadow-lg p-6 w-80 text-center max-w-[315px] mx-auto">
         {/* Close Button */}
         <button
-          onClick={onClose}
+          onClick={() => {
+    onClose();
+    navigate("/dashboard/explorecareers"); 
+  }}
           className="absolute top-3 right-5 text-[#A187FF] opacity-80 py-3"
         >
           <X className="w-5 h-5" />
