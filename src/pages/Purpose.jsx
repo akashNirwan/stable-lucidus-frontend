@@ -5,16 +5,18 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 const Purpose = () => {
   const navigate = useNavigate("");
-  const { predictionandPurpose, loading } = useSelector(
-    (state) => state.encyclopedia
-  );
-
-  const steps =
-    predictionandPurpose?.[0]?.encyclolessons.map((item, index) => ({
-      title: item.lesson,
-      status: index === 0 ? "active" : "locked",
-      lessonId: item._id,
-    })) || [];
+   const { predictionandPurpose, loading } = useSelector(
+        (state) => state.encyclopedia
+      );
+    
+  
+  
+    const steps =
+      predictionandPurpose?.[0]?.encyclolessons.map((item, index) => ({
+        title: item.lesson,
+        status: index === 0 ? "active" : "locked",
+        lessonId: item._id,
+      })) || [];
 
   return (
     <div className="text-white">

@@ -2,18 +2,32 @@ import React from "react";
 import ProcessCrousel from "../components/encylopedia/ProcessCrousel";
 import { ArrowRight, Lock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Process = () => {
   const navigate = useNavigate();
-  const steps = [
-    {
-      title: "What Do They Do?",
-      status: "locked",
-    },
-    {
-      title: "Where Do They Work?",
-      status: "locked",
-    },
-  ];
+
+  const { process, loading } = useSelector(
+          (state) => state.encyclopedia
+        );
+      
+    
+    
+      const steps =
+        process?.[0]?.encyclolessons.map((item, index) => ({
+          title: item.lesson,
+          status:  "locked",
+          lessonId: item._id,
+        })) || [];
+  // const steps = [
+  //   {
+  //     title: "What Do They Do?",
+  //     status: "locked",
+  //   },
+  //   {
+  //     title: "Where Do They Work?",
+  //     status: "locked",
+  //   },
+  // ];
   return (
     <div className="text-white">
       <ProcessCrousel />

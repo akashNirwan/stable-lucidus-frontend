@@ -12,18 +12,29 @@ const Path = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
-  const { loading, recommendedCareer } = useSelector(
+  const { loading, recommendedCareer, path } = useSelector(
     (state) => state.encyclopedia
   );
 
+
+ 
+        
+      
+      
+        const steps =
+          path?.[0]?.encyclolessons.map((item, index) => ({
+            title: item.lesson,
+            status:  "locked",
+            lessonId: item._id,
+          })) || [];
   console.log(recommendedCareer, "recommended career ");
 
-  const steps = [
-    {
-      title: "Where Do They Work?",
-      status: "locked",
-    },
-  ];
+  // const steps = [
+  //   {
+  //     title: "Where Do They Work?",
+  //     status: "locked",
+  //   },
+  // ];
 
   useEffect(() => {
     const careerId = searchParams.get("careerId");
