@@ -1,8 +1,10 @@
 import React from "react";
 import Button from "../components/common/Button";
 import { useOutletContext } from "react-router-dom";
+//changes
 const MicroIntoScreenOne = ({ setScreen, data }) => {
   return (
+    
     <div className="grid gap-2">
       <div
         dangerouslySetInnerHTML={{
