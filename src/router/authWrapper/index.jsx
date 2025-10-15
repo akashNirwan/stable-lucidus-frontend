@@ -10,7 +10,6 @@ export default function AuthLayout() {
             "radial-gradient(69.2% 73.84% at 47.36% 37.56%, #130934 0%, #261172 24.86%, #130934 70.19%)",
         }}
       />
-
       <div className="fixed inset-0">
         {[...Array(30)].map((_, i) => (
           <div
