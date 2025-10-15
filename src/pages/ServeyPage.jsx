@@ -52,13 +52,12 @@ export default function CareerSurvey() {
     };
 
     setIsLike(choice);
-    
+
     const saveStepsRes = await dispatch(saveSteps(payload));
     const saveFeedbackRes = await dispatch(
       saveFeedback({
         likeDislike: choice === "like" ? "Like" : "Dislike",
         careerLevelId: careerLevelId,
-        
       })
     );
 
@@ -117,7 +116,7 @@ export default function CareerSurvey() {
         <div className="w-42 h-2 bg-white rounded-full" />
       </div>
 
-      <div className="relative z-10 flex flex-col items-center gap-8 px-6 mt-44">
+      <div className="relative z-10 flex flex-col items-center gap-8 px-6 mt-12">
         <h2 className="text-white text-xl font-semibold leading-snug">
           Did this experience help you <br /> understand this career better?
         </h2>
