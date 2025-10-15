@@ -79,23 +79,20 @@ const MicroIntroLevelSecond = () => {
         <div className="text-center grid gap-4 relative">
           {/* <h3 className="font-bold text-[20px]">{Data?.titleOne}</h3> */}
 
-          <p className="text-center text-white absolute -top-[130px] left-0 w-full p-4 leading-[140%] bg-black/40 backdrop-blur-md rounded-2xl">
+          <p className="text-center text-white absolute -top-[150px] left-0 w-full p-4 leading-[140%] bg-black/40 backdrop-blur-md rounded-2xl">
             {Data?.titleOne}
           </p>
 
-          <div
-            className="text-center text-[20px] text-[#3618A3] font-bold  "
-            
-          >
-            {  Data?.titleTwo }
+          <div className="text-center text-[20px] text-[#3618A3] font-bold  ">
+            {Data?.titleTwo}
           </div>
-           <div className="text-center">
-  {Data?.description?.map((item, index) => (
-    <p key={index} className="mb-[12px] last:mb-2 text-[16px]">
-      {item.description}
-    </p>
-  ))}
-</div>
+          <div className="text-center">
+            {Data?.description?.map((item, index) => (
+              <p key={index} className="mb-[12px] last:mb-2 text-[16px]">
+                {item.description}
+              </p>
+            ))}
+          </div>
 
           <Button onClick={handleNext} disabled={saveStepsLoading}>
             {saveStepsLoading ? (

@@ -3,9 +3,9 @@ import Button from "../components/common/Button";
 import { useOutletContext } from "react-router-dom";
 const MicroIntoScreenOne = ({ setScreen, data }) => {
   return (
-    <div className="grid gap-2">
+    <div className="grid gap-2 relative">
       {data?.questionintros?.[0]?.titleOne && (
-        <div className="text-center text-white absolute -top-[135px]  left-0 mx-6 leading-[140%] bg-glass p-3 rounded-lg">
+        <div className=" fixed top-[-150px] left-0 mx-6 text-center text-white leading-[140%] bg-glass p-3 rounded-lg z-50">
           {data?.questionintros?.[0]?.titleOne}
         </div>
       )}
