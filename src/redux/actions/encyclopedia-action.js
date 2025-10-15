@@ -122,7 +122,7 @@ export const fetchLesson = createAsyncThunk(
 
     try {
       const response = await client.get(
-        `user/lesson-detail?lessonId=${LessonId}`,
+        `user/lesson-detail?lessonId=${LessonId}&sort_by=date_desc`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

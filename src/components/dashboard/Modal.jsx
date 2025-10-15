@@ -25,20 +25,20 @@ export default function NextLevelModal({ open, onClose, careerLevelId }) {
 
   const handleClick = () => {
     if (nextLevelNumber === "3") {
+         onClose();
       toast("Level 3 is Coming Soon..", {
-        icon: "⌛",
-        style: {
-          borderRadius: "8px",
-          background: "#FEF3C7",
-          color: "#92400E",
-          border: "1px solid #F59E0B",
-        },
-        className: "font-medium",
-        duration: 3000,
-      });
-      setTimeout(() => {
-        navigate(`/dashboard/microexperience`);
-      }, 1500);
+                icon: "⌛",
+                style: {
+                  borderRadius: "8px",
+                  background: "#FEF3C7",
+                  color: "#92400E",
+                  border: "1px solid #F59E0B",
+                },
+                className: "font-medium",
+                duration: 2000,
+              });
+            
+     
     } else {
       navigate(
         `/micro-intro?careerId=${careerId}&levelNumber=${nextLevelNumber}`
