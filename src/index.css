@@ -155,10 +155,3 @@ body {
   backdrop-filter: blur(10px);
   border-radius: 16px;
 }
-
-html,
-body {
-  height: 100%;
-  overflow: hidden;
-  position: fixed;
-}
