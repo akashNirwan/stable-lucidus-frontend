@@ -35,9 +35,11 @@ const MicroIntoScreenTwo = ({ data, levelNumber }) => {
 
   return (
     <div className="text-center flex flex-col gap-4 relative min-w-[325px] mx-auto">
-      <div className="text-center text-white absolute -top-[135px]  left-0 mx-6 leading-[140%] bg-[#13093466] opacity-60 p-3 rounded-lg">
-        {data?.questionintros?.[1]?.titleOne}
-      </div>
+      {data?.questionintros?.[1]?.titleOne && (
+        <div className="text-center text-white absolute -top-[135px]  left-0 mx-6 leading-[140%] bg-[#13093466] opacity-60 p-3 rounded-lg">
+          {data?.questionintros?.[1]?.titleOne}
+        </div>
+      )}
       <div className="text-center text-[20px] text-[#3618A3] font-bold ">
         {data?.questionintros?.[1]?.titleTwo}
       </div>
