@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchCareers, saveCareer, fetchBadges, fetchSavedCareers, fetchDashboardMicroexperience, fetchProfile, updateName} from "../actions/dashboard-action";
+import { fetchCareers, saveCareer, fetchBadges, fetchSavedCareers, fetchDashboardMicroexperience, fetchProfile, updateName, fetchSingleCareers} from "../actions/dashboard-action";
 
 
 const initialState = {
@@ -23,6 +23,8 @@ const initialState = {
    profileLoading: false,
    username : null, 
    userLoading : false,
+   singleCareer : null,
+   singleCareerLoading : false,
 };
 
 
@@ -190,6 +192,23 @@ const dashboardSlice = createSlice({
       .addCase(updateName.rejected, (state, action) => {
         state.userLoading = false;
         state.error = action.payload?.message || "Failed to update username";
+      });
+
+
+
+      //fetchSingleCareer
+       builder
+      .addCase(fetchSingleCareers.pending, (state) => {
+        state.singleCareerLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchSingleCareers.fulfilled, (state, action) => {
+        state.singleCareerLoading = false;
+        state.singleCareer = action.payload;   
+      })
+      .addCase(fetchSingleCareers.rejected, (state, action) => {
+        state.singleCareerLoading = false;
+        state.error = action.payload?.message || "Failed to fetch Career";
       });
   },
 });
