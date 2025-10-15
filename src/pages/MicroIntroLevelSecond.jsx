@@ -84,9 +84,18 @@ const MicroIntroLevelSecond = () => {
           </p>
 
           <div
-            className="text-center "
-            dangerouslySetInnerHTML={{ __html: Data?.titleTwo }}
-          ></div>
+            className="text-center text-[20px] text-[#3618A3] font-bold  "
+            
+          >
+            {  Data?.titleTwo }
+          </div>
+           <div className="text-center">
+  {Data?.description?.map((item, index) => (
+    <p key={index} className="mb-[12px] last:mb-2 text-[16px]">
+      {item.description}
+    </p>
+  ))}
+</div>
 
           <Button onClick={handleNext} disabled={saveStepsLoading}>
             {saveStepsLoading ? (
