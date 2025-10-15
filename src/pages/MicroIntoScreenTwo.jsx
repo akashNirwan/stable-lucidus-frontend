@@ -12,9 +12,7 @@ const MicroIntoScreenTwo = ({ data, levelNumber }) => {
   const { saveStepsLoading } = useSelector((state) => state.microexperience);
   const careerLevelId = data?._id;
 
-  const levelPercent =
-    levelNumber === 1 ? "5" : levelNumber === 2 ? "30" : "0";
-    
+  const levelPercent = levelNumber === 1 ? "5" : levelNumber === 2 ? "30" : "0";
 
   const handleNext = () => {
     const payload = {
@@ -37,17 +35,21 @@ const MicroIntoScreenTwo = ({ data, levelNumber }) => {
 
   return (
     <div className="text-center flex flex-col gap-4 relative min-w-[325px] mx-auto">
+      {data?.questionintros?.[1]?.titleOne && (
         <div className="text-center text-white absolute -top-[135px]  left-0 mx-6 leading-[140%] bg-[#13093466] opacity-60 p-3 rounded-lg">
-        {data?.questionintros?.[1]?.titleOne}
+          {data?.questionintros?.[1]?.titleOne}
+        </div>
+      )}
+      <div className="text-center text-[20px] text-[#3618A3] font-bold ">
+        {data?.questionintros?.[1]?.titleTwo}
       </div>
-      <div className="text-center text-[20px] text-[#3618A3] font-bold ">{data?.questionintros?.[1]?.titleTwo}</div>
-       <div className="text-center">
-  {data?.questionintros?.[1]?.description?.map((item, index) => (
-    <p key={index} className="mb-[12px] last:mb-2 text-[16px]">
-      {item.description}
-    </p>
-  ))}
-</div>
+      <div className="text-center">
+        {data?.questionintros?.[1]?.description?.map((item, index) => (
+          <p key={index} className="mb-[12px] last:mb-2 text-[16px]">
+            {item.description}
+          </p>
+        ))}
+      </div>
 
       <Button onClick={handleNext} disabled={saveStepsLoading}>
         {saveStepsLoading ? (

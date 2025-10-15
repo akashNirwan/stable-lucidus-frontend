@@ -96,7 +96,7 @@ const RoadmapData = ({ roadmapData }) => {
                   </div>
 
                   <div
-                    className={`flex-1 px-4  rounded-full text-white font-medium line-clamp-1 cursor-pointer shadow-md`}
+                    className={`flex-1 px-4  rounded-full text-white font-medium line-clamp-1 cursor-pointer `}
                     onClick={() => toggle(index)}
                   >
                     {section.title}
@@ -161,22 +161,43 @@ const RoadmapData = ({ roadmapData }) => {
               {openIndex === index && (
                 <div className="ml-12 mt-4">
                   {section.items.length > 0 ? (
-                    <div className="flex flex-wrap gap-3">
-                      {section.items.map((item, i) => (
-                        <div
-                          key={i}
-                          className={`px-4 py-1.5 rounded-full text-sm font-medium ${getColorForItem(
-                            i
-                          )}`}
-                          title={item.description || item.category || ""}
-                        >
-                          {/* {item.icon && (
-                            <span className="mr-1">{item.icon}</span>
-                          )} */}
-                          <span>{item.label}</span>
+                    <>
+                      {[
+                        "Extracurriculars to Try",
+                        "Online Courses to Explore",
+                        "College & University Degrees",
+                        "Vocational Pathways",
+                      ].includes(section.title) ? (
+                        // 📋 Render as list
+                        <ul className="list-disc list-inside space-y-2 text-white/90">
+                          {section.items.map((item, i) => (
+                            <li key={i}>
+                              <span className="font-medium">{item.label}</span>
+                              {item.description && (
+                                <p className="text-sm text-gray-400 mt-0.5">
+                                  {item.description}
+                                </p>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        // 🟣 Default chip/pill view
+                        <div className="flex flex-wrap gap-3">
+                          {section.items.map((item, i) => (
+                            <div
+                              key={i}
+                              className={`px-4 py-1.5 rounded-full text-sm font-medium ${getColorForItem(
+                                i
+                              )}`}
+                              title={item.description || item.category || ""}
+                            >
+                              <span>{item.label}</span>
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
+                      )}
+                    </>
                   ) : (
                     <div className="text-gray-400 text-sm italic">
                       No items available for this category

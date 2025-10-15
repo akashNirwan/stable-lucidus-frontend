@@ -21,7 +21,6 @@ const Purpose = () => {
   return (
     <div className="text-white">
       <PurposeCrousel />
-
       <div className=" overflow-hidden overflow-y-auto grid mt-2 gap-4">
         {steps.map((step, i) => (
           <div
