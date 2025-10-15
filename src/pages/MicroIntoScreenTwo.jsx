@@ -13,7 +13,6 @@ const MicroIntoScreenTwo = ({ data, levelNumber }) => {
   const careerLevelId = data?._id;
 
   const levelPercent = levelNumber === 1 ? "5" : levelNumber === 2 ? "30" : "0";
-  const levelPercent = levelNumber === 1 ? "5" : levelNumber === 2 ? "30" : "0";
 
   const handleNext = () => {
     const payload = {
