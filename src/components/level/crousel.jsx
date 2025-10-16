@@ -170,7 +170,7 @@ export default function LevelCarousel({ data, careerLevelId, levelNumber }) {
         {saveAnswerLoading || saveStepsLoading ? (
           <LoadingSpinner size={20} color="green"></LoadingSpinner>
         ) : (
-          data?.questions?.[selected ?? 0]?.buttonName
+          data?.questions?.[currentSlide]?.buttonName
         )}
       </Button>
     </div>

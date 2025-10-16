@@ -16,7 +16,7 @@ export const fetchPredictionandPurpose = createAsyncThunk(
 
     try {
       const response = await client.get(
-        `user/encyclopedia/prediction-and-purpose?careerId=${careerId}&tab=${tab}`,
+        `user/encyclopedia/prediction-and-purpose?careerId=${careerId}&tab=${tab}&sort_by=date_desc`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -45,7 +45,7 @@ export const fetchPath = createAsyncThunk(
 
     try {
       const response = await client.get(
-        `user/encyclopedia/path?careerId=${careerId}`,
+        `user/encyclopedia/path?careerId=${careerId}&sort_by=date_desc`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -71,7 +71,7 @@ export const fetchProcess = createAsyncThunk(
 
     try {
       const response = await client.get(
-        `user/encyclopedia/prowess?careerId=${careerId}`,
+        `user/encyclopedia/prowess?careerId=${careerId}&sort_by=date_desc`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
