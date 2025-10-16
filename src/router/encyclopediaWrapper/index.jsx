@@ -60,7 +60,7 @@ const EncycloPediaWrapper = () => {
         </div>
       </div>
 
-      <div className="flex gap-2 items-center justify-start p-4 max-w-[600px] ">
+      <div className="flex gap-2 items-center justify-start p-4 max-w-[600px] mx-0 md:mx-auto">
         <div className="text-white">
           <button onClick={handleNaviagte}>
             <svg
