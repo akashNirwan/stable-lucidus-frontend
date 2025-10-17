@@ -73,7 +73,7 @@ const DashBoardMenuTwo = () => {
             return (
               <CareerCard
                 key={career?.careerId || index}
-                careerId={career?.careerId}
+                careerId={career?._id}
                 title={career?.career}
                 tags={
                   career?.subjects?.flatMap(
