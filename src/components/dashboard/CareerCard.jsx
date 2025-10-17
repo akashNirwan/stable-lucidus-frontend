@@ -15,13 +15,16 @@ const CareerCard = ({
   const [activeBtn, setActiveBtn] = useState("experience");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+   console.log(careerId, "outer careeerid ");
+    
   // const handleSaveClick = () => {
   //   setSaved(!saved);
   //   dispatch(saveCareer({ careerId }));
   // };
 
   const handleSaveClick = () => {
+    console.log(careerId, "career id inside ");
+    
     dispatch(saveCareer({ careerId }))
       .then((response) => {
         if (response.payload?.code === 200 || response.payload?.code === 201) {

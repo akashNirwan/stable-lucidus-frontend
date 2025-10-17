@@ -14,9 +14,15 @@ const DashBoardMenuTwo = () => {
 
   const [open, setOpen] = useState(Modal);
   const dispatch = useDispatch();
-  const { dashboard, loading, error, singleCareer } = useSelector(
-    (state) => state.dashboard
-  );
+  const {
+    dashboard,
+    loading,
+    error,
+    singleCareer,
+    loadMoreLoading,
+    hasMoreCareers,
+    currentPage,
+  } = useSelector((state) => state.dashboard);
   const { microexperience, loading: microexperienceLoading } = useSelector(
     (state) => state.microexperience
   );
@@ -28,21 +34,26 @@ const DashBoardMenuTwo = () => {
     if (Modal) {
       dispatch(fetchSingleCareers(careerId));
     } else {
-      dispatch(fetchCareers());
+      dispatch(fetchCareers({ page: 1 }));
     }
   }, [dispatch, Modal, careerId, microexperienceLoading]);
 
-  // const careers = [
-  //   ...(dashboard[0]?.top4 || []),
-  //   ...(dashboard[0]?.wildcard?.length ? [dashboard[0].wildcard] : []),
-  // ];
-
   const careers = Modal
     ? singleCareer?.data || []
-    : [
-        ...(dashboard[0]?.top4 || []),
-        ...(dashboard[0]?.wildcard?.length > 0 ? dashboard[0].wildcard : []),
-      ];
+    : dashboard.flatMap((page) => [
+        ...(page?.top4 || []),
+        ...(page?.wildcard?.filter((w) => w !== null) || []),
+      ]);
+
+  const handleScroll = (e) => {
+    const { scrollTop, scrollHeight, clientHeight } = e.target;
+    const bottom = scrollHeight - scrollTop - clientHeight < 50;
+
+    if (bottom && hasMoreCareers && !loadMoreLoading && !loading && !Modal) {
+      const nextPage = currentPage + 1;
+      dispatch(fetchCareers({ page: nextPage }));
+    }
+  };
 
   if (microexperienceLoading) {
     <div className="flex items-center justify-center min-h-[400px]">
@@ -54,7 +65,7 @@ const DashBoardMenuTwo = () => {
       <LoadingSpinner size={64} />
     </div>
   ) : (
-    <div className="p-4 max-w-[365px]  mx-auto  ">
+    <div className="p-4 max-w-[375px] md:max-w-[1024px] mx-auto">
       <h3 className="text-[#A187FF] text-[28px] font-bold">Explore Careers</h3>
       <p className="text-[#EFEAFF] leading-[150%] mb-2 text-sm">
         Try micro-experiences to unlock more{" "}
@@ -64,9 +75,12 @@ const DashBoardMenuTwo = () => {
           No data available
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-6 mb-[100px] h-[65dvh] overflow-y-auto">
+        <div
+          className="grid grid-cols-1 gap-6 mb-[100px] h-[65dvh] overflow-y-auto"
+          onScroll={handleScroll}
+        >
           {careers.map((career, index) => {
-            if (!career?.career || !career?.careerId) {
+            if (!career?.career || !career?._id) {
               return null;
             }
 
@@ -88,6 +102,14 @@ const DashBoardMenuTwo = () => {
           })}
         </div>
       )}
+
+      {loadMoreLoading && (
+        <div className="flex items-center justify-center py-4">
+          <LoadingSpinner size={32} />
+          <span className="ml-2 text-gray-600">Loading more...</span>
+        </div>
+      )}
+
       <NextLevelModal
         careerLevelId={careerLevelId}
         open={open}
