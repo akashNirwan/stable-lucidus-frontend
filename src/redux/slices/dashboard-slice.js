@@ -37,33 +37,38 @@ const dashboardSlice = createSlice({
   extraReducers: (builder) => {
    // FetchCareers
     builder
-      .addCase(fetchCareers.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+      .addCase(fetchCareers.pending, (state,action) => {
+        // state.loading = true;
+        // state.error = null;
+       if (action.meta.arg?.page > 1) {
+    state.loadMoreLoading = true;
+  } else {
+    state.loading = true;
+  }
+  state.error = null;
+
       })
       .addCase(fetchCareers.fulfilled, (state, action) => {
         // state.loading = false;
         // state.dashboard = action.payload.data;
           
-         const { data, total, page, isLoadMore } = action.payload;
-        state.loading = false;
-         state.loadMoreLoading = false;
+   const { data, page, isLoadMore } = action.payload;
+  state.loading = false;
+  state.loadMoreLoading = false;
 
-         if (isLoadMore) {
-          // Append new data for load more
-          state.dashboard = [...state.dashboard, ...data];
-        } else {
-          // Replace data for first page
-          state.dashboard = data;
-        }
-        
-        state.currentPage = page;
-        state.totalCareers = total;
-        state.hasMoreCareers = state.dashboard.length < total;
-        
-        
-      })
-      .addCase(fetchCareers.rejected, (state, action) => {
+  if (isLoadMore) {
+    
+    state.dashboard = [...state.dashboard, ...data];
+  } else {
+    
+    state.dashboard = data;
+  }
+  
+  state.currentPage = page;
+  
+  
+  state.hasMoreCareers = data.length > 0 && data[0]?.top4?.length > 0;
+  }).addCase(fetchCareers.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload?.message || "Failed to fetch Careers";
       });
