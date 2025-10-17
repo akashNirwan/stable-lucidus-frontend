@@ -6,18 +6,14 @@ import { useSelector } from "react-redux";
 const Process = () => {
   const navigate = useNavigate();
 
-  const { process, loading } = useSelector(
-          (state) => state.encyclopedia
-        );
-      
-    
-    
-      const steps =
-        process?.[0]?.encyclolessons.map((item, index) => ({
-          title: item.lesson,
-          status:  "locked",
-          lessonId: item._id,
-        })) || [];
+  const { process, loading } = useSelector((state) => state.encyclopedia);
+
+  const steps =
+    process?.[0]?.encyclolessons.map((item, index) => ({
+      title: item.lesson,
+      status: "locked",
+      lessonId: item._id,
+    })) || [];
   // const steps = [
   //   {
   //     title: "What Do They Do?",
@@ -28,6 +24,7 @@ const Process = () => {
   //     status: "locked",
   //   },
   // ];
+
   return (
     <div className="text-white">
       <ProcessCrousel />
