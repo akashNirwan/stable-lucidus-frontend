@@ -42,7 +42,7 @@ const careerId = microexperience?.[0]?.career?.[0]?._id;
   ? singleCareer?.data || []
   : [
       ...(dashboard[0]?.top4 || []),
-      ...(dashboard[0]?.wildcard?.length ? [dashboard[0].wildcard] : []),
+      ...(dashboard[0]?.wildcard?.length > 0 ? dashboard[0].wildcard : []),
     ];
 
 
@@ -67,21 +67,25 @@ const careerId = microexperience?.[0]?.career?.[0]?._id;
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-6 mb-[100px] h-[65dvh] overflow-y-auto">
-          {careers.map((career, index) => (
-            <CareerCard
-              key={career.careerId || index}
-              careerId={career._id}
-              title={career.career}
+          {careers.map((career, index) => {
+             if (!career?.career || !career?.careerId) {
+    return null;
+  }
+
+          return  <CareerCard
+              key={career?.careerId || index}
+              careerId={career?.careerId}
+              title={career?.career}
               tags={
-  career.subjects?.flatMap((s) =>
+  career?.subjects?.flatMap((s) =>
     s.subject?.map((item) => item.subject) || []
   ) || ["General"]
 }
-              description={career.description}
-              image={career.image}
-              savedCareerCount={career.savedCareerCount}
+              description={career?.description}
+              image={career?.image}
+              savedCareerCount={career?.savedCareerCount}
             />
-          ))}
+})}
         </div>
       )}
       <NextLevelModal

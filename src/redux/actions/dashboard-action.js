@@ -9,30 +9,61 @@ const getTokenFromLocalStorage = () => {
 };
 
 
+// export const fetchCareers = createAsyncThunk(
+//   "dashboard/fetchCareers",
+//   async (_, { rejectWithValue }) => {
+//     const token = getTokenFromLocalStorage()
+
+//     try {
+//       const response = await client.get(
+//         `user/recommended-career`,
+//         {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//           },
+//         }
+//       );
+      
+
+//       return response.data;
+//     } catch (error) {
+      
+//       return rejectWithValue(error?.response?.data?.message || error?.message);
+//     }
+//   }
+// );
+
+
+// dashboard-action.js - Update fetchCareers thunk
 export const fetchCareers = createAsyncThunk(
   "dashboard/fetchCareers",
-  async (_, { rejectWithValue }) => {
-    const token = getTokenFromLocalStorage()
+  async ({ page = 1 } = {}, { rejectWithValue }) => {
+    const token = getTokenFromLocalStorage();
 
     try {
       const response = await client.get(
-        `user/recommended-career`,
+        `user/recommended-career?page=${page}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      
 
-      return response.data;
+      return {
+        data: response.data.data,
+        total: response.data.total,
+        message: response.data.message,
+        page,
+        isLoadMore: page > 1,
+      };
     } catch (error) {
-      
-      return rejectWithValue(error?.response?.data?.message || error?.message);
+      return rejectWithValue(
+        error?.response?.data?.message || error?.message
+      );
     }
   }
 );
-
 
 export const saveCareer = createAsyncThunk(
   "dashboard/saveCareer",

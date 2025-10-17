@@ -42,9 +42,24 @@ const dashboardSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchCareers.fulfilled, (state, action) => {
+        // state.loading = false;
+        // state.dashboard = action.payload.data;
+          
+         const { data, total, page, isLoadMore } = action.payload;
         state.loading = false;
-        state.dashboard = action.payload.data;
-  
+         state.loadMoreLoading = false;
+
+         if (isLoadMore) {
+          // Append new data for load more
+          state.dashboard = [...state.dashboard, ...data];
+        } else {
+          // Replace data for first page
+          state.dashboard = data;
+        }
+        
+        state.currentPage = page;
+        state.totalCareers = total;
+        state.hasMoreCareers = state.dashboard.length < total;
         
         
       })
