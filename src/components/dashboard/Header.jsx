@@ -3,13 +3,12 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-
-const navigate = useNavigate()
-  const handleClick = ()=>{
-  navigate('/dashboard/microexperience')
-}
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/dashboard/microexperience");
+  };
   return (
-    <div className="flex justify-between items-center text-white p-4">
+    <div className="flex justify-between items-center text-white p-4 w-[375px] mx-auto">
       <div onClick={handleClick}>
         <img
           src="/assets/logo.svg"
