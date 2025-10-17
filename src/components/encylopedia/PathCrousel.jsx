@@ -111,7 +111,7 @@ export default function PathCrousel() {
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: -100, opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="bg-[#2a1760] text-white p-6 rounded-2xl shadow-lg w-[320px] mx-auto"
+                className="bg-[#261172] text-white p-6 rounded-2xl shadow-lg w-[320px] mx-auto"
               >
                 <h2 className="font-semibold text-lg mb-4 flex items-center gap-2 min-w-[285px]">
                   {slides[current].title}

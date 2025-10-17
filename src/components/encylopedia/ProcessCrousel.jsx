@@ -57,7 +57,9 @@ export default function ProcessCarousel() {
       ) {
         slide.salaries = item.salaryData.map((salary) => ({
           level: salary.level,
-          salary: `$${salary.min.toLocaleString("en-US")} to $${salary.max.toLocaleString("en-US")}`,
+          salary: `$${salary.min.toLocaleString(
+            "en-US"
+          )} to $${salary.max.toLocaleString("en-US")}`,
         }));
       }
 
@@ -86,7 +88,7 @@ export default function ProcessCarousel() {
   };
 
   return processLoading ? (
-    <div className="flex items-center justify-center min-h-[400px] min-h-[275px] min-w-[350px]">
+    <div className="flex items-center justify-center  min-h-[275px] min-w-[350px]">
       <LoadingSpinner size={64} />
     </div>
   ) : (
@@ -108,7 +110,7 @@ export default function ProcessCarousel() {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -100, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="bg-[#2a1760] text-white p-6 rounded-2xl shadow-lg w-[320px] mx-auto"
+            className="bg-[#261172] text-white p-6 rounded-2xl shadow-lg w-[320px] mx-auto"
           >
             <h2 className="font-semibold text-lg mb-4">
               {slides[current]?.title}
