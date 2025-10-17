@@ -98,7 +98,7 @@ const CareerCard = ({ data }) => {
   return (
     <div className="flex items-center justify-between bg-white rounded-3xl shadow-md p-3 w-[312px] max-w-[345px] mx-auto gap-6">
       <div className="flex items-start gap-2">
-        <div className="w-20 h-20 rounded-[16px] overflow-hidden ">
+        <div className="w-20 h-20 rounded-[16px] shrink-0 overflow-hidden ">
           {careerImage && careerImage !== "tests.com" ? (
             <img
               src={careerImage}
