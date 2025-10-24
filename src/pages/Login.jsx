@@ -112,7 +112,7 @@ export default function Login() {
           type="button"
           onClick={() => setIsLogin(true)}
           className={`flex-1 h-12 rounded-full cursor-pointer flex items-center justify-center text-sm font-medium transition-all duration-200 ${
-            isLogin ? "bg-[#4823CF] text-white shadow" : "text-[#4823CF]"
+            isLogin ? "bg-[#4823CF] text-white shadow-lg" : "text-[#4823CF]"
           }`}
         >
           Log In
@@ -121,7 +121,7 @@ export default function Login() {
           type="button"
           onClick={() => setIsLogin(false)}
           className={`flex-1 h-12 rounded-full cursor-pointer flex items-center justify-center text-sm font-medium transition-all duration-200 ${
-            !isLogin ? "bg-[#4823CF] text-white shadow" : "text-[#4823CF]"
+            !isLogin ? "bg-[#4823CF]  text-white shadow-lg" : "text-[#4823CF]"
           }`}
         >
           Create Account

@@ -5,7 +5,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useDispatch, useSelector } from "react-redux";
-import { verifyOtp, resendOtp  } from "../redux/actions/auth-action";
+import { verifyOtp, resendOtp } from "../redux/actions/auth-action";
 import Button from "../components/common/Button";
 import toast from "react-hot-toast";
 import { otpSchema } from "../validation/auth-validaion";
@@ -26,8 +26,6 @@ export default function Otp() {
     user,
     otpRequestId,
   } = useSelector((state) => state.auth);
-
-
 
   const useremail = localStorage.getItem("email");
   const username = localStorage.getItem("username");
@@ -116,14 +114,13 @@ export default function Otp() {
       otp: parseInt(data.otp),
       id: userId,
     };
-    
 
     try {
       const result = await dispatch(verifyOtp(payload)).unwrap();
 
       if (result?.data?.[0]) {
         const userData = result.data[0];
-        
+
         if (userData?.token) {
           localStorage.setItem("token", userData.token);
         }
@@ -135,8 +132,6 @@ export default function Otp() {
         navigate("/welcome");
       }
     } catch (error) {
-      
-
       setOtp(Array(6).fill(""));
       reset();
       inputRefs.current[0]?.focus();
@@ -177,8 +172,8 @@ export default function Otp() {
   };
 
   useEffect(() => {
-  inputRefs.current[0]?.focus();
-}, []);
+    inputRefs.current[0]?.focus();
+  }, []);
 
   return (
     <motion.form
@@ -234,7 +229,7 @@ export default function Otp() {
                     digit
                       ? "border-[#7B56FF] shadow-md shadow-[#7B56FF]/40 bg-[#EFEAFF]"
                       : "border-gray-300 bg-gray-50"
-                  } focus:outline-none focus:border-[#40279c] focus:ring-[#7B56FF]/60 focus:shadow-md focus:shadow-[#7B56FF]/40 ${
+                  } focus:outline-none focus:border-[#40279c] focus:ring-[#7B56FF]/60 focus:shadow-sm focus:shadow-[#7B56FF]/40 ${
                     verifyOtpLoading ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                 />
@@ -253,10 +248,10 @@ export default function Otp() {
       )}
 
       <p
-        onClick={handleResend}
-        className={`text-center cursor-pointer hover:underline text-sm ${
+        onClick={canResend && !resendOtpLoading ? handleResend : undefined}
+        className={`text-center text-sm ${
           canResend && !resendOtpLoading
-            ? "text-[#24A57F]"
+            ? "text-[#24A57F] cursor-pointer hover:underline"
             : "text-gray-400 cursor-not-allowed"
         }`}
       >
@@ -276,7 +271,15 @@ export default function Otp() {
         isActive={otp.join("").length === 6 && !verifyOtpLoading}
         disabled={verifyOtpLoading || resendOtpLoading}
       >
-        {verifyOtpLoading ? <LoadingSpinner size={20} color="green" variant="ring"></LoadingSpinner>: "Verify OTP"}
+        {verifyOtpLoading ? (
+          <LoadingSpinner
+            size={20}
+            color="green"
+            variant="ring"
+          ></LoadingSpinner>
+        ) : (
+          "Verify OTP"
+        )}
       </Button>
     </motion.form>
   );
