@@ -1,19 +1,18 @@
 import React from "react";
 import { FaArrowLeft, FaTimes } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-const Header = ({data}) => {
-    const navigate = useNavigate()
-     const careerLevelId = data?._id
-   const handleBack = () => {
+const Header = ({ data }) => {
+  const navigate = useNavigate();
+  const careerLevelId = data?._id;
+  const handleBack = () => {
     navigate(`/micro-intro?careerLevelId=${careerLevelId}`);
   };
-     
-     
-const handleCross = ()=>{
-   navigate(`/dashboard/explorecareers`);
-}
+
+  const handleCross = () => {
+    navigate(`/dashboard/explorecareers`);
+  };
   return (
-    <header className="p-6 pb-0">
+    <header className="p-6 pb-0 max-w-[600px] mx-auto">
       <div className="w-[20px] h-[24px]">
         <img src="/assets/header_logo.svg" alt="logo" className="size-full" />
       </div>

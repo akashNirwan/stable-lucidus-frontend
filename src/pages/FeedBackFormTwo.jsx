@@ -76,7 +76,7 @@ const FeedBackFormTwo = ({ microexperience, careerLevelId, levelNumber }) => {
         Select <span className="font-bold">all</span> that apply.
       </p>
       {/* <h3 className="text-lg font-bold text-[#24A57F]">I focused on:</h3> */}
-      <div className=" h-[310px] overflow-y-auto flex flex-col gap-2">
+      <div className=" h-[320px] md:h-[340px] overflow-y-auto flex flex-col gap-2">
         {stepsData.map((insight, ind) => (
           <TwoLineOption
             key={insight._id}

@@ -15,8 +15,8 @@ const CareerCard = ({
   const [activeBtn, setActiveBtn] = useState("experience");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-   console.log(careerId, "outer careeerid ");
-    
+  console.log(careerId, "outer careeerid ");
+
   // const handleSaveClick = () => {
   //   setSaved(!saved);
   //   dispatch(saveCareer({ careerId }));
@@ -24,7 +24,7 @@ const CareerCard = ({
 
   const handleSaveClick = () => {
     console.log(careerId, "career id inside ");
-    
+
     dispatch(saveCareer({ careerId }))
       .then((response) => {
         if (response.payload?.code === 200 || response.payload?.code === 201) {
@@ -114,7 +114,7 @@ const CareerCard = ({
         </div>
 
         {/* Tags */}
-        <div className="flex gap-2 my-2">
+        <div className="flex flex-wrap gap-2 my-2 items-start">
           {tags.map((tag, i) => {
             const color = tagColors[i];
             return (
@@ -131,11 +131,11 @@ const CareerCard = ({
         {/* Description */}
 
         <div
-        dangerouslySetInnerHTML={{
-          __html: description,
-        }}
-        className="text-[#042119] text-sm  h-[150px] line-clamp-4"
-      ></div>
+          dangerouslySetInnerHTML={{
+            __html: description,
+          }}
+          className="text-[#042119] text-sm  h-[150px] line-clamp-4"
+        ></div>
         {/* <p className="text-[#042119] text-sm  h-[150px] line-clamp-4">
           {description}
         </p> */}
